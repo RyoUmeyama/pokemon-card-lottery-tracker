@@ -28,9 +28,8 @@ wheels/
 .env.local
 
 # Data files
-data/*.html
 !data/.gitkeep
-# JSONファイルはGit管理対象（収集データの履歴を残すため）
+# JSONファイルとHTMLレポートはGit管理対象（収集データの履歴を残すため）
 
 # Logs
 logs/
