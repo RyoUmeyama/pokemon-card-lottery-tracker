@@ -21,7 +21,7 @@ class NyukaNowScraper:
             response = requests.get(self.url, headers=self.headers, timeout=30)
             response.raise_for_status()
 
-            soup = BeautifulSoup(response.content, 'lxml')
+            soup = BeautifulSoup(response.content, 'html.parser')
 
             # 抽選情報を抽出
             lotteries = []
@@ -29,13 +29,35 @@ class NyukaNowScraper:
             # 記事の更新日時を取得
             update_date = self._extract_update_date(soup)
 
-            # テーブルやリストから抽選情報を抽出
-            # （実際のHTML構造に応じて調整が必要）
-            tables = soup.find_all('table')
-            for table in tables:
-                lottery_info = self._parse_lottery_table(table)
-                if lottery_info:
-                    lotteries.extend(lottery_info)
+            # 記事本文を取得
+            article = soup.find('article')
+            if not article:
+                article = soup.find('main') or soup.find(class_='content')
+
+            if article:
+                # 見出しとテーブルのペアを探す
+                h2_sections = article.find_all('h2')
+
+                for h2 in h2_sections:
+                    section_title = h2.get_text(strip=True)
+
+                    # 抽選・予約受付中のセクションのみを対象
+                    if '抽選' in section_title or '予約' in section_title:
+                        # このh2の後ろにあるテーブルを全て取得
+                        next_elem = h2.find_next_sibling()
+                        while next_elem and next_elem.name != 'h2':
+                            if next_elem.name == 'table':
+                                lottery_info = self._parse_lottery_table(next_elem)
+                                if lottery_info:
+                                    lotteries.extend(lottery_info)
+                            elif next_elem.name in ['h3', 'h4']:
+                                # h3の後ろのテーブルも確認
+                                h3_table = next_elem.find_next_sibling('table')
+                                if h3_table:
+                                    lottery_info = self._parse_lottery_table(h3_table)
+                                    if lottery_info:
+                                        lotteries.extend(lottery_info)
+                            next_elem = next_elem.find_next_sibling()
 
             result = {
                 'source': 'nyuka-now.com',
@@ -48,6 +70,8 @@ class NyukaNowScraper:
 
         except Exception as e:
             print(f"Error scraping nyuka-now.com: {e}")
+            import traceback
+            traceback.print_exc()
             return None
 
     def _extract_update_date(self, soup):
@@ -67,14 +91,33 @@ class NyukaNowScraper:
 
         for row in rows:
             cells = row.find_all(['td', 'th'])
-            if len(cells) >= 3:
-                lottery = {
-                    'store': cells[0].get_text(strip=True),
-                    'product': cells[1].get_text(strip=True) if len(cells) > 1 else '',
-                    'period': cells[2].get_text(strip=True) if len(cells) > 2 else '',
-                    'status': self._determine_status(cells[2].get_text(strip=True) if len(cells) > 2 else '')
-                }
-                lotteries.append(lottery)
+
+            # 最低限のセル数をチェック
+            if len(cells) >= 2:
+                cell_texts = [c.get_text(strip=True) for c in cells]
+
+                # データ行かヘッダー行かを判定（ヘッダーは除外）
+                if any(text for text in cell_texts if text and not any(header in text for header in ['対象商品', '抽選形式', '開始日', '終了日'])):
+                    lottery = {
+                        'store': cell_texts[0] if len(cell_texts) > 0 else '',
+                        'product': cell_texts[1] if len(cell_texts) > 1 else '',
+                        'lottery_type': cell_texts[2] if len(cell_texts) > 2 else '',
+                        'start_date': cell_texts[3] if len(cell_texts) > 3 else '',
+                        'end_date': cell_texts[4] if len(cell_texts) > 4 else '',
+                        'announcement_date': cell_texts[5] if len(cell_texts) > 5 else '',
+                        'conditions': cell_texts[6] if len(cell_texts) > 6 else '',
+                        'detail_url': '',
+                        'status': self._determine_status(' '.join(cell_texts))
+                    }
+
+                    # リンクを抽出
+                    link = row.find('a')
+                    if link and link.get('href'):
+                        lottery['detail_url'] = link['href']
+
+                    # 空のデータは除外
+                    if lottery['store'] and lottery['product']:
+                        lotteries.append(lottery)
 
         return lotteries
 
