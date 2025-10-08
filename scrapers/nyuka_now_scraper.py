@@ -9,11 +9,12 @@ import re
 
 
 class NyukaNowScraper:
-    def __init__(self):
+    def __init__(self, check_availability=False):
         self.url = "https://nyuka-now.com/archives/2459"
         self.headers = {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'
         }
+        self.check_availability = check_availability  # 在庫チェックを行うかどうか
 
     def scrape(self):
         """抽選情報をスクレイピング"""
@@ -178,11 +179,15 @@ class NyukaNowScraper:
                         'facebook.com' not in href and
                         'instagram.com' not in href):
 
-                        # 販売ページが在庫切れかチェック
-                        if self._check_availability(href):
-                            return href
+                        # 在庫チェックが有効な場合のみチェック
+                        if self.check_availability:
+                            if self._check_availability(href):
+                                return href
+                            else:
+                                return None  # 在庫切れの場合はNoneを返す
                         else:
-                            return None  # 在庫切れの場合はNoneを返す
+                            # 在庫チェックしない場合はそのまま返す
+                            return href
 
             return None
 
