@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-10-08T06:04:07.675561",
+  "timestamp": "2025-10-08T06:10:06.128896",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2025-10-08T06:05:27.402337",
+      "scraped_at": "2025-10-08T06:11:30.991550",
       "update_date": "2025-10-08",
       "lotteries": [
         {
@@ -978,7 +978,7 @@
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2025-10-08T06:05:29.783694",
+      "scraped_at": "2025-10-08T06:11:31.781928",
       "has_active_lottery": false,
       "lotteries": []
     }
