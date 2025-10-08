@@ -113,7 +113,16 @@ class NyukaNowScraper:
                     # リンクを抽出
                     link = row.find('a')
                     if link and link.get('href'):
-                        lottery['detail_url'] = link['href']
+                        nyuka_now_url = link['href']
+                        # 入荷Nowの記事ページから実際の販売・抽選ページのURLを取得
+                        direct_url = self._extract_direct_url(nyuka_now_url)
+                        lottery['detail_url'] = direct_url if direct_url else nyuka_now_url
+
+                    # Amazonを除外（定価より高い可能性があるため）
+                    store_text = lottery['store'].lower()
+                    url_text = lottery['detail_url'].lower()
+                    if 'amazon' in store_text or 'amazon' in url_text:
+                        continue
 
                     # 空のデータは除外
                     if lottery['store'] and lottery['product']:
@@ -129,6 +138,43 @@ class NyukaNowScraper:
             return 'closed'
         else:
             return 'unknown'
+
+    def _extract_direct_url(self, nyuka_now_url):
+        """入荷Nowの記事ページから実際の販売・抽選ページのURLを抽出"""
+        if not nyuka_now_url or 'nyuka-now.com' not in nyuka_now_url:
+            return None
+
+        try:
+            response = requests.get(nyuka_now_url, headers=self.headers, timeout=15)
+            response.raise_for_status()
+
+            soup = BeautifulSoup(response.content, 'html.parser')
+            article = soup.find('article') or soup.find('main')
+
+            if article:
+                # 外部リンクを探す（入荷Nowの内部リンク以外）
+                links = article.find_all('a', href=True)
+
+                for link in links:
+                    href = link.get('href', '')
+
+                    # 外部の販売・抽選ページリンクを優先
+                    # 除外: 内部リンク、アプリストア、SNSなど
+                    if (href.startswith('http') and
+                        'nyuka-now.com' not in href and
+                        'apple.co' not in href and
+                        'play.google.com' not in href and
+                        'twitter.com' not in href and
+                        'facebook.com' not in href and
+                        'instagram.com' not in href):
+                        return href
+
+            return None
+
+        except Exception as e:
+            # エラーが発生してもスクレイピング全体は継続
+            print(f"  Warning: Could not extract direct URL from {nyuka_now_url}: {e}")
+            return None
 
 
 if __name__ == '__main__':
