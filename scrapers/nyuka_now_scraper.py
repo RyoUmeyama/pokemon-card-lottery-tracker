@@ -118,10 +118,20 @@ class NyukaNowScraper:
                         direct_url = self._extract_direct_url(nyuka_now_url)
                         lottery['detail_url'] = direct_url if direct_url else nyuka_now_url
 
+                    # 直接URLが取得できなかった（在庫切れなど）場合は除外
+                    if not lottery['detail_url'] or lottery['detail_url'] == '':
+                        continue
+
                     # Amazonを除外（定価より高い可能性があるため）
                     store_text = lottery['store'].lower()
                     url_text = lottery['detail_url'].lower()
                     if 'amazon' in store_text or 'amazon' in url_text:
+                        continue
+
+                    # 中身がない情報を除外（ヘッダー行など）
+                    if lottery['store'] in ['販売開始日時', '店舗/サイト名', '']:
+                        continue
+                    if lottery['product'] in ['詳細', '商品名', '']:
                         continue
 
                     # 空のデータは除外
@@ -167,7 +177,12 @@ class NyukaNowScraper:
                         'twitter.com' not in href and
                         'facebook.com' not in href and
                         'instagram.com' not in href):
-                        return href
+
+                        # 販売ページが在庫切れかチェック
+                        if self._check_availability(href):
+                            return href
+                        else:
+                            return None  # 在庫切れの場合はNoneを返す
 
             return None
 
@@ -175,6 +190,35 @@ class NyukaNowScraper:
             # エラーが発生してもスクレイピング全体は継続
             print(f"  Warning: Could not extract direct URL from {nyuka_now_url}: {e}")
             return None
+
+    def _check_availability(self, url):
+        """販売ページが在庫ありかチェック"""
+        try:
+            response = requests.get(url, headers=self.headers, timeout=10)
+            response.raise_for_status()
+
+            html = response.text.lower()
+
+            # 在庫切れを示すキーワード
+            out_of_stock_keywords = [
+                '在庫切れ', '売り切れ', '販売終了', '完売', '品切れ',
+                'sold out', 'out of stock', '取り扱いを終了',
+                '現在お取り扱いできません', '申し訳ございません',
+                '販売を終了しました', 'この商品は現在お取り扱いできません'
+            ]
+
+            # 在庫切れキーワードが含まれているかチェック
+            for keyword in out_of_stock_keywords:
+                if keyword in html:
+                    print(f"  Info: {url} - 在庫切れ検出: {keyword}")
+                    return False
+
+            return True
+
+        except Exception as e:
+            print(f"  Warning: Could not check availability for {url}: {e}")
+            # エラーの場合は在庫ありとして扱う（過剰にフィルタしないため）
+            return True
 
 
 if __name__ == '__main__':
