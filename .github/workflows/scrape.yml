@@ -32,9 +32,20 @@ jobs:
         run: |
           python main.py
 
+      - name: Generate HTML report
+        run: |
+          python generate_html_report.py
+
       - name: Commit and push if changed
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "actions@github.com"
           git add data/
           git diff --quiet && git diff --staged --quiet || (git commit -m "Update lottery data $(date +'%Y-%m-%d %H:%M:%S')" && git push)
+
+      - name: Upload HTML report as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: lottery-report
+          path: data/lottery_report.html
+          retention-days: 90
