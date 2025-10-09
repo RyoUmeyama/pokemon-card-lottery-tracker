@@ -29,8 +29,19 @@ class RakutenBooksScraper:
             # ページ全体から商品情報を探す
             products = soup.find_all(['h2', 'h3', 'h4', 'div'], class_=re.compile(r'product|item|entry|lottery', re.I))
 
-            # テキストから期間情報を抽出
+            # 抽選受付中かどうかを確認
             page_text = soup.get_text()
+
+            # 「抽選受付は終了しました」などのメッセージをチェック
+            if '抽選受付は終了' in page_text or '受付終了' in page_text or '受付は終了' in page_text:
+                # 抽選終了の場合は空リストを返す
+                return {
+                    'source': 'books.rakuten.co.jp',
+                    'scraped_at': datetime.now().isoformat(),
+                    'lotteries': []
+                }
+
+            # テキストから期間情報を抽出
             period_match = re.search(r'(\d{4})年(\d{1,2})月(\d{1,2})日.*?(\d{1,2}):(\d{2}).*?(\d{4})年(\d{1,2})月(\d{1,2})日.*?(\d{1,2}):(\d{2})', page_text)
 
             entry_period = ""
