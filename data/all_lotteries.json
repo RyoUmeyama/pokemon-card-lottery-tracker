@@ -1,214 +1,81 @@
 {
-  "timestamp": "2025-10-09T14:27:26.139767",
+  "timestamp": "2025-10-09T14:45:06.618887",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2025-10-09T14:27:36.298909",
+      "scraped_at": "2025-10-09T14:45:19.491319",
       "update_date": "2025-10-09",
+      "lotteries": []
+    },
+    {
+      "source": "books.rakuten.co.jp",
+      "scraped_at": "2025-10-09T14:45:19.788531",
       "lotteries": [
         {
-          "store": "2025年10月8日(水)10時25分",
-          "product": "駿河屋にてトレカ ポケモンカードゲーム MEGA スターターセットMEGA メガディアンシーexが販売開始（価格：2080円）",
-          "lottery_type": "",
+          "store": "楽天ブックス",
+          "product": "ポケモンカードゲーム MEGA　拡張パック インフェルノX【30パック】",
+          "lottery_type": "抽選販売",
           "start_date": "",
           "end_date": "",
           "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=3960&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fproduct%2Fdetail%2F620026867",
-          "status": "unknown"
+          "conditions": "楽天会員登録必須",
+          "detail_url": "https://books.rakuten.co.jp/event/game/card/entry/",
+          "status": "unknown",
+          "entry_period": ""
         },
         {
-          "store": "2025年10月6日(月)8時45分",
-          "product": "駿河屋にてトレカ ポケモンカードゲーム スカーレット＆バイオレット スターターセットex マリィのモルペコ＆オーロンゲexが販売開始（価格：1800円）",
-          "lottery_type": "",
+          "store": "楽天ブックス",
+          "product": "ポケモンカードゲーム MEGA　拡張パック メガブレイブ【30パック】",
+          "lottery_type": "抽選販売",
           "start_date": "",
           "end_date": "",
           "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=3960&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fproduct%2Fdetail%2F620025612",
-          "status": "unknown"
+          "conditions": "楽天会員登録必須",
+          "detail_url": "https://books.rakuten.co.jp/event/game/card/entry/",
+          "status": "unknown",
+          "entry_period": ""
         },
         {
-          "store": "2025年10月8日(水)10時25分",
-          "product": "駿河屋にてトレカ ポケモンカードゲーム MEGA スターターセットMEGA メガディアンシーexが販売開始（価格：2080円）",
-          "lottery_type": "",
+          "store": "楽天ブックス",
+          "product": "ポケモンカードゲーム MEGA　拡張パック メガシンフォニア【30パック】",
+          "lottery_type": "抽選販売",
           "start_date": "",
           "end_date": "",
           "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=3960&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fproduct%2Fdetail%2F620026867",
-          "status": "unknown"
+          "conditions": "楽天会員登録必須",
+          "detail_url": "https://books.rakuten.co.jp/event/game/card/entry/",
+          "status": "unknown",
+          "entry_period": ""
         },
         {
-          "store": "2025年10月6日(月)8時45分",
-          "product": "駿河屋にてトレカ ポケモンカードゲーム スカーレット＆バイオレット スターターセットex マリィのモルペコ＆オーロンゲexが販売開始（価格：1800円）",
-          "lottery_type": "",
+          "store": "楽天ブックス",
+          "product": "ポケモンカードゲーム スカーレット＆バイオレット 拡張パック ブラックボルト【20パック】",
+          "lottery_type": "抽選販売",
           "start_date": "",
           "end_date": "",
           "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=3960&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fproduct%2Fdetail%2F620025612",
-          "status": "unknown"
+          "conditions": "楽天会員登録必須",
+          "detail_url": "https://books.rakuten.co.jp/event/game/card/entry/",
+          "status": "unknown",
+          "entry_period": ""
         },
         {
-          "store": "2025年10月8日(水)10時25分",
-          "product": "駿河屋にてトレカ ポケモンカードゲーム MEGA スターターセットMEGA メガディアンシーexが販売開始（価格：2080円）",
-          "lottery_type": "",
+          "store": "楽天ブックス",
+          "product": "ポケモンカードゲーム スカーレット＆バイオレット 拡張パック ホワイトフレア【20パック】",
+          "lottery_type": "抽選販売",
           "start_date": "",
           "end_date": "",
           "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=3960&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fproduct%2Fdetail%2F620026867",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年10月6日(月)8時45分",
-          "product": "駿河屋にてトレカ ポケモンカードゲーム スカーレット＆バイオレット スターターセットex マリィのモルペコ＆オーロンゲexが販売開始（価格：1800円）",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=3960&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fproduct%2Fdetail%2F620025612",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年10月8日(水)10時25分",
-          "product": "駿河屋にてトレカ ポケモンカードゲーム MEGA スターターセットMEGA メガディアンシーexが販売開始（価格：2080円）",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=3960&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fproduct%2Fdetail%2F620026867",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年10月6日(月)8時45分",
-          "product": "駿河屋にてトレカ ポケモンカードゲーム スカーレット＆バイオレット スターターセットex マリィのモルペコ＆オーロンゲexが販売開始（価格：1800円）",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=3960&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fproduct%2Fdetail%2F620025612",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年10月8日(水)10時25分",
-          "product": "駿河屋にてトレカ ポケモンカードゲーム MEGA スターターセットMEGA メガディアンシーexが販売開始（価格：2080円）",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=3960&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fproduct%2Fdetail%2F620026867",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年10月6日(月)8時45分",
-          "product": "駿河屋にてトレカ ポケモンカードゲーム スカーレット＆バイオレット スターターセットex マリィのモルペコ＆オーロンゲexが販売開始（価格：1800円）",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=3960&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fproduct%2Fdetail%2F620025612",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年10月8日(水)10時25分",
-          "product": "駿河屋にてトレカ ポケモンカードゲーム MEGA スターターセットMEGA メガディアンシーexが販売開始（価格：2080円）",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=3960&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fproduct%2Fdetail%2F620026867",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年10月6日(月)8時45分",
-          "product": "駿河屋にてトレカ ポケモンカードゲーム スカーレット＆バイオレット スターターセットex マリィのモルペコ＆オーロンゲexが販売開始（価格：1800円）",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=3960&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fproduct%2Fdetail%2F620025612",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年10月8日(水)10時25分",
-          "product": "駿河屋にてトレカ ポケモンカードゲーム MEGA スターターセットMEGA メガディアンシーexが販売開始（価格：2080円）",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=3960&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fproduct%2Fdetail%2F620026867",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年10月6日(月)8時45分",
-          "product": "駿河屋にてトレカ ポケモンカードゲーム スカーレット＆バイオレット スターターセットex マリィのモルペコ＆オーロンゲexが販売開始（価格：1800円）",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=3960&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fproduct%2Fdetail%2F620025612",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年10月8日(水)10時25分",
-          "product": "駿河屋にてトレカ ポケモンカードゲーム MEGA スターターセットMEGA メガディアンシーexが販売開始（価格：2080円）",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=3960&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fproduct%2Fdetail%2F620026867",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年10月6日(月)8時45分",
-          "product": "駿河屋にてトレカ ポケモンカードゲーム スカーレット＆バイオレット スターターセットex マリィのモルペコ＆オーロンゲexが販売開始（価格：1800円）",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=3960&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fproduct%2Fdetail%2F620025612",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年10月8日(水)10時25分",
-          "product": "駿河屋にてトレカ ポケモンカードゲーム MEGA スターターセットMEGA メガディアンシーexが販売開始（価格：2080円）",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=3960&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fproduct%2Fdetail%2F620026867",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年10月6日(月)8時45分",
-          "product": "駿河屋にてトレカ ポケモンカードゲーム スカーレット＆バイオレット スターターセットex マリィのモルペコ＆オーロンゲexが販売開始（価格：1800円）",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://affiliate.suruga-ya.jp/modules/af/af_jump.php?user_id=3960&goods_url=https%3A%2F%2Fwww.suruga-ya.jp%2Fproduct%2Fdetail%2F620025612",
-          "status": "unknown"
+          "conditions": "楽天会員登録必須",
+          "detail_url": "https://books.rakuten.co.jp/event/game/card/entry/",
+          "status": "unknown",
+          "entry_period": ""
         }
       ]
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2025-10-09T14:27:36.456662",
+      "scraped_at": "2025-10-09T14:45:19.938725",
       "has_active_lottery": false,
       "lotteries": []
     }

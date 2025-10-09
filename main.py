@@ -6,6 +6,7 @@ import os
 from datetime import datetime
 from scrapers.nyuka_now_scraper import NyukaNowScraper
 from scrapers.pokemon_center_scraper import PokemonCenterScraper
+from scrapers.rakuten_books_scraper import RakutenBooksScraper
 
 
 def load_previous_data(filename):
@@ -65,7 +66,7 @@ def main():
     }
 
     # 1. 入荷Nowをスクレイピング
-    print("\n[1/2] 入荷Nowをチェック中...")
+    print("\n[1/3] 入荷Nowをチェック中...")
     nyuka_scraper = NyukaNowScraper()
     nyuka_data = nyuka_scraper.scrape()
 
@@ -83,8 +84,27 @@ def main():
     else:
         print("✗ 入荷Nowの取得に失敗")
 
-    # 2. ポケモンセンター公式をスクレイピング
-    print("\n[2/2] ポケモンセンター公式をチェック中...")
+    # 2. 楽天ブックスをスクレイピング
+    print("\n[2/3] 楽天ブックスをチェック中...")
+    rakuten_scraper = RakutenBooksScraper()
+    rakuten_data = rakuten_scraper.scrape()
+
+    if rakuten_data:
+        all_results['sources'].append(rakuten_data)
+        print(f"✓ 楽天ブックス: {len(rakuten_data['lotteries'])}件の抽選情報を取得")
+
+        # 変更検出
+        prev_data = load_previous_data('data/rakuten_books_latest.json')
+        has_changes, changes = detect_changes(prev_data, rakuten_data)
+        if has_changes:
+            print(f"  変更検出: {changes}")
+
+        save_data(rakuten_data, 'data/rakuten_books_latest.json')
+    else:
+        print("✗ 楽天ブックスの取得に失敗")
+
+    # 3. ポケモンセンター公式をスクレイピング
+    print("\n[3/3] ポケモンセンター公式をチェック中...")
     pokemon_center_scraper = PokemonCenterScraper()
     pokemon_center_data = pokemon_center_scraper.scrape()
 
