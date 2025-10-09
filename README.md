@@ -6,7 +6,8 @@
 
 - **自動情報収集**: 主要サイトから抽選情報を定期的にスクレイピング
 - **変更検出**: 新しい抽選の開始や終了を自動検出
-- **GitHub Actions**: 1日3回（9時、12時、18時）自動実行
+- **GitHub Actions**: 毎日9:00 JST自動実行
+- **メール通知**: 新しい抽選情報が見つかった場合に自動通知
 - **データ保存**: JSON形式で履歴を保存
 
 ## 📊 収集元
@@ -40,7 +41,7 @@ python main.py
 
 1. このリポジトリをGitHubにプッシュ
 2. GitHub Actionsが自動的に有効化されます
-3. スケジュール実行: 毎日9:00、12:00、18:00 (JST)
+3. スケジュール実行: 毎日9:00 JST
 4. 手動実行: Actionsタブから「Run workflow」をクリック
 
 ## 📁 プロジェクト構造
@@ -96,7 +97,7 @@ pokemon-card-lottery-tracker/
 リポジトリの Settings → Secrets and variables → Actions で以下を設定：
 
 - `SMTP_SERVER`: SMTPサーバー（例: smtp.gmail.com）
-- `SMTP_PORT`: SMTPポート（例: 465）
+- `SMTP_PORT`: SMTPポート（例: 587）
 - `SMTP_USERNAME`: SMTPユーザー名（メールアドレス）
 - `SMTP_PASSWORD`: SMTPパスワード（Gmailの場合はアプリパスワード）
 - `RECIPIENT_EMAIL`: 通知先メールアドレス
@@ -111,9 +112,8 @@ pokemon-card-lottery-tracker/
 ### ローカルでテスト
 
 ```bash
-export ENABLE_EMAIL_NOTIFICATION=true
 export SMTP_SERVER="smtp.gmail.com"
-export SMTP_PORT="465"
+export SMTP_PORT="587"
 export SMTP_USERNAME="your-email@gmail.com"
 export SMTP_PASSWORD="your-app-password"
 export RECIPIENT_EMAIL="recipient@gmail.com"
