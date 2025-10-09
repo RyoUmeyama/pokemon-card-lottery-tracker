@@ -31,6 +31,11 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run scraper
+        env:
+          ENABLE_EMAIL_NOTIFICATION: 'true'
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          GMAIL_RECIPIENT: ${{ secrets.GMAIL_RECIPIENT }}
         run: |
           python main.py
 

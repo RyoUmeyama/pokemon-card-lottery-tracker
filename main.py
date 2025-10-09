@@ -133,6 +133,13 @@ def main():
     total_lotteries = sum(len(s.get('lotteries', [])) for s in all_results['sources'])
     print(f"\n合計: {total_lotteries}件の抽選情報を収集")
 
+    # Gmail通知
+    if os.environ.get('ENABLE_EMAIL_NOTIFICATION') == 'true':
+        print("\n📧 メール通知を送信中...")
+        from notify import GmailNotifier
+        notifier = GmailNotifier()
+        notifier.send_notification(all_results)
+
 
 if __name__ == '__main__':
     main()

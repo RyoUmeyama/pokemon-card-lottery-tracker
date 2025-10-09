@@ -14,8 +14,13 @@
 1. **入荷Now** (https://nyuka-now.com)
    - 最も網羅的な抽選情報集約サイト
    - 複数店舗の情報を一括取得
+   - ⚠️ Amazon、Yahoo!ショッピング、駿河屋は除外
 
-2. **ポケモンセンターオンライン公式**
+2. **楽天ブックス** (https://books.rakuten.co.jp)
+   - 抽選販売ページから直接取得
+   - 信頼性の高いオンライン抽選情報
+
+3. **ポケモンセンターオンライン公式**
    - 公式の抽選販売情報
    - 最も信頼性の高い情報源
 
@@ -82,12 +87,41 @@ pokemon-card-lottery-tracker/
 }
 ```
 
+## 📧 Gmail通知設定
+
+抽選情報が見つかったときにGmailで通知を受け取ることができます。
+
+### 1. Gmailアプリパスワードの取得
+
+1. Googleアカウントにログイン
+2. https://myaccount.google.com/apppasswords にアクセス
+3. アプリパスワードを生成（「メール」「その他」を選択）
+4. 生成された16桁のパスワードをメモ
+
+### 2. GitHub Secretsの設定
+
+リポジトリの Settings → Secrets and variables → Actions で以下を設定：
+
+- `GMAIL_USER`: 送信元Gmailアドレス（例: your-email@gmail.com）
+- `GMAIL_APP_PASSWORD`: アプリパスワード（16桁）
+- `GMAIL_RECIPIENT`: 通知先メールアドレス（省略時は送信元と同じ）
+
+### 3. ローカルでテスト
+
+```bash
+export ENABLE_EMAIL_NOTIFICATION=true
+export GMAIL_USER="your-email@gmail.com"
+export GMAIL_APP_PASSWORD="your-app-password"
+export GMAIL_RECIPIENT="recipient@gmail.com"
+python main.py
+```
+
 ## 🔔 今後の拡張予定
 
+- [x] メール通知機能
 - [ ] Discord/Slack通知機能
 - [ ] LINE通知機能
-- [ ] メール通知機能
-- [ ] より多くのサイトに対応
+- [ ] より多くのサイトに対応（ヨドバシ、あみあみなど）
 - [ ] Webダッシュボード
 
 ## ⚠️ 注意事項
