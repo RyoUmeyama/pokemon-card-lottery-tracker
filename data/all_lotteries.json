@@ -1,15 +1,15 @@
 {
-  "timestamp": "2025-10-09T14:45:06.618887",
+  "timestamp": "2025-10-09T05:55:48.212304",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2025-10-09T14:45:19.491319",
+      "scraped_at": "2025-10-09T05:57:27.647845",
       "update_date": "2025-10-09",
       "lotteries": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-10-09T14:45:19.788531",
+      "scraped_at": "2025-10-09T05:57:39.565557",
       "lotteries": [
         {
           "store": "楽天ブックス",
@@ -75,7 +75,7 @@
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2025-10-09T14:45:19.938725",
+      "scraped_at": "2025-10-09T05:57:40.388297",
       "has_active_lottery": false,
       "lotteries": []
     }
