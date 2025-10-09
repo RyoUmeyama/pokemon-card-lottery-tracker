@@ -11,16 +11,18 @@ from datetime import datetime
 
 class GmailNotifier:
     def __init__(self):
-        # 環境変数から認証情報を取得
-        self.gmail_user = os.environ.get('GMAIL_USER')
-        self.gmail_app_password = os.environ.get('GMAIL_APP_PASSWORD')
-        self.recipient = os.environ.get('GMAIL_RECIPIENT', self.gmail_user)
+        # 環境変数から認証情報を取得（SMTP設定）
+        self.smtp_server = os.environ.get('SMTP_SERVER', 'smtp.gmail.com')
+        self.smtp_port = int(os.environ.get('SMTP_PORT', '465'))
+        self.smtp_username = os.environ.get('SMTP_USERNAME')
+        self.smtp_password = os.environ.get('SMTP_PASSWORD')
+        self.recipient = os.environ.get('RECIPIENT_EMAIL')
 
     def send_notification(self, all_lotteries_data):
         """抽選情報をメールで通知"""
-        if not self.gmail_user or not self.gmail_app_password:
-            print("⚠️ Gmail認証情報が設定されていません")
-            print("環境変数 GMAIL_USER と GMAIL_APP_PASSWORD を設定してください")
+        if not self.smtp_username or not self.smtp_password or not self.recipient:
+            print("⚠️ SMTP認証情報が設定されていません")
+            print("環境変数 SMTP_USERNAME, SMTP_PASSWORD, RECIPIENT_EMAIL を設定してください")
             return False
 
         # 抽選情報を集計
@@ -51,17 +53,23 @@ class GmailNotifier:
         try:
             msg = MIMEMultipart('alternative')
             msg['Subject'] = f'🎴 ポケモンカード抽選情報 ({total_count}件) - {datetime.now().strftime("%Y/%m/%d")}'
-            msg['From'] = self.gmail_user
+            msg['From'] = self.smtp_username
             msg['To'] = self.recipient
 
             # HTML版
             html_part = MIMEText(email_body, 'html')
             msg.attach(html_part)
 
-            # Gmailに接続して送信
-            with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
-                server.login(self.gmail_user, self.gmail_app_password)
-                server.send_message(msg)
+            # SMTPサーバーに接続して送信
+            if self.smtp_port == 465:
+                with smtplib.SMTP_SSL(self.smtp_server, self.smtp_port) as server:
+                    server.login(self.smtp_username, self.smtp_password)
+                    server.send_message(msg)
+            else:
+                with smtplib.SMTP(self.smtp_server, self.smtp_port) as server:
+                    server.starttls()
+                    server.login(self.smtp_username, self.smtp_password)
+                    server.send_message(msg)
 
             print(f"✅ メール通知を送信しました: {self.recipient}")
             return True

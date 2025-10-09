@@ -87,32 +87,36 @@ pokemon-card-lottery-tracker/
 }
 ```
 
-## 📧 Gmail通知設定
+## 📧 メール通知設定
 
-抽選情報が見つかったときにGmailで通知を受け取ることができます。
+抽選情報が見つかったときにメールで通知を受け取ることができます。
 
-### 1. Gmailアプリパスワードの取得
+### GitHub Secretsの設定
+
+リポジトリの Settings → Secrets and variables → Actions で以下を設定：
+
+- `SMTP_SERVER`: SMTPサーバー（例: smtp.gmail.com）
+- `SMTP_PORT`: SMTPポート（例: 465）
+- `SMTP_USERNAME`: SMTPユーザー名（メールアドレス）
+- `SMTP_PASSWORD`: SMTPパスワード（Gmailの場合はアプリパスワード）
+- `RECIPIENT_EMAIL`: 通知先メールアドレス
+
+### Gmailの場合のアプリパスワード取得
 
 1. Googleアカウントにログイン
 2. https://myaccount.google.com/apppasswords にアクセス
 3. アプリパスワードを生成（「メール」「その他」を選択）
-4. 生成された16桁のパスワードをメモ
+4. 生成された16桁のパスワードを `SMTP_PASSWORD` に設定
 
-### 2. GitHub Secretsの設定
-
-リポジトリの Settings → Secrets and variables → Actions で以下を設定：
-
-- `GMAIL_USER`: 送信元Gmailアドレス（例: your-email@gmail.com）
-- `GMAIL_APP_PASSWORD`: アプリパスワード（16桁）
-- `GMAIL_RECIPIENT`: 通知先メールアドレス（省略時は送信元と同じ）
-
-### 3. ローカルでテスト
+### ローカルでテスト
 
 ```bash
 export ENABLE_EMAIL_NOTIFICATION=true
-export GMAIL_USER="your-email@gmail.com"
-export GMAIL_APP_PASSWORD="your-app-password"
-export GMAIL_RECIPIENT="recipient@gmail.com"
+export SMTP_SERVER="smtp.gmail.com"
+export SMTP_PORT="465"
+export SMTP_USERNAME="your-email@gmail.com"
+export SMTP_PASSWORD="your-app-password"
+export RECIPIENT_EMAIL="recipient@gmail.com"
 python main.py
 ```
 
