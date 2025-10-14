@@ -230,8 +230,18 @@ class NyukaNowScraper:
 
                 for link in links:
                     href = link.get('href', '')
-                    # エディオンのリンクを優先的に取得
-                    if 'edion.com' in href.lower():
+                    href_lower = href.lower()
+
+                    # エディオンのリンクを優先的に取得（アフィリエイトリンク対応）
+                    if 'edion.com' in href_lower or 'edion' in href_lower:
+                        # アフィリエイトリンクの場合はmurlパラメータから実URLを抽出
+                        if 'linksynergy.com' in href_lower and 'murl=' in href_lower:
+                            import urllib.parse
+                            parsed = urllib.parse.urlparse(href)
+                            params = urllib.parse.parse_qs(parsed.query)
+                            if 'murl' in params:
+                                actual_url = urllib.parse.unquote(params['murl'][0])
+                                return actual_url
                         return href
 
                 # エディオン以外の外部リンクも対象
@@ -241,7 +251,8 @@ class NyukaNowScraper:
                         'chusen.info' not in href and
                         'nyuka-now.com' not in href and
                         'twitter.com' not in href and
-                        'facebook.com' not in href):
+                        'facebook.com' not in href and
+                        'linksynergy.com' not in href):
                         return href
 
             return None
