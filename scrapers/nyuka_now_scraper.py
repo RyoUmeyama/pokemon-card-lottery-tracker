@@ -60,11 +60,20 @@ class NyukaNowScraper:
                                         lotteries.extend(lottery_info)
                             next_elem = next_elem.find_next_sibling()
 
+            # 重複を除外（商品名とURLの組み合わせで判定）
+            unique_lotteries = []
+            seen = set()
+            for lottery in lotteries:
+                key = (lottery.get('product', ''), lottery.get('detail_url', ''))
+                if key not in seen:
+                    seen.add(key)
+                    unique_lotteries.append(lottery)
+
             result = {
                 'source': 'nyuka-now.com',
                 'scraped_at': datetime.now().isoformat(),
                 'update_date': update_date,
-                'lotteries': lotteries
+                'lotteries': unique_lotteries
             }
 
             return result
@@ -183,6 +192,12 @@ class NyukaNowScraper:
                         'facebook.com' not in href and
                         'instagram.com' not in href):
 
+                        # chusen.infoの場合、実際の販売ページURLを取得
+                        if 'chusen.info' in href:
+                            actual_url = self._extract_url_from_chusen_info(href)
+                            if actual_url:
+                                href = actual_url
+
                         # 在庫チェックが有効な場合のみチェック
                         if self.check_availability:
                             if self._check_availability(href):
@@ -200,6 +215,41 @@ class NyukaNowScraper:
             print(f"  Warning: Could not extract direct URL from {nyuka_now_url}: {e}")
             return None
 
+    def _extract_url_from_chusen_info(self, chusen_info_url):
+        """chusen.infoのページから実際の販売ページURLを抽出"""
+        try:
+            response = requests.get(chusen_info_url, headers=self.headers, timeout=15)
+            response.raise_for_status()
+
+            soup = BeautifulSoup(response.content, 'html.parser')
+            article = soup.find('article') or soup.find('main') or soup.find(class_='content')
+
+            if article:
+                # 外部リンク（エディオンなど）を探す
+                links = article.find_all('a', href=True)
+
+                for link in links:
+                    href = link.get('href', '')
+                    # エディオンのリンクを優先的に取得
+                    if 'edion.com' in href.lower():
+                        return href
+
+                # エディオン以外の外部リンクも対象
+                for link in links:
+                    href = link.get('href', '')
+                    if (href.startswith('http') and
+                        'chusen.info' not in href and
+                        'nyuka-now.com' not in href and
+                        'twitter.com' not in href and
+                        'facebook.com' not in href):
+                        return href
+
+            return None
+
+        except Exception as e:
+            print(f"  Warning: Could not extract URL from {chusen_info_url}: {e}")
+            return None
+
     def _check_availability(self, url):
         """販売ページが在庫ありかチェック"""
         try:
@@ -213,7 +263,9 @@ class NyukaNowScraper:
                 '在庫切れ', '売り切れ', '販売終了', '完売', '品切れ',
                 'sold out', 'out of stock', '取り扱いを終了',
                 '現在お取り扱いできません', '申し訳ございません',
-                '販売を終了しました', 'この商品は現在お取り扱いできません'
+                '販売を終了しました', 'この商品は現在お取り扱いできません',
+                'ご指定の商品は販売しておりません', '商品が見つかりませんでした',
+                'お探しの商品は見つかりませんでした'
             ]
 
             # 在庫切れキーワードが含まれているかチェック

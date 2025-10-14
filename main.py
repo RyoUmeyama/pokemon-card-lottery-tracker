@@ -67,7 +67,7 @@ def main():
 
     # 1. 入荷Nowをスクレイピング
     print("\n[1/3] 入荷Nowをチェック中...")
-    nyuka_scraper = NyukaNowScraper()
+    nyuka_scraper = NyukaNowScraper(check_availability=True)
     nyuka_data = nyuka_scraper.scrape()
 
     if nyuka_data:
