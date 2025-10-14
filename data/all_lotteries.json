@@ -1,87 +1,20 @@
 {
-  "timestamp": "2025-10-14T11:49:16.228706",
+  "timestamp": "2025-10-14T11:56:53.377268",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2025-10-14T11:50:34.104128",
+      "scraped_at": "2025-10-14T11:58:10.126482",
       "update_date": "2025-10-14",
-      "lotteries": [
-        {
-          "store": "2025年10月13日(月)8時35分",
-          "product": "駿河屋にてトレカ ポケモンカードゲーム スカーレット＆バイオレット スターターセットex マリィのモルペコ＆オーロンゲexが販売開始（価格：1800円）",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://nyuka-now.com/archives/150170",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年10月10日(金)21時25分",
-          "product": "駿河屋にてトレカ ポケモンカードゲーム MEGA スターターセットMEGA メガゲンガーexが販売開始（価格：3300円）",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://nyuka-now.com/archives/154720",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年10月10日(金)3時26分",
-          "product": "駿河屋にてトレカ ポケモンカードゲーム スカーレット＆バイオレット スターターセットex ダイゴのダンバル＆メタグロスexが販売開始（価格：1800円）",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://nyuka-now.com/archives/150171",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年10月8日(水)10時25分",
-          "product": "駿河屋にてトレカ ポケモンカードゲーム MEGA スターターセットMEGA メガディアンシーexが販売開始（価格：2080円）",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://nyuka-now.com/archives/154619",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年10月10日(金)9時01分",
-          "product": "エディオンにてポケモン ポケモンカードゲーム MEGA プレミアムトレーナーボックス MEGA ﾎﾟｹﾓﾝMEGAﾌﾟﾚﾐｱﾑTﾎﾞﾂｸｽMEGAが販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://www.edion.com/detail.html?p_cd=00082511531",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年10月10日(金)17時58分",
-          "product": "エディオンにてポケモン ポケットモンスター ポケモンカードゲーム MEGA スターターセットMEGA メガディアンシーex ﾎﾟｹﾓﾝMEGAｽﾀ-ﾀ-Mﾃﾞｲｱﾝｼ-EXが販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://www.edion.com/detail.html?p_cd=00082963491",
-          "status": "unknown"
-        }
-      ]
+      "lotteries": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-10-14T11:50:34.271001",
+      "scraped_at": "2025-10-14T11:58:10.285443",
       "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2025-10-14T11:50:34.456758",
+      "scraped_at": "2025-10-14T11:58:10.451921",
       "has_active_lottery": false,
       "lotteries": []
     }

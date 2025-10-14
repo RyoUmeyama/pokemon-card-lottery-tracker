@@ -138,7 +138,14 @@ class NyukaNowScraper:
                         # 入荷Nowの記事ページから実際の販売・抽選ページのURLを取得
                         elif 'nyuka-now.com' in url:
                             direct_url = self._extract_direct_url(url)
-                            lottery['detail_url'] = direct_url if direct_url else url
+                            if direct_url:
+                                lottery['detail_url'] = direct_url
+                            elif self.check_availability:
+                                # 在庫チェックが有効で、直接URLが取得できない場合はスキップ
+                                continue
+                            else:
+                                # 在庫チェックが無効の場合はnyuka-now.comのURLをそのまま使用
+                                lottery['detail_url'] = url
                         else:
                             lottery['detail_url'] = url
 
@@ -301,9 +308,17 @@ class NyukaNowScraper:
 
             return True
 
+        except requests.exceptions.HTTPError as e:
+            # 403エラー（bot protection）の場合、エディオンは在庫切れとして扱う
+            if e.response.status_code == 403 and 'edion.com' in url.lower():
+                print(f"  Info: {url} - 403エラー（エディオンbot protection）により在庫切れとして扱う")
+                return False
+            print(f"  Warning: Could not check availability for {url}: {e}")
+            # その他のHTTPエラーは在庫ありとして扱う
+            return True
         except Exception as e:
             print(f"  Warning: Could not check availability for {url}: {e}")
-            # エラーの場合は在庫ありとして扱う（過剰にフィルタしないため）
+            # その他のエラーの場合は在庫ありとして扱う（過剰にフィルタしないため）
             return True
 
 
