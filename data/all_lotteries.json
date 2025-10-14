@@ -1,121 +1,11 @@
 {
-  "timestamp": "2025-10-13T01:57:37.146710",
+  "timestamp": "2025-10-14T01:50:50.850386",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2025-10-13T01:58:49.822343",
-      "update_date": "2025-10-13",
+      "scraped_at": "2025-10-14T01:51:56.932685",
+      "update_date": "2025-10-14",
       "lotteries": [
-        {
-          "store": "2025年10月10日(金)17時58分",
-          "product": "エディオンにてポケモン ポケットモンスター ポケモンカードゲーム MEGA スターターセットMEGA メガディアンシーex ﾎﾟｹﾓﾝMEGAｽﾀ-ﾀ-Mﾃﾞｲｱﾝｼ-EXが販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://chusen.info/archives/3434",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年10月10日(金)9時26分",
-          "product": "エディオンにてポケモン ポケットモンスター ポケモンカードゲーム MEGA スターターセットMEGA メガディアンシーex ﾎﾟｹﾓﾝMEGAｽﾀ-ﾀ-Mﾃﾞｲｱﾝｼ-EXが販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://chusen.info/archives/3434",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年10月10日(金)9時02分",
-          "product": "エディオンにてポケモン ポケモンカードゲーム MEGA プレミアムトレーナーボックス MEGA ﾎﾟｹﾓﾝMEGAﾌﾟﾚﾐｱﾑTﾎﾞﾂｸｽMEGAが販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://chusen.info/archives/3459",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年10月10日(金)9時01分",
-          "product": "エディオンにてポケモン ポケモンカードゲーム MEGA プレミアムトレーナーボックス MEGA ﾎﾟｹﾓﾝMEGAﾌﾟﾚﾐｱﾑTﾎﾞﾂｸｽMEGAが販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://chusen.info/archives/3459",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年10月10日(金)9時01分",
-          "product": "エディオンにてポケモン ポケットモンスター ポケモンカードゲーム MEGA スターターセットMEGA メガゲンガーex ﾎﾟｹﾓﾝMEGAｽﾀ-ﾀ-ﾒｶﾞｹﾞﾝｶﾞ-EX  ﾎﾟｹﾓﾝMEGAｽﾀ-ﾀ-ﾒｶﾞｹﾞﾝｶﾞ-EXが販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://chusen.info/archives/3433",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年10月10日(金)17時58分",
-          "product": "エディオンにてポケモン ポケットモンスター ポケモンカードゲーム MEGA スターターセットMEGA メガディアンシーex ﾎﾟｹﾓﾝMEGAｽﾀ-ﾀ-Mﾃﾞｲｱﾝｼ-EXが販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://chusen.info/archives/3434",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年10月10日(金)9時26分",
-          "product": "エディオンにてポケモン ポケットモンスター ポケモンカードゲーム MEGA スターターセットMEGA メガディアンシーex ﾎﾟｹﾓﾝMEGAｽﾀ-ﾀ-Mﾃﾞｲｱﾝｼ-EXが販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://chusen.info/archives/3434",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年10月10日(金)9時02分",
-          "product": "エディオンにてポケモン ポケモンカードゲーム MEGA プレミアムトレーナーボックス MEGA ﾎﾟｹﾓﾝMEGAﾌﾟﾚﾐｱﾑTﾎﾞﾂｸｽMEGAが販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://chusen.info/archives/3459",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年10月10日(金)9時01分",
-          "product": "エディオンにてポケモン ポケモンカードゲーム MEGA プレミアムトレーナーボックス MEGA ﾎﾟｹﾓﾝMEGAﾌﾟﾚﾐｱﾑTﾎﾞﾂｸｽMEGAが販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://chusen.info/archives/3459",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年10月10日(金)9時01分",
-          "product": "エディオンにてポケモン ポケットモンスター ポケモンカードゲーム MEGA スターターセットMEGA メガゲンガーex ﾎﾟｹﾓﾝMEGAｽﾀ-ﾀ-ﾒｶﾞｹﾞﾝｶﾞ-EX  ﾎﾟｹﾓﾝMEGAｽﾀ-ﾀ-ﾒｶﾞｹﾞﾝｶﾞ-EXが販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://chusen.info/archives/3433",
-          "status": "unknown"
-        },
         {
           "store": "2025年10月10日(金)17時58分",
           "product": "エディオンにてポケモン ポケットモンスター ポケモンカードゲーム MEGA スターターセットMEGA メガディアンシーex ﾎﾟｹﾓﾝMEGAｽﾀ-ﾀ-Mﾃﾞｲｱﾝｼ-EXが販売開始",
@@ -615,12 +505,12 @@
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-10-13T01:59:01.022724",
+      "scraped_at": "2025-10-14T01:52:08.204212",
       "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2025-10-13T01:59:01.925703",
+      "scraped_at": "2025-10-14T01:52:08.942992",
       "has_active_lottery": false,
       "lotteries": []
     }
