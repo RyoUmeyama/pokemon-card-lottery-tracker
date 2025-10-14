@@ -123,10 +123,24 @@ class NyukaNowScraper:
                     # リンクを抽出
                     link = row.find('a')
                     if link and link.get('href'):
-                        nyuka_now_url = link['href']
+                        url = link['href']
+
+                        # chusen.infoの場合は直接実URLを取得
+                        if 'chusen.info' in url:
+                            actual_url = self._extract_url_from_chusen_info(url)
+                            if actual_url:
+                                url = actual_url
+                                # 在庫チェック
+                                if self.check_availability:
+                                    if not self._check_availability(url):
+                                        continue  # 在庫切れの場合はスキップ
+                            lottery['detail_url'] = url
                         # 入荷Nowの記事ページから実際の販売・抽選ページのURLを取得
-                        direct_url = self._extract_direct_url(nyuka_now_url)
-                        lottery['detail_url'] = direct_url if direct_url else nyuka_now_url
+                        elif 'nyuka-now.com' in url:
+                            direct_url = self._extract_direct_url(url)
+                            lottery['detail_url'] = direct_url if direct_url else url
+                        else:
+                            lottery['detail_url'] = url
 
                     # 直接URLが取得できなかった（在庫切れなど）場合は除外
                     if not lottery['detail_url'] or lottery['detail_url'] == '':
