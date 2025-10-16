@@ -7,6 +7,8 @@ from datetime import datetime
 from scrapers.nyuka_now_scraper import NyukaNowScraper
 from scrapers.pokemon_center_scraper import PokemonCenterScraper
 from scrapers.rakuten_books_scraper import RakutenBooksScraper
+from scrapers.amazon_reservation_scraper import AmazonReservationScraper
+from scrapers.rakuten_reservation_scraper import RakutenReservationScraper
 
 
 def load_previous_data(filename):
@@ -49,6 +51,40 @@ def detect_changes(old_data, new_data):
     removed = old_products - new_products
     if removed:
         changes.append(f"終了抽選: {', '.join(removed)}")
+
+    return len(changes) > 0, changes
+
+
+def detect_reservation_changes(old_data, new_data):
+    """予約情報の変更を検出"""
+    if not old_data:
+        return True, "初回実行"
+
+    changes = []
+
+    # 予約商品数の変化をチェック
+    old_count = len(old_data.get('reservations', []))
+    new_count = len(new_data.get('reservations', []))
+
+    if old_count != new_count:
+        changes.append(f"予約商品数が変化: {old_count} → {new_count}")
+
+    # 新しい予約商品をチェック
+    old_products = {r.get('title', '') for r in old_data.get('reservations', [])}
+    new_products = {r.get('title', '') for r in new_data.get('reservations', [])}
+
+    added = new_products - old_products
+    if added:
+        added_list = list(added)[:3]  # 最大3件表示
+        more = len(added) - 3
+        if more > 0:
+            changes.append(f"新規予約: {', '.join(added_list)} 他{more}件")
+        else:
+            changes.append(f"新規予約: {', '.join(added_list)}")
+
+    removed = old_products - new_products
+    if removed:
+        changes.append(f"予約終了: {len(removed)}件")
 
     return len(changes) > 0, changes
 
@@ -104,7 +140,7 @@ def main():
         print("✗ 楽天ブックスの取得に失敗")
 
     # 3. ポケモンセンター公式をスクレイピング
-    print("\n[3/3] ポケモンセンター公式をチェック中...")
+    print("\n[3/5] ポケモンセンター公式をチェック中...")
     pokemon_center_scraper = PokemonCenterScraper()
     pokemon_center_data = pokemon_center_scraper.scrape()
 
@@ -122,6 +158,46 @@ def main():
     else:
         print("✗ ポケモンセンター公式の取得に失敗")
 
+    # 4. Amazon予約情報をスクレイピング
+    print("\n[4/5] Amazon予約情報をチェック中...")
+    amazon_scraper = AmazonReservationScraper()
+    amazon_data = amazon_scraper.scrape()
+
+    if amazon_data:
+        all_results['sources'].append(amazon_data)
+        reservation_count = len(amazon_data.get('reservations', []))
+        print(f"✓ Amazon: {reservation_count}件の予約可能商品を取得")
+
+        # 変更検出（新規予約を検出）
+        prev_data = load_previous_data('data/amazon_reservation_latest.json')
+        has_changes, changes = detect_reservation_changes(prev_data, amazon_data)
+        if has_changes:
+            print(f"  変更検出: {changes}")
+
+        save_data(amazon_data, 'data/amazon_reservation_latest.json')
+    else:
+        print("✗ Amazon予約情報の取得に失敗")
+
+    # 5. 楽天ブックス予約情報をスクレイピング
+    print("\n[5/5] 楽天ブックス予約情報をチェック中...")
+    rakuten_reservation_scraper = RakutenReservationScraper()
+    rakuten_reservation_data = rakuten_reservation_scraper.scrape()
+
+    if rakuten_reservation_data:
+        all_results['sources'].append(rakuten_reservation_data)
+        reservation_count = len(rakuten_reservation_data.get('reservations', []))
+        print(f"✓ 楽天ブックス: {reservation_count}件の予約可能商品を取得")
+
+        # 変更検出
+        prev_data = load_previous_data('data/rakuten_reservation_latest.json')
+        has_changes, changes = detect_reservation_changes(prev_data, rakuten_reservation_data)
+        if has_changes:
+            print(f"  変更検出: {changes}")
+
+        save_data(rakuten_reservation_data, 'data/rakuten_reservation_latest.json')
+    else:
+        print("✗ 楽天ブックス予約情報の取得に失敗")
+
     # 統合データを保存
     save_data(all_results, 'data/all_lotteries.json')
 
@@ -131,7 +207,8 @@ def main():
 
     # サマリー表示
     total_lotteries = sum(len(s.get('lotteries', [])) for s in all_results['sources'])
-    print(f"\n合計: {total_lotteries}件の抽選情報を収集")
+    total_reservations = sum(len(s.get('reservations', [])) for s in all_results['sources'])
+    print(f"\n合計: {total_lotteries}件の抽選情報、{total_reservations}件の予約情報を収集")
 
     # Gmail通知
     if os.environ.get('ENABLE_EMAIL_NOTIFICATION') == 'true':

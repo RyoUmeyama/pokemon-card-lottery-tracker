@@ -4,15 +4,18 @@
 
 ## 🎯 機能
 
-- **自動情報収集**: 主要サイトから抽選情報を定期的にスクレイピング
+- **自動情報収集**: 主要サイトから抽選・予約情報を定期的にスクレイピング
 - **在庫チェック**: 売り切れ商品を自動的に除外
 - **重複除外**: 同じ商品の重複エントリを自動削除
-- **変更検出**: 新しい抽選の開始や終了を自動検出
+- **変更検出**: 新しい抽選・予約の開始や終了を自動検出
+- **予約開始通知**: Amazon・楽天ブックスの予約開始を即座に検知
 - **GitHub Actions**: 毎日9:00 JST自動実行
-- **メール通知**: 新しい抽選情報が見つかった場合に自動通知
+- **メール通知**: 新しい抽選・予約情報が見つかった場合に自動通知
 - **データ保存**: JSON形式で履歴を保存
 
 ## 📊 収集元
+
+### 抽選情報
 
 1. **入荷Now** (https://nyuka-now.com)
    - 最も網羅的な抽選情報集約サイト
@@ -27,6 +30,18 @@
 3. **ポケモンセンターオンライン公式**
    - 公式の抽選販売情報
    - 最も信頼性の高い情報源
+
+### 予約情報
+
+4. **Amazon.co.jp**
+   - ポケモンカード予約商品を検索
+   - 予約受付中の商品を自動検知
+   - ASIN（商品ID）による重複除外
+
+5. **楽天ブックス（予約）**
+   - ポケモンカード予約商品を検索
+   - 発売日情報と予約状態を取得
+   - 在庫状況をリアルタイムチェック
 
 ## 🚀 使い方
 
@@ -53,17 +68,24 @@ python main.py
 pokemon-card-lottery-tracker/
 ├── scrapers/
 │   ├── __init__.py
-│   ├── nyuka_now_scraper.py       # 入荷Nowスクレイパー
-│   └── pokemon_center_scraper.py  # ポケモンセンター公式スクレイパー
+│   ├── nyuka_now_scraper.py              # 入荷Nowスクレイパー
+│   ├── pokemon_center_scraper.py         # ポケモンセンター公式スクレイパー
+│   ├── rakuten_books_scraper.py          # 楽天ブックス抽選スクレイパー
+│   ├── amazon_reservation_scraper.py     # Amazon予約スクレイパー
+│   └── rakuten_reservation_scraper.py    # 楽天ブックス予約スクレイパー
 ├── data/
-│   ├── nyuka_now_latest.json      # 入荷Now最新データ
-│   ├── pokemon_center_latest.json # ポケモンセンター最新データ
-│   └── all_lotteries.json         # 統合データ
+│   ├── nyuka_now_latest.json             # 入荷Now最新データ
+│   ├── pokemon_center_latest.json        # ポケモンセンター最新データ
+│   ├── rakuten_books_latest.json         # 楽天ブックス抽選最新データ
+│   ├── amazon_reservation_latest.json    # Amazon予約最新データ
+│   ├── rakuten_reservation_latest.json   # 楽天ブックス予約最新データ
+│   └── all_lotteries.json                # 統合データ
 ├── .github/
 │   └── workflows/
-│       └── scrape.yml             # GitHub Actions設定
-├── main.py                        # メインスクリプト
-├── requirements.txt               # Python依存関係
+│       └── scrape.yml                    # GitHub Actions設定
+├── main.py                               # メインスクリプト
+├── notify.py                             # メール通知機能
+├── requirements.txt                      # Python依存関係
 └── README.md
 ```
 
@@ -128,6 +150,12 @@ python main.py
 - [x] メール通知機能
 - [x] 在庫チェック機能
 - [x] 重複除外機能
+- [x] Amazon予約情報の収集
+- [x] 楽天ブックス予約情報の収集
+- [ ] 実店舗抽選情報の収集（東京・神奈川・千葉・埼玉）
+- [ ] 再入荷アラート機能
+- [ ] 地域フィルタリング機能（関東圏のみ）
+- [ ] 通知の優先度設定（定価 > 抽選 > 予約）
 - [ ] Discord/Slack通知機能
 - [ ] LINE通知機能
 - [ ] より多くのサイトに対応（ヨドバシ、あみあみなど）

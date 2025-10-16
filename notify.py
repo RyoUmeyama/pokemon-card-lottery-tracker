@@ -26,33 +26,43 @@ class GmailNotifier:
             return False
 
         # 抽選情報を集計
-        total_count = 0
+        total_lottery_count = 0
+        total_reservation_count = 0
         sources_summary = []
 
         for source in all_lotteries_data.get('sources', []):
             lottery_count = len(source.get('lotteries', []))
-            total_count += lottery_count
+            reservation_count = len(source.get('reservations', []))
+            total_lottery_count += lottery_count
+            total_reservation_count += reservation_count
 
-            if lottery_count > 0:
+            if lottery_count > 0 or reservation_count > 0:
                 source_name = source.get('source', 'Unknown')
                 sources_summary.append({
                     'name': source_name,
-                    'count': lottery_count,
-                    'lotteries': source.get('lotteries', [])
+                    'lottery_count': lottery_count,
+                    'reservation_count': reservation_count,
+                    'lotteries': source.get('lotteries', []),
+                    'reservations': source.get('reservations', [])
                 })
 
-        # 抽選がない場合は通知しない
-        if total_count == 0:
-            print("📭 抽選情報がないため通知をスキップします")
+        # 抽選も予約もない場合は通知しない
+        if total_lottery_count == 0 and total_reservation_count == 0:
+            print("📭 抽選・予約情報がないため通知をスキップします")
             return True
 
         # メール本文を作成
-        email_body = self._create_email_body(sources_summary, total_count)
+        email_body = self._create_email_body(sources_summary, total_lottery_count, total_reservation_count)
 
         # メールを送信
         try:
             msg = MIMEMultipart('alternative')
-            msg['Subject'] = f'🎴 ポケモンカード抽選情報 ({total_count}件) - {datetime.now().strftime("%Y/%m/%d")}'
+            subject_parts = []
+            if total_lottery_count > 0:
+                subject_parts.append(f'抽選{total_lottery_count}件')
+            if total_reservation_count > 0:
+                subject_parts.append(f'予約{total_reservation_count}件')
+            msg['Subject'] = f'🎴 ポケモンカード情報 ({", ".join(subject_parts)}) - {datetime.now().strftime("%Y/%m/%d")}'
             msg['From'] = self.smtp_username
             msg['To'] = self.recipient
 
@@ -80,8 +90,14 @@ class GmailNotifier:
             traceback.print_exc()
             return False
 
-    def _create_email_body(self, sources_summary, total_count):
+    def _create_email_body(self, sources_summary, total_lottery_count, total_reservation_count):
         """メール本文（HTML）を作成"""
+        summary_parts = []
+        if total_lottery_count > 0:
+            summary_parts.append(f'{total_lottery_count}件の抽選情報')
+        if total_reservation_count > 0:
+            summary_parts.append(f'{total_reservation_count}件の予約情報')
+
         html = f"""
 <!DOCTYPE html>
 <html>
@@ -142,6 +158,14 @@ class GmailNotifier:
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }}
+        .reservation-item {{
+            background: white;
+            border-left: 4px solid #48bb78;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }}
         .product-name {{
             font-size: 16px;
             font-weight: bold;
@@ -152,6 +176,17 @@ class GmailNotifier:
             color: #718096;
             font-size: 14px;
             margin-bottom: 5px;
+        }}
+        .price {{
+            color: #38a169;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }}
+        .availability {{
+            color: #48bb78;
+            font-size: 14px;
+            margin-bottom: 5px;
+            font-weight: bold;
         }}
         .detail-link {{
             display: inline-block;
@@ -165,6 +200,14 @@ class GmailNotifier:
         }}
         .detail-link:hover {{
             background: #5568d3;
+        }}
+        .section-title {{
+            font-size: 18px;
+            font-weight: bold;
+            color: #2d3748;
+            margin: 20px 0 10px 0;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #e2e8f0;
         }}
         .footer {{
             margin-top: 30px;
@@ -189,30 +232,40 @@ class GmailNotifier:
 </head>
 <body>
     <div class="container">
-        <h1>🎴 ポケモンカード抽選情報</h1>
+        <h1>🎴 ポケモンカード情報</h1>
 
         <div class="summary">
-            合計 {total_count} 件の抽選情報があります
+            {'と'.join(summary_parts)}
         </div>
 """
 
         # 各ソースの情報を追加
         for source in sources_summary:
+            source_count_parts = []
+            if source['lottery_count'] > 0:
+                source_count_parts.append(f'抽選{source["lottery_count"]}件')
+            if source['reservation_count'] > 0:
+                source_count_parts.append(f'予約{source["reservation_count"]}件')
+
             html += f"""
         <div class="source-section">
             <div class="source-header">
                 <span>📌 {source['name']}</span>
-                <span style="color: #667eea;">{source['count']}件</span>
+                <span style="color: #667eea;">{', '.join(source_count_parts)}</span>
             </div>
 """
 
             # 抽選情報を追加（最大5件まで表示）
-            for lottery in source['lotteries'][:5]:
-                store = lottery.get('store', '')
-                product = lottery.get('product', '')
-                detail_url = lottery.get('detail_url', '#')
+            if source['lottery_count'] > 0:
+                html += """
+            <div class="section-title">🎯 抽選情報</div>
+"""
+                for lottery in source['lotteries'][:5]:
+                    store = lottery.get('store', '')
+                    product = lottery.get('product', '')
+                    detail_url = lottery.get('detail_url', '#')
 
-                html += f"""
+                    html += f"""
             <div class="lottery-item">
                 <div class="store-name">🏪 {store}</div>
                 <div class="product-name">📦 {product}</div>
@@ -220,10 +273,46 @@ class GmailNotifier:
             </div>
 """
 
-            # 5件以上ある場合は省略メッセージ
-            if len(source['lotteries']) > 5:
-                remaining = len(source['lotteries']) - 5
-                html += f"""
+                # 5件以上ある場合は省略メッセージ
+                if len(source['lotteries']) > 5:
+                    remaining = len(source['lotteries']) - 5
+                    html += f"""
+            <div style="text-align: center; color: #718096; margin-top: 15px;">
+                ... 他 {remaining} 件
+            </div>
+"""
+
+            # 予約情報を追加（最大5件まで表示）
+            if source['reservation_count'] > 0:
+                html += """
+            <div class="section-title">📅 予約情報</div>
+"""
+                for reservation in source['reservations'][:5]:
+                    title = reservation.get('title', '')
+                    price = reservation.get('price', '')
+                    availability = reservation.get('availability', '')
+                    url = reservation.get('url', '#')
+                    release_date = reservation.get('release_date', '')
+
+                    html += f"""
+            <div class="reservation-item">
+                <div class="product-name">📦 {title}</div>
+                <div class="price">💰 {price}</div>
+                <div class="availability">✅ {availability}</div>
+"""
+                    if release_date:
+                        html += f"""
+                <div class="store-name">📅 {release_date}</div>
+"""
+                    html += f"""
+                <a href="{url}" class="detail-link" target="_blank">🔗 予約ページを見る</a>
+            </div>
+"""
+
+                # 5件以上ある場合は省略メッセージ
+                if len(source['reservations']) > 5:
+                    remaining = len(source['reservations']) - 5
+                    html += f"""
             <div style="text-align: center; color: #718096; margin-top: 15px;">
                 ... 他 {remaining} 件
             </div>
