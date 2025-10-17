@@ -20,7 +20,7 @@ def generate_html_report(data, output_file='data/lottery_report.html'):
     # 全抽選情報を収集
     all_lotteries = []
     for source in data['sources']:
-        for lottery in source['lotteries']:
+        for lottery in source.get('lotteries', []):
             lottery['_source'] = source['source']
             all_lotteries.append(lottery)
 
@@ -274,9 +274,10 @@ def generate_html_report(data, output_file='data/lottery_report.html'):
         if source['source'] == 'pokemoncenter-online.com':
             status_text = "✅ 抽選実施中" if source.get('has_active_lottery') else "⚠️ 現在抽選なし"
 
+        lottery_count = len(source.get('lotteries', []))
         html_content += f"""
                 <div class="stat-card">
-                    <div class="number">{len(source['lotteries'])}</div>
+                    <div class="number">{lottery_count}</div>
                     <div class="label">{source['source']}</div>
                     {f'<div style="margin-top: 10px; color: #667eea;">{status_text}</div>' if status_text else ''}
                 </div>
