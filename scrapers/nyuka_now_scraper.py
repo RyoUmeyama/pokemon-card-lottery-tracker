@@ -190,7 +190,7 @@ class NyukaNowScraper:
             return None
 
         try:
-            response = requests.get(nyuka_now_url, headers=self.headers, timeout=15)
+            response = requests.get(nyuka_now_url, headers=self.headers, timeout=30)
             response.raise_for_status()
 
             soup = BeautifulSoup(response.content, 'html.parser')
@@ -239,7 +239,7 @@ class NyukaNowScraper:
     def _extract_url_from_chusen_info(self, chusen_info_url):
         """chusen.infoのページから実際の販売ページURLを抽出"""
         try:
-            response = requests.get(chusen_info_url, headers=self.headers, timeout=15)
+            response = requests.get(chusen_info_url, headers=self.headers, timeout=30)
             response.raise_for_status()
 
             soup = BeautifulSoup(response.content, 'html.parser')
@@ -285,7 +285,7 @@ class NyukaNowScraper:
     def _check_availability(self, url):
         """販売ページが在庫ありかチェック"""
         try:
-            response = requests.get(url, headers=self.headers, timeout=10)
+            response = requests.get(url, headers=self.headers, timeout=30)
             response.raise_for_status()
 
             html = response.text.lower()
@@ -308,6 +308,10 @@ class NyukaNowScraper:
 
             return True
 
+        except requests.exceptions.Timeout:
+            # タイムアウトの場合は在庫ありとして扱う（過剰にフィルタしないため）
+            print(f"  Warning: Timeout checking availability for {url}, treating as available")
+            return True
         except requests.exceptions.HTTPError as e:
             # 403エラー（bot protection）の場合、エディオンは在庫切れとして扱う
             if e.response.status_code == 403 and 'edion.com' in url.lower():
