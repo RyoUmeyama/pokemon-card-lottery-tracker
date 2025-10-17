@@ -1,6 +1,62 @@
 {
   "source": "nyuka-now.com",
-  "scraped_at": "2025-10-16T01:55:13.666377",
-  "update_date": "2025-10-16",
-  "lotteries": []
+  "scraped_at": "2025-10-17T02:46:32.202136",
+  "update_date": "2025-10-17",
+  "lotteries": [
+    {
+      "store": "2025年10月16日(木)12時26分",
+      "product": "エディオンにてポケモン ポケモン ポケモンカードゲーム スカーレット&バイオレット ハイクラスパック テラスタルフェスex ECﾎﾟｹﾓﾝSVﾃﾗｽﾀﾙﾌｴｽEXが販売開始",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://www.edion.com/detail.html?p_cd=00082044480",
+      "status": "unknown"
+    },
+    {
+      "store": "2025年10月16日(木)11時59分",
+      "product": "楽天ブックスにてポケモンカードゲーム MEGA　スターターセットMEGA メガディアンシーexが販売開始",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fbooks.rakuten.co.jp%2Frb%2F18182245%2F",
+      "status": "unknown"
+    },
+    {
+      "store": "2025年10月16日(木)11時59分",
+      "product": "楽天ブックスにてポケモンカードゲーム MEGA　スターターセットMEGA メガゲンガーexが販売開始",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fbooks.rakuten.co.jp%2Frb%2F18182244%2F",
+      "status": "unknown"
+    },
+    {
+      "store": "2025年10月16日(木)11時58分",
+      "product": "楽天ブックスにてポケモンカードゲーム MEGA　スターターセットMEGA メガディアンシーexが新規登録されました（販売有無要確認）",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fbooks.rakuten.co.jp%2Frb%2F18182245%2F",
+      "status": "unknown"
+    },
+    {
+      "store": "2025年10月16日(木)11時58分",
+      "product": "楽天ブックスにてポケモンカードゲーム MEGA　スターターセットMEGA メガゲンガーexが新規登録されました（販売有無要確認）",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fbooks.rakuten.co.jp%2Frb%2F18182244%2F",
+      "status": "unknown"
+    }
+  ]
 }
