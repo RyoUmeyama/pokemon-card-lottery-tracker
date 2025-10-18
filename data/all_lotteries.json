@@ -1,11 +1,22 @@
 {
-  "timestamp": "2025-10-17T08:50:02.361838",
+  "timestamp": "2025-10-18T01:46:23.306044",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2025-10-17T08:51:12.418179",
-      "update_date": "2025-10-17",
+      "scraped_at": "2025-10-18T01:47:28.911984",
+      "update_date": "2025-10-18",
       "lotteries": [
+        {
+          "store": "2025年10月17日(金)16時41分",
+          "product": "楽天ブックスにてポケモンカードゲーム MEGA　スターターセットMEGA メガディアンシーexが販売開始",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fbooks.rakuten.co.jp%2Frb%2F18182245%2F",
+          "status": "unknown"
+        },
         {
           "store": "2025年10月16日(木)12時26分",
           "product": "エディオンにてポケモン ポケモン ポケモンカードゲーム スカーレット&バイオレット ハイクラスパック テラスタルフェスex ECﾎﾟｹﾓﾝSVﾃﾗｽﾀﾙﾌｴｽEXが販売開始",
@@ -15,17 +26,6 @@
           "announcement_date": "",
           "conditions": "",
           "detail_url": "https://www.edion.com/detail.html?p_cd=00082044480",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年10月16日(木)11時59分",
-          "product": "楽天ブックスにてポケモンカードゲーム MEGA　スターターセットMEGA メガディアンシーexが販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fbooks.rakuten.co.jp%2Frb%2F18182245%2F",
           "status": "unknown"
         },
         {
@@ -65,23 +65,23 @@
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-10-17T08:51:23.763339",
+      "scraped_at": "2025-10-18T01:47:40.422452",
       "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2025-10-17T08:51:24.235046",
+      "scraped_at": "2025-10-18T01:47:42.030194",
       "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2025-10-17T08:51:30.663368",
+      "scraped_at": "2025-10-18T01:47:49.405281",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-10-17T08:51:56.618728",
+      "scraped_at": "2025-10-18T01:48:16.181277",
       "reservations": []
     }
   ]
