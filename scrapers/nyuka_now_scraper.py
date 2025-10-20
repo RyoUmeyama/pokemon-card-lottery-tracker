@@ -153,7 +153,7 @@ class NyukaNowScraper:
                     if not lottery['detail_url'] or lottery['detail_url'] == '':
                         continue
 
-                    # Amazon、Yahoo!ショッピング、駿河屋を除外
+                    # Amazon、Yahoo!ショッピング、駿河屋、エディオンを除外
                     store_text = lottery['store'].lower()
                     url_text = lottery['detail_url'].lower()
                     if 'amazon' in store_text or 'amazon' in url_text:
@@ -161,6 +161,8 @@ class NyukaNowScraper:
                     if 'yahoo' in store_text or 'yahoo' in url_text or 'shopping.yahoo' in url_text:
                         continue
                     if '駿河屋' in lottery['store'] or 'suruga' in url_text:
+                        continue
+                    if 'エディオン' in lottery['store'] or 'edion' in url_text:
                         continue
 
                     # 中身がない情報を除外（ヘッダー行など）
