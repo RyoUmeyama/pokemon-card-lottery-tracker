@@ -1,22 +1,9 @@
 # Pokemon Card Lottery Tracker - Claude Code Instructions
 
+⚠️ **重要**: このプロジェクトは `/Users/r.umeyama/work/.claude/CLAUDE.md` の共通ルールに従います。
+特に **README更新ルール** を必ず確認してください。
+
 このプロジェクトは、ポケモンカード抽選情報を自動収集するシステムです。
-
-## 📋 README更新ルール（重要）
-
-**コードに変更を加えた場合、必ずREADME.mdを更新してください。**
-
-### 更新が必要な場合
-- 新機能の追加
-- 既存機能の変更・削除
-- 実行スケジュールの変更
-- 収集元サイトの追加・除外
-- 設定方法の変更
-
-### 更新すべきセクション
-- `## 🎯 機能`: 機能の追加・削除
-- `## 📊 収集元`: データソース・除外サイトの変更
-- `## 🔔 今後の拡張予定`: 完了した機能にチェックマークを追加
 
 ## 🔧 技術的な注意事項
 
@@ -35,14 +22,6 @@
 - `data/all_lotteries.json`: 統合データ
 - `data/lottery_report.html`: HTMLレポート
 
-## 📧 メール通知設定
-
-GitHub Secretsで以下を設定:
-- `SMTP_SERVER`: smtp.gmail.com
-- `SMTP_PORT`: 587
-- `SMTP_USERNAME`: 完全なGmailアドレス（@gmail.com含む）
-- `SMTP_PASSWORD`: Gmailアプリパスワード（16文字、スペースなし）
-- `RECIPIENT_EMAIL`: 通知先メールアドレス
 
 ## ⚠️ よくある問題と対処法
 
