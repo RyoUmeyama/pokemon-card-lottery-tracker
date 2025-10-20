@@ -1,9 +1,9 @@
 {
-  "timestamp": "2025-10-20T02:00:48.969033",
+  "timestamp": "2025-10-20T07:00:37.102662",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2025-10-20T02:01:53.317248",
+      "scraped_at": "2025-10-20T07:01:38.655406",
       "update_date": "2025-10-20",
       "lotteries": [
         {
@@ -15,17 +15,6 @@
           "announcement_date": "",
           "conditions": "",
           "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fbooks.rakuten.co.jp%2Frb%2F18182245%2F",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年10月16日(木)12時26分",
-          "product": "エディオンにてポケモン ポケモン ポケモンカードゲーム スカーレット&バイオレット ハイクラスパック テラスタルフェスex ECﾎﾟｹﾓﾝSVﾃﾗｽﾀﾙﾌｴｽEXが販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://www.edion.com/detail.html?p_cd=00082044480",
           "status": "unknown"
         },
         {
@@ -43,23 +32,23 @@
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-10-20T02:02:05.797172",
+      "scraped_at": "2025-10-20T07:01:49.669903",
       "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2025-10-20T02:02:06.666264",
+      "scraped_at": "2025-10-20T07:01:51.070039",
       "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2025-10-20T02:02:13.903810",
+      "scraped_at": "2025-10-20T07:01:57.724220",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-10-20T02:02:40.220025",
+      "scraped_at": "2025-10-20T07:02:24.017929",
       "reservations": []
     }
   ]
