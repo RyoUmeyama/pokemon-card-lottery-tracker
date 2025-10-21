@@ -1,11 +1,33 @@
 {
-  "timestamp": "2025-10-20T07:00:37.102662",
+  "timestamp": "2025-10-21T01:54:37.029020",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2025-10-20T07:01:38.655406",
-      "update_date": "2025-10-20",
+      "scraped_at": "2025-10-21T01:55:35.467162",
+      "update_date": "2025-10-21",
       "lotteries": [
+        {
+          "store": "2025年10月20日(月)15時09分",
+          "product": "VIP会員限定 Joshinにてポケモン ポケモンカードゲーム スカーレット＆バイオレット ハイクラスパック テラスタルフェスex【1BOX＝10パック入】が販売開始",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://joshinweb.jp/toy/18745/set4521329362335.html",
+          "status": "unknown"
+        },
+        {
+          "store": "2025年10月20日(月)15時07分",
+          "product": "Joshinにてポケモン ポケモンカードゲーム スカーレット＆バイオレット ハイクラスパック テラスタルフェスex【1BOX＝10パック入】が販売開始",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://joshinweb.jp/toy/18745/set4521329362335.html",
+          "status": "unknown"
+        },
         {
           "store": "2025年10月17日(金)16時41分",
           "product": "楽天ブックスにてポケモンカードゲーム MEGA　スターターセットMEGA メガディアンシーexが販売開始",
@@ -16,39 +38,28 @@
           "conditions": "",
           "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fbooks.rakuten.co.jp%2Frb%2F18182245%2F",
           "status": "unknown"
-        },
-        {
-          "store": "2025年10月16日(木)11時59分",
-          "product": "楽天ブックスにてポケモンカードゲーム MEGA　スターターセットMEGA メガゲンガーexが販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fbooks.rakuten.co.jp%2Frb%2F18182244%2F",
-          "status": "unknown"
         }
       ]
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-10-20T07:01:49.669903",
+      "scraped_at": "2025-10-21T01:55:46.697581",
       "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2025-10-20T07:01:51.070039",
+      "scraped_at": "2025-10-21T01:55:47.390394",
       "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2025-10-20T07:01:57.724220",
+      "scraped_at": "2025-10-21T01:55:54.116467",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-10-20T07:02:24.017929",
+      "scraped_at": "2025-10-21T01:56:20.618585",
       "reservations": []
     }
   ]
