@@ -1,11 +1,55 @@
 {
-  "timestamp": "2025-10-24T01:49:01.562043",
+  "timestamp": "2025-10-25T01:51:09.986893",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2025-10-24T01:50:25.084818",
-      "update_date": "2025-10-24",
+      "scraped_at": "2025-10-25T01:51:58.555099",
+      "update_date": "2025-10-25",
       "lotteries": [
+        {
+          "store": "2025年10月24日(金)14時24分",
+          "product": "エムスタ（楽天市場）にてポケモン ポケモンカードゲーム スカーレット＆バイオレット ハイクラスパック テラスタルフェスex BOXが販売開始（価格：11000円）",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmurauchi-dvd%2F4521329362342%2F",
+          "status": "unknown"
+        },
+        {
+          "store": "2025年10月24日(金)11時44分",
+          "product": "あみあみ本店にてポケモンカードゲーム MEGA スターターセットMEGA メガディアンシーex（再販）[ポケモン]《１０月予約》が販売開始",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://www.hana-log.net/archives/4728",
+          "status": "unknown"
+        },
+        {
+          "store": "2025年10月24日(金)11時21分",
+          "product": "あみあみ本店にてポケモンカードゲーム MEGA スターターセットMEGA メガディアンシーexが販売開始",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://www.hana-log.net/archives/4727",
+          "status": "unknown"
+        },
+        {
+          "store": "2025年10月24日(金)11時21分",
+          "product": "あみあみ本店にてポケモンカードゲーム MEGA スターターセットMEGA メガディアンシーexが新規登録されました（販売有無要確認）",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://www.hana-log.net/archives/4727",
+          "status": "unknown"
+        },
         {
           "store": "2025年10月22日(水)11時13分",
           "product": "エムスタ（楽天市場）にてポケモン ポケモンカードゲーム MEGA 拡張パック メガシンフォニア BOXが販売開始（価格：6600円）",
@@ -43,23 +87,23 @@
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-10-24T01:50:37.473035",
+      "scraped_at": "2025-10-25T01:52:09.401192",
       "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2025-10-24T01:50:39.474893",
+      "scraped_at": "2025-10-25T01:52:09.896038",
       "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2025-10-24T01:50:45.871754",
+      "scraped_at": "2025-10-25T01:52:16.184338",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-10-24T01:51:12.129048",
+      "scraped_at": "2025-10-25T01:52:43.368058",
       "reservations": []
     }
   ]
