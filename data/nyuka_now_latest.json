@@ -1,8 +1,30 @@
 {
   "source": "nyuka-now.com",
-  "scraped_at": "2025-10-25T01:51:58.555099",
-  "update_date": "2025-10-25",
+  "scraped_at": "2025-10-26T02:00:52.567296",
+  "update_date": "2025-10-26",
   "lotteries": [
+    {
+      "store": "2025年10月25日(土)17時30分",
+      "product": "イエローサブマリン楽天市場（楽天市場）にて【8/18公開】[予約：9/5]ポケモンカードゲーム MEGA スターターセットMEGA　 メガディアンシーexが販売開始（価格：1800円）",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fyellowsubmarine%2F4521329427812%2F",
+      "status": "unknown"
+    },
+    {
+      "store": "2025年10月25日(土)9時05分",
+      "product": "あみあみ本店にてポケモンカードゲーム MEGA スターターセットMEGA メガディアンシーexが販売開始",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://www.hana-log.net/archives/4727",
+      "status": "unknown"
+    },
     {
       "store": "2025年10月24日(金)14時24分",
       "product": "エムスタ（楽天市場）にてポケモン ポケモンカードゲーム スカーレット＆バイオレット ハイクラスパック テラスタルフェスex BOXが販売開始（価格：11000円）",
@@ -27,17 +49,6 @@
     },
     {
       "store": "2025年10月24日(金)11時21分",
-      "product": "あみあみ本店にてポケモンカードゲーム MEGA スターターセットMEGA メガディアンシーexが販売開始",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://www.hana-log.net/archives/4727",
-      "status": "unknown"
-    },
-    {
-      "store": "2025年10月24日(金)11時21分",
       "product": "あみあみ本店にてポケモンカードゲーム MEGA スターターセットMEGA メガディアンシーexが新規登録されました（販売有無要確認）",
       "lottery_type": "",
       "start_date": "",
@@ -56,28 +67,6 @@
       "announcement_date": "",
       "conditions": "",
       "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmurauchi-dvd%2F4521329431185%2F",
-      "status": "unknown"
-    },
-    {
-      "store": "2025年10月21日(火)15時26分",
-      "product": "Joshinにてポケモン ポケモンカードゲーム スカーレット＆バイオレット ハイクラスパック テラスタルフェスex【1BOX＝10パック入】が販売開始",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://joshinweb.jp/toy/18745/set4521329362335.html",
-      "status": "unknown"
-    },
-    {
-      "store": "2025年10月20日(月)15時09分",
-      "product": "VIP会員限定 Joshinにてポケモン ポケモンカードゲーム スカーレット＆バイオレット ハイクラスパック テラスタルフェスex【1BOX＝10パック入】が販売開始",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://joshinweb.jp/toy/18745/set4521329362335.html",
       "status": "unknown"
     }
   ]
