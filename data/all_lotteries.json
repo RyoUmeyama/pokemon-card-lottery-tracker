@@ -1,13 +1,13 @@
 {
-  "timestamp": "2025-10-27T02:04:11.010229",
+  "timestamp": "2025-10-28T01:53:47.940928",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2025-10-27T02:05:04.575606",
-      "update_date": "2025-10-27",
+      "scraped_at": "2025-10-28T01:54:49.156028",
+      "update_date": "2025-10-28",
       "lotteries": [
         {
-          "store": "2025年10月25日(土)17時30分",
+          "store": "2025年10月27日(月)12時36分",
           "product": "イエローサブマリン楽天市場（楽天市場）にて【8/18公開】[予約：9/5]ポケモンカードゲーム MEGA スターターセットMEGA　 メガディアンシーexが販売開始（価格：1800円）",
           "lottery_type": "",
           "start_date": "",
@@ -76,23 +76,23 @@
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-10-27T02:05:15.705401",
+      "scraped_at": "2025-10-28T01:55:00.318877",
       "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2025-10-27T02:05:17.203014",
+      "scraped_at": "2025-10-28T01:55:01.045149",
       "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2025-10-27T02:05:24.495330",
+      "scraped_at": "2025-10-28T01:55:08.273170",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-10-27T02:05:51.734471",
+      "scraped_at": "2025-10-28T01:55:34.655698",
       "reservations": []
     }
   ]
