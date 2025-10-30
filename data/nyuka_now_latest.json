@@ -1,8 +1,30 @@
 {
   "source": "nyuka-now.com",
-  "scraped_at": "2025-10-29T02:02:01.702124",
-  "update_date": "2025-10-29",
+  "scraped_at": "2025-10-30T02:00:52.509601",
+  "update_date": "2025-10-30",
   "lotteries": [
+    {
+      "store": "2025年10月30日(木)8時14分",
+      "product": "ビッグウェブ（楽天市場）にてポケモンカードゲーム スカーレット＆バイオレット 拡張パック ホワイトフレア BOX（20個入）が販売開始（価格：8500円）",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fauc-big-web%2F3419929%2F",
+      "status": "unknown"
+    },
+    {
+      "store": "2025年10月30日(木)8時13分",
+      "product": "ビッグウェブ（楽天市場）にてポケモンカードゲーム MEGA 拡張パック メガシンフォニア BOX（30個入）が販売開始（価格：7000円）",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fauc-big-web%2F3442576%2F",
+      "status": "unknown"
+    },
     {
       "store": "2025年10月29日(水)8時44分",
       "product": "ビッグウェブ（楽天市場）にてポケモンカードゲーム スカーレット＆バイオレット ハイクラスパック テラスタルフェスex BOX（10個入）が販売開始（価格：10000円）",
@@ -12,17 +34,6 @@
       "announcement_date": "",
       "conditions": "",
       "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fauc-big-web%2F3384802%2F",
-      "status": "unknown"
-    },
-    {
-      "store": "2025年10月29日(水)8時43分",
-      "product": "ビッグウェブ（楽天市場）にてポケモンカードゲーム MEGA 拡張パック メガシンフォニア BOX（30個入）が販売開始（価格：7000円）",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fauc-big-web%2F3442576%2F",
       "status": "unknown"
     },
     {
