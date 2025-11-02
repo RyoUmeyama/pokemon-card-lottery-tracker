@@ -1,8 +1,19 @@
 {
   "source": "nyuka-now.com",
-  "scraped_at": "2025-11-01T02:01:59.148764",
-  "update_date": "2025-11-01",
+  "scraped_at": "2025-11-02T02:05:29.362532",
+  "update_date": "2025-11-02",
   "lotteries": [
+    {
+      "store": "2025年11月1日(土)16時12分",
+      "product": "Joshinにてポケモン ポケモンカードゲーム スカーレット＆バイオレット ハイクラスパック テラスタルフェスex【1BOX＝10パック入】が販売開始",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://joshinweb.jp/toy/18745/set4521329362335.html",
+      "status": "unknown"
+    },
     {
       "store": "2025年10月30日(木)12時45分",
       "product": "楽天ブックスにてポケモンカードゲーム MEGA　スターターセットMEGA メガゲンガーexが販売開始",
