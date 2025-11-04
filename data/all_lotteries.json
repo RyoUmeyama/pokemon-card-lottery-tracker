@@ -1,13 +1,13 @@
 {
-  "timestamp": "2025-11-03T02:02:03.355213",
+  "timestamp": "2025-11-04T01:57:14.199588",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2025-11-03T02:03:41.620323",
-      "update_date": "2025-11-03",
+      "scraped_at": "2025-11-04T01:58:48.324672",
+      "update_date": "2025-11-04",
       "lotteries": [
         {
-          "store": "2025年11月2日(日)15時10分",
+          "store": "2025年11月3日(月)15時09分",
           "product": "Joshinにてポケモン ポケモンカードゲーム スカーレット＆バイオレット ハイクラスパック テラスタルフェスex【1BOX＝10パック入】が販売開始",
           "lottery_type": "",
           "start_date": "",
@@ -82,39 +82,28 @@
           "conditions": "",
           "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fauc-big-web%2F3384802%2F",
           "status": "unknown"
-        },
-        {
-          "store": "2025年10月29日(水)8時43分",
-          "product": "ビッグウェブ（楽天市場）にてポケモンカードゲーム MEGA 拡張パック メガブレイブ BOX（30個入）が販売開始（価格：9500円）",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fauc-big-web%2F3442575%2F",
-          "status": "unknown"
         }
       ]
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-11-03T02:03:52.502409",
+      "scraped_at": "2025-11-04T01:58:59.500346",
       "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2025-11-03T02:03:52.985879",
+      "scraped_at": "2025-11-04T01:59:00.383714",
       "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2025-11-03T02:03:59.496841",
+      "scraped_at": "2025-11-04T01:59:06.828070",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-11-03T02:04:25.674631",
+      "scraped_at": "2025-11-04T01:59:32.967684",
       "reservations": []
     }
   ]
