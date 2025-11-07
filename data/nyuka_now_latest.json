@@ -1,7 +1,7 @@
 {
   "source": "nyuka-now.com",
-  "scraped_at": "2025-11-06T01:58:38.093834",
-  "update_date": "2025-11-06",
+  "scraped_at": "2025-11-07T01:57:27.498043",
+  "update_date": "2025-11-07",
   "lotteries": [
     {
       "store": "2025年11月5日(水)16時47分",
@@ -34,17 +34,6 @@
       "announcement_date": "",
       "conditions": "",
       "detail_url": "https://www.hana-log.net/archives/4746",
-      "status": "unknown"
-    },
-    {
-      "store": "2025年11月4日(火)11時46分",
-      "product": "あみあみ本店にてポケモンカードゲーム MEGA 拡張パック メガシンフォニア 30パック入りBOXが販売開始",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://www.hana-log.net/archives/4745",
       "status": "unknown"
     }
   ]
