@@ -1,11 +1,33 @@
 {
-  "timestamp": "2025-11-07T01:57:07.114806",
+  "timestamp": "2025-11-08T01:51:03.404189",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2025-11-07T01:57:27.498043",
-      "update_date": "2025-11-07",
+      "scraped_at": "2025-11-08T01:52:14.029152",
+      "update_date": "2025-11-08",
       "lotteries": [
+        {
+          "store": "2025年11月8日(土)10時34分",
+          "product": "カードラボAKIHABARAゲーマーズB1店、他一部店舗にてポケモンカード スタートデッキ100 バトルコレクションの店頭先着予約が開始されました。",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyukanow.page.link/app",
+          "status": "unknown"
+        },
+        {
+          "store": "2025年11月7日(金)19時39分",
+          "product": "11月10日(月)9:00よりイオン北海道eショップにてポケモンカード MEGAドリームexのオンライン先着販売が開始。お一人様1BOX限り、店頭受取のみ、シュリンクを外してお渡し。",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyukanow.page.link/app",
+          "status": "unknown"
+        },
         {
           "store": "2025年11月5日(水)16時47分",
           "product": "ヤマダウェブコムにてポケモン ポケモンカードゲーム ソード＆シールド 拡張パック パラダイムトリガーが販売開始",
@@ -16,44 +38,22 @@
           "conditions": "",
           "detail_url": "https://www.yamada-denkiweb.com/4758973012/",
           "status": "unknown"
-        },
-        {
-          "store": "2025年11月5日(水)15時13分",
-          "product": "Joshinにてポケモン ポケモンカードゲーム スカーレット＆バイオレット 拡張パック 「ホワイトフレア」【1BOX＝20パック入】が販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://joshinweb.jp/toy/18745/set4521329427775.html",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年11月5日(水)11時48分",
-          "product": "あみあみ本店にてポケモンカードゲーム MEGA 拡張パック メガブレイブ 30パック入りBOXが販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://www.hana-log.net/archives/4746",
-          "status": "unknown"
         }
       ]
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-11-07T01:57:39.791720",
+      "scraped_at": "2025-11-08T01:52:25.661206",
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2025-11-07T01:57:48.094621",
+      "scraped_at": "2025-11-08T01:52:33.605193",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-11-07T01:58:14.781900",
+      "scraped_at": "2025-11-08T01:53:00.302161",
       "reservations": []
     }
   ]
