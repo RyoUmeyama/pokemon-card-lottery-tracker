@@ -1,11 +1,33 @@
 {
-  "timestamp": "2025-11-09T02:01:40.458014",
+  "timestamp": "2025-11-10T02:03:19.354110",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2025-11-09T02:04:54.036342",
-      "update_date": "2025-11-09",
+      "scraped_at": "2025-11-10T02:06:02.027542",
+      "update_date": "2025-11-10",
       "lotteries": [
+        {
+          "store": "2025年11月10日(月)8時50分",
+          "product": "このあと9:00よりイオン北海道eショップにてポケモンカード MEGAドリームexのオンライン先着販売が開始。",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyukanow.page.link/app",
+          "status": "unknown"
+        },
+        {
+          "store": "2025年11月9日(日)13時33分",
+          "product": "ノジマオンラインにてポケモンカード MEGAドリームexの招待制販売エントリー受付が新規開始されました。",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyukanow.page.link/app",
+          "status": "unknown"
+        },
         {
           "store": "2025年11月9日(日)1時38分",
           "product": "Amazonにてコロちゃお vol.1（てれコロスペシャル2026年1月号）　付録：スタートデッキ100 バトルコレクション コロチャオVer. ピカチュウexが販売中です",
@@ -49,44 +71,28 @@
           "conditions": "",
           "detail_url": "https://www.yodobashi.com/product/100000009004185277/",
           "status": "unknown"
-        },
-        {
-          "store": "2025年11月8日(土)11時55分",
-          "product": "このあと12:00よりバースデイにてポケモンカード スターターセットMEGA メガゲンガーex / スターターセットMEGA メガディアンシーexのオンライン先着販売が開始。",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://nyukanow.page.link/app",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年11月8日(土)10時34分",
-          "product": "カードラボAKIHABARAゲーマーズB1店、他一部店舗にてポケモンカード スタートデッキ100 バトルコレクションの店頭先着予約が開始されました。",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://nyukanow.page.link/app",
-          "status": "unknown"
         }
       ]
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-11-09T02:05:05.339257",
+      "scraped_at": "2025-11-10T02:06:13.308665",
+      "lotteries": []
+    },
+    {
+      "source": "pokemoncenter-online.com",
+      "scraped_at": "2025-11-10T02:06:15.712983",
+      "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2025-11-09T02:05:12.924981",
+      "scraped_at": "2025-11-10T02:06:22.236779",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-11-09T02:05:37.990954",
+      "scraped_at": "2025-11-10T02:06:48.196779",
       "reservations": []
     }
   ]
