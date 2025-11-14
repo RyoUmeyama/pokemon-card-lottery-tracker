@@ -1,5 +1,78 @@
 {
   "source": "books.rakuten.co.jp",
-  "scraped_at": "2025-11-13T02:04:49.358279",
-  "lotteries": []
+  "scraped_at": "2025-11-14T02:04:59.487248",
+  "lotteries": [
+    {
+      "store": "楽天ブックス",
+      "product": "ポケモンカードゲーム MEGA 拡張パック インフェルノX【30パック】",
+      "lottery_type": "抽選販売",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "楽天会員登録必須",
+      "detail_url": "https://books.rakuten.co.jp/event/game/card/entry/",
+      "status": "unknown",
+      "entry_period": ""
+    },
+    {
+      "store": "楽天ブックス",
+      "product": "ポケモンカードゲーム スカーレット＆バイオレット 拡張パック ロケット団の栄光【30パック】",
+      "lottery_type": "抽選販売",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "楽天会員登録必須",
+      "detail_url": "https://books.rakuten.co.jp/event/game/card/entry/",
+      "status": "unknown",
+      "entry_period": ""
+    },
+    {
+      "store": "楽天ブックス",
+      "product": "ポケモンカードゲーム スカーレット&バイオレット ハイクラスパック テラスタルフェスex 【10パック】",
+      "lottery_type": "抽選販売",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "楽天会員登録必須",
+      "detail_url": "https://books.rakuten.co.jp/event/game/card/entry/",
+      "status": "unknown",
+      "entry_period": ""
+    },
+    {
+      "store": "楽天ブックス",
+      "product": "ポケモンカードゲーム MEGA　拡張パック メガブレイブ【30パック】",
+      "lottery_type": "抽選販売",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "楽天会員登録必須",
+      "detail_url": "https://books.rakuten.co.jp/event/game/card/entry/",
+      "status": "unknown",
+      "entry_period": ""
+    },
+    {
+      "store": "楽天ブックス",
+      "product": "ポケモンカードゲーム MEGA　拡張パック メガシンフォニア【30パック】",
+      "lottery_type": "抽選販売",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "楽天会員登録必須",
+      "detail_url": "https://books.rakuten.co.jp/event/game/card/entry/",
+      "status": "unknown",
+      "entry_period": ""
+    },
+    {
+      "store": "楽天ブックス",
+      "product": "ポケモンカードゲーム MEGA ハイクラスパック MEGAドリームex【10パック】",
+      "lottery_type": "抽選販売",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "楽天会員登録必須",
+      "detail_url": "https://books.rakuten.co.jp/event/game/card/entry/",
+      "status": "unknown",
+      "entry_period": ""
+    }
+  ]
 }
