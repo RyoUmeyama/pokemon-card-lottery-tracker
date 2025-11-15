@@ -1,8 +1,19 @@
 {
   "source": "nyuka-now.com",
-  "scraped_at": "2025-11-14T02:04:48.222311",
-  "update_date": "2025-11-14",
+  "scraped_at": "2025-11-15T01:59:02.130059",
+  "update_date": "2025-11-15",
   "lotteries": [
+    {
+      "store": "2025年11月14日(金)16時51分",
+      "product": "楽天ブックスにてポケモンカードゲーム MEGA　スターターセットMEGA メガディアンシーexが販売開始",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fbooks.rakuten.co.jp%2Frb%2F18182245%2F",
+      "status": "unknown"
+    },
     {
       "store": "2025年11月14日(金)10時07分",
       "product": "MEGAドリームex、テラスタルフェスexなど抽選受付開始 楽天ブックスにてポケモンカードゲーム抽選受付ページ 更新あり",
@@ -48,17 +59,6 @@
       "status": "unknown"
     },
     {
-      "store": "2025年11月12日(水)17時21分",
-      "product": "楽天ブックスにてポケモンカードゲーム MEGA　スターターセットMEGA メガディアンシーexが販売開始",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fbooks.rakuten.co.jp%2Frb%2F18182245%2F",
-      "status": "unknown"
-    },
-    {
       "store": "2025年11月12日(水)15時58分",
       "product": "セブンネットショッピングにてコロちゃお vol.1（てれコロスペシャル2026年1月号）が販売開始",
       "lottery_type": "",
@@ -67,28 +67,6 @@
       "announcement_date": "",
       "conditions": "",
       "detail_url": "https://7net.omni7.jp/detail/1263922791",
-      "status": "unknown"
-    },
-    {
-      "store": "2025年11月11日(火)18時31分",
-      "product": "タワーレコードにてコロちゃお vol.1(てれコロスペシャル2026年1月号)が販売開始",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://tower.jp/item/7682807",
-      "status": "unknown"
-    },
-    {
-      "store": "2025年11月11日(火)18時24分",
-      "product": "ヨドバシ・ドット・コムにてコロちゃお vol.1（てれコロスペシャル2026年1月号） [雑誌]が販売開始",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://www.yodobashi.com/product/100000009004185277/",
       "status": "unknown"
     }
   ]
