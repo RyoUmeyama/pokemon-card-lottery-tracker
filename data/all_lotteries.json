@@ -1,11 +1,33 @@
 {
-  "timestamp": "2025-11-17T01:59:58.365245",
+  "timestamp": "2025-11-18T01:58:10.907378",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2025-11-17T02:03:39.053675",
-      "update_date": "2025-11-17",
+      "scraped_at": "2025-11-18T02:01:20.991989",
+      "update_date": "2025-11-18",
       "lotteries": [
+        {
+          "store": "2025年11月17日(月)16時32分",
+          "product": "palsamyuk　楽天市場店（楽天市場）にてポケモンカードゲーム スカーレット＆バイオレット 拡張パック ロケット団の栄光 BOXが販売開始（価格：7749円）",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ffree-jin-japan%2Fs-b0dkhhytgj-20251116%2F",
+          "status": "unknown"
+        },
+        {
+          "store": "2025年11月17日(月)15時25分",
+          "product": "Joshinにてポケモン ポケモンカードゲーム スカーレット＆バイオレット ハイクラスパック テラスタルフェスex【1BOX＝10パック入】が販売開始",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://joshinweb.jp/toy/18745/set4521329362335.html",
+          "status": "unknown"
+        },
         {
           "store": "2025年11月17日(月)1時53分",
           "product": "丸伊商事楽天市場店（楽天市場）にてポケモンカードゲーム スカーレット＆バイオレット 拡張パック ブラックボルト BOXが販売開始（価格：8297円）",
@@ -16,145 +38,28 @@
           "conditions": "",
           "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmaruishouji%2F25marui100dp4586rv%2F",
           "status": "unknown"
-        },
-        {
-          "store": "2025年11月14日(金)16時51分",
-          "product": "楽天ブックスにてポケモンカードゲーム MEGA　スターターセットMEGA メガディアンシーexが販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fbooks.rakuten.co.jp%2Frb%2F18182245%2F",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年11月14日(金)10時07分",
-          "product": "MEGAドリームex、テラスタルフェスexなど抽選受付開始 楽天ブックスにてポケモンカードゲーム抽選受付ページ 更新あり",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fbooks.rakuten.co.jp%2Fevent%2Fgame%2Fcard%2Fentry%2F",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年11月14日(金)10時00分",
-          "product": "COMG!各店にてポケモンカード スタートデッキ100 バトルコレクション / MEGAドリームexの予約販売（期間限定）が開始されました。各3BOXまで。トクする会員限定。",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://nyukanow.page.link/app",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年11月14日(金)10時00分",
-          "product": "COMG!各店にてポケモンカード スタートデッキ100 バトルコレクション / MEGAドリームexの予約販売（期間限定）が開始されました。",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://nyukanow.page.link/app",
-          "status": "unknown"
         }
       ]
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-11-17T02:03:50.338458",
-      "lotteries": [
-        {
-          "store": "楽天ブックス",
-          "product": "ポケモンカードゲーム MEGA 拡張パック インフェルノX【30パック】",
-          "lottery_type": "抽選販売",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "楽天会員登録必須",
-          "detail_url": "https://books.rakuten.co.jp/event/game/card/entry/",
-          "status": "unknown",
-          "entry_period": ""
-        },
-        {
-          "store": "楽天ブックス",
-          "product": "ポケモンカードゲーム スカーレット＆バイオレット 拡張パック ロケット団の栄光【30パック】",
-          "lottery_type": "抽選販売",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "楽天会員登録必須",
-          "detail_url": "https://books.rakuten.co.jp/event/game/card/entry/",
-          "status": "unknown",
-          "entry_period": ""
-        },
-        {
-          "store": "楽天ブックス",
-          "product": "ポケモンカードゲーム スカーレット&バイオレット ハイクラスパック テラスタルフェスex 【10パック】",
-          "lottery_type": "抽選販売",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "楽天会員登録必須",
-          "detail_url": "https://books.rakuten.co.jp/event/game/card/entry/",
-          "status": "unknown",
-          "entry_period": ""
-        },
-        {
-          "store": "楽天ブックス",
-          "product": "ポケモンカードゲーム MEGA　拡張パック メガブレイブ【30パック】",
-          "lottery_type": "抽選販売",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "楽天会員登録必須",
-          "detail_url": "https://books.rakuten.co.jp/event/game/card/entry/",
-          "status": "unknown",
-          "entry_period": ""
-        },
-        {
-          "store": "楽天ブックス",
-          "product": "ポケモンカードゲーム MEGA　拡張パック メガシンフォニア【30パック】",
-          "lottery_type": "抽選販売",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "楽天会員登録必須",
-          "detail_url": "https://books.rakuten.co.jp/event/game/card/entry/",
-          "status": "unknown",
-          "entry_period": ""
-        },
-        {
-          "store": "楽天ブックス",
-          "product": "ポケモンカードゲーム MEGA ハイクラスパック MEGAドリームex【10パック】",
-          "lottery_type": "抽選販売",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "楽天会員登録必須",
-          "detail_url": "https://books.rakuten.co.jp/event/game/card/entry/",
-          "status": "unknown",
-          "entry_period": ""
-        }
-      ]
+      "scraped_at": "2025-11-18T02:01:32.329637",
+      "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2025-11-17T02:03:51.010999",
+      "scraped_at": "2025-11-18T02:01:35.115372",
       "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2025-11-17T02:03:57.458048",
+      "scraped_at": "2025-11-18T02:01:41.929062",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-11-17T02:04:24.186442",
+      "scraped_at": "2025-11-18T02:02:08.263808",
       "reservations": []
     }
   ]
