@@ -1,54 +1,37 @@
 {
-  "timestamp": "2025-11-22T01:53:39.861344",
+  "timestamp": "2025-11-23T02:12:20.940357",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2025-11-22T01:56:19.446550",
-      "update_date": "2025-11-22",
+      "scraped_at": "2025-11-23T02:14:00.950870",
+      "update_date": "2025-11-23",
       "lotteries": [
         {
-          "store": "2025年11月19日(水)15時22分",
-          "product": "Joshinにてポケモンカードゲーム MEGA 拡張パック 「メガブレイブ」【1BOX＝30パック入】が販売開始",
+          "store": "2025年11月22日(土)17時16分",
+          "product": "明日8:00より ヨドバシカメラ 梅田店にてポケモンカード インフェルノX / テラスタルフェスex / メガブレイブ / メガシンフォニアの店頭先着販売が開始。ゴールドポイントカードプラスカード会員限定。",
           "lottery_type": "",
           "start_date": "",
           "end_date": "",
           "announcement_date": "",
           "conditions": "",
-          "detail_url": "https://joshinweb.jp/toy/18745/set4521329431154.html",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年11月19日(水)10時21分",
-          "product": "ビッグウェブ（楽天市場）にてポケモンカードゲーム MEGA 拡張パック メガシンフォニア BOX（30個入）が販売開始（価格：7000円）",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fauc-big-web%2F3442576%2F",
+          "detail_url": "https://nyukanow.page.link/app",
           "status": "unknown"
         }
       ]
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-11-22T01:56:30.524473",
-      "lotteries": []
-    },
-    {
-      "source": "pokemoncenter-online.com",
-      "scraped_at": "2025-11-22T01:56:32.804699",
-      "has_active_lottery": false,
+      "scraped_at": "2025-11-23T02:14:11.941591",
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2025-11-22T01:56:39.221718",
+      "scraped_at": "2025-11-23T02:14:18.883231",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-11-22T01:57:05.186195",
+      "scraped_at": "2025-11-23T02:14:44.541989",
       "reservations": []
     }
   ]
