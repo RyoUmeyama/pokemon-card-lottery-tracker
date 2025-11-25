@@ -1,11 +1,22 @@
 {
-  "timestamp": "2025-11-24T02:06:20.612892",
+  "timestamp": "2025-11-25T01:59:36.552832",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2025-11-24T02:07:29.530463",
-      "update_date": "2025-11-24",
+      "scraped_at": "2025-11-25T02:01:07.976497",
+      "update_date": "2025-11-25",
       "lotteries": [
+        {
+          "store": "2025年11月24日(月)17時29分",
+          "product": "ヤマダウェブコムにてポケモン ポケモンカードゲーム ソード＆シールド 拡張パック パラダイムトリガーが販売開始",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://www.yamada-denkiweb.com/4758973012/",
+          "status": "unknown"
+        },
         {
           "store": "2025年11月22日(土)17時16分",
           "product": "明日8:00より ヨドバシカメラ 梅田店にてポケモンカード インフェルノX / テラスタルフェスex / メガブレイブ / メガシンフォニアの店頭先着販売が開始。ゴールドポイントカードプラスカード会員限定。",
@@ -21,17 +32,23 @@
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-11-24T02:07:40.787548",
+      "scraped_at": "2025-11-25T02:01:19.179018",
+      "lotteries": []
+    },
+    {
+      "source": "pokemoncenter-online.com",
+      "scraped_at": "2025-11-25T02:01:20.707642",
+      "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2025-11-24T02:07:47.844042",
+      "scraped_at": "2025-11-25T02:01:29.209914",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-11-24T02:08:13.811185",
+      "scraped_at": "2025-11-25T02:01:55.392148",
       "reservations": []
     }
   ]
