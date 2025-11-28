@@ -1,11 +1,44 @@
 {
-  "timestamp": "2025-11-27T01:57:12.746125",
+  "timestamp": "2025-11-28T01:57:04.883408",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2025-11-27T01:58:10.740080",
-      "update_date": "2025-11-27",
+      "scraped_at": "2025-11-28T01:58:32.466579",
+      "update_date": "2025-11-28",
       "lotteries": [
+        {
+          "store": "2025年11月27日(木)18時09分",
+          "product": "明日11月28日(金)8:00より ヨドバシカメラ 梅田店にてポケモンカード MEGAドリームexの店頭先着販売が開始。最大5パック限。ゴールドポイントカードプラスカード会員限定。",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyukanow.page.link/app",
+          "status": "unknown"
+        },
+        {
+          "store": "2025年11月27日(木)11時57分",
+          "product": "あみあみ本店にて【12月中旬出荷】ポケモンカードゲーム スカーレット＆バイオレット ハイクラスパック テラスタルフェスex 10パック入りBOXが販売開始",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://www.hana-log.net/archives/4837",
+          "status": "unknown"
+        },
+        {
+          "store": "2025年11月27日(木)11時52分",
+          "product": "あみあみ本店にて【12月中旬出荷】ポケモンカードゲーム スカーレット＆バイオレット ハイクラスパック テラスタルフェスex 10パック入りBOXが新規登録されました（販売有無要確認）",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://www.hana-log.net/archives/4837",
+          "status": "unknown"
+        },
         {
           "store": "2025年11月24日(月)17時29分",
           "product": "ヤマダウェブコムにてポケモン ポケモンカードゲーム ソード＆シールド 拡張パック パラダイムトリガーが販売開始",
@@ -16,39 +49,28 @@
           "conditions": "",
           "detail_url": "https://www.yamada-denkiweb.com/4758973012/",
           "status": "unknown"
-        },
-        {
-          "store": "2025年11月22日(土)17時16分",
-          "product": "明日8:00より ヨドバシカメラ 梅田店にてポケモンカード インフェルノX / テラスタルフェスex / メガブレイブ / メガシンフォニアの店頭先着販売が開始。ゴールドポイントカードプラスカード会員限定。",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://nyukanow.page.link/app",
-          "status": "unknown"
         }
       ]
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-11-27T01:58:22.889076",
+      "scraped_at": "2025-11-28T01:58:43.519729",
       "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2025-11-27T01:58:23.758995",
+      "scraped_at": "2025-11-28T01:58:44.229460",
       "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2025-11-27T01:58:30.560174",
+      "scraped_at": "2025-11-28T01:58:51.532126",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-11-27T01:58:57.880579",
+      "scraped_at": "2025-11-28T01:59:17.097742",
       "reservations": []
     }
   ]
