@@ -1,11 +1,44 @@
 {
-  "timestamp": "2025-11-29T01:56:52.190404",
+  "timestamp": "2025-11-30T02:10:56.999041",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2025-11-29T01:57:50.631693",
-      "update_date": "2025-11-29",
+      "scraped_at": "2025-11-30T02:12:30.253738",
+      "update_date": "2025-11-30",
       "lotteries": [
+        {
+          "store": "2025年11月30日(日)0時21分",
+          "product": "フォーチュネスマート（楽天市場）にてポケモンカードゲーム スカーレット＆バイオレット 拡張パック ブラックボルト BOXが販売開始（価格：7117円）",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ffortuness%2F20251129221010_110%2F",
+          "status": "unknown"
+        },
+        {
+          "store": "2025年11月29日(土)23時38分",
+          "product": "フォーチュネスマート（楽天市場）にてポケモンカードゲーム スカーレット＆バイオレット 拡張パック ホワイトフレア BOXが販売開始（価格：7117円）",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ffortuness%2F20251129213950_110%2F",
+          "status": "unknown"
+        },
+        {
+          "store": "2025年11月29日(土)9時56分",
+          "product": "ビッグウェブ（楽天市場）にてポケモンカードゲーム MEGA 拡張パック メガシンフォニア BOX（30個入）が販売開始（価格：7000円）",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fauc-big-web%2F3442576%2F",
+          "status": "unknown"
+        },
         {
           "store": "2025年11月28日(金)11時58分",
           "product": "あみあみ本店にて【12月中旬出荷】ポケモンカードゲーム スカーレット＆バイオレット 拡張パック ロケット団の栄光 30パック入りBOX[ポケモン]《１２月予約》が販売開始",
@@ -49,39 +82,28 @@
           "conditions": "",
           "detail_url": "https://www.hana-log.net/archives/4837",
           "status": "unknown"
-        },
-        {
-          "store": "2025年11月24日(月)17時29分",
-          "product": "ヤマダウェブコムにてポケモン ポケモンカードゲーム ソード＆シールド 拡張パック パラダイムトリガーが販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://www.yamada-denkiweb.com/4758973012/",
-          "status": "unknown"
         }
       ]
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-11-29T01:58:02.472420",
+      "scraped_at": "2025-11-30T02:12:42.869449",
       "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2025-11-29T01:58:03.453397",
+      "scraped_at": "2025-11-30T02:12:43.601072",
       "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2025-11-29T01:58:09.734319",
+      "scraped_at": "2025-11-30T02:12:50.121796",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-11-29T01:58:35.576171",
+      "scraped_at": "2025-11-30T02:13:16.612917",
       "reservations": []
     }
   ]
