@@ -1,11 +1,22 @@
 {
-  "timestamp": "2025-12-03T02:01:05.654955",
+  "timestamp": "2025-12-04T02:02:23.139965",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2025-12-03T02:02:29.125574",
-      "update_date": "2025-12-03",
+      "scraped_at": "2025-12-04T02:03:20.456512",
+      "update_date": "2025-12-04",
       "lotteries": [
+        {
+          "store": "2025年12月3日(水)11時49分",
+          "product": "あみあみ本店にて【12月中旬出荷】ポケモンカードゲーム スカーレット＆バイオレット 拡張パック ホワイトフレア 20パック入りBOX[ポケモン]《１２月予約》が販売開始",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://www.hana-log.net/archives/4854",
+          "status": "unknown"
+        },
         {
           "store": "2025年12月2日(火)12時39分",
           "product": "あみあみ本店にて【12月中旬出荷】ポケモンカードゲーム スカーレット＆バイオレット 拡張パック ブラックボルト 20パック入りBOX[ポケモン]《１２月予約》が販売開始",
@@ -27,50 +38,28 @@
           "conditions": "",
           "detail_url": "https://www.hana-log.net/archives/4852",
           "status": "unknown"
-        },
-        {
-          "store": "2025年11月30日(日)0時21分",
-          "product": "フォーチュネスマート（楽天市場）にてポケモンカードゲーム スカーレット＆バイオレット 拡張パック ブラックボルト BOXが販売開始（価格：7117円）",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ffortuness%2F20251129221010_110%2F",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年11月29日(土)23時38分",
-          "product": "フォーチュネスマート（楽天市場）にてポケモンカードゲーム スカーレット＆バイオレット 拡張パック ホワイトフレア BOXが販売開始（価格：7117円）",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ffortuness%2F20251129213950_110%2F",
-          "status": "unknown"
         }
       ]
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-12-03T02:02:40.276856",
+      "scraped_at": "2025-12-04T02:03:31.744744",
       "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2025-12-03T02:02:41.028922",
+      "scraped_at": "2025-12-04T02:03:32.900508",
       "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2025-12-03T02:02:47.574258",
+      "scraped_at": "2025-12-04T02:03:39.415459",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-12-03T02:03:13.876884",
+      "scraped_at": "2025-12-04T02:04:05.868647",
       "reservations": []
     }
   ]
