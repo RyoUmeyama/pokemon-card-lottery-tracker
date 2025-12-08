@@ -1,7 +1,7 @@
 {
   "source": "nyuka-now.com",
-  "scraped_at": "2025-12-07T02:12:57.299436",
-  "update_date": "2025-12-07",
+  "scraped_at": "2025-12-08T02:05:38.121893",
+  "update_date": "2025-12-08",
   "lotteries": [
     {
       "store": "2025年12月3日(水)11時49分",
@@ -12,28 +12,6 @@
       "announcement_date": "",
       "conditions": "",
       "detail_url": "https://www.hana-log.net/archives/4854",
-      "status": "unknown"
-    },
-    {
-      "store": "2025年12月2日(火)12時39分",
-      "product": "あみあみ本店にて【12月中旬出荷】ポケモンカードゲーム スカーレット＆バイオレット 拡張パック ブラックボルト 20パック入りBOX[ポケモン]《１２月予約》が販売開始",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://www.hana-log.net/archives/4851",
-      "status": "unknown"
-    },
-    {
-      "store": "2025年12月2日(火)11時41分",
-      "product": "あみあみ本店にて【ギフトバッグ付】ポケモンカードゲーム スカーレット＆バイオレット バトルアカデミー[ポケモン]【同梱不可】《発売済・在庫品》が販売開始",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://www.hana-log.net/archives/4852",
       "status": "unknown"
     }
   ]
