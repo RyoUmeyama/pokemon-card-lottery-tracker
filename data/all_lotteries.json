@@ -1,43 +1,31 @@
 {
-  "timestamp": "2025-12-15T02:09:41.546939",
+  "timestamp": "2025-12-16T02:06:24.452389",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2025-12-15T02:10:29.972747",
-      "update_date": "2025-12-15",
-      "lotteries": [
-        {
-          "store": "2025年12月10日(水)18時45分",
-          "product": "エムスタ（楽天市場）にてポケモン ポケモンカードゲーム MEGA 拡張パック メガシンフォニア BOXが販売開始（価格：6600円）",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmurauchi-dvd%2F4521329431185%2F",
-          "status": "unknown"
-        }
-      ]
+      "scraped_at": "2025-12-16T02:07:01.592004",
+      "update_date": "2025-12-16",
+      "lotteries": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-12-15T02:10:40.785455",
+      "scraped_at": "2025-12-16T02:07:12.899533",
       "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2025-12-15T02:10:41.271067",
+      "scraped_at": "2025-12-16T02:07:13.958180",
       "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2025-12-15T02:10:48.249872",
+      "scraped_at": "2025-12-16T02:07:20.759865",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-12-15T02:11:14.062861",
+      "scraped_at": "2025-12-16T02:07:47.014729",
       "reservations": []
     }
   ]
