@@ -1,31 +1,43 @@
 {
-  "timestamp": "2025-12-16T02:06:24.452389",
+  "timestamp": "2025-12-17T02:01:30.961503",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2025-12-16T02:07:01.592004",
-      "update_date": "2025-12-16",
-      "lotteries": []
+      "scraped_at": "2025-12-17T02:02:14.027521",
+      "update_date": "2025-12-17",
+      "lotteries": [
+        {
+          "store": "2025年12月16日(火)10時50分",
+          "product": "コレイズ（その他のストア）にてポケモンカードゲーム MEGA ハイクラスパック MEGAドリームex（単位／パック販売）が販売開始",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://colleize.com/lineup/70/327613",
+          "status": "unknown"
+        }
+      ]
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-12-16T02:07:12.899533",
+      "scraped_at": "2025-12-17T02:02:25.436639",
       "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2025-12-16T02:07:13.958180",
+      "scraped_at": "2025-12-17T02:02:26.803285",
       "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2025-12-16T02:07:20.759865",
+      "scraped_at": "2025-12-17T02:02:34.860724",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-12-16T02:07:47.014729",
+      "scraped_at": "2025-12-17T02:03:01.416667",
       "reservations": []
     }
   ]
