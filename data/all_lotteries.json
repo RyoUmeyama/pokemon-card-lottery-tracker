@@ -1,43 +1,87 @@
 {
-  "timestamp": "2025-12-18T02:02:25.803337",
+  "timestamp": "2025-12-19T02:05:13.022038",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2025-12-18T02:03:12.236783",
-      "update_date": "2025-12-18",
+      "scraped_at": "2025-12-19T02:06:33.204885",
+      "update_date": "2025-12-19",
       "lotteries": [
         {
-          "store": "2025年12月16日(火)10時50分",
-          "product": "コレイズ（その他のストア）にてポケモンカードゲーム MEGA ハイクラスパック MEGAドリームex（単位／パック販売）が販売開始",
+          "store": "2025年12月18日(木)19時00分",
+          "product": "明日12月19日(金)7:00よりローソンにてポケモンカード スタートデッキ100 バトルコレクションの店頭先着販売が開始。12月19日(金)～12月21日(日)までの購入可能数はお一人様2個まで。",
           "lottery_type": "",
           "start_date": "",
           "end_date": "",
           "announcement_date": "",
           "conditions": "",
-          "detail_url": "https://colleize.com/lineup/70/327613",
+          "detail_url": "https://nyukanow.page.link/app",
+          "status": "unknown"
+        },
+        {
+          "store": "2025年12月18日(木)16時17分",
+          "product": "Joshinにてポケモンカードゲーム ハイクラスパック MEGAドリームex【1BOX＝10パック入】が販売開始",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://joshinweb.jp/toy/98765/set4521329431925.html",
+          "status": "unknown"
+        },
+        {
+          "store": "2025年12月18日(木)15時57分",
+          "product": "VIP限定販売中 Joshinにてポケモンカードゲーム ハイクラスパック MEGAドリームex【1BOX＝10パック入】が販売開始",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://joshinweb.jp/toy/98765/set4521329431925.html",
+          "status": "unknown"
+        },
+        {
+          "store": "2025年12月18日(木)11時55分",
+          "product": "このあと12時よりバースデイにてポケモンカード MEGAドリームex / インフェルノXのオンライン先着販売が開始。",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyukanow.page.link/app",
+          "status": "unknown"
+        },
+        {
+          "store": "2025年12月18日(木)11時02分",
+          "product": "このあと12:00よりバースデイにてポケモンカード MEGAドリームex / インフェルノXのオンライン先着販売が開始。",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyukanow.page.link/app",
           "status": "unknown"
         }
       ]
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-12-18T02:03:23.969175",
+      "scraped_at": "2025-12-19T02:06:45.784767",
       "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2025-12-18T02:03:24.628077",
+      "scraped_at": "2025-12-19T02:06:47.325717",
       "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2025-12-18T02:03:31.808529",
+      "scraped_at": "2025-12-19T02:06:55.183580",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-12-18T02:03:58.573518",
+      "scraped_at": "2025-12-19T02:07:21.318158",
       "reservations": []
     }
   ]
