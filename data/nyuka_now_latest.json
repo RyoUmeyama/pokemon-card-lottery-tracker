@@ -1,7 +1,7 @@
 {
   "source": "nyuka-now.com",
-  "scraped_at": "2025-12-20T01:59:22.149814",
-  "update_date": "2025-12-20",
+  "scraped_at": "2025-12-21T02:12:43.163555",
+  "update_date": "2025-12-21",
   "lotteries": [
     {
       "store": "2025年12月19日(金)12時36分",
@@ -12,39 +12,6 @@
       "announcement_date": "",
       "conditions": "",
       "detail_url": "https://7net.omni7.jp/detail/1263922791",
-      "status": "unknown"
-    },
-    {
-      "store": "2025年12月18日(木)19時00分",
-      "product": "明日12月19日(金)7:00よりローソンにてポケモンカード スタートデッキ100 バトルコレクションの店頭先着販売が開始。12月19日(金)～12月21日(日)までの購入可能数はお一人様2個まで。",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://nyukanow.page.link/app",
-      "status": "unknown"
-    },
-    {
-      "store": "2025年12月18日(木)16時17分",
-      "product": "Joshinにてポケモンカードゲーム ハイクラスパック MEGAドリームex【1BOX＝10パック入】が販売開始",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://joshinweb.jp/toy/98765/set4521329431925.html",
-      "status": "unknown"
-    },
-    {
-      "store": "2025年12月18日(木)15時57分",
-      "product": "VIP限定販売中 Joshinにてポケモンカードゲーム ハイクラスパック MEGAドリームex【1BOX＝10パック入】が販売開始",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://joshinweb.jp/toy/98765/set4521329431925.html",
       "status": "unknown"
     }
   ]
