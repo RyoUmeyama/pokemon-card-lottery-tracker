@@ -1,48 +1,54 @@
 {
-  "timestamp": "2025-12-22T02:11:16.370962",
+  "timestamp": "2025-12-23T02:06:32.911997",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2025-12-22T02:11:50.779601",
-      "update_date": "2025-12-22",
+      "scraped_at": "2025-12-23T02:08:22.656830",
+      "update_date": "2025-12-23",
       "lotteries": [
         {
-          "store": "2025年12月21日(日)16時46分",
-          "product": "エムスタ（楽天市場）にてポケモン ポケモンカードゲーム MEGA 拡張パック メガシンフォニア BOXが販売開始（価格：6600円）",
+          "store": "2025年12月22日(月)15時16分",
+          "product": "VIP限定 Joshinにてポケモンカードゲーム スタートデッキ100『バトルコレクション』が販売開始",
           "lottery_type": "",
           "start_date": "",
           "end_date": "",
           "announcement_date": "",
           "conditions": "",
-          "detail_url": "https://hb.afl.rakuten.co.jp/hgc/1f892dc2.c9f46e5f.1f892dc3.1307877f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmurauchi-dvd%2F4521329431185%2F",
+          "detail_url": "https://joshinweb.jp/toy/18745/4521329427270.html",
           "status": "unknown"
         },
         {
-          "store": "2025年12月19日(金)12時36分",
-          "product": "セブンネットショッピングにてコロちゃお vol.1（てれコロスペシャル2026年1月号）が販売開始",
+          "store": "2025年12月22日(月)15時15分",
+          "product": "Joshinにてポケモンカードゲーム スタートデッキ100『バトルコレクション』が販売開始",
           "lottery_type": "",
           "start_date": "",
           "end_date": "",
           "announcement_date": "",
           "conditions": "",
-          "detail_url": "https://7net.omni7.jp/detail/1263922791",
+          "detail_url": "https://joshinweb.jp/toy/18745/4521329427270.html",
           "status": "unknown"
         }
       ]
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-12-22T02:12:02.703768",
+      "scraped_at": "2025-12-23T02:08:34.021341",
+      "lotteries": []
+    },
+    {
+      "source": "pokemoncenter-online.com",
+      "scraped_at": "2025-12-23T02:08:35.535881",
+      "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2025-12-22T02:12:10.139987",
+      "scraped_at": "2025-12-23T02:08:43.115410",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-12-22T02:12:35.960542",
+      "scraped_at": "2025-12-23T02:09:09.387974",
       "reservations": []
     }
   ]
