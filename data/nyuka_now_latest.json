@@ -1,8 +1,52 @@
 {
   "source": "nyuka-now.com",
-  "scraped_at": "2025-12-23T02:08:22.656830",
-  "update_date": "2025-12-23",
+  "scraped_at": "2025-12-24T02:06:04.626289",
+  "update_date": "2025-12-24",
   "lotteries": [
+    {
+      "store": "2025年12月23日(火)15時46分",
+      "product": "VIP会員限定 Joshinにてポケモンカードゲーム ハイクラスパック MEGAドリームex【1BOX＝10パック入】が販売開始",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://joshinweb.jp/toy/98765/set4521329431925.html",
+      "status": "unknown"
+    },
+    {
+      "store": "2025年12月23日(火)15時22分",
+      "product": "Joshinにてポケモンカードゲーム ハイクラスパック MEGAドリームex【1BOX＝10パック入】が販売開始",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://joshinweb.jp/toy/98765/set4521329431925.html",
+      "status": "unknown"
+    },
+    {
+      "store": "2025年12月23日(火)11時51分",
+      "product": "あみあみ本店にてポケモンカードゲーム MEGA スペシャルカードセット メガエルレイドex[ポケモン]《０１月予約》が販売開始",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://www.hana-log.net/archives/4914",
+      "status": "unknown"
+    },
+    {
+      "store": "2025年12月23日(火)10時10分",
+      "product": "古本市場 一部店舗にてポケモンカードMEGA スペシャルカードセット メガエルレイドexの店頭先着予約が受付中。一部実施していない / 終了している店舗があります。",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://nyukanow.page.link/app",
+      "status": "active"
+    },
     {
       "store": "2025年12月22日(月)15時16分",
       "product": "VIP限定 Joshinにてポケモンカードゲーム スタートデッキ100『バトルコレクション』が販売開始",
