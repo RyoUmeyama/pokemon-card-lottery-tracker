@@ -1,10 +1,10 @@
 {
-  "timestamp": "2025-12-24T02:04:36.299483",
+  "timestamp": "2025-12-25T02:06:52.623196",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2025-12-24T02:06:04.626289",
-      "update_date": "2025-12-24",
+      "scraped_at": "2025-12-25T02:07:47.151035",
+      "update_date": "2025-12-25",
       "lotteries": [
         {
           "store": "2025年12月23日(火)15時46分",
@@ -49,44 +49,22 @@
           "conditions": "",
           "detail_url": "https://nyukanow.page.link/app",
           "status": "active"
-        },
-        {
-          "store": "2025年12月22日(月)15時16分",
-          "product": "VIP限定 Joshinにてポケモンカードゲーム スタートデッキ100『バトルコレクション』が販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://joshinweb.jp/toy/18745/4521329427270.html",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年12月22日(月)15時15分",
-          "product": "Joshinにてポケモンカードゲーム スタートデッキ100『バトルコレクション』が販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://joshinweb.jp/toy/18745/4521329427270.html",
-          "status": "unknown"
         }
       ]
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-12-24T02:06:16.058875",
+      "scraped_at": "2025-12-25T02:07:58.266892",
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2025-12-24T02:06:23.564742",
+      "scraped_at": "2025-12-25T02:08:06.787719",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-12-24T02:06:50.416267",
+      "scraped_at": "2025-12-25T02:08:33.217841",
       "reservations": []
     }
   ]
