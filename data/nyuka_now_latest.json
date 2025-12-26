@@ -1,7 +1,7 @@
 {
   "source": "nyuka-now.com",
-  "scraped_at": "2025-12-25T02:07:47.151035",
-  "update_date": "2025-12-25",
+  "scraped_at": "2025-12-26T02:07:33.262476",
+  "update_date": "2025-12-26",
   "lotteries": [
     {
       "store": "2025年12月23日(火)15時46分",
@@ -35,17 +35,6 @@
       "conditions": "",
       "detail_url": "https://www.hana-log.net/archives/4914",
       "status": "unknown"
-    },
-    {
-      "store": "2025年12月23日(火)10時10分",
-      "product": "古本市場 一部店舗にてポケモンカードMEGA スペシャルカードセット メガエルレイドexの店頭先着予約が受付中。一部実施していない / 終了している店舗があります。",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://nyukanow.page.link/app",
-      "status": "active"
     }
   ]
 }
