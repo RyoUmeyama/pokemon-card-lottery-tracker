@@ -1,65 +1,43 @@
 {
-  "timestamp": "2025-12-26T02:05:49.306866",
+  "timestamp": "2025-12-27T02:03:32.801488",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2025-12-26T02:07:33.262476",
-      "update_date": "2025-12-26",
+      "scraped_at": "2025-12-27T02:04:51.280035",
+      "update_date": "2025-12-27",
       "lotteries": [
         {
-          "store": "2025年12月23日(火)15時46分",
-          "product": "VIP会員限定 Joshinにてポケモンカードゲーム ハイクラスパック MEGAドリームex【1BOX＝10パック入】が販売開始",
+          "store": "2025年12月26日(金)15時30分",
+          "product": "Joshinにてポケモン ポケモンカードゲーム スカーレット＆バイオレット 拡張パック 「ホワイトフレア」【1BOX＝20パック入】が販売開始",
           "lottery_type": "",
           "start_date": "",
           "end_date": "",
           "announcement_date": "",
           "conditions": "",
-          "detail_url": "https://joshinweb.jp/toy/98765/set4521329431925.html",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年12月23日(火)15時22分",
-          "product": "Joshinにてポケモンカードゲーム ハイクラスパック MEGAドリームex【1BOX＝10パック入】が販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://joshinweb.jp/toy/98765/set4521329431925.html",
-          "status": "unknown"
-        },
-        {
-          "store": "2025年12月23日(火)11時51分",
-          "product": "あみあみ本店にてポケモンカードゲーム MEGA スペシャルカードセット メガエルレイドex[ポケモン]《０１月予約》が販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://www.hana-log.net/archives/4914",
+          "detail_url": "https://joshinweb.jp/toy/18745/set4521329427775.html",
           "status": "unknown"
         }
       ]
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-12-26T02:07:44.442621",
+      "scraped_at": "2025-12-27T02:05:02.785665",
       "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2025-12-26T02:07:45.178251",
+      "scraped_at": "2025-12-27T02:05:03.541228",
       "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2025-12-26T02:07:51.747919",
+      "scraped_at": "2025-12-27T02:05:10.988365",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-12-26T02:08:18.443874",
+      "scraped_at": "2025-12-27T02:05:37.542317",
       "reservations": []
     }
   ]
