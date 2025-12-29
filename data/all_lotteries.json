@@ -1,43 +1,31 @@
 {
-  "timestamp": "2025-12-28T02:24:12.501992",
+  "timestamp": "2025-12-29T02:22:10.118215",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2025-12-28T02:24:56.221419",
-      "update_date": "2025-12-28",
-      "lotteries": [
-        {
-          "store": "2025年12月26日(金)15時30分",
-          "product": "Joshinにてポケモン ポケモンカードゲーム スカーレット＆バイオレット 拡張パック 「ホワイトフレア」【1BOX＝20パック入】が販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://joshinweb.jp/toy/18745/set4521329427775.html",
-          "status": "unknown"
-        }
-      ]
+      "scraped_at": "2025-12-29T02:22:30.694073",
+      "update_date": "2025-12-29",
+      "lotteries": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-12-28T02:25:07.516700",
+      "scraped_at": "2025-12-29T02:22:42.012596",
       "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2025-12-28T02:25:08.488159",
+      "scraped_at": "2025-12-29T02:22:42.758257",
       "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2025-12-28T02:25:14.908081",
+      "scraped_at": "2025-12-29T02:22:49.190798",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-12-28T02:25:41.662094",
+      "scraped_at": "2025-12-29T02:23:15.600936",
       "reservations": []
     }
   ]

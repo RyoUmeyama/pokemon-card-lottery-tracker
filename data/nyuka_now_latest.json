@@ -1,18 +1,6 @@
 {
   "source": "nyuka-now.com",
-  "scraped_at": "2025-12-28T02:24:56.221419",
-  "update_date": "2025-12-28",
-  "lotteries": [
-    {
-      "store": "2025年12月26日(金)15時30分",
-      "product": "Joshinにてポケモン ポケモンカードゲーム スカーレット＆バイオレット 拡張パック 「ホワイトフレア」【1BOX＝20パック入】が販売開始",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://joshinweb.jp/toy/18745/set4521329427775.html",
-      "status": "unknown"
-    }
-  ]
+  "scraped_at": "2025-12-29T02:22:30.694073",
+  "update_date": "2025-12-29",
+  "lotteries": []
 }
