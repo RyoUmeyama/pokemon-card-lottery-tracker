@@ -1,31 +1,31 @@
 {
-  "timestamp": "2025-12-31T02:07:45.619520",
+  "timestamp": "2026-01-01T02:24:40.003540",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2025-12-31T02:08:15.147682",
-      "update_date": "2025-12-31",
+      "scraped_at": "2026-01-01T02:25:22.014364",
+      "update_date": "2026-01-01",
       "lotteries": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-12-31T02:08:25.958243",
+      "scraped_at": "2026-01-01T02:25:33.218245",
       "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2025-12-31T02:08:26.429199",
+      "scraped_at": "2026-01-01T02:25:33.965354",
       "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2025-12-31T02:08:33.461469",
+      "scraped_at": "2026-01-01T02:25:40.648059",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2025-12-31T02:08:58.940332",
+      "scraped_at": "2026-01-01T02:26:06.799919",
       "reservations": []
     }
   ]
