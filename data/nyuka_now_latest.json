@@ -1,8 +1,41 @@
 {
   "source": "nyuka-now.com",
-  "scraped_at": "2026-01-08T02:11:24.880279",
-  "update_date": "2026-01-08",
+  "scraped_at": "2026-01-09T02:12:28.375832",
+  "update_date": "2026-01-09",
   "lotteries": [
+    {
+      "store": "2026年1月8日(木)16時05分",
+      "product": "Joshinにてポケモンカードゲーム スタートデッキ100『バトルコレクション』が販売開始",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://joshinweb.jp/toy/18745/4521329427270.html",
+      "status": "unknown"
+    },
+    {
+      "store": "2026年1月8日(木)16時02分",
+      "product": "Joshinにてポケモンカードゲーム ハイクラスパック MEGAドリームex【1BOX＝10パック入】が販売開始",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://joshinweb.jp/toy/98765/set4521329431925.html",
+      "status": "unknown"
+    },
+    {
+      "store": "2026年1月8日(木)11時32分",
+      "product": "トイザらスオンラインストアにて【予約受付商品】【お1人様1点限り】【BOX販売】ポケモンカードゲーム MEGA ハイクラスパック MEGAドリームex【出荷予定日：2025年11月28日】が販売開始",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://www.toysrus.co.jp/ja-jp/8195692-10118189.html",
+      "status": "unknown"
+    },
     {
       "store": "2026年1月7日(水)19時58分",
       "product": "ポケモン×ロンドン自然史博物館コラボを記念してピカチュウ at the Museumプロモカード（ジャンボカード）の配布が決定。詳細判明次第、改めてお知らせいたします。",
@@ -12,17 +45,6 @@
       "announcement_date": "",
       "conditions": "",
       "detail_url": "https://nyukanow.page.link/app",
-      "status": "unknown"
-    },
-    {
-      "store": "2026年1月7日(水)15時41分",
-      "product": "Joshinにてポケモンカードゲーム ハイクラスパック MEGAドリームex【1BOX＝10パック入】が販売開始",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://joshinweb.jp/toy/98765/set4521329431925.html",
       "status": "unknown"
     }
   ]
