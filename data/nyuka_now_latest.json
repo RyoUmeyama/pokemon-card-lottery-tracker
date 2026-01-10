@@ -1,8 +1,30 @@
 {
   "source": "nyuka-now.com",
-  "scraped_at": "2026-01-09T02:12:28.375832",
-  "update_date": "2026-01-09",
+  "scraped_at": "2026-01-10T02:08:40.413461",
+  "update_date": "2026-01-10",
   "lotteries": [
+    {
+      "store": "2026年1月9日(金)14時07分",
+      "product": "イオンスタイルオンラインにて予約 2026年1月23日発売 ポケモン ポケモンカードゲーム MEGA スペシャルカードセット メガエルレイドex お一人さま１点限り 4521329462011が販売開始",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://aeonretail.com/product/0/P-4521329462011/P-452132946201101/",
+      "status": "unknown"
+    },
+    {
+      "store": "2026年1月9日(金)12時00分",
+      "product": "イオンスタイルオンラインにて予約 2026年1月23日発売 ポケモン ポケモンカードゲーム MEGA スペシャルカードセット メガエルレイドex お一人さま１点限り 4521329462011が新規登録されました（販売有無要確認）",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://aeonretail.com/product/0/P-4521329462011/P-452132946201101/",
+      "status": "unknown"
+    },
     {
       "store": "2026年1月8日(木)16時05分",
       "product": "Joshinにてポケモンカードゲーム スタートデッキ100『バトルコレクション』が販売開始",
@@ -34,17 +56,6 @@
       "announcement_date": "",
       "conditions": "",
       "detail_url": "https://www.toysrus.co.jp/ja-jp/8195692-10118189.html",
-      "status": "unknown"
-    },
-    {
-      "store": "2026年1月7日(水)19時58分",
-      "product": "ポケモン×ロンドン自然史博物館コラボを記念してピカチュウ at the Museumプロモカード（ジャンボカード）の配布が決定。詳細判明次第、改めてお知らせいたします。",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://nyukanow.page.link/app",
       "status": "unknown"
     }
   ]
