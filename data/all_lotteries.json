@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-01-11T02:25:46.282617",
+  "timestamp": "2026-01-12T02:22:00.173275",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2026-01-11T02:28:20.777704",
-      "update_date": "2026-01-11",
+      "scraped_at": "2026-01-12T02:25:01.100518",
+      "update_date": "2026-01-12",
       "lotteries": [
         {
           "store": "2026年1月9日(金)14時07分",
@@ -65,17 +65,17 @@
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-01-11T02:28:31.743884",
+      "scraped_at": "2026-01-12T02:25:12.332489",
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2026-01-11T02:28:38.609693",
+      "scraped_at": "2026-01-12T02:25:20.112434",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-01-11T02:29:04.408212",
+      "scraped_at": "2026-01-12T02:25:46.893731",
       "reservations": []
     }
   ]
