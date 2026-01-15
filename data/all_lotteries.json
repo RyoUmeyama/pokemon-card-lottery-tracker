@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-01-14T02:20:26.554985",
+  "timestamp": "2026-01-15T02:08:40.121529",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2026-01-14T02:22:55.292007",
-      "update_date": "2026-01-14",
+      "scraped_at": "2026-01-15T02:09:40.973448",
+      "update_date": "2026-01-15",
       "lotteries": [
         {
           "store": "2026年1月13日(火)17時31分",
@@ -49,61 +49,28 @@
           "conditions": "",
           "detail_url": "https://nyukanow.page.link/app",
           "status": "unknown"
-        },
-        {
-          "store": "2026年1月12日(月)13時06分",
-          "product": "イオンスタイルオンラインにて予約 2026年1月23日発売 ポケモン ポケモンカードゲーム MEGA スペシャルカードセット メガエルレイドex お一人さま１点限り 4521329462011が販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://aeonretail.com/product/0/P-4521329462011/P-452132946201101/",
-          "status": "unknown"
-        },
-        {
-          "store": "2026年1月12日(月)12時00分",
-          "product": "イオンスタイルオンラインにて予約 2026年1月23日発売 ポケモン ポケモンカードゲーム MEGA 拡張パック ムニキスゼロ  30パックセット (4521329432267×30) お一人さま1点限りが販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://aeonretail.com/product/0/P-2135500002549/P-213550000254901/",
-          "status": "unknown"
-        },
-        {
-          "store": "2026年1月12日(月)12時00分",
-          "product": "イオンスタイルオンラインにて予約 2026年1月23日発売 ポケモン ポケモンカードゲーム MEGA 拡張パック ムニキスゼロ  30パックセット (4521329432267×30) お一人さま1点限りが新規登録されました（販売有無要確認）",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://aeonretail.com/product/0/P-2135500002549/P-213550000254901/",
-          "status": "unknown"
         }
       ]
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-01-14T02:23:06.697446",
+      "scraped_at": "2026-01-15T02:09:52.297948",
       "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2026-01-14T02:23:07.453640",
+      "scraped_at": "2026-01-15T02:09:53.177235",
       "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2026-01-14T02:23:14.288702",
+      "scraped_at": "2026-01-15T02:10:00.497651",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-01-14T02:23:40.365130",
+      "scraped_at": "2026-01-15T02:10:26.833290",
       "reservations": []
     }
   ]
