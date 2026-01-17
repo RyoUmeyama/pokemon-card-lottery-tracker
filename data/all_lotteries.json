@@ -1,13 +1,24 @@
 {
-  "timestamp": "2026-01-16T02:10:40.900597",
+  "timestamp": "2026-01-17T02:04:31.770936",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2026-01-16T02:12:29.728187",
-      "update_date": "2026-01-16",
+      "scraped_at": "2026-01-17T02:05:39.007146",
+      "update_date": "2026-01-17",
       "lotteries": [
         {
-          "store": "2026年1月15日(木)15時06分",
+          "store": "2026年1月16日(金)15時04分",
+          "product": "ゴールド以上 Joshinにてポケモンカードゲーム ハイクラスパック MEGAドリームex【1BOX＝10パック入】が販売開始",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://joshinweb.jp/toy/98765/set4521329431925.html",
+          "status": "unknown"
+        },
+        {
+          "store": "2026年1月16日(金)15時03分",
           "product": "Joshinにてポケモンカードゲーム ハイクラスパック MEGAドリームex【1BOX＝10パック入】が販売開始",
           "lottery_type": "",
           "start_date": "",
@@ -32,23 +43,23 @@
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-01-16T02:12:41.391363",
+      "scraped_at": "2026-01-17T02:05:50.315293",
       "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2026-01-16T02:12:42.112877",
+      "scraped_at": "2026-01-17T02:05:51.112704",
       "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2026-01-16T02:12:48.565390",
+      "scraped_at": "2026-01-17T02:05:57.884884",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-01-16T02:13:15.068636",
+      "scraped_at": "2026-01-17T02:06:23.992735",
       "reservations": []
     }
   ]

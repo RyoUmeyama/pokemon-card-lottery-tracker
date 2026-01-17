@@ -1,10 +1,21 @@
 {
   "source": "nyuka-now.com",
-  "scraped_at": "2026-01-16T02:12:29.728187",
-  "update_date": "2026-01-16",
+  "scraped_at": "2026-01-17T02:05:39.007146",
+  "update_date": "2026-01-17",
   "lotteries": [
     {
-      "store": "2026年1月15日(木)15時06分",
+      "store": "2026年1月16日(金)15時04分",
+      "product": "ゴールド以上 Joshinにてポケモンカードゲーム ハイクラスパック MEGAドリームex【1BOX＝10パック入】が販売開始",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://joshinweb.jp/toy/98765/set4521329431925.html",
+      "status": "unknown"
+    },
+    {
+      "store": "2026年1月16日(金)15時03分",
       "product": "Joshinにてポケモンカードゲーム ハイクラスパック MEGAドリームex【1BOX＝10パック入】が販売開始",
       "lottery_type": "",
       "start_date": "",
