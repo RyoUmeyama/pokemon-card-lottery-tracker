@@ -1,21 +1,43 @@
 {
   "source": "nyuka-now.com",
-  "scraped_at": "2026-01-17T02:05:39.007146",
-  "update_date": "2026-01-17",
+  "scraped_at": "2026-01-18T02:25:46.203423",
+  "update_date": "2026-01-18",
   "lotteries": [
     {
-      "store": "2026年1月16日(金)15時04分",
-      "product": "ゴールド以上 Joshinにてポケモンカードゲーム ハイクラスパック MEGAドリームex【1BOX＝10パック入】が販売開始",
+      "store": "2026年1月17日(土)22時30分",
+      "product": "Amazonにてポケモンカードゲーム スカーレット＆バイオレット 拡張パック 超電ブレイカー BOXが販売開始（価格：5412円）※購入前に販売元がAmazon.co.jpであることを必ず確認してください。",
       "lottery_type": "",
       "start_date": "",
       "end_date": "",
       "announcement_date": "",
       "conditions": "",
-      "detail_url": "https://joshinweb.jp/toy/98765/set4521329431925.html",
+      "detail_url": "https://amzn.to/3zVDS54",
       "status": "unknown"
     },
     {
-      "store": "2026年1月16日(金)15時03分",
+      "store": "2026年1月17日(土)22時30分",
+      "product": "Amazonにてポケモンカードゲーム スカーレット&バイオレット ハイクラスパック テラスタルフェスex BOXが販売開始（価格：5500円）※購入前に販売元がAmazon.co.jpであることを必ず確認してください。",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://amzn.to/3ZN78Ud",
+      "status": "unknown"
+    },
+    {
+      "store": "2026年1月17日(土)22時27分",
+      "product": "Amazonにてポケモンカードゲーム スカーレット&バイオレット 強化拡張パック 楽園ドラゴーナ BOXが販売開始（価格：5412円）※購入前に販売元がAmazon.co.jpであることを必ず確認してください。",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://amzn.to/4f6MRz6",
+      "status": "unknown"
+    },
+    {
+      "store": "2026年1月17日(土)15時04分",
       "product": "Joshinにてポケモンカードゲーム ハイクラスパック MEGAドリームex【1BOX＝10パック入】が販売開始",
       "lottery_type": "",
       "start_date": "",
@@ -26,14 +48,14 @@
       "status": "unknown"
     },
     {
-      "store": "2026年1月15日(木)10時00分",
-      "product": "小学館公式総合通販サイト LIFETUNES MALLにてコロちゃお vol.1 付録：スタートデッキ100 バトルコレクション コロちゃおVer.（ピカチュウex）の受注販売が開始されました。",
+      "store": "2026年1月16日(金)15時04分",
+      "product": "ゴールド以上 Joshinにてポケモンカードゲーム ハイクラスパック MEGAドリームex【1BOX＝10パック入】が販売開始",
       "lottery_type": "",
       "start_date": "",
       "end_date": "",
       "announcement_date": "",
       "conditions": "",
-      "detail_url": "https://nyukanow.page.link/app",
+      "detail_url": "https://joshinweb.jp/toy/98765/set4521329431925.html",
       "status": "unknown"
     }
   ]
