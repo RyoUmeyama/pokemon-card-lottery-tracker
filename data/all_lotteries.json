@@ -1,11 +1,22 @@
 {
-  "timestamp": "2026-01-18T02:24:30.597521",
+  "timestamp": "2026-01-19T02:21:57.132726",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2026-01-18T02:25:46.203423",
-      "update_date": "2026-01-18",
+      "scraped_at": "2026-01-19T02:22:32.992208",
+      "update_date": "2026-01-19",
       "lotteries": [
+        {
+          "store": "2026年1月18日(日)15時02分",
+          "product": "Joshinにてポケモンカードゲーム ハイクラスパック MEGAドリームex【1BOX＝10パック入】が販売開始",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://joshinweb.jp/toy/98765/set4521329431925.html",
+          "status": "unknown"
+        },
         {
           "store": "2026年1月17日(土)22時30分",
           "product": "Amazonにてポケモンカードゲーム スカーレット＆バイオレット 拡張パック 超電ブレイカー BOXが販売開始（価格：5412円）※購入前に販売元がAmazon.co.jpであることを必ず確認してください。",
@@ -40,17 +51,6 @@
           "status": "unknown"
         },
         {
-          "store": "2026年1月17日(土)15時04分",
-          "product": "Joshinにてポケモンカードゲーム ハイクラスパック MEGAドリームex【1BOX＝10パック入】が販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://joshinweb.jp/toy/98765/set4521329431925.html",
-          "status": "unknown"
-        },
-        {
           "store": "2026年1月16日(金)15時04分",
           "product": "ゴールド以上 Joshinにてポケモンカードゲーム ハイクラスパック MEGAドリームex【1BOX＝10パック入】が販売開始",
           "lottery_type": "",
@@ -65,23 +65,23 @@
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-01-18T02:26:00.431315",
+      "scraped_at": "2026-01-19T02:22:43.826141",
       "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2026-01-18T02:26:02.016157",
+      "scraped_at": "2026-01-19T02:22:44.284878",
       "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2026-01-18T02:26:09.338072",
+      "scraped_at": "2026-01-19T02:22:50.529533",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-01-18T02:26:35.758378",
+      "scraped_at": "2026-01-19T02:23:16.143048",
       "reservations": []
     }
   ]
