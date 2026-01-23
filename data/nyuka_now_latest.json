@@ -1,8 +1,30 @@
 {
   "source": "nyuka-now.com",
-  "scraped_at": "2026-01-22T02:21:38.036223",
-  "update_date": "2026-01-22",
+  "scraped_at": "2026-01-23T02:10:43.348858",
+  "update_date": "2026-01-23",
   "lotteries": [
+    {
+      "store": "2026年1月22日(木)19時00分",
+      "product": "明日1月23日(金)7:00よりローソンにてポケモンカード ムニキスゼロ、ポケモンカードMEGA スペシャルカードセット メガエルレイドexの店頭先着販売が開始。",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://nyukanow.page.link/app",
+      "status": "unknown"
+    },
+    {
+      "store": "2026年1月22日(木)17時59分",
+      "product": "このあと18:00よりポケパーク カントー公式サイトにて2026年2月5日開業予定テーマパーク「ポケパーク カントー」入場チケットのオンライン先着販売が開始。※ポケモンカード関連商品の販売有無は不明です。",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://nyukanow.page.link/app",
+      "status": "unknown"
+    },
     {
       "store": "2026年1月18日(日)15時02分",
       "product": "Joshinにてポケモンカードゲーム ハイクラスパック MEGAドリームex【1BOX＝10パック入】が販売開始",
@@ -45,17 +67,6 @@
       "announcement_date": "",
       "conditions": "",
       "detail_url": "https://amzn.to/4f6MRz6",
-      "status": "unknown"
-    },
-    {
-      "store": "2026年1月16日(金)15時04分",
-      "product": "ゴールド以上 Joshinにてポケモンカードゲーム ハイクラスパック MEGAドリームex【1BOX＝10パック入】が販売開始",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://joshinweb.jp/toy/98765/set4521329431925.html",
       "status": "unknown"
     }
   ]

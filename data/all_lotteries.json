@@ -1,11 +1,33 @@
 {
-  "timestamp": "2026-01-22T02:21:14.121195",
+  "timestamp": "2026-01-23T02:10:18.840073",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2026-01-22T02:21:38.036223",
-      "update_date": "2026-01-22",
+      "scraped_at": "2026-01-23T02:10:43.348858",
+      "update_date": "2026-01-23",
       "lotteries": [
+        {
+          "store": "2026年1月22日(木)19時00分",
+          "product": "明日1月23日(金)7:00よりローソンにてポケモンカード ムニキスゼロ、ポケモンカードMEGA スペシャルカードセット メガエルレイドexの店頭先着販売が開始。",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyukanow.page.link/app",
+          "status": "unknown"
+        },
+        {
+          "store": "2026年1月22日(木)17時59分",
+          "product": "このあと18:00よりポケパーク カントー公式サイトにて2026年2月5日開業予定テーマパーク「ポケパーク カントー」入場チケットのオンライン先着販売が開始。※ポケモンカード関連商品の販売有無は不明です。",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyukanow.page.link/app",
+          "status": "unknown"
+        },
         {
           "store": "2026年1月18日(日)15時02分",
           "product": "Joshinにてポケモンカードゲーム ハイクラスパック MEGAドリームex【1BOX＝10パック入】が販売開始",
@@ -49,33 +71,59 @@
           "conditions": "",
           "detail_url": "https://amzn.to/4f6MRz6",
           "status": "unknown"
-        },
-        {
-          "store": "2026年1月16日(金)15時04分",
-          "product": "ゴールド以上 Joshinにてポケモンカードゲーム ハイクラスパック MEGAドリームex【1BOX＝10パック入】が販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://joshinweb.jp/toy/98765/set4521329431925.html",
-          "status": "unknown"
         }
       ]
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-01-22T02:21:50.186824",
-      "lotteries": []
+      "scraped_at": "2026-01-23T02:10:54.208335",
+      "lotteries": [
+        {
+          "store": "楽天ブックス",
+          "product": "ポケモンカードゲーム MEGA 拡張パック ムニキスゼロ【30パック】",
+          "lottery_type": "抽選販売",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "楽天会員登録必須",
+          "detail_url": "https://books.rakuten.co.jp/event/game/card/entry/",
+          "status": "unknown",
+          "entry_period": ""
+        },
+        {
+          "store": "楽天ブックス",
+          "product": "ポケモンカードゲーム MEGA 拡張パック インフェルノX【30パック】",
+          "lottery_type": "抽選販売",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "楽天会員登録必須",
+          "detail_url": "https://books.rakuten.co.jp/event/game/card/entry/",
+          "status": "unknown",
+          "entry_period": ""
+        },
+        {
+          "store": "楽天ブックス",
+          "product": "ポケモンカードゲーム MEGA ハイクラスパック MEGAドリームex【10パック】",
+          "lottery_type": "抽選販売",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "楽天会員登録必須",
+          "detail_url": "https://books.rakuten.co.jp/event/game/card/entry/",
+          "status": "unknown",
+          "entry_period": ""
+        }
+      ]
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2026-01-22T02:21:57.692591",
+      "scraped_at": "2026-01-23T02:11:01.846906",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-01-22T02:22:23.801327",
+      "scraped_at": "2026-01-23T02:11:27.448077",
       "reservations": []
     }
   ]
