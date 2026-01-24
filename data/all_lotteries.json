@@ -1,11 +1,55 @@
 {
-  "timestamp": "2026-01-23T02:10:18.840073",
+  "timestamp": "2026-01-24T02:06:50.280478",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2026-01-23T02:10:43.348858",
-      "update_date": "2026-01-23",
+      "scraped_at": "2026-01-24T02:07:51.184614",
+      "update_date": "2026-01-24",
       "lotteries": [
+        {
+          "store": "2026年1月23日(金)21時17分",
+          "product": "コレイズ（その他のストア）にてポケモンカードゲーム MEGA スペシャルカードセット メガエルレイドexが販売開始",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://colleize.com/lineup/70/350745",
+          "status": "unknown"
+        },
+        {
+          "store": "2026年1月23日(金)21時02分",
+          "product": "コレイズ（その他のストア）にてポケモンカードゲーム MEGA 拡張パック ムニキスゼロ（単位／1パック）が販売開始",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://colleize.com/lineup/70/350744",
+          "status": "unknown"
+        },
+        {
+          "store": "2026年1月23日(金)13時25分",
+          "product": "イオンスタイルオンラインにて予約 2026年1月23日発売 ポケモン ポケモンカードゲーム MEGA 拡張パック ムニキスゼロ  30パックセット (4521329432267×30) お一人さま1点限りが販売開始",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://aeonretail.com/product/0/P-2135500002549/P-213550000254901/",
+          "status": "unknown"
+        },
+        {
+          "store": "2026年1月23日(金)12時07分",
+          "product": "明日12:00よりバースデイにてポケモンカードMEGA スペシャルカードセット メガエルレイドexのオンライン先着販売が開始。",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyukanow.page.link/app",
+          "status": "unknown"
+        },
         {
           "store": "2026年1月22日(木)19時00分",
           "product": "明日1月23日(金)7:00よりローソンにてポケモンカード ムニキスゼロ、ポケモンカードMEGA スペシャルカードセット メガエルレイドexの店頭先着販売が開始。",
@@ -27,56 +71,12 @@
           "conditions": "",
           "detail_url": "https://nyukanow.page.link/app",
           "status": "unknown"
-        },
-        {
-          "store": "2026年1月18日(日)15時02分",
-          "product": "Joshinにてポケモンカードゲーム ハイクラスパック MEGAドリームex【1BOX＝10パック入】が販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://joshinweb.jp/toy/98765/set4521329431925.html",
-          "status": "unknown"
-        },
-        {
-          "store": "2026年1月17日(土)22時30分",
-          "product": "Amazonにてポケモンカードゲーム スカーレット＆バイオレット 拡張パック 超電ブレイカー BOXが販売開始（価格：5412円）※購入前に販売元がAmazon.co.jpであることを必ず確認してください。",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://amzn.to/3zVDS54",
-          "status": "unknown"
-        },
-        {
-          "store": "2026年1月17日(土)22時30分",
-          "product": "Amazonにてポケモンカードゲーム スカーレット&バイオレット ハイクラスパック テラスタルフェスex BOXが販売開始（価格：5500円）※購入前に販売元がAmazon.co.jpであることを必ず確認してください。",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://amzn.to/3ZN78Ud",
-          "status": "unknown"
-        },
-        {
-          "store": "2026年1月17日(土)22時27分",
-          "product": "Amazonにてポケモンカードゲーム スカーレット&バイオレット 強化拡張パック 楽園ドラゴーナ BOXが販売開始（価格：5412円）※購入前に販売元がAmazon.co.jpであることを必ず確認してください。",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://amzn.to/4f6MRz6",
-          "status": "unknown"
         }
       ]
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-01-23T02:10:54.208335",
+      "scraped_at": "2026-01-24T02:08:02.488906",
       "lotteries": [
         {
           "store": "楽天ブックス",
@@ -117,13 +117,19 @@
       ]
     },
     {
+      "source": "pokemoncenter-online.com",
+      "scraped_at": "2026-01-24T02:08:04.217700",
+      "has_active_lottery": false,
+      "lotteries": []
+    },
+    {
       "source": "amazon.co.jp",
-      "scraped_at": "2026-01-23T02:11:01.846906",
+      "scraped_at": "2026-01-24T02:08:11.459298",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-01-23T02:11:27.448077",
+      "scraped_at": "2026-01-24T02:08:37.867034",
       "reservations": []
     }
   ]
