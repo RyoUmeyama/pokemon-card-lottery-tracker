@@ -1,8 +1,19 @@
 {
   "source": "nyuka-now.com",
-  "scraped_at": "2026-01-24T02:07:51.184614",
-  "update_date": "2026-01-24",
+  "scraped_at": "2026-01-25T02:28:43.019097",
+  "update_date": "2026-01-25",
   "lotteries": [
+    {
+      "store": "2026年1月24日(土)11時50分",
+      "product": "このあと12時よりバースデイ（その他のストア）にてポケモンカードゲーム MEGA スペシャルカードセット メガエルレイドexが販売開始",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://www.shop-shimamura.com/item/0363100013787/?cl=220",
+      "status": "unknown"
+    },
     {
       "store": "2026年1月23日(金)21時17分",
       "product": "コレイズ（その他のストア）にてポケモンカードゲーム MEGA スペシャルカードセット メガエルレイドexが販売開始",
@@ -39,28 +50,6 @@
     {
       "store": "2026年1月23日(金)12時07分",
       "product": "明日12:00よりバースデイにてポケモンカードMEGA スペシャルカードセット メガエルレイドexのオンライン先着販売が開始。",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://nyukanow.page.link/app",
-      "status": "unknown"
-    },
-    {
-      "store": "2026年1月22日(木)19時00分",
-      "product": "明日1月23日(金)7:00よりローソンにてポケモンカード ムニキスゼロ、ポケモンカードMEGA スペシャルカードセット メガエルレイドexの店頭先着販売が開始。",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://nyukanow.page.link/app",
-      "status": "unknown"
-    },
-    {
-      "store": "2026年1月22日(木)17時59分",
-      "product": "このあと18:00よりポケパーク カントー公式サイトにて2026年2月5日開業予定テーマパーク「ポケパーク カントー」入場チケットのオンライン先着販売が開始。※ポケモンカード関連商品の販売有無は不明です。",
       "lottery_type": "",
       "start_date": "",
       "end_date": "",
