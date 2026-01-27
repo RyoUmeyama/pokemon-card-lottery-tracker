@@ -6,6 +6,7 @@ import os
 from datetime import datetime
 from scrapers.nyuka_now_scraper import NyukaNowScraper
 from scrapers.pokemon_center_scraper import PokemonCenterScraper
+from scrapers.pokemoncenter_playwright_scraper import PokemonCenterPlaywrightScraper
 from scrapers.rakuten_books_scraper import RakutenBooksScraper
 from scrapers.amazon_reservation_scraper import AmazonReservationScraper
 from scrapers.rakuten_reservation_scraper import RakutenReservationScraper
@@ -22,6 +23,7 @@ from scrapers.amiami_playwright_scraper import AmiAmiPlaywrightScraper
 from scrapers.yellow_submarine_scraper import YellowSubmarineScraper
 from scrapers.cardshop_serra_scraper import CardShopSerraScraper
 # コンビニ・小売 (Playwright版)
+from scrapers.sevennet_playwright_scraper import SevenNetPlaywrightScraper
 from scrapers.seven_eleven_scraper import SevenElevenScraper
 from scrapers.lawson_scraper import LawsonScraper
 from scrapers.aeon_playwright_scraper import AeonPlaywrightScraper
@@ -118,7 +120,7 @@ def main():
         'sources': []
     }
 
-    total_sources = 19  # 全ソース数
+    total_sources = 21  # 全ソース数
 
     # 1. 入荷Nowをスクレイピング
     print(f"\n[1/{total_sources}] 入荷Nowをチェック中...")
@@ -158,7 +160,7 @@ def main():
     else:
         print("✗ 楽天ブックスの取得に失敗")
 
-    # 3. ポケモンセンター公式をスクレイピング
+    # 3. ポケモンセンター公式をスクレイピング (通常版)
     print(f"\n[3/{total_sources}] ポケモンセンター公式をチェック中...")
     pokemon_center_scraper = PokemonCenterScraper()
     pokemon_center_data = pokemon_center_scraper.scrape()
@@ -177,8 +179,24 @@ def main():
     else:
         print("✗ ポケモンセンター公式の取得に失敗")
 
-    # 4. Amazon予約情報をスクレイピング
-    print(f"\n[4/{total_sources}] Amazon予約情報をチェック中...")
+    # 3.5. ポケモンセンター公式をスクレイピング (Playwright版 - JS対応)
+    print(f"\n[4/{total_sources}] ポケモンセンター公式(Playwright)をチェック中...")
+    pokemon_center_pw_scraper = PokemonCenterPlaywrightScraper()
+    pokemon_center_pw_data = pokemon_center_pw_scraper.scrape()
+
+    if pokemon_center_pw_data:
+        # 通常版と結果が異なる場合のみ追加
+        pw_lottery_count = len(pokemon_center_pw_data.get('lotteries', []))
+        if pw_lottery_count > 0:
+            all_results['sources'].append(pokemon_center_pw_data)
+            print(f"✓ ポケモンセンター公式(Playwright): {pw_lottery_count}件の抽選情報を取得")
+        else:
+            print(f"✓ ポケモンセンター公式(Playwright): 抽選なし（通常版と同じ）")
+    else:
+        print("✗ ポケモンセンター公式(Playwright)の取得に失敗")
+
+    # 5. Amazon予約情報をスクレイピング
+    print(f"\n[5/{total_sources}] Amazon予約情報をチェック中...")
     amazon_scraper = AmazonReservationScraper()
     amazon_data = amazon_scraper.scrape()
 
@@ -197,8 +215,8 @@ def main():
     else:
         print("✗ Amazon予約情報の取得に失敗")
 
-    # 5. 楽天ブックス予約情報をスクレイピング
-    print(f"\n[5/{total_sources}] 楽天ブックス予約情報をチェック中...")
+    # 6. 楽天ブックス予約情報をスクレイピング
+    print(f"\n[6/{total_sources}] 楽天ブックス予約情報をチェック中...")
     rakuten_reservation_scraper = RakutenReservationScraper()
     rakuten_reservation_data = rakuten_reservation_scraper.scrape()
 
@@ -217,8 +235,8 @@ def main():
     else:
         print("✗ 楽天ブックス予約情報の取得に失敗")
 
-    # 6. ヨドバシカメラをスクレイピング
-    print(f"\n[6/{total_sources}] ヨドバシカメラをチェック中...")
+    # 7. ヨドバシカメラをスクレイピング
+    print(f"\n[7/{total_sources}] ヨドバシカメラをチェック中...")
     yodobashi_scraper = YodobashiScraper()
     yodobashi_data = yodobashi_scraper.scrape()
 
@@ -237,8 +255,8 @@ def main():
     else:
         print("✗ ヨドバシカメラの取得に失敗")
 
-    # 7. ビックカメラをスクレイピング (Playwright版)
-    print(f"\n[7/{total_sources}] ビックカメラをチェック中...")
+    # 8. ビックカメラをスクレイピング (Playwright版)
+    print(f"\n[8/{total_sources}] ビックカメラをチェック中...")
     biccamera_scraper = BiccameraPlaywrightScraper()
     biccamera_data = biccamera_scraper.scrape()
 
@@ -257,8 +275,8 @@ def main():
     else:
         print("✗ ビックカメラの取得に失敗")
 
-    # 8. X(Twitter)公式アカウントをスクレイピング
-    print(f"\n[8/{total_sources}] X(Twitter)公式アカウントをチェック中...")
+    # 9. X(Twitter)公式アカウントをスクレイピング
+    print(f"\n[9/{total_sources}] X(Twitter)公式アカウントをチェック中...")
     x_scraper = XLotteryScraper()
     x_data = x_scraper.scrape()
 
@@ -282,8 +300,8 @@ def main():
 
     # ===== 家電量販店 =====
 
-    # 9. ジョーシンをスクレイピング (Playwright版)
-    print(f"\n[9/{total_sources}] ジョーシンをチェック中...")
+    # 10. ジョーシンをスクレイピング (Playwright版)
+    print(f"\n[10/{total_sources}] ジョーシンをチェック中...")
     joshin_scraper = JoshinPlaywrightScraper()
     joshin_data = joshin_scraper.scrape()
 
@@ -301,8 +319,8 @@ def main():
     else:
         print("✗ ジョーシンの取得に失敗")
 
-    # 10. エディオンをスクレイピング (Playwright版)
-    print(f"\n[10/{total_sources}] エディオンをチェック中...")
+    # 11. エディオンをスクレイピング (Playwright版)
+    print(f"\n[11/{total_sources}] エディオンをチェック中...")
     edion_scraper = EdionPlaywrightScraper()
     edion_data = edion_scraper.scrape()
 
@@ -320,8 +338,8 @@ def main():
     else:
         print("✗ エディオンの取得に失敗")
 
-    # 11. ケーズデンキをスクレイピング
-    print(f"\n[11/{total_sources}] ケーズデンキをチェック中...")
+    # 12. ケーズデンキをスクレイピング
+    print(f"\n[12/{total_sources}] ケーズデンキをチェック中...")
     ksdenki_scraper = KsDenkiScraper()
     ksdenki_data = ksdenki_scraper.scrape()
 
@@ -339,8 +357,8 @@ def main():
     else:
         print("✗ ケーズデンキの取得に失敗")
 
-    # 12. ノジマをスクレイピング
-    print(f"\n[12/{total_sources}] ノジマをチェック中...")
+    # 13. ノジマをスクレイピング
+    print(f"\n[13/{total_sources}] ノジマをチェック中...")
     nojima_scraper = NojimaScraper()
     nojima_data = nojima_scraper.scrape()
 
@@ -360,8 +378,8 @@ def main():
 
     # ===== ホビーショップ =====
 
-    # 13. あみあみをスクレイピング (Playwright版)
-    print(f"\n[13/{total_sources}] あみあみをチェック中...")
+    # 14. あみあみをスクレイピング (Playwright版)
+    print(f"\n[14/{total_sources}] あみあみをチェック中...")
     amiami_scraper = AmiAmiPlaywrightScraper()
     amiami_data = amiami_scraper.scrape()
 
@@ -379,8 +397,8 @@ def main():
     else:
         print("✗ あみあみの取得に失敗")
 
-    # 14. イエローサブマリンをスクレイピング
-    print(f"\n[14/{total_sources}] イエローサブマリンをチェック中...")
+    # 15. イエローサブマリンをスクレイピング
+    print(f"\n[15/{total_sources}] イエローサブマリンをチェック中...")
     yellow_submarine_scraper = YellowSubmarineScraper()
     yellow_submarine_data = yellow_submarine_scraper.scrape()
 
@@ -398,8 +416,8 @@ def main():
     else:
         print("✗ イエローサブマリンの取得に失敗")
 
-    # 15. カードショップセラをスクレイピング
-    print(f"\n[15/{total_sources}] カードショップセラをチェック中...")
+    # 16. カードショップセラをスクレイピング
+    print(f"\n[16/{total_sources}] カードショップセラをチェック中...")
     cardshop_serra_scraper = CardShopSerraScraper()
     cardshop_serra_data = cardshop_serra_scraper.scrape()
 
@@ -419,8 +437,8 @@ def main():
 
     # ===== コンビニ・小売 =====
 
-    # 16. セブンネットショッピングをスクレイピング
-    print(f"\n[16/{total_sources}] セブンネットショッピングをチェック中...")
+    # 17. セブンネットショッピングをスクレイピング (通常版)
+    print(f"\n[17/{total_sources}] セブンネットショッピングをチェック中...")
     seven_eleven_scraper = SevenElevenScraper()
     seven_eleven_data = seven_eleven_scraper.scrape()
 
@@ -438,8 +456,24 @@ def main():
     else:
         print("✗ セブンネットショッピングの取得に失敗")
 
-    # 17. ローソンHMVをスクレイピング
-    print(f"\n[17/{total_sources}] ローソンHMVをチェック中...")
+    # 18. セブンネットショッピングをスクレイピング (Playwright版 - 抽選専用)
+    print(f"\n[18/{total_sources}] セブンネット抽選ページ(Playwright)をチェック中...")
+    sevennet_pw_scraper = SevenNetPlaywrightScraper()
+    sevennet_pw_data = sevennet_pw_scraper.scrape()
+
+    if sevennet_pw_data:
+        pw_lottery_count = len(sevennet_pw_data.get('lotteries', []))
+        if pw_lottery_count > 0:
+            all_results['sources'].append(sevennet_pw_data)
+            print(f"✓ セブンネット抽選(Playwright): {pw_lottery_count}件の抽選情報を取得")
+            save_data(sevennet_pw_data, 'data/sevennet_lottery_latest.json')
+        else:
+            print(f"✓ セブンネット抽選(Playwright): 抽選情報なし")
+    else:
+        print("✗ セブンネット抽選(Playwright)の取得に失敗")
+
+    # 19. ローソンHMVをスクレイピング
+    print(f"\n[19/{total_sources}] ローソンHMVをチェック中...")
     lawson_scraper = LawsonScraper()
     lawson_data = lawson_scraper.scrape()
 
@@ -457,8 +491,8 @@ def main():
     else:
         print("✗ ローソンHMVの取得に失敗")
 
-    # 18. イオンをスクレイピング (Playwright版)
-    print(f"\n[18/{total_sources}] イオンをチェック中...")
+    # 20. イオンをスクレイピング (Playwright版)
+    print(f"\n[20/{total_sources}] イオンをチェック中...")
     aeon_scraper = AeonPlaywrightScraper()
     aeon_data = aeon_scraper.scrape()
 
@@ -476,8 +510,8 @@ def main():
     else:
         print("✗ イオンの取得に失敗")
 
-    # 19. ファミリーマートをスクレイピング
-    print(f"\n[19/{total_sources}] ファミリーマートをチェック中...")
+    # 21. ファミリーマートをスクレイピング
+    print(f"\n[21/{total_sources}] ファミリーマートをチェック中...")
     familymart_scraper = FamilyMartScraper()
     familymart_data = familymart_scraper.scrape()
 
