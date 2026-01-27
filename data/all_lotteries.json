@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-01-27T02:23:48.773714",
+  "timestamp": "2026-01-27T04:07:57.600734",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2026-01-27T02:24:46.553670",
+      "scraped_at": "2026-01-27T04:08:48.086003",
       "update_date": "2026-01-27",
       "lotteries": [
         {
@@ -65,72 +65,72 @@
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-01-27T02:24:58.033103",
+      "scraped_at": "2026-01-27T04:09:00.094559",
       "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2026-01-27T02:24:58.754014",
+      "scraped_at": "2026-01-27T04:09:00.982858",
       "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2026-01-27T02:25:05.947253",
+      "scraped_at": "2026-01-27T04:09:33.140913",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-01-27T02:25:32.071327",
+      "scraped_at": "2026-01-27T04:09:59.887832",
       "reservations": []
     },
     {
       "source": "ヨドバシカメラ (limited.yodobashi.com)",
       "source_url": "https://limited.yodobashi.com/",
-      "scraped_at": "2026-01-27T02:25:32.495792",
+      "scraped_at": "2026-01-27T04:10:00.358422",
       "lotteries": [],
       "error": "HTTP 403"
     },
     {
       "source": "ビックカメラ (biccamera.com)",
       "source_url": "https://www.biccamera.com/bc/category/?q=ポケモンカード+抽選",
-      "scraped_at": "2026-01-27T02:25:34.268332",
+      "scraped_at": "2026-01-27T04:10:01.101889",
       "lotteries": []
     },
     {
       "source": "X (Twitter) 公式アカウント",
-      "scraped_at": "2026-01-27T02:25:34.268619",
+      "scraped_at": "2026-01-27T04:10:01.102177",
       "lotteries": [],
       "error": "X API credentials not configured or tweepy not installed"
     },
     {
       "source": "ジョーシン (joshinweb.jp)",
       "source_url": "https://joshinweb.jp/hobby/pokemon.html",
-      "scraped_at": "2026-01-27T02:26:04.672389",
+      "scraped_at": "2026-01-27T04:10:46.521255",
       "lotteries": []
     },
     {
       "source": "エディオン (edion.com)",
       "source_url": "https://www.edion.com/search/?keyword=ポケモンカード",
-      "scraped_at": "2026-01-27T02:26:17.102707",
+      "scraped_at": "2026-01-27T04:11:07.163616",
       "lotteries": []
     },
     {
       "source": "ケーズデンキ (ksdenki.co.jp)",
       "source_url": null,
-      "scraped_at": "2026-01-27T02:26:17.102969",
+      "scraped_at": "2026-01-27T04:11:07.163935",
       "lotteries": []
     },
     {
       "source": "ノジマオンライン (online.nojima.co.jp)",
       "source_url": null,
-      "scraped_at": "2026-01-27T02:26:17.103393",
+      "scraped_at": "2026-01-27T04:11:07.164101",
       "lotteries": []
     },
     {
       "source": "あみあみ (amiami.jp)",
       "source_url": "https://www.amiami.jp/top/search/list?s_keywords=ポケモンカード&pagemax=30",
-      "scraped_at": "2026-01-27T02:26:36.117656",
+      "scraped_at": "2026-01-27T04:11:32.810220",
       "lotteries": [
         {
           "store": "あみあみ",
@@ -416,20 +416,20 @@
     {
       "source": "イエローサブマリン (yellowsubmarine.co.jp)",
       "source_url": "https://www.yellowsubmarine.co.jp/",
-      "scraped_at": "2026-01-27T02:26:38.289652",
+      "scraped_at": "2026-01-27T04:11:34.819322",
       "lotteries": []
     },
     {
       "source": "カードショップセラ (cardshopserra.jp)",
       "source_url": "https://www.cardshopserra.jp/",
-      "scraped_at": "2026-01-27T02:26:38.290127",
+      "scraped_at": "2026-01-27T04:11:34.819963",
       "lotteries": [],
       "note": "DNS解決エラーのため現在無効化"
     },
     {
       "source": "セブンネットショッピング (7net.omni7.jp)",
       "source_url": "https://7net.omni7.jp/search/?keyword=ポケモンカード&searchKeywordFlg=1",
-      "scraped_at": "2026-01-27T02:26:40.175557",
+      "scraped_at": "2026-01-27T04:11:36.633216",
       "lotteries": [
         {
           "store": "セブンネットショッピング",
@@ -553,13 +553,13 @@
     {
       "source": "ローソン HMV (hmv.co.jp)",
       "source_url": "https://www.hmv.co.jp/search/?category=ALL&keyword=ポケモンカード",
-      "scraped_at": "2026-01-27T02:26:43.053287",
+      "scraped_at": "2026-01-27T04:12:58.118065",
       "lotteries": [
         {
           "store": "ローソン HMV",
           "product": "カテゴリー",
           "lottery_type": "抽選販売",
-          "period": "2026年1月13日",
+          "period": "2025年12月12日",
           "price": "",
           "detail_url": "https://www.hmv.co.jp/javascript:funLinkGenre('%2Fsearch%2Fadvanced_1%2Fcategory_5%2Fformattype_1%2Fkeyword_%25E3%2583%259D%25E3%2582%25B1%25E3%2583%25A2%25E3%2583%25B3%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%2589%2Fpagesize_1%2Ftarget_LBOOKS%2F')",
           "status": "active"
@@ -577,18 +577,18 @@
           "store": "ローソン HMV",
           "product": "Nelnal",
           "lottery_type": "抽選販売",
-          "period": "2026年1月13日",
+          "period": "2025年12月12日",
           "price": "",
           "detail_url": "https://www.hmv.co.jp/artist_Nelnal_000000000963439/",
           "status": "unknown"
         },
         {
           "store": "ローソン HMV",
-          "product": "ポケモンカードゲーム MEGA 拡張パック「ムニキスゼロ」HMV店頭 抽選販売受付",
+          "product": "ポケモンカードゲーム MEGA ハイクラスパック「MEGAドリームex」HMV店頭 抽選販売受付",
           "lottery_type": "抽選販売",
-          "period": "2026年1月13日",
+          "period": "2025年11月17日",
           "price": "",
-          "detail_url": "https://www.hmv.co.jp/news/article/260109100/",
+          "detail_url": "https://www.hmv.co.jp/news/article/251113148/",
           "status": "unknown"
         }
       ]
@@ -596,13 +596,13 @@
     {
       "source": "イオン (aeonretail.jp)",
       "source_url": "https://www.aeonretail.jp/campaign/",
-      "scraped_at": "2026-01-27T02:26:49.262069",
+      "scraped_at": "2026-01-27T04:13:18.357619",
       "lotteries": []
     },
     {
       "source": "ファミリーマート (family.co.jp)",
       "source_url": "https://www.family.co.jp/campaign.html",
-      "scraped_at": "2026-01-27T02:26:50.396097",
+      "scraped_at": "2026-01-27T04:13:19.426447",
       "lotteries": []
     }
   ]
