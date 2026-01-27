@@ -9,6 +9,23 @@ from scrapers.pokemon_center_scraper import PokemonCenterScraper
 from scrapers.rakuten_books_scraper import RakutenBooksScraper
 from scrapers.amazon_reservation_scraper import AmazonReservationScraper
 from scrapers.rakuten_reservation_scraper import RakutenReservationScraper
+from scrapers.yodobashi_scraper import YodobashiScraper
+from scrapers.x_lottery_scraper import XLotteryScraper
+# 家電量販店 (Playwright版)
+from scrapers.biccamera_playwright_scraper import BiccameraPlaywrightScraper
+from scrapers.joshin_playwright_scraper import JoshinPlaywrightScraper
+from scrapers.edion_playwright_scraper import EdionPlaywrightScraper
+from scrapers.ksdenki_scraper import KsDenkiScraper
+from scrapers.nojima_scraper import NojimaScraper
+# ホビーショップ (Playwright版)
+from scrapers.amiami_playwright_scraper import AmiAmiPlaywrightScraper
+from scrapers.yellow_submarine_scraper import YellowSubmarineScraper
+from scrapers.cardshop_serra_scraper import CardShopSerraScraper
+# コンビニ・小売 (Playwright版)
+from scrapers.seven_eleven_scraper import SevenElevenScraper
+from scrapers.lawson_scraper import LawsonScraper
+from scrapers.aeon_playwright_scraper import AeonPlaywrightScraper
+from scrapers.familymart_scraper import FamilyMartScraper
 
 
 def load_previous_data(filename):
@@ -101,8 +118,10 @@ def main():
         'sources': []
     }
 
+    total_sources = 19  # 全ソース数
+
     # 1. 入荷Nowをスクレイピング
-    print("\n[1/3] 入荷Nowをチェック中...")
+    print(f"\n[1/{total_sources}] 入荷Nowをチェック中...")
     nyuka_scraper = NyukaNowScraper(check_availability=False)
     nyuka_data = nyuka_scraper.scrape()
 
@@ -121,7 +140,7 @@ def main():
         print("✗ 入荷Nowの取得に失敗")
 
     # 2. 楽天ブックスをスクレイピング
-    print("\n[2/3] 楽天ブックスをチェック中...")
+    print(f"\n[2/{total_sources}] 楽天ブックスをチェック中...")
     rakuten_scraper = RakutenBooksScraper()
     rakuten_data = rakuten_scraper.scrape()
 
@@ -140,7 +159,7 @@ def main():
         print("✗ 楽天ブックスの取得に失敗")
 
     # 3. ポケモンセンター公式をスクレイピング
-    print("\n[3/5] ポケモンセンター公式をチェック中...")
+    print(f"\n[3/{total_sources}] ポケモンセンター公式をチェック中...")
     pokemon_center_scraper = PokemonCenterScraper()
     pokemon_center_data = pokemon_center_scraper.scrape()
 
@@ -159,7 +178,7 @@ def main():
         print("✗ ポケモンセンター公式の取得に失敗")
 
     # 4. Amazon予約情報をスクレイピング
-    print("\n[4/5] Amazon予約情報をチェック中...")
+    print(f"\n[4/{total_sources}] Amazon予約情報をチェック中...")
     amazon_scraper = AmazonReservationScraper()
     amazon_data = amazon_scraper.scrape()
 
@@ -179,7 +198,7 @@ def main():
         print("✗ Amazon予約情報の取得に失敗")
 
     # 5. 楽天ブックス予約情報をスクレイピング
-    print("\n[5/5] 楽天ブックス予約情報をチェック中...")
+    print(f"\n[5/{total_sources}] 楽天ブックス予約情報をチェック中...")
     rakuten_reservation_scraper = RakutenReservationScraper()
     rakuten_reservation_data = rakuten_reservation_scraper.scrape()
 
@@ -197,6 +216,284 @@ def main():
         save_data(rakuten_reservation_data, 'data/rakuten_reservation_latest.json')
     else:
         print("✗ 楽天ブックス予約情報の取得に失敗")
+
+    # 6. ヨドバシカメラをスクレイピング
+    print(f"\n[6/{total_sources}] ヨドバシカメラをチェック中...")
+    yodobashi_scraper = YodobashiScraper()
+    yodobashi_data = yodobashi_scraper.scrape()
+
+    if yodobashi_data:
+        all_results['sources'].append(yodobashi_data)
+        lottery_count = len(yodobashi_data.get('lotteries', []))
+        print(f"✓ ヨドバシカメラ: {lottery_count}件の抽選情報を取得")
+
+        # 変更検出
+        prev_data = load_previous_data('data/yodobashi_latest.json')
+        has_changes, changes = detect_changes(prev_data, yodobashi_data)
+        if has_changes:
+            print(f"  変更検出: {changes}")
+
+        save_data(yodobashi_data, 'data/yodobashi_latest.json')
+    else:
+        print("✗ ヨドバシカメラの取得に失敗")
+
+    # 7. ビックカメラをスクレイピング (Playwright版)
+    print(f"\n[7/{total_sources}] ビックカメラをチェック中...")
+    biccamera_scraper = BiccameraPlaywrightScraper()
+    biccamera_data = biccamera_scraper.scrape()
+
+    if biccamera_data:
+        all_results['sources'].append(biccamera_data)
+        lottery_count = len(biccamera_data.get('lotteries', []))
+        print(f"✓ ビックカメラ: {lottery_count}件の抽選情報を取得")
+
+        # 変更検出
+        prev_data = load_previous_data('data/biccamera_latest.json')
+        has_changes, changes = detect_changes(prev_data, biccamera_data)
+        if has_changes:
+            print(f"  変更検出: {changes}")
+
+        save_data(biccamera_data, 'data/biccamera_latest.json')
+    else:
+        print("✗ ビックカメラの取得に失敗")
+
+    # 8. X(Twitter)公式アカウントをスクレイピング
+    print(f"\n[8/{total_sources}] X(Twitter)公式アカウントをチェック中...")
+    x_scraper = XLotteryScraper()
+    x_data = x_scraper.scrape()
+
+    if x_data:
+        all_results['sources'].append(x_data)
+        lottery_count = len(x_data.get('lotteries', []))
+        if x_data.get('error'):
+            print(f"⚠️ X(Twitter): {x_data['error']}")
+        else:
+            print(f"✓ X(Twitter): {lottery_count}件の抽選情報を取得")
+
+        # 変更検出
+        prev_data = load_previous_data('data/x_lottery_latest.json')
+        has_changes, changes = detect_changes(prev_data, x_data)
+        if has_changes:
+            print(f"  変更検出: {changes}")
+
+        save_data(x_data, 'data/x_lottery_latest.json')
+    else:
+        print("✗ X(Twitter)の取得に失敗")
+
+    # ===== 家電量販店 =====
+
+    # 9. ジョーシンをスクレイピング (Playwright版)
+    print(f"\n[9/{total_sources}] ジョーシンをチェック中...")
+    joshin_scraper = JoshinPlaywrightScraper()
+    joshin_data = joshin_scraper.scrape()
+
+    if joshin_data:
+        all_results['sources'].append(joshin_data)
+        lottery_count = len(joshin_data.get('lotteries', []))
+        print(f"✓ ジョーシン: {lottery_count}件の抽選情報を取得")
+
+        prev_data = load_previous_data('data/joshin_latest.json')
+        has_changes, changes = detect_changes(prev_data, joshin_data)
+        if has_changes:
+            print(f"  変更検出: {changes}")
+
+        save_data(joshin_data, 'data/joshin_latest.json')
+    else:
+        print("✗ ジョーシンの取得に失敗")
+
+    # 10. エディオンをスクレイピング (Playwright版)
+    print(f"\n[10/{total_sources}] エディオンをチェック中...")
+    edion_scraper = EdionPlaywrightScraper()
+    edion_data = edion_scraper.scrape()
+
+    if edion_data:
+        all_results['sources'].append(edion_data)
+        lottery_count = len(edion_data.get('lotteries', []))
+        print(f"✓ エディオン: {lottery_count}件の抽選情報を取得")
+
+        prev_data = load_previous_data('data/edion_latest.json')
+        has_changes, changes = detect_changes(prev_data, edion_data)
+        if has_changes:
+            print(f"  変更検出: {changes}")
+
+        save_data(edion_data, 'data/edion_latest.json')
+    else:
+        print("✗ エディオンの取得に失敗")
+
+    # 11. ケーズデンキをスクレイピング
+    print(f"\n[11/{total_sources}] ケーズデンキをチェック中...")
+    ksdenki_scraper = KsDenkiScraper()
+    ksdenki_data = ksdenki_scraper.scrape()
+
+    if ksdenki_data:
+        all_results['sources'].append(ksdenki_data)
+        lottery_count = len(ksdenki_data.get('lotteries', []))
+        print(f"✓ ケーズデンキ: {lottery_count}件の抽選情報を取得")
+
+        prev_data = load_previous_data('data/ksdenki_latest.json')
+        has_changes, changes = detect_changes(prev_data, ksdenki_data)
+        if has_changes:
+            print(f"  変更検出: {changes}")
+
+        save_data(ksdenki_data, 'data/ksdenki_latest.json')
+    else:
+        print("✗ ケーズデンキの取得に失敗")
+
+    # 12. ノジマをスクレイピング
+    print(f"\n[12/{total_sources}] ノジマをチェック中...")
+    nojima_scraper = NojimaScraper()
+    nojima_data = nojima_scraper.scrape()
+
+    if nojima_data:
+        all_results['sources'].append(nojima_data)
+        lottery_count = len(nojima_data.get('lotteries', []))
+        print(f"✓ ノジマ: {lottery_count}件の抽選情報を取得")
+
+        prev_data = load_previous_data('data/nojima_latest.json')
+        has_changes, changes = detect_changes(prev_data, nojima_data)
+        if has_changes:
+            print(f"  変更検出: {changes}")
+
+        save_data(nojima_data, 'data/nojima_latest.json')
+    else:
+        print("✗ ノジマの取得に失敗")
+
+    # ===== ホビーショップ =====
+
+    # 13. あみあみをスクレイピング (Playwright版)
+    print(f"\n[13/{total_sources}] あみあみをチェック中...")
+    amiami_scraper = AmiAmiPlaywrightScraper()
+    amiami_data = amiami_scraper.scrape()
+
+    if amiami_data:
+        all_results['sources'].append(amiami_data)
+        lottery_count = len(amiami_data.get('lotteries', []))
+        print(f"✓ あみあみ: {lottery_count}件の予約情報を取得")
+
+        prev_data = load_previous_data('data/amiami_latest.json')
+        has_changes, changes = detect_changes(prev_data, amiami_data)
+        if has_changes:
+            print(f"  変更検出: {changes}")
+
+        save_data(amiami_data, 'data/amiami_latest.json')
+    else:
+        print("✗ あみあみの取得に失敗")
+
+    # 14. イエローサブマリンをスクレイピング
+    print(f"\n[14/{total_sources}] イエローサブマリンをチェック中...")
+    yellow_submarine_scraper = YellowSubmarineScraper()
+    yellow_submarine_data = yellow_submarine_scraper.scrape()
+
+    if yellow_submarine_data:
+        all_results['sources'].append(yellow_submarine_data)
+        lottery_count = len(yellow_submarine_data.get('lotteries', []))
+        print(f"✓ イエローサブマリン: {lottery_count}件の予約情報を取得")
+
+        prev_data = load_previous_data('data/yellow_submarine_latest.json')
+        has_changes, changes = detect_changes(prev_data, yellow_submarine_data)
+        if has_changes:
+            print(f"  変更検出: {changes}")
+
+        save_data(yellow_submarine_data, 'data/yellow_submarine_latest.json')
+    else:
+        print("✗ イエローサブマリンの取得に失敗")
+
+    # 15. カードショップセラをスクレイピング
+    print(f"\n[15/{total_sources}] カードショップセラをチェック中...")
+    cardshop_serra_scraper = CardShopSerraScraper()
+    cardshop_serra_data = cardshop_serra_scraper.scrape()
+
+    if cardshop_serra_data:
+        all_results['sources'].append(cardshop_serra_data)
+        lottery_count = len(cardshop_serra_data.get('lotteries', []))
+        print(f"✓ カードショップセラ: {lottery_count}件の予約情報を取得")
+
+        prev_data = load_previous_data('data/cardshop_serra_latest.json')
+        has_changes, changes = detect_changes(prev_data, cardshop_serra_data)
+        if has_changes:
+            print(f"  変更検出: {changes}")
+
+        save_data(cardshop_serra_data, 'data/cardshop_serra_latest.json')
+    else:
+        print("✗ カードショップセラの取得に失敗")
+
+    # ===== コンビニ・小売 =====
+
+    # 16. セブンネットショッピングをスクレイピング
+    print(f"\n[16/{total_sources}] セブンネットショッピングをチェック中...")
+    seven_eleven_scraper = SevenElevenScraper()
+    seven_eleven_data = seven_eleven_scraper.scrape()
+
+    if seven_eleven_data:
+        all_results['sources'].append(seven_eleven_data)
+        lottery_count = len(seven_eleven_data.get('lotteries', []))
+        print(f"✓ セブンネットショッピング: {lottery_count}件の予約情報を取得")
+
+        prev_data = load_previous_data('data/seven_eleven_latest.json')
+        has_changes, changes = detect_changes(prev_data, seven_eleven_data)
+        if has_changes:
+            print(f"  変更検出: {changes}")
+
+        save_data(seven_eleven_data, 'data/seven_eleven_latest.json')
+    else:
+        print("✗ セブンネットショッピングの取得に失敗")
+
+    # 17. ローソンHMVをスクレイピング
+    print(f"\n[17/{total_sources}] ローソンHMVをチェック中...")
+    lawson_scraper = LawsonScraper()
+    lawson_data = lawson_scraper.scrape()
+
+    if lawson_data:
+        all_results['sources'].append(lawson_data)
+        lottery_count = len(lawson_data.get('lotteries', []))
+        print(f"✓ ローソンHMV: {lottery_count}件の予約情報を取得")
+
+        prev_data = load_previous_data('data/lawson_latest.json')
+        has_changes, changes = detect_changes(prev_data, lawson_data)
+        if has_changes:
+            print(f"  変更検出: {changes}")
+
+        save_data(lawson_data, 'data/lawson_latest.json')
+    else:
+        print("✗ ローソンHMVの取得に失敗")
+
+    # 18. イオンをスクレイピング (Playwright版)
+    print(f"\n[18/{total_sources}] イオンをチェック中...")
+    aeon_scraper = AeonPlaywrightScraper()
+    aeon_data = aeon_scraper.scrape()
+
+    if aeon_data:
+        all_results['sources'].append(aeon_data)
+        lottery_count = len(aeon_data.get('lotteries', []))
+        print(f"✓ イオン: {lottery_count}件の予約情報を取得")
+
+        prev_data = load_previous_data('data/aeon_latest.json')
+        has_changes, changes = detect_changes(prev_data, aeon_data)
+        if has_changes:
+            print(f"  変更検出: {changes}")
+
+        save_data(aeon_data, 'data/aeon_latest.json')
+    else:
+        print("✗ イオンの取得に失敗")
+
+    # 19. ファミリーマートをスクレイピング
+    print(f"\n[19/{total_sources}] ファミリーマートをチェック中...")
+    familymart_scraper = FamilyMartScraper()
+    familymart_data = familymart_scraper.scrape()
+
+    if familymart_data:
+        all_results['sources'].append(familymart_data)
+        lottery_count = len(familymart_data.get('lotteries', []))
+        print(f"✓ ファミリーマート: {lottery_count}件の抽選情報を取得")
+
+        prev_data = load_previous_data('data/familymart_latest.json')
+        has_changes, changes = detect_changes(prev_data, familymart_data)
+        if has_changes:
+            print(f"  変更検出: {changes}")
+
+        save_data(familymart_data, 'data/familymart_latest.json')
+    else:
+        print("✗ ファミリーマートの取得に失敗")
 
     # 統合データを保存
     save_data(all_results, 'data/all_lotteries.json')

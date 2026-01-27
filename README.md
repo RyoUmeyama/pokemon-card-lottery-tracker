@@ -8,7 +8,7 @@
 - **重複除外**: 同じ商品の重複エントリを自動削除
 - **変更検出**: 新しい抽選・予約の開始や終了を自動検出
 - **予約開始通知**: Amazon・楽天ブックスの予約開始を即座に検知
-- **GitHub Actions**: 毎日9:00 JST自動実行
+- **GitHub Actions**: 1日4回自動実行（9:00, 12:00, 18:00, 21:00 JST）
 - **メール通知**: 新しい抽選・予約情報が見つかった場合に自動通知
 - **データ保存**: JSON形式で履歴を保存
 
@@ -41,6 +41,60 @@
    - 発売日情報と予約状態を取得
    - 在庫状況をリアルタイムチェック
 
+6. **ヨドバシカメラ** (https://limited.yodobashi.com)
+   - 抽選販売ページからポケモンカード関連情報を取得
+   - 受付中・終了・予定などのステータスを検出
+
+7. **ビックカメラ** (https://www.biccamera.com)
+   - 抽選販売ページからポケモンカード関連情報を取得
+   - 複数の抽選関連ページを監視
+
+8. **X (Twitter) 公式アカウント**
+   - ゲオ、TSUTAYA、ヨドバシカメラ等の公式アカウントを監視
+   - 抽選・予約関連のツイートを自動検出
+   - ※X API認証情報が必要
+
+### 家電量販店
+
+9. **ジョーシン** (https://joshinweb.jp)
+   - 抽選・予約販売ページを監視
+   - ポケモンカード関連商品を自動検出
+
+10. **エディオン** (https://www.edion.com)
+    - 抽選販売・イベントページを監視
+
+11. **ケーズデンキ** (https://www.ksdenki.co.jp)
+    - オンラインショップの抽選・予約情報を取得
+
+12. **ノジマオンライン** (https://online.nojima.co.jp)
+    - 予約・抽選販売情報を監視
+
+### ホビーショップ
+
+13. **あみあみ** (https://www.amiami.jp)
+    - ポケモンカード予約商品を検索
+    - 予約状態・価格情報を取得
+
+14. **イエローサブマリン** (https://www.yellowsubmarine.co.jp)
+    - トレカ新入荷・予約情報ページを監視
+
+15. **カードショップセラ** (https://www.cardshopserra.jp)
+    - トレカ専門店の予約情報を取得
+
+### コンビニ・小売
+
+16. **セブンネットショッピング** (https://7net.omni7.jp)
+    - ポケモンカード予約・新発売商品を検索
+
+17. **ローソン HMV** (https://www.hmv.co.jp)
+    - HMV&BOOKS onlineの予約情報を取得
+
+18. **イオンスタイルオンライン** (https://www.aeonnetshop.com)
+    - ポケモンカード予約・販売情報を取得
+
+19. **ファミリーマート** (https://www.family.co.jp)
+    - キャンペーン・ホビー情報ページを監視
+
 ## 🚀 使い方
 
 ### ローカルで実行
@@ -70,13 +124,41 @@ pokemon-card-lottery-tracker/
 │   ├── pokemon_center_scraper.py         # ポケモンセンター公式スクレイパー
 │   ├── rakuten_books_scraper.py          # 楽天ブックス抽選スクレイパー
 │   ├── amazon_reservation_scraper.py     # Amazon予約スクレイパー
-│   └── rakuten_reservation_scraper.py    # 楽天ブックス予約スクレイパー
+│   ├── rakuten_reservation_scraper.py    # 楽天ブックス予約スクレイパー
+│   ├── yodobashi_scraper.py              # ヨドバシカメラスクレイパー
+│   ├── biccamera_scraper.py              # ビックカメラスクレイパー
+│   ├── x_lottery_scraper.py              # X(Twitter)公式アカウントスクレイパー
+│   ├── joshin_scraper.py                 # ジョーシンスクレイパー
+│   ├── edion_scraper.py                  # エディオンスクレイパー
+│   ├── ksdenki_scraper.py                # ケーズデンキスクレイパー
+│   ├── nojima_scraper.py                 # ノジマスクレイパー
+│   ├── amiami_scraper.py                 # あみあみスクレイパー
+│   ├── yellow_submarine_scraper.py       # イエローサブマリンスクレイパー
+│   ├── cardshop_serra_scraper.py         # カードショップセラスクレイパー
+│   ├── seven_eleven_scraper.py           # セブンネットスクレイパー
+│   ├── lawson_scraper.py                 # ローソンHMVスクレイパー
+│   ├── aeon_scraper.py                   # イオンスクレイパー
+│   └── familymart_scraper.py             # ファミリーマートスクレイパー
 ├── data/
 │   ├── nyuka_now_latest.json             # 入荷Now最新データ
 │   ├── pokemon_center_latest.json        # ポケモンセンター最新データ
 │   ├── rakuten_books_latest.json         # 楽天ブックス抽選最新データ
 │   ├── amazon_reservation_latest.json    # Amazon予約最新データ
 │   ├── rakuten_reservation_latest.json   # 楽天ブックス予約最新データ
+│   ├── yodobashi_latest.json             # ヨドバシカメラ最新データ
+│   ├── biccamera_latest.json             # ビックカメラ最新データ
+│   ├── x_lottery_latest.json             # X(Twitter)最新データ
+│   ├── joshin_latest.json                # ジョーシン最新データ
+│   ├── edion_latest.json                 # エディオン最新データ
+│   ├── ksdenki_latest.json               # ケーズデンキ最新データ
+│   ├── nojima_latest.json                # ノジマ最新データ
+│   ├── amiami_latest.json                # あみあみ最新データ
+│   ├── yellow_submarine_latest.json      # イエローサブマリン最新データ
+│   ├── cardshop_serra_latest.json        # カードショップセラ最新データ
+│   ├── seven_eleven_latest.json          # セブンネット最新データ
+│   ├── lawson_latest.json                # ローソンHMV最新データ
+│   ├── aeon_latest.json                  # イオン最新データ
+│   ├── familymart_latest.json            # ファミリーマート最新データ
 │   └── all_lotteries.json                # 統合データ
 ├── .github/
 │   └── workflows/
@@ -125,6 +207,19 @@ pokemon-card-lottery-tracker/
 - `SMTP_PASSWORD`: SMTPパスワード（Gmailの場合はアプリパスワード）
 - `RECIPIENT_EMAIL`: 通知先メールアドレス
 
+### X (Twitter) API認証（オプション）
+
+X(Twitter)からの情報収集を有効にする場合は追加で設定：
+
+- `X_BEARER_TOKEN`: X API Bearer Token（推奨）
+- または以下の組み合わせ：
+  - `X_API_KEY`: API Key
+  - `X_API_SECRET`: API Secret
+  - `X_ACCESS_TOKEN`: Access Token
+  - `X_ACCESS_TOKEN_SECRET`: Access Token Secret
+
+※X API認証情報がない場合でも、他のスクレイパーは正常に動作します
+
 ### Gmailの場合のアプリパスワード取得
 
 1. Googleアカウントにログイン
@@ -157,7 +252,12 @@ python main.py
 - [ ] 通知の優先度設定（定価 > 抽選 > 予約）
 - [ ] Discord/Slack通知機能
 - [ ] LINE通知機能
-- [ ] より多くのサイトに対応（ヨドバシ、あみあみなど）
+- [x] ヨドバシカメラ対応
+- [x] ビックカメラ対応
+- [x] X(Twitter)公式アカウント監視
+- [x] 家電量販店対応（ジョーシン、エディオン、ケーズデンキ、ノジマ）
+- [x] ホビーショップ対応（あみあみ、イエローサブマリン、カードショップセラ）
+- [x] コンビニ・小売対応（セブン、ローソンHMV、イオン、ファミマ）
 - [ ] Webダッシュボード
 
 ## ⚠️ 注意事項

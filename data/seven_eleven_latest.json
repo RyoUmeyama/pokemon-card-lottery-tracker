@@ -1,0 +1,124 @@
+{
+  "source": "セブンネットショッピング (7net.omni7.jp)",
+  "source_url": "https://7net.omni7.jp/search/?keyword=ポケモンカード&searchKeywordFlg=1",
+  "scraped_at": "2026-01-27T10:04:49.456947",
+  "lotteries": [
+    {
+      "store": "セブンネットショッピング",
+      "product": "Nintendo Switch 2 ぽこ あ ポケモン【セブンネットオリジナル特典：アクリルスマホスタンド／早期購入特典：メタモンラグ】",
+      "lottery_type": "予約販売",
+      "period": "2026/03/05",
+      "price": "8,164円",
+      "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110680067",
+      "status": "active"
+    },
+    {
+      "store": "セブンネットショッピング",
+      "product": "ポケモンカードゲーム スカーレット＆バイオレット 強化拡張パック 熱風のアリーナ【BOX】",
+      "lottery_type": "予約販売",
+      "period": "2025/03/14",
+      "price": "4,920円",
+      "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110661265",
+      "status": "unknown"
+    },
+    {
+      "store": "セブンネットショッピング",
+      "product": "ポケモンカードゲーム スカーレット＆バイオレット 拡張パック バトルパートナーズ【BOX】",
+      "lottery_type": "予約販売",
+      "period": "2025/01/24",
+      "price": "4,920円",
+      "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110658809",
+      "status": "unknown"
+    },
+    {
+      "store": "セブンネットショッピング",
+      "product": "Nintendo Switch 2 ぽこ あ ポケモン（お買い得商品／オリジナル特典なし／早期購入特典：メタモンラグ付き）",
+      "lottery_type": "予約販売",
+      "period": "2026/03/05",
+      "price": "8,164円",
+      "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110680066",
+      "status": "active"
+    },
+    {
+      "store": "セブンネットショッピング",
+      "product": "ポケモンカードゲーム スカーレット＆バイオレット 拡張パック 変幻の仮面【BOX】",
+      "lottery_type": "予約販売",
+      "period": "2024/04/26",
+      "price": "4,920円",
+      "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110648457",
+      "status": "unknown"
+    },
+    {
+      "store": "セブンネットショッピング",
+      "product": "ポケモンカードゲーム スカーレット&バイオレット ハイクラスパック テラスタルフェスex【BOX】",
+      "lottery_type": "予約販売",
+      "period": "2024/12/06",
+      "price": "5,000円",
+      "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110657005",
+      "status": "unknown"
+    },
+    {
+      "store": "セブンネットショッピング",
+      "product": "ポケモンカードゲーム スカーレット&バイオレット 強化拡張パック クリムゾンヘイズ【10パックset】",
+      "lottery_type": "予約販売",
+      "period": "2024/03/22",
+      "price": "1,640円",
+      "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110653934",
+      "status": "unknown"
+    },
+    {
+      "store": "セブンネットショッピング",
+      "product": "ポケモンカードゲーム スカーレット&バイオレット 強化拡張パック クリムゾンヘイズ【BOX】",
+      "lottery_type": "予約販売",
+      "period": "2024/06/24",
+      "price": "4,920円",
+      "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110647238",
+      "status": "unknown"
+    },
+    {
+      "store": "セブンネットショッピング",
+      "product": "ポケモンカードゲーム スカーレット＆バイオレット 拡張パック ステラミラクル【BOX】",
+      "lottery_type": "予約販売",
+      "period": "2024/07/19",
+      "price": "4,920円",
+      "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110651933",
+      "status": "unknown"
+    },
+    {
+      "store": "セブンネットショッピング",
+      "product": "ポケモンカードゲーム スカーレット＆バイオレット 強化拡張パック 楽園ドラゴーナ【10パックset】",
+      "lottery_type": "予約販売",
+      "period": "2024/09/13",
+      "price": "1,640円",
+      "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110656483",
+      "status": "unknown"
+    },
+    {
+      "store": "セブンネットショッピング",
+      "product": "ポケモンカードゲーム スカーレット＆バイオレット 拡張パック ステラミラクル【10パックset】",
+      "lottery_type": "予約販売",
+      "period": "2024/07/19",
+      "price": "1,640円",
+      "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110654335",
+      "status": "unknown"
+    },
+    {
+      "store": "セブンネットショッピング",
+      "product": "ポケモンカードゲーム スカーレット＆バイオレット 強化拡張パック 楽園ドラゴーナ【BOX】",
+      "lottery_type": "予約販売",
+      "period": "2024/09/13",
+      "price": "4,920円",
+      "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110654462",
+      "status": "unknown"
+    },
+    {
+      "store": "セブンネットショッピング",
+      "product": "ポケモンカードゲーム スカーレット＆バイオレット 強化拡張パック ナイトワンダラー【BOX】",
+      "lottery_type": "予約販売",
+      "period": "2024/06/07",
+      "price": "4,920円",
+      "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110650081",
+      "status": "unknown"
+    }
+  ]
+}
