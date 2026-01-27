@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-01-27T04:35:17.330951",
+  "timestamp": "2026-01-27T04:54:10.899261",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2026-01-27T04:36:23.229907",
+      "scraped_at": "2026-01-27T04:55:15.317605",
       "update_date": "2026-01-27",
       "lotteries": [
         {
@@ -65,371 +65,85 @@
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-01-27T04:36:34.645890",
+      "scraped_at": "2026-01-27T04:55:26.134331",
       "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2026-01-27T04:36:35.294386",
+      "scraped_at": "2026-01-27T04:55:26.613886",
       "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2026-01-27T04:37:06.307615",
+      "scraped_at": "2026-01-27T04:55:55.815409",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-01-27T04:37:33.082663",
+      "scraped_at": "2026-01-27T04:56:21.518488",
       "reservations": []
     },
     {
       "source": "ヨドバシカメラ (limited.yodobashi.com)",
       "source_url": "https://limited.yodobashi.com/",
-      "scraped_at": "2026-01-27T04:37:33.611577",
+      "scraped_at": "2026-01-27T04:56:21.791995",
       "lotteries": [],
       "error": "HTTP 403"
     },
     {
       "source": "ビックカメラ (biccamera.com)",
       "source_url": "https://www.biccamera.com/bc/category/?q=ポケモンカード+抽選",
-      "scraped_at": "2026-01-27T04:37:34.313343",
+      "scraped_at": "2026-01-27T04:56:22.415168",
       "lotteries": []
     },
     {
       "source": "X (Twitter) 公式アカウント",
-      "scraped_at": "2026-01-27T04:37:34.313618",
+      "scraped_at": "2026-01-27T04:56:22.415436",
       "lotteries": [],
       "error": "X API credentials not configured or tweepy not installed"
     },
     {
       "source": "ジョーシン (joshinweb.jp)",
       "source_url": "https://joshinweb.jp/hobby/pokemon.html",
-      "scraped_at": "2026-01-27T04:37:34.776258",
+      "scraped_at": "2026-01-27T04:57:07.811605",
       "lotteries": []
     },
     {
       "source": "エディオン (edion.com)",
       "source_url": "https://www.edion.com/search/?keyword=ポケモンカード",
-      "scraped_at": "2026-01-27T04:37:54.936930",
+      "scraped_at": "2026-01-27T04:57:28.292385",
       "lotteries": []
     },
     {
       "source": "ケーズデンキ (ksdenki.co.jp)",
       "source_url": null,
-      "scraped_at": "2026-01-27T04:37:54.937205",
+      "scraped_at": "2026-01-27T04:57:28.292669",
       "lotteries": []
     },
     {
       "source": "ノジマオンライン (online.nojima.co.jp)",
       "source_url": null,
-      "scraped_at": "2026-01-27T04:37:54.937373",
+      "scraped_at": "2026-01-27T04:57:28.292827",
       "lotteries": []
-    },
-    {
-      "source": "あみあみ (amiami.jp)",
-      "source_url": "https://www.amiami.jp/top/search/list?s_keywords=ポケモンカード&pagemax=30",
-      "scraped_at": "2026-01-27T04:38:20.889344",
-      "lotteries": [
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム MEGA グミ インフェルノX 20個入りBOX (食玩)2,420ポケモンカードゲーム スカーレット＆バイオレット バトルアカデミー18%2,690ポケモンカードゲーム スカーレット＆バイオレット スタートデッキGenerations ピカチュウex・カビゴンex パック18",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=GOODS-04684789",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム MEGA グミ インフェルノX 20個入りBOX (食玩)2,420",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=GOODS-04684789",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム スカーレット＆バイオレット バトルアカデミー18%2,690",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=CARD-00024084",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム スカーレット＆バイオレット スタートデッキGenerations ピカチュウex・カビゴンex パック18%690",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=CARD-00025848",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム スカーレット＆バイオレット バトルマスターデッキ パオジアンex50%1,500",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=CARD-00024595",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム スカーレット＆バイオレット いつでもどこでも バトルアカデミー18%1,110",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=CARD-00024085",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム スカーレット＆バイオレット スタートデッキGenerations ザシアンex・マホイップex パック850",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=CARD-00025862",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム デッキシールド メガリザードンX パック889",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=CARD-00030188",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム スカーレット＆バイオレット スタートデッキGenerations ルギアex・バンギラスex パック18%690",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=CARD-00025850",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム スカーレット＆バイオレット スタートデッキGenerations ディアルガex・ルカリオex パック18%690",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=CARD-00025854",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム ラバープレイマット ピカチュウとかみなり2,970",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=CARD-00030845",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム デッキケース メガリザードンX500",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=CARD-00030189",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム デッキシールド メガジガルデ パック889",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=CARD-00031423",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム スカーレット＆バイオレット スタートデッキGenerations コライドンex・パルデアドオーex パック18%690",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=CARD-00025864",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム デッキシールド メガサーナイト パック889",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=CARD-00029581",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム ラバープレイマット ピカチュウ大集合5%2,820",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=CARD-00020346",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム スカーレット＆バイオレット スタートデッキGenerations ゼルネアスex・オンバーンex パック18%690",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=CARD-00025858",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム アクリルダメカン Ver.210%590",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=CARD-00019320",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム コインサイコロ ピカチュウ11%440",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=CARD-00019321",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム スカーレット＆バイオレット スタートデッキGenerations カプ・コケコex・ミミッキュex パック18%690",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=CARD-00025860",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム デッキシールド メガルカリオ パック889",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=CARD-00029579",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム デッキシールド ピカチュウとかみなり パック889",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=CARD-00030843",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム ディスプレイフレーム ブラックVer.210%1,340",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=CARD-00019319",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム ロングカードボックス イーブイ大集合660",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=CARD-00026486",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム キャリングケース イーブイ大集合1,650",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=CARD-00026488",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム スカーレット＆バイオレット スペシャルジャンボカードセット オーガポン販売停止中",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=CARD-00024594",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム ダメカンケース ピカチュウ大集合6%310",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=CARD-00020345",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム ダメカンケース イーブイ大集合330",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=CARD-00026487",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム デッキケース メガルカリオ500",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=CARD-00029580",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム デッキケース メガジガルデ500",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=CARD-00031424",
-          "status": "unknown"
-        },
-        {
-          "store": "あみあみ",
-          "product": "ポケモンカードゲーム デッキケース ピカチュウ大集合6%470",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.amiami.jp/top/detail/detail?gcode=CARD-00020344",
-          "status": "unknown"
-        }
-      ]
     },
     {
       "source": "イエローサブマリン (yellowsubmarine.co.jp)",
       "source_url": "https://www.yellowsubmarine.co.jp/",
-      "scraped_at": "2026-01-27T04:38:23.109229",
+      "scraped_at": "2026-01-27T04:57:30.296622",
       "lotteries": []
     },
     {
       "source": "カードショップセラ (cardshopserra.jp)",
       "source_url": "https://www.cardshopserra.jp/",
-      "scraped_at": "2026-01-27T04:38:23.109636",
+      "scraped_at": "2026-01-27T04:57:30.296857",
       "lotteries": [],
       "note": "DNS解決エラーのため現在無効化"
     },
     {
       "source": "セブンネットショッピング (7net.omni7.jp)",
       "source_url": "https://7net.omni7.jp/search/?keyword=ポケモンカード&searchKeywordFlg=1",
-      "scraped_at": "2026-01-27T04:38:24.259109",
+      "scraped_at": "2026-01-27T04:57:31.665068",
       "lotteries": [
         {
           "store": "セブンネットショッピング",
@@ -437,7 +151,7 @@
           "lottery_type": "予約販売",
           "period": "2026/03/05",
           "price": "8,164円",
-          "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110680067",
+          "detail_url": "https://7net.omni7.jp/detail/2110680067",
           "status": "active"
         },
         {
@@ -446,7 +160,7 @@
           "lottery_type": "予約販売",
           "period": "2025/03/14",
           "price": "4,920円",
-          "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110661265",
+          "detail_url": "https://7net.omni7.jp/detail/2110661265",
           "status": "unknown"
         },
         {
@@ -455,7 +169,7 @@
           "lottery_type": "予約販売",
           "period": "2025/01/24",
           "price": "4,920円",
-          "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110658809",
+          "detail_url": "https://7net.omni7.jp/detail/2110658809",
           "status": "unknown"
         },
         {
@@ -464,7 +178,7 @@
           "lottery_type": "予約販売",
           "period": "2026/03/05",
           "price": "8,164円",
-          "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110680066",
+          "detail_url": "https://7net.omni7.jp/detail/2110680066",
           "status": "active"
         },
         {
@@ -473,7 +187,7 @@
           "lottery_type": "予約販売",
           "period": "2024/04/26",
           "price": "4,920円",
-          "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110648457",
+          "detail_url": "https://7net.omni7.jp/detail/2110648457",
           "status": "unknown"
         },
         {
@@ -482,7 +196,7 @@
           "lottery_type": "予約販売",
           "period": "2024/12/06",
           "price": "5,000円",
-          "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110657005",
+          "detail_url": "https://7net.omni7.jp/detail/2110657005",
           "status": "unknown"
         },
         {
@@ -491,7 +205,7 @@
           "lottery_type": "予約販売",
           "period": "2024/03/22",
           "price": "1,640円",
-          "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110653934",
+          "detail_url": "https://7net.omni7.jp/detail/2110653934",
           "status": "unknown"
         },
         {
@@ -500,7 +214,7 @@
           "lottery_type": "予約販売",
           "period": "2024/06/24",
           "price": "4,920円",
-          "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110647238",
+          "detail_url": "https://7net.omni7.jp/detail/2110647238",
           "status": "unknown"
         },
         {
@@ -509,7 +223,7 @@
           "lottery_type": "予約販売",
           "period": "2024/07/19",
           "price": "4,920円",
-          "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110651933",
+          "detail_url": "https://7net.omni7.jp/detail/2110651933",
           "status": "unknown"
         },
         {
@@ -518,7 +232,7 @@
           "lottery_type": "予約販売",
           "period": "2024/09/13",
           "price": "1,640円",
-          "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110656483",
+          "detail_url": "https://7net.omni7.jp/detail/2110656483",
           "status": "unknown"
         },
         {
@@ -527,7 +241,7 @@
           "lottery_type": "予約販売",
           "period": "2024/07/19",
           "price": "1,640円",
-          "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110654335",
+          "detail_url": "https://7net.omni7.jp/detail/2110654335",
           "status": "unknown"
         },
         {
@@ -536,7 +250,7 @@
           "lottery_type": "予約販売",
           "period": "2024/09/13",
           "price": "4,920円",
-          "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110654462",
+          "detail_url": "https://7net.omni7.jp/detail/2110654462",
           "status": "unknown"
         },
         {
@@ -545,7 +259,7 @@
           "lottery_type": "予約販売",
           "period": "2024/06/07",
           "price": "4,920円",
-          "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110650081",
+          "detail_url": "https://7net.omni7.jp/detail/2110650081",
           "status": "unknown"
         }
       ]
@@ -553,35 +267,8 @@
     {
       "source": "ローソン HMV (hmv.co.jp)",
       "source_url": "https://www.hmv.co.jp/search/?category=ALL&keyword=ポケモンカード",
-      "scraped_at": "2026-01-27T04:39:43.553948",
+      "scraped_at": "2026-01-27T04:58:46.740395",
       "lotteries": [
-        {
-          "store": "ローソン HMV",
-          "product": "カテゴリー",
-          "lottery_type": "抽選販売",
-          "period": "2025年12月12日",
-          "price": "",
-          "detail_url": "https://www.hmv.co.jp/javascript:funLinkGenre('%2Fsearch%2Fadvanced_1%2Fcategory_5%2Fformattype_1%2Fkeyword_%25E3%2583%259D%25E3%2582%25B1%25E3%2583%25A2%25E3%2583%25B3%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%2589%2Fpagesize_1%2Ftarget_LBOOKS%2F')",
-          "status": "active"
-        },
-        {
-          "store": "ローソン HMV",
-          "product": "商品絞り込み",
-          "lottery_type": "予約販売",
-          "period": "",
-          "price": "",
-          "detail_url": "https://www.hmv.co.jp/help/002000013/#jogaiword",
-          "status": "unknown"
-        },
-        {
-          "store": "ローソン HMV",
-          "product": "Nelnal",
-          "lottery_type": "抽選販売",
-          "period": "2025年12月12日",
-          "price": "",
-          "detail_url": "https://www.hmv.co.jp/artist_Nelnal_000000000963439/",
-          "status": "unknown"
-        },
         {
           "store": "ローソン HMV",
           "product": "ポケモンカードゲーム MEGA ハイクラスパック「MEGAドリームex」HMV店頭 抽選販売受付",
@@ -596,13 +283,13 @@
     {
       "source": "イオン (aeonretail.jp)",
       "source_url": "https://www.aeonretail.jp/campaign/",
-      "scraped_at": "2026-01-27T04:40:01.681492",
+      "scraped_at": "2026-01-27T04:59:03.279023",
       "lotteries": []
     },
     {
       "source": "ファミリーマート (family.co.jp)",
       "source_url": "https://www.family.co.jp/campaign.html",
-      "scraped_at": "2026-01-27T04:40:02.867363",
+      "scraped_at": "2026-01-27T04:59:04.147369",
       "lotteries": []
     }
   ]

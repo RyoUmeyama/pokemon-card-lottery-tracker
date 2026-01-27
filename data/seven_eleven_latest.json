@@ -1,7 +1,7 @@
 {
   "source": "セブンネットショッピング (7net.omni7.jp)",
   "source_url": "https://7net.omni7.jp/search/?keyword=ポケモンカード&searchKeywordFlg=1",
-  "scraped_at": "2026-01-27T04:38:24.259109",
+  "scraped_at": "2026-01-27T04:57:31.665068",
   "lotteries": [
     {
       "store": "セブンネットショッピング",
@@ -9,7 +9,7 @@
       "lottery_type": "予約販売",
       "period": "2026/03/05",
       "price": "8,164円",
-      "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110680067",
+      "detail_url": "https://7net.omni7.jp/detail/2110680067",
       "status": "active"
     },
     {
@@ -18,7 +18,7 @@
       "lottery_type": "予約販売",
       "period": "2025/03/14",
       "price": "4,920円",
-      "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110661265",
+      "detail_url": "https://7net.omni7.jp/detail/2110661265",
       "status": "unknown"
     },
     {
@@ -27,7 +27,7 @@
       "lottery_type": "予約販売",
       "period": "2025/01/24",
       "price": "4,920円",
-      "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110658809",
+      "detail_url": "https://7net.omni7.jp/detail/2110658809",
       "status": "unknown"
     },
     {
@@ -36,7 +36,7 @@
       "lottery_type": "予約販売",
       "period": "2026/03/05",
       "price": "8,164円",
-      "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110680066",
+      "detail_url": "https://7net.omni7.jp/detail/2110680066",
       "status": "active"
     },
     {
@@ -45,7 +45,7 @@
       "lottery_type": "予約販売",
       "period": "2024/04/26",
       "price": "4,920円",
-      "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110648457",
+      "detail_url": "https://7net.omni7.jp/detail/2110648457",
       "status": "unknown"
     },
     {
@@ -54,7 +54,7 @@
       "lottery_type": "予約販売",
       "period": "2024/12/06",
       "price": "5,000円",
-      "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110657005",
+      "detail_url": "https://7net.omni7.jp/detail/2110657005",
       "status": "unknown"
     },
     {
@@ -63,7 +63,7 @@
       "lottery_type": "予約販売",
       "period": "2024/03/22",
       "price": "1,640円",
-      "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110653934",
+      "detail_url": "https://7net.omni7.jp/detail/2110653934",
       "status": "unknown"
     },
     {
@@ -72,7 +72,7 @@
       "lottery_type": "予約販売",
       "period": "2024/06/24",
       "price": "4,920円",
-      "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110647238",
+      "detail_url": "https://7net.omni7.jp/detail/2110647238",
       "status": "unknown"
     },
     {
@@ -81,7 +81,7 @@
       "lottery_type": "予約販売",
       "period": "2024/07/19",
       "price": "4,920円",
-      "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110651933",
+      "detail_url": "https://7net.omni7.jp/detail/2110651933",
       "status": "unknown"
     },
     {
@@ -90,7 +90,7 @@
       "lottery_type": "予約販売",
       "period": "2024/09/13",
       "price": "1,640円",
-      "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110656483",
+      "detail_url": "https://7net.omni7.jp/detail/2110656483",
       "status": "unknown"
     },
     {
@@ -99,7 +99,7 @@
       "lottery_type": "予約販売",
       "period": "2024/07/19",
       "price": "1,640円",
-      "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110654335",
+      "detail_url": "https://7net.omni7.jp/detail/2110654335",
       "status": "unknown"
     },
     {
@@ -108,7 +108,7 @@
       "lottery_type": "予約販売",
       "period": "2024/09/13",
       "price": "4,920円",
-      "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110654462",
+      "detail_url": "https://7net.omni7.jp/detail/2110654462",
       "status": "unknown"
     },
     {
@@ -117,7 +117,7 @@
       "lottery_type": "予約販売",
       "period": "2024/06/07",
       "price": "4,920円",
-      "detail_url": "https://7net.omni7.jp//7net.omni7.jp/detail/2110650081",
+      "detail_url": "https://7net.omni7.jp/detail/2110650081",
       "status": "unknown"
     }
   ]

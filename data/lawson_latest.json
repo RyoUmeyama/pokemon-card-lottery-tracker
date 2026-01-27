@@ -1,35 +1,8 @@
 {
   "source": "ローソン HMV (hmv.co.jp)",
   "source_url": "https://www.hmv.co.jp/search/?category=ALL&keyword=ポケモンカード",
-  "scraped_at": "2026-01-27T04:39:43.553948",
+  "scraped_at": "2026-01-27T04:58:46.740395",
   "lotteries": [
-    {
-      "store": "ローソン HMV",
-      "product": "カテゴリー",
-      "lottery_type": "抽選販売",
-      "period": "2025年12月12日",
-      "price": "",
-      "detail_url": "https://www.hmv.co.jp/javascript:funLinkGenre('%2Fsearch%2Fadvanced_1%2Fcategory_5%2Fformattype_1%2Fkeyword_%25E3%2583%259D%25E3%2582%25B1%25E3%2583%25A2%25E3%2583%25B3%25E3%2582%25AB%25E3%2583%25BC%25E3%2583%2589%2Fpagesize_1%2Ftarget_LBOOKS%2F')",
-      "status": "active"
-    },
-    {
-      "store": "ローソン HMV",
-      "product": "商品絞り込み",
-      "lottery_type": "予約販売",
-      "period": "",
-      "price": "",
-      "detail_url": "https://www.hmv.co.jp/help/002000013/#jogaiword",
-      "status": "unknown"
-    },
-    {
-      "store": "ローソン HMV",
-      "product": "Nelnal",
-      "lottery_type": "抽選販売",
-      "period": "2025年12月12日",
-      "price": "",
-      "detail_url": "https://www.hmv.co.jp/artist_Nelnal_000000000963439/",
-      "status": "unknown"
-    },
     {
       "store": "ローソン HMV",
       "product": "ポケモンカードゲーム MEGA ハイクラスパック「MEGAドリームex」HMV店頭 抽選販売受付",
