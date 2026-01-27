@@ -292,14 +292,18 @@ class NyukaNowScraper:
 
             html = response.text.lower()
 
-            # 在庫切れを示すキーワード
+            # 在庫切れを示すキーワード（より厳密に）
             out_of_stock_keywords = [
                 '在庫切れ', '売り切れ', '販売終了', '完売', '品切れ',
                 'sold out', 'out of stock', '取り扱いを終了',
                 '現在お取り扱いできません', '申し訳ございません',
                 '販売を終了しました', 'この商品は現在お取り扱いできません',
                 'ご指定の商品は販売しておりません', '商品が見つかりませんでした',
-                'お探しの商品は見つかりませんでした'
+                'お探しの商品は見つかりませんでした', '予約受付は終了',
+                '受付終了', '抽選受付は終了', '予約終了', '終了しました',
+                '受付期間外', 'ただいま品切れ', '入荷待ち',
+                'カートに入れることができません', '購入できません',
+                'お取り扱いしておりません', '販売しておりません'
             ]
 
             # 在庫切れキーワードが含まれているかチェック
@@ -308,24 +312,34 @@ class NyukaNowScraper:
                     print(f"  Info: {url} - 在庫切れ検出: {keyword}")
                     return False
 
+            # 購入可能を示すキーワードがあるかチェック（より厳密な判定）
+            available_keywords = [
+                'カートに入れる', 'カートに追加', '購入する', '予約する',
+                '抽選に応募', '応募する', '申し込む', '予約受付中',
+                '抽選受付中', '販売中', 'add to cart', 'buy now'
+            ]
+
+            has_available_keyword = any(keyword in html for keyword in available_keywords)
+
+            # 購入可能キーワードがない場合も在庫切れとみなす
+            if not has_available_keyword:
+                print(f"  Info: {url} - 購入可能キーワードなし")
+                return False
+
             return True
 
         except requests.exceptions.Timeout:
-            # タイムアウトの場合は在庫ありとして扱う（過剰にフィルタしないため）
-            print(f"  Warning: Timeout checking availability for {url}, treating as available")
-            return True
+            # タイムアウトの場合は除外（確認できないため）
+            print(f"  Warning: Timeout checking availability for {url}, excluding")
+            return False
         except requests.exceptions.HTTPError as e:
-            # 403エラー（bot protection）の場合、エディオンは在庫切れとして扱う
-            if e.response.status_code == 403 and 'edion.com' in url.lower():
-                print(f"  Info: {url} - 403エラー（エディオンbot protection）により在庫切れとして扱う")
-                return False
-            print(f"  Warning: Could not check availability for {url}: {e}")
-            # その他のHTTPエラーは在庫ありとして扱う
-            return True
+            # HTTPエラーの場合は除外
+            print(f"  Info: {url} - HTTPエラー({e.response.status_code})により除外")
+            return False
         except Exception as e:
             print(f"  Warning: Could not check availability for {url}: {e}")
-            # その他のエラーの場合は在庫ありとして扱う（過剰にフィルタしないため）
-            return True
+            # その他のエラーの場合も除外
+            return False
 
 
 if __name__ == '__main__':

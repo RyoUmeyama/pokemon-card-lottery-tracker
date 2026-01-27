@@ -421,9 +421,9 @@ def main():
 
     # ===== コンビニ・小売 =====
 
-    # 17. セブンネットショッピングをスクレイピング (通常版)
+    # 17. セブンネットショッピングをスクレイピング (通常版・在庫チェック有効)
     print(f"\n[17/{total_sources}] セブンネットショッピングをチェック中...")
-    seven_eleven_scraper = SevenElevenScraper()
+    seven_eleven_scraper = SevenElevenScraper(check_availability=True)
     seven_eleven_data = seven_eleven_scraper.scrape()
 
     if seven_eleven_data:

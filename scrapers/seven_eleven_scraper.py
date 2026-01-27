@@ -10,7 +10,7 @@ import re
 
 
 class SevenElevenScraper:
-    def __init__(self):
+    def __init__(self, check_availability=True):
         # セブンネットショッピングのポケモンカード関連ページ
         self.search_url = "https://7net.omni7.jp/search/?keyword=ポケモンカード&searchKeywordFlg=1"
         self.headers = {
@@ -18,6 +18,7 @@ class SevenElevenScraper:
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
             'Accept-Language': 'ja,en-US;q=0.7,en;q=0.3',
         }
+        self.check_availability = check_availability
         self.pokemon_keywords = [
             'ポケモンカード', 'ポケカ', 'pokemon', 'ポケモン',
             'スカーレット', 'バイオレット', 'テラスタル',
@@ -35,6 +36,14 @@ class SevenElevenScraper:
             print(f"Error scraping 7net: {e}")
 
         unique_lotteries = self._remove_duplicates(all_lotteries)
+
+        # 在庫チェックが有効な場合、各商品の在庫を確認
+        if self.check_availability:
+            available_lotteries = []
+            for lottery in unique_lotteries:
+                if self._check_availability(lottery.get('detail_url', '')):
+                    available_lotteries.append(lottery)
+            unique_lotteries = available_lotteries
 
         result = {
             'source': 'セブンネットショッピング (7net.omni7.jp)',
@@ -250,9 +259,76 @@ class SevenElevenScraper:
 
         return unique
 
+    def _check_availability(self, url):
+        """商品ページにアクセスして在庫があるかチェック"""
+        if not url:
+            return False
+
+        try:
+            response = requests.get(url, headers=self.headers, timeout=30)
+            response.raise_for_status()
+
+            html = response.text.lower()
+
+            # ページが見つからない・アクセスできないパターン
+            not_found_keywords = [
+                'ご指定のページにアクセスできませんでした',
+                'ページが見つかりません',
+                'お探しのページは見つかりませんでした',
+                'ページにアクセスできません',
+                '404'
+            ]
+
+            for keyword in not_found_keywords:
+                if keyword in html:
+                    print(f"  Info: {url} - ページなし: {keyword}")
+                    return False
+
+            # 在庫切れを示すキーワード
+            out_of_stock_keywords = [
+                '在庫切れ', '売り切れ', '販売終了', '完売', '品切れ',
+                'sold out', 'out of stock', '取り扱いを終了',
+                '現在お取り扱いできません', '販売を終了しました',
+                '予約受付は終了', '受付終了', '抽選受付は終了',
+                '予約終了', '終了しました', '受付期間外',
+                'カートに入れることができません', '購入できません',
+                'お取り扱いしておりません', '販売しておりません',
+                'ただいまお取り扱いできません', '現在販売しておりません'
+            ]
+
+            for keyword in out_of_stock_keywords:
+                if keyword in html:
+                    print(f"  Info: {url} - 在庫切れ: {keyword}")
+                    return False
+
+            # 購入可能を示すキーワードがあるかチェック
+            available_keywords = [
+                'カートに入れる', 'カートに追加', '購入する', '予約する',
+                '抽選に応募', '応募する', '申し込む', '予約受付中',
+                '抽選受付中', '販売中', 'お気に入りに追加'
+            ]
+
+            has_available_keyword = any(keyword in html for keyword in available_keywords)
+
+            if not has_available_keyword:
+                print(f"  Info: {url} - 購入可能キーワードなし")
+                return False
+
+            return True
+
+        except requests.exceptions.HTTPError as e:
+            print(f"  Info: {url} - HTTPエラー({e.response.status_code})")
+            return False
+        except requests.exceptions.Timeout:
+            print(f"  Warning: {url} - タイムアウト")
+            return False
+        except Exception as e:
+            print(f"  Warning: {url} - エラー: {e}")
+            return False
+
 
 if __name__ == '__main__':
-    scraper = SevenElevenScraper()
+    scraper = SevenElevenScraper(check_availability=True)
     data = scraper.scrape()
 
     if data:
