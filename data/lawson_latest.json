@@ -1,15 +1,15 @@
 {
   "source": "ローソン HMV (hmv.co.jp)",
   "source_url": "https://www.hmv.co.jp/search/?category=ALL&keyword=ポケモンカード",
-  "scraped_at": "2026-01-27T04:58:46.740395",
+  "scraped_at": "2026-01-27T05:13:38.907534",
   "lotteries": [
     {
       "store": "ローソン HMV",
-      "product": "ポケモンカードゲーム MEGA ハイクラスパック「MEGAドリームex」HMV店頭 抽選販売受付",
+      "product": "ポケモンカードゲーム MEGA 拡張パック「ムニキスゼロ」HMV店頭 抽選販売受付",
       "lottery_type": "抽選販売",
-      "period": "2025年11月17日",
+      "period": "2026年1月13日",
       "price": "",
-      "detail_url": "https://www.hmv.co.jp/news/article/251113148/",
+      "detail_url": "https://www.hmv.co.jp/news/article/260109100/",
       "status": "unknown"
     }
   ]

@@ -1,281 +1,107 @@
 {
-  "timestamp": "2026-01-27T04:54:10.899261",
+  "timestamp": "2026-01-27T05:09:09.164333",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2026-01-27T04:55:15.317605",
+      "scraped_at": "2026-01-27T05:10:39.489040",
       "update_date": "2026-01-27",
-      "lotteries": [
-        {
-          "store": "2026年1月24日(土)11時50分",
-          "product": "このあと12時よりバースデイ（その他のストア）にてポケモンカードゲーム MEGA スペシャルカードセット メガエルレイドexが販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://www.shop-shimamura.com/item/0363100013787/?cl=220",
-          "status": "unknown"
-        },
-        {
-          "store": "2026年1月23日(金)21時17分",
-          "product": "コレイズ（その他のストア）にてポケモンカードゲーム MEGA スペシャルカードセット メガエルレイドexが販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://colleize.com/lineup/70/350745",
-          "status": "unknown"
-        },
-        {
-          "store": "2026年1月23日(金)21時02分",
-          "product": "コレイズ（その他のストア）にてポケモンカードゲーム MEGA 拡張パック ムニキスゼロ（単位／1パック）が販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://colleize.com/lineup/70/350744",
-          "status": "unknown"
-        },
-        {
-          "store": "2026年1月23日(金)13時25分",
-          "product": "イオンスタイルオンラインにて予約 2026年1月23日発売 ポケモン ポケモンカードゲーム MEGA 拡張パック ムニキスゼロ  30パックセット (4521329432267×30) お一人さま1点限りが販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://aeonretail.com/product/0/P-2135500002549/P-213550000254901/",
-          "status": "unknown"
-        },
-        {
-          "store": "2026年1月23日(金)12時07分",
-          "product": "明日12:00よりバースデイにてポケモンカードMEGA スペシャルカードセット メガエルレイドexのオンライン先着販売が開始。",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://nyukanow.page.link/app",
-          "status": "unknown"
-        }
-      ]
+      "lotteries": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-01-27T04:55:26.134331",
+      "scraped_at": "2026-01-27T05:10:50.489651",
       "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2026-01-27T04:55:26.613886",
+      "scraped_at": "2026-01-27T05:10:51.259779",
       "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2026-01-27T04:55:55.815409",
+      "scraped_at": "2026-01-27T05:11:21.768204",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-01-27T04:56:21.518488",
+      "scraped_at": "2026-01-27T05:11:47.713758",
       "reservations": []
     },
     {
       "source": "ヨドバシカメラ (limited.yodobashi.com)",
       "source_url": "https://limited.yodobashi.com/",
-      "scraped_at": "2026-01-27T04:56:21.791995",
+      "scraped_at": "2026-01-27T05:11:48.102726",
       "lotteries": [],
       "error": "HTTP 403"
     },
     {
       "source": "ビックカメラ (biccamera.com)",
       "source_url": "https://www.biccamera.com/bc/category/?q=ポケモンカード+抽選",
-      "scraped_at": "2026-01-27T04:56:22.415168",
+      "scraped_at": "2026-01-27T05:11:48.836869",
       "lotteries": []
     },
     {
       "source": "X (Twitter) 公式アカウント",
-      "scraped_at": "2026-01-27T04:56:22.415436",
+      "scraped_at": "2026-01-27T05:11:48.837148",
       "lotteries": [],
       "error": "X API credentials not configured or tweepy not installed"
     },
     {
       "source": "ジョーシン (joshinweb.jp)",
       "source_url": "https://joshinweb.jp/hobby/pokemon.html",
-      "scraped_at": "2026-01-27T04:57:07.811605",
+      "scraped_at": "2026-01-27T05:11:49.403765",
       "lotteries": []
     },
     {
       "source": "エディオン (edion.com)",
       "source_url": "https://www.edion.com/search/?keyword=ポケモンカード",
-      "scraped_at": "2026-01-27T04:57:28.292385",
+      "scraped_at": "2026-01-27T05:12:10.059417",
       "lotteries": []
     },
     {
       "source": "ケーズデンキ (ksdenki.co.jp)",
       "source_url": null,
-      "scraped_at": "2026-01-27T04:57:28.292669",
+      "scraped_at": "2026-01-27T05:12:10.059671",
       "lotteries": []
     },
     {
       "source": "ノジマオンライン (online.nojima.co.jp)",
       "source_url": null,
-      "scraped_at": "2026-01-27T04:57:28.292827",
+      "scraped_at": "2026-01-27T05:12:10.059858",
       "lotteries": []
     },
     {
       "source": "イエローサブマリン (yellowsubmarine.co.jp)",
       "source_url": "https://www.yellowsubmarine.co.jp/",
-      "scraped_at": "2026-01-27T04:57:30.296622",
+      "scraped_at": "2026-01-27T05:12:12.306376",
       "lotteries": []
     },
     {
       "source": "カードショップセラ (cardshopserra.jp)",
       "source_url": "https://www.cardshopserra.jp/",
-      "scraped_at": "2026-01-27T04:57:30.296857",
+      "scraped_at": "2026-01-27T05:12:12.306749",
       "lotteries": [],
       "note": "DNS解決エラーのため現在無効化"
     },
     {
       "source": "セブンネットショッピング (7net.omni7.jp)",
       "source_url": "https://7net.omni7.jp/search/?keyword=ポケモンカード&searchKeywordFlg=1",
-      "scraped_at": "2026-01-27T04:57:31.665068",
-      "lotteries": [
-        {
-          "store": "セブンネットショッピング",
-          "product": "Nintendo Switch 2 ぽこ あ ポケモン【セブンネットオリジナル特典：アクリルスマホスタンド／早期購入特典：メタモンラグ】",
-          "lottery_type": "予約販売",
-          "period": "2026/03/05",
-          "price": "8,164円",
-          "detail_url": "https://7net.omni7.jp/detail/2110680067",
-          "status": "active"
-        },
-        {
-          "store": "セブンネットショッピング",
-          "product": "ポケモンカードゲーム スカーレット＆バイオレット 強化拡張パック 熱風のアリーナ【BOX】",
-          "lottery_type": "予約販売",
-          "period": "2025/03/14",
-          "price": "4,920円",
-          "detail_url": "https://7net.omni7.jp/detail/2110661265",
-          "status": "unknown"
-        },
-        {
-          "store": "セブンネットショッピング",
-          "product": "ポケモンカードゲーム スカーレット＆バイオレット 拡張パック バトルパートナーズ【BOX】",
-          "lottery_type": "予約販売",
-          "period": "2025/01/24",
-          "price": "4,920円",
-          "detail_url": "https://7net.omni7.jp/detail/2110658809",
-          "status": "unknown"
-        },
-        {
-          "store": "セブンネットショッピング",
-          "product": "Nintendo Switch 2 ぽこ あ ポケモン（お買い得商品／オリジナル特典なし／早期購入特典：メタモンラグ付き）",
-          "lottery_type": "予約販売",
-          "period": "2026/03/05",
-          "price": "8,164円",
-          "detail_url": "https://7net.omni7.jp/detail/2110680066",
-          "status": "active"
-        },
-        {
-          "store": "セブンネットショッピング",
-          "product": "ポケモンカードゲーム スカーレット＆バイオレット 拡張パック 変幻の仮面【BOX】",
-          "lottery_type": "予約販売",
-          "period": "2024/04/26",
-          "price": "4,920円",
-          "detail_url": "https://7net.omni7.jp/detail/2110648457",
-          "status": "unknown"
-        },
-        {
-          "store": "セブンネットショッピング",
-          "product": "ポケモンカードゲーム スカーレット&バイオレット ハイクラスパック テラスタルフェスex【BOX】",
-          "lottery_type": "予約販売",
-          "period": "2024/12/06",
-          "price": "5,000円",
-          "detail_url": "https://7net.omni7.jp/detail/2110657005",
-          "status": "unknown"
-        },
-        {
-          "store": "セブンネットショッピング",
-          "product": "ポケモンカードゲーム スカーレット&バイオレット 強化拡張パック クリムゾンヘイズ【10パックset】",
-          "lottery_type": "予約販売",
-          "period": "2024/03/22",
-          "price": "1,640円",
-          "detail_url": "https://7net.omni7.jp/detail/2110653934",
-          "status": "unknown"
-        },
-        {
-          "store": "セブンネットショッピング",
-          "product": "ポケモンカードゲーム スカーレット&バイオレット 強化拡張パック クリムゾンヘイズ【BOX】",
-          "lottery_type": "予約販売",
-          "period": "2024/06/24",
-          "price": "4,920円",
-          "detail_url": "https://7net.omni7.jp/detail/2110647238",
-          "status": "unknown"
-        },
-        {
-          "store": "セブンネットショッピング",
-          "product": "ポケモンカードゲーム スカーレット＆バイオレット 拡張パック ステラミラクル【BOX】",
-          "lottery_type": "予約販売",
-          "period": "2024/07/19",
-          "price": "4,920円",
-          "detail_url": "https://7net.omni7.jp/detail/2110651933",
-          "status": "unknown"
-        },
-        {
-          "store": "セブンネットショッピング",
-          "product": "ポケモンカードゲーム スカーレット＆バイオレット 強化拡張パック 楽園ドラゴーナ【10パックset】",
-          "lottery_type": "予約販売",
-          "period": "2024/09/13",
-          "price": "1,640円",
-          "detail_url": "https://7net.omni7.jp/detail/2110656483",
-          "status": "unknown"
-        },
-        {
-          "store": "セブンネットショッピング",
-          "product": "ポケモンカードゲーム スカーレット＆バイオレット 拡張パック ステラミラクル【10パックset】",
-          "lottery_type": "予約販売",
-          "period": "2024/07/19",
-          "price": "1,640円",
-          "detail_url": "https://7net.omni7.jp/detail/2110654335",
-          "status": "unknown"
-        },
-        {
-          "store": "セブンネットショッピング",
-          "product": "ポケモンカードゲーム スカーレット＆バイオレット 強化拡張パック 楽園ドラゴーナ【BOX】",
-          "lottery_type": "予約販売",
-          "period": "2024/09/13",
-          "price": "4,920円",
-          "detail_url": "https://7net.omni7.jp/detail/2110654462",
-          "status": "unknown"
-        },
-        {
-          "store": "セブンネットショッピング",
-          "product": "ポケモンカードゲーム スカーレット＆バイオレット 強化拡張パック ナイトワンダラー【BOX】",
-          "lottery_type": "予約販売",
-          "period": "2024/06/07",
-          "price": "4,920円",
-          "detail_url": "https://7net.omni7.jp/detail/2110650081",
-          "status": "unknown"
-        }
-      ]
+      "scraped_at": "2026-01-27T05:12:19.420270",
+      "lotteries": []
     },
     {
       "source": "ローソン HMV (hmv.co.jp)",
       "source_url": "https://www.hmv.co.jp/search/?category=ALL&keyword=ポケモンカード",
-      "scraped_at": "2026-01-27T04:58:46.740395",
+      "scraped_at": "2026-01-27T05:13:38.907534",
       "lotteries": [
         {
           "store": "ローソン HMV",
-          "product": "ポケモンカードゲーム MEGA ハイクラスパック「MEGAドリームex」HMV店頭 抽選販売受付",
+          "product": "ポケモンカードゲーム MEGA 拡張パック「ムニキスゼロ」HMV店頭 抽選販売受付",
           "lottery_type": "抽選販売",
-          "period": "2025年11月17日",
+          "period": "2026年1月13日",
           "price": "",
-          "detail_url": "https://www.hmv.co.jp/news/article/251113148/",
+          "detail_url": "https://www.hmv.co.jp/news/article/260109100/",
           "status": "unknown"
         }
       ]
@@ -283,13 +109,13 @@
     {
       "source": "イオン (aeonretail.jp)",
       "source_url": "https://www.aeonretail.jp/campaign/",
-      "scraped_at": "2026-01-27T04:59:03.279023",
+      "scraped_at": "2026-01-27T05:13:57.359886",
       "lotteries": []
     },
     {
       "source": "ファミリーマート (family.co.jp)",
       "source_url": "https://www.family.co.jp/campaign.html",
-      "scraped_at": "2026-01-27T04:59:04.147369",
+      "scraped_at": "2026-01-27T05:13:58.443144",
       "lotteries": []
     }
   ]

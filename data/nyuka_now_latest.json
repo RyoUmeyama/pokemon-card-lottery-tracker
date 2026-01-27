@@ -1,62 +1,6 @@
 {
   "source": "nyuka-now.com",
-  "scraped_at": "2026-01-27T04:55:15.317605",
+  "scraped_at": "2026-01-27T05:10:39.489040",
   "update_date": "2026-01-27",
-  "lotteries": [
-    {
-      "store": "2026年1月24日(土)11時50分",
-      "product": "このあと12時よりバースデイ（その他のストア）にてポケモンカードゲーム MEGA スペシャルカードセット メガエルレイドexが販売開始",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://www.shop-shimamura.com/item/0363100013787/?cl=220",
-      "status": "unknown"
-    },
-    {
-      "store": "2026年1月23日(金)21時17分",
-      "product": "コレイズ（その他のストア）にてポケモンカードゲーム MEGA スペシャルカードセット メガエルレイドexが販売開始",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://colleize.com/lineup/70/350745",
-      "status": "unknown"
-    },
-    {
-      "store": "2026年1月23日(金)21時02分",
-      "product": "コレイズ（その他のストア）にてポケモンカードゲーム MEGA 拡張パック ムニキスゼロ（単位／1パック）が販売開始",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://colleize.com/lineup/70/350744",
-      "status": "unknown"
-    },
-    {
-      "store": "2026年1月23日(金)13時25分",
-      "product": "イオンスタイルオンラインにて予約 2026年1月23日発売 ポケモン ポケモンカードゲーム MEGA 拡張パック ムニキスゼロ  30パックセット (4521329432267×30) お一人さま1点限りが販売開始",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://aeonretail.com/product/0/P-2135500002549/P-213550000254901/",
-      "status": "unknown"
-    },
-    {
-      "store": "2026年1月23日(金)12時07分",
-      "product": "明日12:00よりバースデイにてポケモンカードMEGA スペシャルカードセット メガエルレイドexのオンライン先着販売が開始。",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://nyukanow.page.link/app",
-      "status": "unknown"
-    }
-  ]
+  "lotteries": []
 }
