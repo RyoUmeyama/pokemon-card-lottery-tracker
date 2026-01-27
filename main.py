@@ -18,8 +18,8 @@ from scrapers.joshin_playwright_scraper import JoshinPlaywrightScraper
 from scrapers.edion_playwright_scraper import EdionPlaywrightScraper
 from scrapers.ksdenki_scraper import KsDenkiScraper
 from scrapers.nojima_scraper import NojimaScraper
-# ホビーショップ (Playwright版)
-from scrapers.amiami_playwright_scraper import AmiAmiPlaywrightScraper
+# ホビーショップ
+# あみあみはサプライ品中心のため除外
 from scrapers.yellow_submarine_scraper import YellowSubmarineScraper
 from scrapers.cardshop_serra_scraper import CardShopSerraScraper
 # コンビニ・小売 (Playwright版)
@@ -122,9 +122,9 @@ def main():
 
     total_sources = 21  # 全ソース数
 
-    # 1. 入荷Nowをスクレイピング
+    # 1. 入荷Nowをスクレイピング（在庫チェック有効）
     print(f"\n[1/{total_sources}] 入荷Nowをチェック中...")
-    nyuka_scraper = NyukaNowScraper(check_availability=False)
+    nyuka_scraper = NyukaNowScraper(check_availability=True)
     nyuka_data = nyuka_scraper.scrape()
 
     if nyuka_data:
@@ -378,24 +378,8 @@ def main():
 
     # ===== ホビーショップ =====
 
-    # 14. あみあみをスクレイピング (Playwright版)
-    print(f"\n[14/{total_sources}] あみあみをチェック中...")
-    amiami_scraper = AmiAmiPlaywrightScraper()
-    amiami_data = amiami_scraper.scrape()
-
-    if amiami_data:
-        all_results['sources'].append(amiami_data)
-        lottery_count = len(amiami_data.get('lotteries', []))
-        print(f"✓ あみあみ: {lottery_count}件の予約情報を取得")
-
-        prev_data = load_previous_data('data/amiami_latest.json')
-        has_changes, changes = detect_changes(prev_data, amiami_data)
-        if has_changes:
-            print(f"  変更検出: {changes}")
-
-        save_data(amiami_data, 'data/amiami_latest.json')
-    else:
-        print("✗ あみあみの取得に失敗")
+    # 14. あみあみをスクレイピング (スキップ - サプライ品中心のため除外)
+    print(f"\n[14/{total_sources}] あみあみをスキップ（サプライ品中心のため除外）")
 
     # 15. イエローサブマリンをスクレイピング
     print(f"\n[15/{total_sources}] イエローサブマリンをチェック中...")

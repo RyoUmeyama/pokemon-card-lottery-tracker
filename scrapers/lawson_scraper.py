@@ -94,6 +94,10 @@ class LawsonScraper:
             link = item.find('a', href=True)
             href = link.get('href', '') if link else ''
 
+            # javascriptリンクや無効なリンクは除外
+            if 'javascript:' in href or not href:
+                return None
+
             if href.startswith('/'):
                 href = 'https://www.hmv.co.jp' + href
             elif href and not href.startswith('http'):
@@ -137,6 +141,19 @@ class LawsonScraper:
             if not any(kw in text for kw in ['予約', '抽選', 'BOX', 'ボックス', 'パック', '新発売']):
                 return None
 
+            # 無効なURL（ヘルプページ、javascriptなど）を除外
+            invalid_patterns = ['javascript:', '/help/', '/artist_', 'funLinkGenre', '#']
+            if any(pattern in href for pattern in invalid_patterns):
+                return None
+
+            # 商品ページまたはニュースページのみ対象
+            if not any(pattern in href for pattern in ['/product/', '/news/', '/detail/']):
+                return None
+
+            # 短すぎる商品名は除外（カテゴリー名など）
+            if len(product_name) < 15:
+                return None
+
             if product_name and href:
                 return {
                     'store': 'ローソン HMV',
@@ -157,6 +174,10 @@ class LawsonScraper:
         """商品リンクから情報を抽出"""
         try:
             link_text = link.get_text(strip=True)
+
+            # javascriptリンクや無効なリンクは除外
+            if 'javascript:' in href or not href:
+                return None
 
             if href.startswith('/'):
                 href = 'https://www.hmv.co.jp' + href
@@ -186,6 +207,19 @@ class LawsonScraper:
 
             # 予約または抽選関連のみ
             if not any(kw in link_text for kw in ['予約', '抽選', 'BOX', 'ボックス', 'パック']):
+                return None
+
+            # 無効なURL（ヘルプページ、javascriptなど）を除外
+            invalid_patterns = ['javascript:', '/help/', '/artist_', 'funLinkGenre', '#']
+            if any(pattern in href for pattern in invalid_patterns):
+                return None
+
+            # 商品ページまたはニュースページのみ対象
+            if not any(pattern in href for pattern in ['/product/', '/news/', '/detail/']):
+                return None
+
+            # 短すぎる商品名は除外（カテゴリー名など）
+            if len(link_text) < 15:
                 return None
 
             if len(link_text) > 10:

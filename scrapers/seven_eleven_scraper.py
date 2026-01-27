@@ -94,10 +94,8 @@ class SevenElevenScraper:
             link = item.find('a', href=True)
             href = link.get('href', '') if link else ''
 
-            if href.startswith('/'):
-                href = 'https://7net.omni7.jp' + href
-            elif href and not href.startswith('http'):
-                href = 'https://7net.omni7.jp/' + href
+            # URLの正規化
+            href = self._normalize_url(href)
 
             # 商品名を取得
             title_elem = item.find(['h2', 'h3', 'h4', 'p', 'span'], class_=lambda x: x and any(
@@ -158,10 +156,8 @@ class SevenElevenScraper:
         try:
             link_text = link.get_text(strip=True)
 
-            if href.startswith('/'):
-                href = 'https://7net.omni7.jp' + href
-            elif not href.startswith('http'):
-                href = 'https://7net.omni7.jp/' + href
+            # URLの正規化
+            href = self._normalize_url(href)
 
             parent = link.find_parent(['div', 'li', 'article'])
             price = ''
@@ -205,6 +201,41 @@ class SevenElevenScraper:
             return False
         text_lower = text.lower()
         return any(kw.lower() in text_lower for kw in self.pokemon_keywords)
+
+    def _normalize_url(self, href):
+        """URLを正規化"""
+        if not href:
+            return ''
+
+        # 既に正しいURLの場合はそのまま返す
+        if href.startswith('https://7net.omni7.jp/'):
+            return href
+
+        # //7net.omni7.jp/... 形式
+        if href.startswith('//7net.omni7.jp/'):
+            return 'https:' + href
+
+        # /7net.omni7.jp/... 形式（誤った形式）
+        if href.startswith('/7net.omni7.jp/'):
+            return 'https:/' + href
+
+        # // で始まる場合
+        if href.startswith('//'):
+            return 'https:' + href
+
+        # /detail/... などの相対パス
+        if href.startswith('/'):
+            return 'https://7net.omni7.jp' + href
+
+        # detail/... など
+        if href.startswith('detail/'):
+            return 'https://7net.omni7.jp/' + href
+
+        # http(s)で始まる場合はそのまま
+        if href.startswith('http'):
+            return href
+
+        return 'https://7net.omni7.jp/' + href
 
     def _remove_duplicates(self, lotteries):
         """重複を除去"""
