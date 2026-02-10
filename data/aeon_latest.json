@@ -1,16 +1,6 @@
 {
   "source": "イオン (aeonretail.jp)",
   "source_url": "https://www.aeonretail.jp/campaign/",
-  "scraped_at": "2026-02-10T10:10:35.545542",
-  "lotteries": [
-    {
-      "store": "イオン",
-      "product": "月イチ予約開催中！",
-      "lottery_type": "キャンペーン",
-      "period": "",
-      "price": "",
-      "detail_url": "https://shop.aeon.com/netsuper/tsukiichiyoyakubin?utm_source=retailHP&utm_medium=referral&utm_campaign=referral_62711",
-      "status": "unknown"
-    }
-  ]
+  "scraped_at": "2026-02-10T13:18:27.448597",
+  "lotteries": []
 }
