@@ -1,87 +1,93 @@
 {
-  "timestamp": "2026-02-14T04:41:32.435062",
+  "timestamp": "2026-02-14T09:34:16.966250",
   "sources": [
     {
+      "source": "nyuka-now.com",
+      "scraped_at": "2026-02-14T09:35:55.635807",
+      "update_date": "2026-02-14",
+      "lotteries": []
+    },
+    {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-02-14T04:42:14.016594",
+      "scraped_at": "2026-02-14T09:36:06.960397",
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2026-02-14T04:42:24.579230",
+      "scraped_at": "2026-02-14T09:36:15.618138",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-02-14T04:42:50.661916",
+      "scraped_at": "2026-02-14T09:36:42.012665",
       "reservations": []
     },
     {
       "source": "ヨドバシカメラ (limited.yodobashi.com)",
       "source_url": "https://limited.yodobashi.com/",
-      "scraped_at": "2026-02-14T04:42:51.081373",
+      "scraped_at": "2026-02-14T09:36:42.366908",
       "lotteries": [],
       "error": "HTTP 403"
     },
     {
       "source": "ビックカメラ (biccamera.com)",
       "source_url": "https://www.biccamera.com/bc/category/?q=ポケモンカード+抽選",
-      "scraped_at": "2026-02-14T04:42:51.949716",
+      "scraped_at": "2026-02-14T09:36:43.032251",
       "lotteries": []
     },
     {
       "source": "X (Twitter) 公式アカウント",
-      "scraped_at": "2026-02-14T04:42:51.949984",
+      "scraped_at": "2026-02-14T09:36:43.032527",
       "lotteries": [],
       "error": "X API credentials not configured or tweepy not installed"
     },
     {
       "source": "ジョーシン (joshinweb.jp)",
       "source_url": "https://joshinweb.jp/hobby/pokemon.html",
-      "scraped_at": "2026-02-14T04:43:37.464815",
+      "scraped_at": "2026-02-14T09:37:28.560946",
       "lotteries": []
     },
     {
       "source": "エディオン (edion.com)",
       "source_url": "https://www.edion.com/search/?keyword=ポケモンカード",
-      "scraped_at": "2026-02-14T04:43:57.977828",
+      "scraped_at": "2026-02-14T09:37:48.931328",
       "lotteries": []
     },
     {
       "source": "ケーズデンキ (ksdenki.co.jp)",
       "source_url": null,
-      "scraped_at": "2026-02-14T04:43:57.978080",
+      "scraped_at": "2026-02-14T09:37:48.931586",
       "lotteries": []
     },
     {
       "source": "ノジマオンライン (online.nojima.co.jp)",
       "source_url": null,
-      "scraped_at": "2026-02-14T04:43:57.978241",
+      "scraped_at": "2026-02-14T09:37:48.931773",
       "lotteries": []
     },
     {
       "source": "イエローサブマリン (yellowsubmarine.co.jp)",
       "source_url": "https://www.yellowsubmarine.co.jp/",
-      "scraped_at": "2026-02-14T04:44:00.064496",
+      "scraped_at": "2026-02-14T09:37:51.476424",
       "lotteries": []
     },
     {
       "source": "カードショップセラ (cardshopserra.jp)",
       "source_url": "https://www.cardshopserra.jp/",
-      "scraped_at": "2026-02-14T04:44:00.064874",
+      "scraped_at": "2026-02-14T09:37:51.476853",
       "lotteries": [],
       "note": "DNS解決エラーのため現在無効化"
     },
     {
       "source": "セブンネットショッピング (7net.omni7.jp)",
       "source_url": "https://7net.omni7.jp/search/?keyword=ポケモンカード&searchKeywordFlg=1",
-      "scraped_at": "2026-02-14T04:44:08.684949",
+      "scraped_at": "2026-02-14T09:37:57.592613",
       "lotteries": []
     },
     {
       "source": "ローソン HMV (hmv.co.jp)",
       "source_url": "https://www.hmv.co.jp/search/?category=ALL&keyword=ポケモンカード",
-      "scraped_at": "2026-02-14T04:45:30.036795",
+      "scraped_at": "2026-02-14T09:39:16.823789",
       "lotteries": [
         {
           "store": "ローソン HMV",
@@ -97,7 +103,7 @@
     {
       "source": "イオン (aeonretail.jp)",
       "source_url": "https://www.aeonretail.jp/campaign/",
-      "scraped_at": "2026-02-14T04:45:48.264852",
+      "scraped_at": "2026-02-14T09:39:35.667990",
       "lotteries": [
         {
           "store": "イオン",
@@ -122,7 +128,7 @@
     {
       "source": "ファミリーマート (family.co.jp)",
       "source_url": "https://www.family.co.jp/campaign.html",
-      "scraped_at": "2026-02-14T04:45:49.258633",
+      "scraped_at": "2026-02-14T09:39:36.465379",
       "lotteries": []
     }
   ]
