@@ -1,99 +1,99 @@
 {
-  "timestamp": "2026-02-16T09:57:42.551357",
+  "timestamp": "2026-02-16T13:01:12.837520",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2026-02-16T09:59:24.504915",
+      "scraped_at": "2026-02-16T13:02:33.988382",
       "update_date": "2026-02-16",
       "lotteries": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-02-16T09:59:35.820257",
+      "scraped_at": "2026-02-16T13:02:44.983070",
       "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2026-02-16T09:59:36.325273",
+      "scraped_at": "2026-02-16T13:02:45.452707",
       "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2026-02-16T10:00:14.924615",
+      "scraped_at": "2026-02-16T13:03:18.512148",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-02-16T10:00:40.757812",
+      "scraped_at": "2026-02-16T13:03:44.157502",
       "reservations": []
     },
     {
       "source": "ヨドバシカメラ (limited.yodobashi.com)",
       "source_url": "https://limited.yodobashi.com/",
-      "scraped_at": "2026-02-16T10:00:41.230208",
+      "scraped_at": "2026-02-16T13:03:44.462519",
       "lotteries": [],
       "error": "HTTP 403"
     },
     {
       "source": "ビックカメラ (biccamera.com)",
       "source_url": "https://www.biccamera.com/bc/category/?q=ポケモンカード+抽選",
-      "scraped_at": "2026-02-16T10:00:41.917883",
+      "scraped_at": "2026-02-16T13:03:45.101153",
       "lotteries": []
     },
     {
       "source": "X (Twitter) 公式アカウント",
-      "scraped_at": "2026-02-16T10:00:41.918170",
+      "scraped_at": "2026-02-16T13:03:45.101469",
       "lotteries": [],
       "error": "X API credentials not configured or tweepy not installed"
     },
     {
       "source": "ジョーシン (joshinweb.jp)",
       "source_url": "https://joshinweb.jp/hobby/pokemon.html",
-      "scraped_at": "2026-02-16T10:01:27.449370",
+      "scraped_at": "2026-02-16T13:04:30.628815",
       "lotteries": []
     },
     {
       "source": "エディオン (edion.com)",
       "source_url": "https://www.edion.com/search/?keyword=ポケモンカード",
-      "scraped_at": "2026-02-16T10:01:48.084779",
+      "scraped_at": "2026-02-16T13:04:51.126046",
       "lotteries": []
     },
     {
       "source": "ケーズデンキ (ksdenki.co.jp)",
       "source_url": null,
-      "scraped_at": "2026-02-16T10:01:48.085052",
+      "scraped_at": "2026-02-16T13:04:51.126328",
       "lotteries": []
     },
     {
       "source": "ノジマオンライン (online.nojima.co.jp)",
       "source_url": null,
-      "scraped_at": "2026-02-16T10:01:48.085242",
+      "scraped_at": "2026-02-16T13:04:51.126563",
       "lotteries": []
     },
     {
       "source": "イエローサブマリン (yellowsubmarine.co.jp)",
       "source_url": "https://www.yellowsubmarine.co.jp/",
-      "scraped_at": "2026-02-16T10:01:50.574901",
+      "scraped_at": "2026-02-16T13:04:54.021049",
       "lotteries": []
     },
     {
       "source": "カードショップセラ (cardshopserra.jp)",
       "source_url": "https://www.cardshopserra.jp/",
-      "scraped_at": "2026-02-16T10:01:50.575379",
+      "scraped_at": "2026-02-16T13:04:54.021504",
       "lotteries": [],
       "note": "DNS解決エラーのため現在無効化"
     },
     {
       "source": "セブンネットショッピング (7net.omni7.jp)",
       "source_url": "https://7net.omni7.jp/search/?keyword=ポケモンカード&searchKeywordFlg=1",
-      "scraped_at": "2026-02-16T10:01:56.762013",
+      "scraped_at": "2026-02-16T13:04:56.710628",
       "lotteries": []
     },
     {
       "source": "ローソン HMV (hmv.co.jp)",
       "source_url": "https://www.hmv.co.jp/search/?category=ALL&keyword=ポケモンカード",
-      "scraped_at": "2026-02-16T10:03:16.151426",
+      "scraped_at": "2026-02-16T13:06:12.426786",
       "lotteries": [
         {
           "store": "ローソン HMV",
@@ -109,7 +109,7 @@
     {
       "source": "イオン (aeonretail.jp)",
       "source_url": "https://www.aeonretail.jp/campaign/",
-      "scraped_at": "2026-02-16T10:03:36.033318",
+      "scraped_at": "2026-02-16T13:06:30.821542",
       "lotteries": [
         {
           "store": "イオン",
@@ -134,7 +134,7 @@
     {
       "source": "ファミリーマート (family.co.jp)",
       "source_url": "https://www.family.co.jp/campaign.html",
-      "scraped_at": "2026-02-16T10:03:37.275594",
+      "scraped_at": "2026-02-16T13:06:31.771276",
       "lotteries": []
     }
   ]
