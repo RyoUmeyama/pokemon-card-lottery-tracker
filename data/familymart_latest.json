@@ -1,6 +1,23 @@
 {
   "source": "ファミリーマート (family.co.jp)",
   "source_url": "https://www.family.co.jp/campaign.html",
-  "scraped_at": "2026-02-16T13:06:31.771276",
-  "lotteries": []
+  "scraped_at": "2026-02-17T02:47:51.964545",
+  "lotteries": [
+    {
+      "store": "ファミリーマート",
+      "product": "おすすめ商品・実施中のキャンペーン",
+      "lottery_type": "抽選販売",
+      "period": "",
+      "detail_url": "https://www.family.co.jp/#js-filter-campaignCategory-",
+      "status": "active"
+    },
+    {
+      "store": "ファミリーマート",
+      "product": "一般ファミリーマートのご予約弁当行楽のお供やお祝い事、普段の食卓も華やかに彩る「ご予約弁当」1個からネット・店舗にてご予約承り中！※地域により、ファミマオンライン・店舗でのお取り扱いがない場合や商品が異なる場合がございます。NEW一般「極旨　黒豚まん」に新フレーバー登場！新フレーバー第3弾は、国産黒",
+      "lottery_type": "抽選販売",
+      "period": "",
+      "detail_url": "https://www.family.co.jp/campaign/spot/redirect/goyoyakubento_redirect.html",
+      "status": "active"
+    }
+  ]
 }
