@@ -1,18 +1,6 @@
 {
   "source": "nyuka-now.com",
-  "scraped_at": "2026-02-27T02:45:15.516354",
+  "scraped_at": "2026-02-27T09:51:35.172686",
   "update_date": "2026-02-27",
-  "lotteries": [
-    {
-      "store": "2026年2月26日(木)16時57分",
-      "product": "アメニティドリームにて【ポケモンカードゲーム】スペシャルカードセット メガエルレイドex [スペシャルカードセット]が販売開始",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://www.amenitydream.com/product/257417",
-      "status": "unknown"
-    }
-  ]
+  "lotteries": []
 }
