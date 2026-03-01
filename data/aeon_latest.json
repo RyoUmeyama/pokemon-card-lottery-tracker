@@ -1,17 +1,8 @@
 {
   "source": "イオン (aeonretail.jp)",
   "source_url": "https://www.aeonretail.jp/campaign/",
-  "scraped_at": "2026-03-01T05:05:07.639461",
+  "scraped_at": "2026-03-01T12:56:15.025513",
   "lotteries": [
-    {
-      "store": "イオン",
-      "product": "決算謝恩 特別ご予約販売会 開催中",
-      "lottery_type": "キャンペーン",
-      "period": "",
-      "price": "",
-      "detail_url": "https://aeonretail.com/Page/f-preorde-sale2.aspx?utm_source=aeon_retail&utm_medium=website&utm_campaign=f_shop_202401_01_02",
-      "status": "unknown"
-    },
     {
       "store": "イオン",
       "product": "イオン母の日先行ご予約受付中！",
