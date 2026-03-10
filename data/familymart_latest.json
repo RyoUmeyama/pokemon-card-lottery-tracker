@@ -1,16 +1,8 @@
 {
   "source": "ファミリーマート (family.co.jp)",
   "source_url": "https://www.family.co.jp/campaign.html",
-  "scraped_at": "2026-03-02T13:05:56.592201",
+  "scraped_at": "2026-03-10T02:43:35.255778",
   "lotteries": [
-    {
-      "store": "ファミリーマート",
-      "product": "NEW一般POSAカード ポケモンGOギフトカード フォロー＆リポストキャンペーン2月25日（水）19:00 ～ 3月9日（月）",
-      "lottery_type": "キャンペーン",
-      "period": "",
-      "detail_url": "https://www.family.co.jp/campaign/sns/2602_posago_xcp.html",
-      "status": "unknown"
-    },
     {
       "store": "ファミリーマート",
       "product": "おすすめ商品・実施中のキャンペーン",
@@ -21,10 +13,10 @@
     },
     {
       "store": "ファミリーマート",
-      "product": "予告一般【予告】ドリームチーム「新生、おむすびJAPAN。」誕生！おむすびアンバサダー大谷翔平選手とともに、ファミマのおむすびも最強布陣でいざ出陣！全9種類のおむすびが3週連続で順次発売。3月3日（火） ～ 3月23日（月）予告一般ファミリーマート 45周年3月3日（火） ～NEWファミペイファミマ",
+      "product": "NEW一般ファミチキとおむすびセットで買うごとに100円引き！ファミチキ（骨なし）、ファミチキレッドいずれか1個とおむすび全品いずれか1個をセットで買うごとに、合計価格（税込）から100円引き！3月10日（火） ～ 3月23日（月）NEW一般ファミマのおトクが止まらない!? 1個買うと、1個もらえる",
       "lottery_type": "抽選販売",
       "period": "",
-      "detail_url": "https://www.family.co.jp/campaign/spot/2603_omusubi_cp_XsBycYeB.html",
+      "detail_url": "https://www.family.co.jp/campaign/spot/2603_famichiki-omu100_cp.html",
       "status": "active"
     }
   ]
