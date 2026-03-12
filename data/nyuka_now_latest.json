@@ -1,6 +1,18 @@
 {
   "source": "nyuka-now.com",
-  "scraped_at": "2026-03-12T02:42:08.559909",
+  "scraped_at": "2026-03-12T04:48:29.971384",
   "update_date": "2026-03-12",
-  "lotteries": []
+  "lotteries": [
+    {
+      "store": "2026年3月12日(木)11時46分",
+      "product": "あみあみ本店にてポケモンカードゲーム MEGA スタートデッキ100 バトルコレクション パック[ポケモン]《１２月予約》が販売開始",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://www.hana-log.net/archives/4882",
+      "status": "unknown"
+    }
+  ]
 }
