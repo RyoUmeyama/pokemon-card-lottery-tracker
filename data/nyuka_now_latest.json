@@ -1,18 +1,6 @@
 {
   "source": "nyuka-now.com",
-  "scraped_at": "2026-03-14T12:51:27.551576",
-  "update_date": "2026-03-14",
-  "lotteries": [
-    {
-      "store": "2026年3月13日(金)12時19分",
-      "product": "あみあみ本店にてポケモンカードゲーム MEGA スペシャルカードセット メガエルレイドex[ポケモン]《０１月予約》が販売開始",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://www.hana-log.net/archives/4914",
-      "status": "unknown"
-    }
-  ]
+  "scraped_at": "2026-03-15T02:59:59.181674",
+  "update_date": "2026-03-15",
+  "lotteries": []
 }
