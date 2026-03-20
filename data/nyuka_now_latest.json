@@ -1,18 +1,6 @@
 {
   "source": "nyuka-now.com",
-  "scraped_at": "2026-03-17T04:53:04.015263",
-  "update_date": "2026-03-17",
-  "lotteries": [
-    {
-      "store": "2026年3月16日(月)18時12分",
-      "product": "アメニティドリームにてポケモンカードゲーム MEGA 拡張パック ムニキスゼロ BOXが販売開始",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://www.amenitydream.com/product/253353",
-      "status": "unknown"
-    }
-  ]
+  "scraped_at": "2026-03-20T02:41:49.011069",
+  "update_date": "2026-03-20",
+  "lotteries": []
 }

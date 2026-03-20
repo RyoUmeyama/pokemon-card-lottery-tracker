@@ -1,111 +1,99 @@
 {
-  "timestamp": "2026-03-17T04:52:14.273361",
+  "timestamp": "2026-03-20T02:39:33.734722",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2026-03-17T04:53:04.015263",
-      "update_date": "2026-03-17",
-      "lotteries": [
-        {
-          "store": "2026年3月16日(月)18時12分",
-          "product": "アメニティドリームにてポケモンカードゲーム MEGA 拡張パック ムニキスゼロ BOXが販売開始",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://www.amenitydream.com/product/253353",
-          "status": "unknown"
-        }
-      ]
+      "scraped_at": "2026-03-20T02:41:49.011069",
+      "update_date": "2026-03-20",
+      "lotteries": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-03-17T04:53:14.326230",
+      "scraped_at": "2026-03-20T02:41:59.380244",
       "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2026-03-17T04:53:14.903081",
+      "scraped_at": "2026-03-20T02:42:00.060250",
       "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2026-03-17T04:53:54.459518",
+      "scraped_at": "2026-03-20T02:42:37.933826",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-03-17T04:54:19.566588",
+      "scraped_at": "2026-03-20T02:43:02.720173",
       "reservations": []
     },
     {
       "source": "ヨドバシカメラ (limited.yodobashi.com)",
       "source_url": "https://limited.yodobashi.com/",
-      "scraped_at": "2026-03-17T04:54:19.892749",
+      "scraped_at": "2026-03-20T02:43:03.461398",
       "lotteries": [],
       "error": "HTTP 403"
     },
     {
       "source": "ビックカメラ (biccamera.com)",
       "source_url": "https://www.biccamera.com/bc/category/?q=ポケモンカード+抽選",
-      "scraped_at": "2026-03-17T04:54:20.587607",
+      "scraped_at": "2026-03-20T02:43:04.116505",
       "lotteries": []
     },
     {
       "source": "X (Twitter) 公式アカウント",
-      "scraped_at": "2026-03-17T04:54:20.587912",
+      "scraped_at": "2026-03-20T02:43:04.116772",
       "lotteries": [],
       "error": "X API credentials not configured or tweepy not installed"
     },
     {
       "source": "ジョーシン (joshinweb.jp)",
       "source_url": "https://joshinweb.jp/hobby/pokemon.html",
-      "scraped_at": "2026-03-17T04:55:06.123317",
+      "scraped_at": "2026-03-20T02:43:49.579562",
       "lotteries": []
     },
     {
       "source": "エディオン (edion.com)",
       "source_url": "https://www.edion.com/search/?keyword=ポケモンカード",
-      "scraped_at": "2026-03-17T04:55:26.511162",
+      "scraped_at": "2026-03-20T02:44:09.595632",
       "lotteries": []
     },
     {
       "source": "ケーズデンキ (ksdenki.co.jp)",
       "source_url": null,
-      "scraped_at": "2026-03-17T04:55:26.511422",
+      "scraped_at": "2026-03-20T02:44:09.595860",
       "lotteries": []
     },
     {
       "source": "ノジマオンライン (online.nojima.co.jp)",
       "source_url": null,
-      "scraped_at": "2026-03-17T04:55:26.511628",
+      "scraped_at": "2026-03-20T02:44:09.595983",
       "lotteries": []
     },
     {
       "source": "イエローサブマリン (yellowsubmarine.co.jp)",
       "source_url": "https://www.yellowsubmarine.co.jp/",
-      "scraped_at": "2026-03-17T04:55:27.779722",
+      "scraped_at": "2026-03-20T02:44:10.640123",
       "lotteries": []
     },
     {
       "source": "カードショップセラ (cardshopserra.jp)",
       "source_url": "https://www.cardshopserra.jp/",
-      "scraped_at": "2026-03-17T04:55:27.779966",
+      "scraped_at": "2026-03-20T02:44:10.640598",
       "lotteries": [],
       "note": "DNS解決エラーのため現在無効化"
     },
     {
       "source": "セブンネットショッピング (7net.omni7.jp)",
       "source_url": "https://7net.omni7.jp/search/?keyword=ポケモンカード&searchKeywordFlg=1",
-      "scraped_at": "2026-03-17T04:55:32.148493",
+      "scraped_at": "2026-03-20T02:44:14.507450",
       "lotteries": []
     },
     {
       "source": "ローソン HMV (hmv.co.jp)",
       "source_url": "https://www.hmv.co.jp/search/?category=ALL&keyword=ポケモンカード",
-      "scraped_at": "2026-03-17T04:56:55.296520",
+      "scraped_at": "2026-03-20T02:45:31.055297",
       "lotteries": [
         {
           "store": "ローソン HMV",
@@ -130,7 +118,7 @@
     {
       "source": "イオン (aeonretail.jp)",
       "source_url": "https://www.aeonretail.jp/campaign/",
-      "scraped_at": "2026-03-17T04:57:15.673472",
+      "scraped_at": "2026-03-20T02:45:48.557985",
       "lotteries": [
         {
           "store": "イオン",
@@ -146,7 +134,7 @@
     {
       "source": "ファミリーマート (family.co.jp)",
       "source_url": "https://www.family.co.jp/campaign.html",
-      "scraped_at": "2026-03-17T04:57:16.511444",
+      "scraped_at": "2026-03-20T02:45:48.827832",
       "lotteries": [
         {
           "store": "ファミリーマート",
@@ -158,10 +146,10 @@
         },
         {
           "store": "ファミリーマート",
-          "product": "NEW一般「春の彩りサラダ」めんたい＆たまご新登場3月17日（火） ～NEW一般ファミマのおトクが止まらない!? 1個買うと、1個もらえる期間中に対象商品を1個買うと、対象商品の無料引換券がもらえる！3月17日（火） ～ 3月23日（月）ファミペイ【ファミマのアプリ ファミペイ限定】ファミペイで期間",
+          "product": "予告一般【予告】うまくてドでかい！お値段そのまま「なぜか45％増量作戦」今年は創立45周年を記念して、初登場商品を含む全14種類を週替わりで発売！3月24日（火） ～NEW一般「春の彩りサラダ」めんたい＆たまご新登場3月17日（火） ～NEW一般ファミマのおトクが止まらない!? 1個買うと、1個もら",
           "lottery_type": "抽選販売",
           "period": "",
-          "detail_url": "https://www.family.co.jp/campaign/spot/2603_springsalad_cp.html",
+          "detail_url": "https://www.family.co.jp/campaign/spot/2603_45sakusen_cp_qSdJ1U7g.html",
           "status": "active"
         }
       ]
