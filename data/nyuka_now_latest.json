@@ -1,18 +1,6 @@
 {
   "source": "nyuka-now.com",
-  "scraped_at": "2026-03-26T02:55:19.624204",
+  "scraped_at": "2026-03-26T05:08:03.384914",
   "update_date": "2026-03-26",
-  "lotteries": [
-    {
-      "store": "2026年3月25日(水)11時11分",
-      "product": "ポケモンセンターオンラインにてポケモンカードゲーム スカーレット＆バイオレット  ハイクラスパック テラスタルフェスexが販売開始",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://www.pokemoncenter-online.com/4521329362335.html",
-      "status": "unknown"
-    }
-  ]
+  "lotteries": []
 }
