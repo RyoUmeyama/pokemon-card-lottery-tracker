@@ -1,6 +1,16 @@
 {
   "source": "イオン (aeonretail.jp)",
   "source_url": "https://www.aeonretail.jp/campaign/",
-  "scraped_at": "2026-01-27T04:59:03.279023",
-  "lotteries": []
+  "scraped_at": "2026-03-27T05:13:52.383150",
+  "lotteries": [
+    {
+      "store": "イオン",
+      "product": "イオン母の日ギフトご予約受付中！",
+      "lottery_type": "キャンペーン",
+      "period": "",
+      "price": "",
+      "detail_url": "https://aeonshop.com/pages/mothersday?utm_source=aeonretail_jp&utm_medium=referral&utm_campaign=mothersday_aeonretail_jp",
+      "status": "active"
+    }
+  ]
 }
