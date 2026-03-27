@@ -7,6 +7,10 @@ from bs4 import BeautifulSoup
 import json
 from datetime import datetime
 import re
+import time
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class AeonScraper:
@@ -46,8 +50,21 @@ class AeonScraper:
         lotteries = []
 
         try:
-            response = requests.get(self.search_url, headers=self.headers, timeout=30)
-            response.raise_for_status()
+            response = None
+            for attempt in range(3):
+                time.sleep(1)
+                try:
+                    response = requests.get(self.search_url, headers=self.headers, timeout=30)
+                    response.raise_for_status()
+                    break
+                except (requests.exceptions.ConnectionError, requests.exceptions.Timeout) as e:
+                    if attempt < 2:
+                        logger.warning(f"Retry {attempt+1}/3 for {self.search_url}: {e}")
+                        continue
+                    raise
+
+            if response is None:
+                return lotteries
 
             soup = BeautifulSoup(response.content, 'html.parser')
 
@@ -73,9 +90,9 @@ class AeonScraper:
                         lotteries.append(lottery)
 
         except requests.exceptions.HTTPError as e:
-            print(f"HTTP Error: {e.response.status_code}")
+            logger.error(f"HTTP Error: {e.response.status_code}")
         except Exception as e:
-            print(f"Error scraping search results: {e}")
+            logger.error(f"Error scraping search results: {e}", exc_info=True)
 
         return lotteries
 
@@ -138,8 +155,8 @@ class AeonScraper:
                     'status': status
                 }
 
-        except Exception:
-            pass
+        except Exception as e:
+            logger.warning(f"Error parsing product item: {e}", exc_info=False)
 
         return None
 
@@ -184,8 +201,8 @@ class AeonScraper:
                     'status': status
                 }
 
-        except Exception:
-            pass
+        except Exception as e:
+            logger.warning(f"Error parsing product link: {e}", exc_info=False)
 
         return None
 
@@ -215,6 +232,6 @@ if __name__ == '__main__':
     data = scraper.scrape()
 
     if data:
-        print(f"Found {len(data['lotteries'])} entries")
+        logger.info(f"Found {len(data['lotteries'])} entries")
         for lottery in data['lotteries']:
-            print(f"  - {lottery['product']}")
+            logger.info(f"  - {lottery['product']}")

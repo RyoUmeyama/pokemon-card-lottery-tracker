@@ -1,3 +1,7 @@
+import time
+import logging
+
+logger = logging.getLogger(__name__)
 """
 エディオン（EDION）からポケモンカード抽選情報をスクレイピング
 """
@@ -35,7 +39,7 @@ class EdionScraper:
                 lotteries = self._scrape_url(url)
                 all_lotteries.extend(lotteries)
             except Exception as e:
-                print(f"Error scraping {url}: {e}")
+                logger.error(f"Error scraping {url}: {e}", exc_info=True)
 
         unique_lotteries = self._remove_duplicates(all_lotteries)
 
@@ -53,6 +57,7 @@ class EdionScraper:
         lotteries = []
 
         try:
+            time.sleep(1)
             response = requests.get(url, headers=self.headers, timeout=30)
             response.raise_for_status()
 
@@ -84,11 +89,11 @@ class EdionScraper:
 
         except requests.exceptions.HTTPError as e:
             if e.response.status_code == 403:
-                print(f"Access forbidden for {url} (bot protection)")
+                logger.info(f"Access forbidden for {url} (bot protection)")
             else:
-                print(f"HTTP Error for {url}: {e.response.status_code}")
+                logger.error(f"HTTP Error for {url}: {e.response.status_code}")
         except Exception as e:
-            print(f"Error scraping {url}: {e}")
+            logger.error(f"Error scraping {url}: {e}", exc_info=True)
 
         return lotteries
 
@@ -169,8 +174,8 @@ class EdionScraper:
                     'status': 'active' if '受付中' in text or '抽選' in text else 'unknown'
                 }
 
-        except Exception:
-            pass
+        except Exception as e:
+            logger.warning(f"Error: {e}", exc_info=False)
 
         return None
 
@@ -193,6 +198,6 @@ if __name__ == '__main__':
     data = scraper.scrape()
 
     if data:
-        print(f"Found {len(data['lotteries'])} lottery entries")
+        logger.info(f"Found {len(data['lotteries'])} lottery entries")
         for lottery in data['lotteries']:
-            print(f"  - {lottery['product']}")
+            logger.info(f"  - {lottery['product']}")

@@ -6,6 +6,10 @@ from bs4 import BeautifulSoup
 import json
 from datetime import datetime
 import re
+import time
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class NyukaNowScraper:
@@ -17,72 +21,79 @@ class NyukaNowScraper:
         self.check_availability = check_availability  # 在庫チェックを行うかどうか
 
     def scrape(self):
-        """抽選情報をスクレイピング"""
-        try:
-            response = requests.get(self.url, headers=self.headers, timeout=30)
-            response.raise_for_status()
+        """抽選情報をスクレイピング（リトライ機構付き）"""
+        max_retries = 3
+        for attempt in range(max_retries):
+            try:
+                response = requests.get(self.url, headers=self.headers, timeout=30)
+                response.raise_for_status()
 
-            soup = BeautifulSoup(response.content, 'html.parser')
+                soup = BeautifulSoup(response.content, 'html.parser')
 
-            # 抽選情報を抽出
-            lotteries = []
+                # 抽選情報を抽出
+                lotteries = []
 
-            # 記事の更新日時を取得
-            update_date = self._extract_update_date(soup)
+                # 記事の更新日時を取得
+                update_date = self._extract_update_date(soup)
 
-            # 記事本文を取得
-            article = soup.find('article')
-            if not article:
-                article = soup.find('main') or soup.find(class_='content')
+                # 記事本文を取得
+                article = soup.find('article')
+                if not article:
+                    article = soup.find('main') or soup.find(class_='content')
 
-            if article:
-                # 見出しとテーブルのペアを探す
-                h2_sections = article.find_all('h2')
+                if article:
+                    # 見出しとテーブルのペアを探す
+                    h2_sections = article.find_all('h2')
 
-                for h2 in h2_sections:
-                    section_title = h2.get_text(strip=True)
+                    for h2 in h2_sections:
+                        section_title = h2.get_text(strip=True)
 
-                    # 抽選・予約受付中のセクションのみを対象
-                    if '抽選' in section_title or '予約' in section_title:
-                        # このh2の後ろにあるテーブルを全て取得
-                        next_elem = h2.find_next_sibling()
-                        while next_elem and next_elem.name != 'h2':
-                            if next_elem.name == 'table':
-                                lottery_info = self._parse_lottery_table(next_elem)
-                                if lottery_info:
-                                    lotteries.extend(lottery_info)
-                            elif next_elem.name in ['h3', 'h4']:
-                                # h3の後ろのテーブルも確認
-                                h3_table = next_elem.find_next_sibling('table')
-                                if h3_table:
-                                    lottery_info = self._parse_lottery_table(h3_table)
+                        # 抽選・予約受付中のセクションのみを対象
+                        if '抽選' in section_title or '予約' in section_title:
+                            # このh2の後ろにあるテーブルを全て取得
+                            next_elem = h2.find_next_sibling()
+                            while next_elem and next_elem.name != 'h2':
+                                if next_elem.name == 'table':
+                                    lottery_info = self._parse_lottery_table(next_elem)
                                     if lottery_info:
                                         lotteries.extend(lottery_info)
-                            next_elem = next_elem.find_next_sibling()
+                                elif next_elem.name in ['h3', 'h4']:
+                                    # h3の後ろのテーブルも確認
+                                    h3_table = next_elem.find_next_sibling('table')
+                                    if h3_table:
+                                        lottery_info = self._parse_lottery_table(h3_table)
+                                        if lottery_info:
+                                            lotteries.extend(lottery_info)
+                                next_elem = next_elem.find_next_sibling()
 
-            # 重複を除外（商品名とURLの組み合わせで判定）
-            unique_lotteries = []
-            seen = set()
-            for lottery in lotteries:
-                key = (lottery.get('product', ''), lottery.get('detail_url', ''))
-                if key not in seen:
-                    seen.add(key)
-                    unique_lotteries.append(lottery)
+                # 重複を除外（商品名とURLの組み合わせで判定）
+                unique_lotteries = []
+                seen = set()
+                for lottery in lotteries:
+                    key = (lottery.get('product', ''), lottery.get('detail_url', ''))
+                    if key not in seen:
+                        seen.add(key)
+                        unique_lotteries.append(lottery)
 
-            result = {
-                'source': 'nyuka-now.com',
-                'scraped_at': datetime.now().isoformat(),
-                'update_date': update_date,
-                'lotteries': unique_lotteries
-            }
+                result = {
+                    'source': 'nyuka-now.com',
+                    'scraped_at': datetime.now().isoformat(),
+                    'update_date': update_date,
+                    'lotteries': unique_lotteries
+                }
 
-            return result
+                return result
 
-        except Exception as e:
-            print(f"Error scraping nyuka-now.com: {e}")
-            import traceback
-            traceback.print_exc()
-            return None
+            except Exception as e:
+                if attempt < max_retries - 1:
+                    wait_time = (attempt + 1) ** 2  # exponential backoff: 1, 4, 9秒
+                    logging.warning(f"Retry {attempt + 1}/{max_retries} for nyuka-now.com, waiting {wait_time}s: {e}")
+                    time.sleep(wait_time)
+                else:
+                    logging.error(f"Error scraping nyuka-now.com after {max_retries} retries: {e}")
+                    import traceback
+                    traceback.print_exc()
+                    return None
 
     def _extract_update_date(self, soup):
         """更新日時を抽出"""
@@ -235,7 +246,7 @@ class NyukaNowScraper:
 
         except Exception as e:
             # エラーが発生してもスクレイピング全体は継続
-            print(f"  Warning: Could not extract direct URL from {nyuka_now_url}: {e}")
+            logger.info(f"  Warning: Could not extract direct URL from {nyuka_now_url}: {e}")
             return None
 
     def _extract_url_from_chusen_info(self, chusen_info_url):
@@ -281,7 +292,7 @@ class NyukaNowScraper:
             return None
 
         except Exception as e:
-            print(f"  Warning: Could not extract URL from {chusen_info_url}: {e}")
+            logger.info(f"  Warning: Could not extract URL from {chusen_info_url}: {e}")
             return None
 
     def _check_availability(self, url):
@@ -309,7 +320,7 @@ class NyukaNowScraper:
             # 在庫切れキーワードが含まれているかチェック
             for keyword in out_of_stock_keywords:
                 if keyword in html:
-                    print(f"  Info: {url} - 在庫切れ検出: {keyword}")
+                    logger.info(f"  Info: {url} - 在庫切れ検出: {keyword}")
                     return False
 
             # 購入可能を示すキーワードがあるかチェック（より厳密な判定）
@@ -323,21 +334,21 @@ class NyukaNowScraper:
 
             # 購入可能キーワードがない場合も在庫切れとみなす
             if not has_available_keyword:
-                print(f"  Info: {url} - 購入可能キーワードなし")
+                logger.info(f"  Info: {url} - 購入可能キーワードなし")
                 return False
 
             return True
 
         except requests.exceptions.Timeout:
             # タイムアウトの場合は除外（確認できないため）
-            print(f"  Warning: Timeout checking availability for {url}, excluding")
+            logger.info(f"  Warning: Timeout checking availability for {url}, excluding")
             return False
         except requests.exceptions.HTTPError as e:
             # HTTPエラーの場合は除外
-            print(f"  Info: {url} - HTTPエラー({e.response.status_code})により除外")
+            logger.info(f"  Info: {url} - HTTPエラー({e.response.status_code})により除外")
             return False
         except Exception as e:
-            print(f"  Warning: Could not check availability for {url}: {e}")
+            logger.info(f"  Warning: Could not check availability for {url}: {e}")
             # その他のエラーの場合も除外
             return False
 
@@ -351,5 +362,5 @@ if __name__ == '__main__':
         output_file = '../data/nyuka_now_latest.json'
         with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
-        print(f"Saved to {output_file}")
-        print(f"Found {len(data['lotteries'])} lottery entries")
+        logger.info(f"Saved to {output_file}")
+        logger.info(f"Found {len(data['lotteries'])} lottery entries")

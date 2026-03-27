@@ -4,8 +4,11 @@ GEO、TSUTAYA、ヨドバシなどの公式アカウントを監視
 """
 import os
 import re
+import logging
 from datetime import datetime, timedelta
 import json
+
+logger = logging.getLogger(__name__)
 
 try:
     import tweepy
@@ -47,7 +50,7 @@ class XLotteryScraper:
     def _init_client(self):
         """Tweepyクライアントを初期化"""
         if not TWEEPY_AVAILABLE:
-            print("Warning: tweepy is not installed. X scraping will be skipped.")
+            logger.warning("tweepy is not installed. X scraping will be skipped.")
             return False
 
         if self.bearer_token:
@@ -55,7 +58,7 @@ class XLotteryScraper:
                 self.client = tweepy.Client(bearer_token=self.bearer_token)
                 return True
             except Exception as e:
-                print(f"Error initializing X client with bearer token: {e}")
+                logger.error(f"Error initializing X client with bearer token: {e}")
 
         if self.api_key and self.api_secret and self.access_token and self.access_token_secret:
             try:
@@ -67,9 +70,9 @@ class XLotteryScraper:
                 )
                 return True
             except Exception as e:
-                print(f"Error initializing X client with OAuth: {e}")
+                logger.error(f"Error initializing X client with OAuth: {e}")
 
-        print("Warning: X API credentials not configured. X scraping will be skipped.")
+        logger.warning("X API credentials not configured. X scraping will be skipped.")
         return False
 
     def scrape(self):
@@ -90,7 +93,7 @@ class XLotteryScraper:
                 account_lotteries = self._scrape_account(account)
                 lotteries.extend(account_lotteries)
             except Exception as e:
-                print(f"Error scraping @{account}: {e}")
+                logger.error(f"Error scraping @{account}: {e}")
 
         # 重複除去
         unique_lotteries = self._remove_duplicates(lotteries)
@@ -112,7 +115,7 @@ class XLotteryScraper:
             # ユーザーIDを取得
             user = self.client.get_user(username=username)
             if not user.data:
-                print(f"User @{username} not found")
+                logger.warning(f"User @{username} not found")
                 return []
 
             user_id = user.data.id
@@ -140,11 +143,11 @@ class XLotteryScraper:
                         lotteries.append(lottery_info)
 
         except tweepy.errors.TooManyRequests:
-            print(f"Rate limit exceeded for @{username}")
+            logger.warning(f"Rate limit exceeded for @{username}")
         except tweepy.errors.Forbidden as e:
-            print(f"Access forbidden for @{username}: {e}")
+            logger.error(f"Access forbidden for @{username}: {e}")
         except Exception as e:
-            print(f"Error fetching tweets from @{username}: {e}")
+            logger.error(f"Error fetching tweets from @{username}: {e}")
 
         return lotteries
 
@@ -209,7 +212,7 @@ class XLotteryScraper:
             return lottery
 
         except Exception as e:
-            print(f"Error parsing tweet: {e}")
+            logger.error(f"Error parsing tweet: {e}")
             return None
 
     def _extract_product_name(self, text):
@@ -263,6 +266,7 @@ class XLotteryScraper:
 
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
     scraper = XLotteryScraper()
     data = scraper.scrape()
 
@@ -270,7 +274,7 @@ if __name__ == '__main__':
         output_file = '../data/x_lottery_latest.json'
         with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
-        print(f"Saved to {output_file}")
-        print(f"Found {len(data['lotteries'])} lottery entries")
+        logger.info(f"Saved to {output_file}")
+        logger.info(f"Found {len(data['lotteries'])} lottery entries")
         for lottery in data['lotteries']:
-            print(f"  - [{lottery['store']}] {lottery['product']}")
+            logger.info(f"  - [{lottery['store']}] {lottery['product']}")

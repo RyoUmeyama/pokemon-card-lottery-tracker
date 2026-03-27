@@ -2,14 +2,142 @@
 ポケモンカード抽選情報のHTMLレポート生成
 """
 import json
-from datetime import datetime
+import html
+import logging
+from datetime import datetime, timedelta
 from pathlib import Path
+
+logger = logging.getLogger(__name__)
+
+
+def normalize_schema(data):
+    """H8: all_lotteries.json スキーマ整理
+    - キー命名統一
+    - 不要フィールド削除
+    """
+    normalized_sources = []
+
+    for source in data.get('sources', []):
+        normalized_source = {
+            'source': source.get('source', 'unknown'),
+            'lotteries': []
+        }
+
+        # タイムスタンプがあれば記録
+        if 'scraped_at' in source:
+            normalized_source['scraped_at'] = source['scraped_at']
+
+        # 各ロッテリーのスキーマ統一
+        for lottery in source.get('lotteries', []):
+            normalized_lottery = {
+                'product': lottery.get('product', ''),
+                'store': lottery.get('store', ''),
+                'lottery_type': lottery.get('lottery_type', ''),
+                'start_date': lottery.get('start_date', ''),
+                'end_date': lottery.get('end_date', ''),
+                'announcement_date': lottery.get('announcement_date', ''),
+                'conditions': lottery.get('conditions', ''),
+                'detail_url': lottery.get('detail_url', ''),
+            }
+            # 不要フィールドを除去（status, _source など）
+
+            normalized_source['lotteries'].append(normalized_lottery)
+
+        normalized_sources.append(normalized_source)
+
+    return {
+        'timestamp': data.get('timestamp', ''),
+        'sources': normalized_sources
+    }
+
+
+def parse_date(date_string):
+    """M7: 日付文字列をdatetime形式に正規化（パース失敗時は元文字列保持）"""
+    if not date_string or not isinstance(date_string, str):
+        return date_string
+
+    # 複数フォーマットを試す
+    formats = [
+        '%Y-%m-%d',
+        '%Y/%m/%d',
+        '%Y年%m月%d日',
+        '%Y-%m-%dT%H:%M:%S',
+        '%Y-%m-%dT%H:%M:%S.%f',
+    ]
+
+    for fmt in formats:
+        try:
+            return datetime.strptime(date_string, fmt)
+        except ValueError:
+            continue
+
+    # パース失敗時は元文字列を返す
+    return date_string
+
+
+def cleanup_old_data(data, days=30):
+    """M6: 30日以上前のデータを削除"""
+    if 'timestamp' not in data:
+        return data
+
+    try:
+        base_time = datetime.fromisoformat(data['timestamp'])
+    except (ValueError, AttributeError):
+        return data
+
+    cutoff_time = base_time - timedelta(days=days)
+
+    for source in data.get('sources', []):
+        if 'lotteries' not in source:
+            continue
+
+        # 各ロッテリーのstart_dateをチェック
+        filtered_lotteries = []
+        for lottery in source['lotteries']:
+            start_date_str = lottery.get('start_date', '')
+            if start_date_str:
+                start_dt = parse_date(start_date_str)
+                if isinstance(start_dt, datetime) and start_dt >= cutoff_time:
+                    filtered_lotteries.append(lottery)
+                elif not isinstance(start_dt, datetime):
+                    # パース失敗の場合は保持
+                    filtered_lotteries.append(lottery)
+            else:
+                # start_dateがない場合は保持
+                filtered_lotteries.append(lottery)
+
+        source['lotteries'] = filtered_lotteries
+
+    return data
 
 
 def load_data(filename='data/all_lotteries.json'):
-    """データを読み込み"""
+    """データを読み込み（スキーマ検証 + クリーンアップ付き）"""
     with open(filename, 'r', encoding='utf-8') as f:
-        return json.load(f)
+        data = json.load(f)
+
+    # M5: スキーマ検証 - 必須フィールド確認
+    if 'timestamp' not in data:
+        raise ValueError("Missing required field: 'timestamp'")
+    if 'sources' not in data or not isinstance(data['sources'], list):
+        raise ValueError("Missing or invalid required field: 'sources' (must be list)")
+
+    # 各ソースの検証
+    for i, source in enumerate(data['sources']):
+        if 'source' not in source:
+            raise ValueError(f"Source[{i}]: Missing required field 'source'")
+        if 'lotteries' in source and isinstance(source['lotteries'], list):
+            for j, lottery in enumerate(source['lotteries']):
+                if 'product' not in lottery or not lottery['product']:
+                    raise ValueError(f"Source[{i}].lotteries[{j}]: Missing required field 'product'")
+
+    # M6: 30日以上前のデータを削除
+    data = cleanup_old_data(data, days=30)
+
+    # H8: スキーマ統一（キー命名統一 + 不要フィールド削除）
+    data = normalize_schema(data)
+
+    return data
 
 
 def generate_html_report(data, output_file='data/lottery_report.html'):
@@ -306,27 +434,35 @@ def generate_html_report(data, output_file='data/lottery_report.html'):
         url = lottery.get('detail_url', '')
         source = lottery.get('_source', 'unknown')
 
+        # H5: XSS対策 - html.escape() で ユーザー由来データをエスケープ
+        store_escaped = html.escape(store)
+        product_escaped = html.escape(product)
+        lottery_type_escaped = html.escape(lottery_type)
+        source_escaped = html.escape(source)
+        announcement_escaped = html.escape(announcement)
+        conditions_escaped = html.escape(conditions)
+
         html_content += f"""
             <div class="lottery-card" data-search="{product.lower()} {store.lower()} {lottery_type.lower()}">
                 <div class="header">
-                    <div class="store">{'🕐' if '(' in store and ')' in store else '🏪'} {store}</div>
-                    <div class="source">📌 {source}</div>
+                    <div class="store">{'🕐' if '(' in store and ')' in store else '🏪'} {store_escaped}</div>
+                    <div class="source">📌 {source_escaped}</div>
                 </div>
 
-                <div class="product">📦 {product}</div>
+                <div class="product">📦 {product_escaped}</div>
 """
 
         if lottery_type:
             html_content += f"""
-                <div class="lottery-type">🎯 {lottery_type}</div>
+                <div class="lottery-type">🎯 {lottery_type_escaped}</div>
 """
 
         if start_date or end_date:
             period_text = ""
             if start_date:
-                period_text += f"開始: {start_date}"
+                period_text += f"開始: {html.escape(start_date)}"
             if end_date:
-                period_text += f" / 終了: {end_date}" if period_text else f"終了: {end_date}"
+                period_text += f" / 終了: {html.escape(end_date)}" if period_text else f"終了: {html.escape(end_date)}"
 
             html_content += f"""
                 <div class="detail-row">
@@ -339,7 +475,7 @@ def generate_html_report(data, output_file='data/lottery_report.html'):
             html_content += f"""
                 <div class="detail-row">
                     <div class="icon">🎊</div>
-                    <div class="content">当選発表: {announcement}</div>
+                    <div class="content">当選発表: {announcement_escaped}</div>
                 </div>
 """
 
@@ -347,13 +483,14 @@ def generate_html_report(data, output_file='data/lottery_report.html'):
             html_content += f"""
                 <div class="detail-row">
                     <div class="icon">ℹ️</div>
-                    <div class="content">{conditions[:200]}{'...' if len(conditions) > 200 else ''}</div>
+                    <div class="content">{conditions_escaped[:200]}{'...' if len(conditions) > 200 else ''}</div>
                 </div>
 """
 
         if url and url.startswith('http'):
+            # URLはエスケープしない（href属性内で使用）
             html_content += f"""
-                <a href="{url}" target="_blank">🔗 詳細を見る</a>
+                <a href="{html.escape(url)}" target="_blank">🔗 詳細を見る</a>
 """
 
         html_content += """
@@ -426,12 +563,12 @@ def main():
     try:
         data = load_data()
         output_file = generate_html_report(data)
-        print(f"✅ HTMLレポートを生成しました: {output_file}")
-        print(f"\nブラウザで開くには:")
-        print(f"  open {output_file}")
+        logger.info(f"✅ HTMLレポートを生成しました: {output_file}")
+        logger.info(f"\nブラウザで開くには:")
+        logger.info(f"  open {output_file}")
     except FileNotFoundError:
-        print("❌ データファイルが見つかりません")
-        print("まず python main.py を実行してデータを収集してください")
+        logger.error("❌ データファイルが見つかりません")
+        logger.error("まず python main.py を実行してデータを収集してください")
 
 
 if __name__ == '__main__':

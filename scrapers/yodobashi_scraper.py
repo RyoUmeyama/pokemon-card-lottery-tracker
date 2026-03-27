@@ -1,3 +1,7 @@
+import time
+import logging
+
+logger = logging.getLogger(__name__)
 """
 ヨドバシカメラ抽選販売ページからポケモンカード抽選情報をスクレイピング
 """
@@ -26,6 +30,7 @@ class YodobashiScraper:
     def scrape(self):
         """抽選情報をスクレイピング"""
         try:
+            time.sleep(1)
             response = requests.get(self.url, headers=self.headers, timeout=30)
             response.raise_for_status()
 
@@ -73,7 +78,7 @@ class YodobashiScraper:
             return result
 
         except requests.exceptions.HTTPError as e:
-            print(f"Error scraping limited.yodobashi.com: HTTP {e.response.status_code}")
+            logger.error(f"Error scraping limited.yodobashi.com: HTTP {e.response.status_code}")
             return {
                 'source': 'ヨドバシカメラ (limited.yodobashi.com)',
                 'source_url': self.url,
@@ -82,7 +87,7 @@ class YodobashiScraper:
                 'error': f'HTTP {e.response.status_code}'
             }
         except Exception as e:
-            print(f"Error scraping limited.yodobashi.com: {e}")
+            logger.error(f"Error scraping limited.yodobashi.com: {e}", exc_info=True)
             return {
                 'source': 'ヨドバシカメラ (limited.yodobashi.com)',
                 'source_url': self.url,
@@ -202,6 +207,7 @@ class YodobashiScraper:
 
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
     scraper = YodobashiScraper()
     data = scraper.scrape()
 
@@ -209,7 +215,7 @@ if __name__ == '__main__':
         output_file = '../data/yodobashi_latest.json'
         with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
-        print(f"Saved to {output_file}")
-        print(f"Found {len(data['lotteries'])} lottery entries")
+        logger.info(f"Saved to {output_file}")
+        logger.info(f"Found {len(data['lotteries'])} lottery entries")
         for lottery in data['lotteries']:
-            print(f"  - {lottery['product']}")
+            logger.info(f"  - {lottery['product']}")

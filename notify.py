@@ -7,6 +7,10 @@ from email.mime.multipart import MIMEMultipart
 import json
 import os
 from datetime import datetime
+import logging
+import time
+
+logger = logging.getLogger(__name__)
 
 
 class GmailNotifier:
@@ -21,8 +25,8 @@ class GmailNotifier:
     def send_notification(self, all_lotteries_data):
         """抽選情報をメールで通知"""
         if not self.smtp_username or not self.smtp_password or not self.recipient:
-            print("⚠️ SMTP認証情報が設定されていません")
-            print("環境変数 SMTP_USERNAME, SMTP_PASSWORD, RECIPIENT_EMAIL を設定してください")
+            logger.warning("⚠️ SMTP認証情報が設定されていません")
+            logger.warning("環境変数 SMTP_USERNAME, SMTP_PASSWORD, RECIPIENT_EMAIL を設定してください")
             return False
 
         # 抽選情報を集計
@@ -48,47 +52,71 @@ class GmailNotifier:
 
         # 抽選も予約もない場合は通知しない
         if total_lottery_count == 0 and total_reservation_count == 0:
-            print("📭 抽選・予約情報がないため通知をスキップします")
+            logger.info("📭 抽選・予約情報がないため通知をスキップします")
             return True
 
         # メール本文を作成
         email_body = self._create_email_body(sources_summary, total_lottery_count, total_reservation_count)
 
-        # メールを送信
-        try:
-            msg = MIMEMultipart('alternative')
-            subject_parts = []
-            if total_lottery_count > 0:
-                subject_parts.append(f'抽選{total_lottery_count}件')
-            if total_reservation_count > 0:
-                subject_parts.append(f'予約{total_reservation_count}件')
-            msg['Subject'] = f'🎴 ポケモンカード情報 ({", ".join(subject_parts)}) - {datetime.now().strftime("%Y/%m/%d")}'
-            msg['From'] = self.smtp_username
-            msg['To'] = self.recipient
+        # メールを送信（リトライ機能付き: exponential backoff 2s, 4s, 8s）
+        msg = MIMEMultipart('alternative')
+        subject_parts = []
+        if total_lottery_count > 0:
+            subject_parts.append(f'抽選{total_lottery_count}件')
+        if total_reservation_count > 0:
+            subject_parts.append(f'予約{total_reservation_count}件')
+        msg['Subject'] = f'🎴 ポケモンカード情報 ({", ".join(subject_parts)}) - {datetime.now().strftime("%Y/%m/%d")}'
+        msg['From'] = self.smtp_username
+        msg['To'] = self.recipient
 
-            # HTML版
-            html_part = MIMEText(email_body, 'html')
-            msg.attach(html_part)
+        # HTML版
+        html_part = MIMEText(email_body, 'html')
+        msg.attach(html_part)
 
-            # SMTPサーバーに接続して送信
-            if self.smtp_port == 465:
-                with smtplib.SMTP_SSL(self.smtp_server, self.smtp_port) as server:
-                    server.login(self.smtp_username, self.smtp_password)
-                    server.send_message(msg)
-            else:
-                with smtplib.SMTP(self.smtp_server, self.smtp_port) as server:
-                    server.starttls()
-                    server.login(self.smtp_username, self.smtp_password)
-                    server.send_message(msg)
+        # リトライ（最大3回）
+        max_retries = 3
+        backoff_times = [2, 4, 8]  # 秒単位
 
-            print(f"✅ メール通知を送信しました: {self.recipient}")
-            return True
+        for attempt in range(max_retries):
+            try:
+                # SMTPサーバーに接続して送信
+                if self.smtp_port == 465:
+                    with smtplib.SMTP_SSL(self.smtp_server, self.smtp_port, timeout=30) as server:
+                        server.login(self.smtp_username, self.smtp_password)
+                        server.send_message(msg)
+                else:
+                    with smtplib.SMTP(self.smtp_server, self.smtp_port, timeout=30) as server:
+                        server.starttls()
+                        server.login(self.smtp_username, self.smtp_password)
+                        server.send_message(msg)
 
-        except Exception as e:
-            print(f"❌ メール送信エラー: {e}")
-            import traceback
-            traceback.print_exc()
-            return False
+                logger.info(f"✅ メール通知を送信しました: {self.recipient}")
+                return True
+
+            except smtplib.SMTPAuthenticationError as e:
+                logger.error(f"❌ SMTP認証エラー（試行{attempt+1}/{max_retries}）: {e}")
+                # 認証エラーはリトライしない
+                return False
+
+            except (smtplib.SMTPException, ConnectionError, TimeoutError) as e:
+                if attempt < max_retries - 1:
+                    wait_time = backoff_times[attempt]
+                    logger.warning(f"⚠️ メール送信エラー（試行{attempt+1}/{max_retries}）: {e}. {wait_time}秒後にリトライします...")
+                    time.sleep(wait_time)
+                else:
+                    logger.error(f"❌ メール送信が{max_retries}回失敗しました: {e}")
+                    return False
+
+            except Exception as e:
+                logger.error(f"❌ 予期しないメール送信エラー（試行{attempt+1}/{max_retries}）: {e}")
+                if attempt < max_retries - 1:
+                    wait_time = backoff_times[attempt]
+                    logger.info(f"ℹ️ {wait_time}秒後にリトライします...")
+                    time.sleep(wait_time)
+                else:
+                    return False
+
+        return False
 
     def _create_email_body(self, sources_summary, total_lottery_count, total_reservation_count):
         """メール本文（HTML）を作成"""

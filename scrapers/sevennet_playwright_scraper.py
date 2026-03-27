@@ -6,6 +6,9 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 from .playwright_base import PlaywrightBaseScraper, PLAYWRIGHT_AVAILABLE
 import re
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class SevenNetPlaywrightScraper(PlaywrightBaseScraper):
@@ -51,13 +54,13 @@ class SevenNetPlaywrightScraper(PlaywrightBaseScraper):
                 if content:
                     # Incapsulaブロックチェック
                     if 'Incapsula' in content or 'Request unsuccessful' in content:
-                        print(f"セブンネット{name}: Incapsulaでブロック")
+                        logger.warning(f"セブンネット{name}: Incapsulaでブロック")
                         continue
                     parsed = self._parse_content(content)
                     lotteries.extend(parsed)
-                    print(f"セブンネット{name}: {len(parsed)}件")
+                    logger.info(f"セブンネット{name}: {len(parsed)}件")
             except Exception as e:
-                print(f"Error scraping sevennet {name}: {e}")
+                logger.error(f"Error scraping sevennet {name}: {e}")
 
         unique_lotteries = self.remove_duplicates(lotteries)
 
@@ -75,7 +78,7 @@ class SevenNetPlaywrightScraper(PlaywrightBaseScraper):
 
         # Incapsulaのブロックページかチェック
         if 'Incapsula' in content or 'Request unsuccessful' in content:
-            print("Warning: Blocked by Incapsula WAF")
+            logger.warning("Warning: Blocked by Incapsula WAF")
             return []
 
         # 商品アイテムを探す
@@ -158,8 +161,8 @@ class SevenNetPlaywrightScraper(PlaywrightBaseScraper):
                     'status': status
                 }
 
-        except Exception:
-            pass
+        except Exception as e:
+            logger.error(f"Error parsing item: {e}")
 
         return None
 
@@ -197,8 +200,8 @@ class SevenNetPlaywrightScraper(PlaywrightBaseScraper):
                     'status': status
                 }
 
-        except Exception:
-            pass
+        except Exception as e:
+            logger.error(f"Error parsing link: {e}")
 
         return None
 
@@ -207,7 +210,7 @@ if __name__ == '__main__':
     scraper = SevenNetPlaywrightScraper()
     data = scraper.scrape()
 
-    print(f"Source: {data['source']}")
-    print(f"Found {len(data['lotteries'])} entries")
+    logger.info(f"Source: {data['source']}")
+    logger.info(f"Found {len(data['lotteries'])} entries")
     for lottery in data['lotteries']:
-        print(f"  - {lottery['product'][:60]}... ({lottery['status']})")
+        logger.info(f"  - {lottery['product'][:60]}... ({lottery['status']})")

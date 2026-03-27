@@ -5,6 +5,9 @@ Bot対策を回避するためヘッドレスブラウザを使用
 from bs4 import BeautifulSoup
 from datetime import datetime
 from .playwright_base import PlaywrightBaseScraper, PLAYWRIGHT_AVAILABLE
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class AeonPlaywrightScraper(PlaywrightBaseScraper):
@@ -35,7 +38,7 @@ class AeonPlaywrightScraper(PlaywrightBaseScraper):
             if content:
                 lotteries = self._parse_content(content)
         except Exception as e:
-            print(f"Error scraping aeon: {e}")
+            logger.error(f"Error scraping aeon: {e}")
 
         unique_lotteries = self.remove_duplicates(lotteries)
 
@@ -112,8 +115,8 @@ class AeonPlaywrightScraper(PlaywrightBaseScraper):
                     'status': status
                 }
 
-        except Exception:
-            pass
+        except Exception as e:
+            logger.error(f"Error parsing item: {e}")
 
         return None
 
@@ -141,8 +144,8 @@ class AeonPlaywrightScraper(PlaywrightBaseScraper):
                     'status': status
                 }
 
-        except Exception:
-            pass
+        except Exception as e:
+            logger.error(f"Error parsing link: {e}")
 
         return None
 
@@ -152,6 +155,6 @@ if __name__ == '__main__':
     data = scraper.scrape()
 
     if data:
-        print(f"Found {len(data['lotteries'])} entries")
+        logger.info(f"Found {len(data['lotteries'])} entries")
         for lottery in data['lotteries']:
-            print(f"  - {lottery['product'][:50]}...")
+            logger.info(f"  - {lottery['product'][:50]}...")

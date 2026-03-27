@@ -7,6 +7,10 @@ from bs4 import BeautifulSoup
 import json
 from datetime import datetime
 import re
+import time
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class SevenElevenScraper:
@@ -26,14 +30,14 @@ class SevenElevenScraper:
         ]
 
     def scrape(self):
-        """抽選・予約情報をスクレイピング"""
+        """抽選・予約情報をスクレイピング（リトライ + レート制限対応）"""
         all_lotteries = []
 
         try:
             lotteries = self._scrape_search_results()
             all_lotteries.extend(lotteries)
         except Exception as e:
-            print(f"Error scraping 7net: {e}")
+            logging.error(f"Error scraping 7net: {e}")
 
         unique_lotteries = self._remove_duplicates(all_lotteries)
 
@@ -55,40 +59,55 @@ class SevenElevenScraper:
         return result
 
     def _scrape_search_results(self):
-        """検索結果からポケモンカード情報を取得"""
+        """検索結果からポケモンカード情報を取得（リトライ + レート制限対応）"""
         lotteries = []
+        max_retries = 3
 
-        try:
-            response = requests.get(self.search_url, headers=self.headers, timeout=30)
-            response.raise_for_status()
+        for attempt in range(max_retries):
+            try:
+                response = requests.get(self.search_url, headers=self.headers, timeout=30)
+                response.raise_for_status()
 
-            soup = BeautifulSoup(response.content, 'html.parser')
+                soup = BeautifulSoup(response.content, 'html.parser')
 
-            # 商品アイテムを探す
-            product_items = soup.find_all(['div', 'li', 'article'], class_=lambda x: x and any(
-                kw in str(x).lower() for kw in ['item', 'product', 'goods', 'list']
-            ))
+                # 商品アイテムを探す
+                product_items = soup.find_all(['div', 'li', 'article'], class_=lambda x: x and any(
+                    kw in str(x).lower() for kw in ['item', 'product', 'goods', 'list']
+                ))
 
-            for item in product_items:
-                lottery = self._parse_product_item(item)
-                if lottery:
-                    lotteries.append(lottery)
-
-            # リンクから直接探す
-            all_links = soup.find_all('a', href=True)
-            for link in all_links:
-                link_text = link.get_text(strip=True)
-                href = link.get('href', '')
-
-                if self._is_pokemon_card(link_text) and '/detail/' in href:
-                    lottery = self._parse_product_link(link, href)
+                for item in product_items:
+                    lottery = self._parse_product_item(item)
                     if lottery:
                         lotteries.append(lottery)
 
-        except requests.exceptions.HTTPError as e:
-            print(f"HTTP Error: {e.response.status_code}")
-        except Exception as e:
-            print(f"Error scraping search results: {e}")
+                # リンクから直接探す
+                all_links = soup.find_all('a', href=True)
+                for link in all_links:
+                    link_text = link.get_text(strip=True)
+                    href = link.get('href', '')
+
+                    if self._is_pokemon_card(link_text) and '/detail/' in href:
+                        lottery = self._parse_product_link(link, href)
+                        if lottery:
+                            lotteries.append(lottery)
+
+                # リトライ成功後は直ちに返却
+                return lotteries
+
+            except requests.exceptions.HTTPError as e:
+                if attempt < max_retries - 1:
+                    wait_time = (attempt + 1) ** 2  # exponential backoff: 1, 4, 9秒
+                    logging.warning(f"HTTP Error {e.response.status_code}, retry {attempt + 1}/{max_retries}, waiting {wait_time}s")
+                    time.sleep(wait_time)
+                else:
+                    logging.error(f"HTTP Error: {e.response.status_code}")
+            except Exception as e:
+                if attempt < max_retries - 1:
+                    wait_time = (attempt + 1) ** 2
+                    logging.warning(f"Error scraping search results, retry {attempt + 1}/{max_retries}, waiting {wait_time}s: {e}")
+                    time.sleep(wait_time)
+                else:
+                    logging.error(f"Error scraping search results after {max_retries} retries: {e}")
 
         return lotteries
 
@@ -281,7 +300,7 @@ class SevenElevenScraper:
 
             for keyword in not_found_keywords:
                 if keyword in html:
-                    print(f"  Info: {url} - ページなし: {keyword}")
+                    logger.info(f"  Info: {url} - ページなし: {keyword}")
                     return False
 
             # 在庫切れを示すキーワード
@@ -298,7 +317,7 @@ class SevenElevenScraper:
 
             for keyword in out_of_stock_keywords:
                 if keyword in html:
-                    print(f"  Info: {url} - 在庫切れ: {keyword}")
+                    logger.info(f"  Info: {url} - 在庫切れ: {keyword}")
                     return False
 
             # 購入可能を示すキーワードがあるかチェック
@@ -311,19 +330,19 @@ class SevenElevenScraper:
             has_available_keyword = any(keyword in html for keyword in available_keywords)
 
             if not has_available_keyword:
-                print(f"  Info: {url} - 購入可能キーワードなし")
+                logger.info(f"  Info: {url} - 購入可能キーワードなし")
                 return False
 
             return True
 
         except requests.exceptions.HTTPError as e:
-            print(f"  Info: {url} - HTTPエラー({e.response.status_code})")
+            logger.info(f"  Info: {url} - HTTPエラー({e.response.status_code})")
             return False
         except requests.exceptions.Timeout:
-            print(f"  Warning: {url} - タイムアウト")
+            logger.info(f"  Warning: {url} - タイムアウト")
             return False
         except Exception as e:
-            print(f"  Warning: {url} - エラー: {e}")
+            logger.info(f"  Warning: {url} - エラー: {e}")
             return False
 
 
@@ -332,6 +351,6 @@ if __name__ == '__main__':
     data = scraper.scrape()
 
     if data:
-        print(f"Found {len(data['lotteries'])} entries")
+        logger.info(f"Found {len(data['lotteries'])} entries")
         for lottery in data['lotteries']:
-            print(f"  - {lottery['product']}")
+            logger.info(f"  - {lottery['product']}")

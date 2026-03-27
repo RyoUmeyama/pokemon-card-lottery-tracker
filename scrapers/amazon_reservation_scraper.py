@@ -7,6 +7,10 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 import json
 import time
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 
 class AmazonReservationScraper:
@@ -35,7 +39,7 @@ class AmazonReservationScraper:
             ]
 
             for keyword in keywords:
-                print(f"  検索中: {keyword}")
+                logger.info(f"  検索中: {keyword}")
                 keyword_products = self._search_products(keyword)
                 products.extend(keyword_products)
                 time.sleep(2)  # レート制限対策
@@ -52,7 +56,7 @@ class AmazonReservationScraper:
             return result
 
         except Exception as e:
-            print(f"Error scraping Amazon: {e}")
+            logger.error(f"Error scraping Amazon: {e}")
             import traceback
             traceback.print_exc()
             return None
@@ -93,7 +97,7 @@ class AmazonReservationScraper:
                     continue
 
         except Exception as e:
-            print(f"  Warning: Search error for '{keyword}': {e}")
+            logger.error(f"  Warning: Search error for '{keyword}': {e}")
 
         return products
 
@@ -211,5 +215,5 @@ if __name__ == '__main__':
         output_file = '../data/amazon_reservation_latest.json'
         with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
-        print(f"Saved to {output_file}")
-        print(f"Found {len(data['reservations'])} reservation products")
+        logger.info(f"Saved to {output_file}")
+        logger.info(f"Found {len(data['reservations'])} reservation products")

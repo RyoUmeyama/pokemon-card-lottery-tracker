@@ -1,3 +1,7 @@
+import time
+import logging
+
+logger = logging.getLogger(__name__)
 """
 ファミリーマート（FamilyMart）からポケモンカード抽選・予約情報をスクレイピング
 ファミマの公式サイトとキャンペーンページを監視
@@ -35,7 +39,7 @@ class FamilyMartScraper:
                 lotteries = self._scrape_url(url)
                 all_lotteries.extend(lotteries)
             except Exception as e:
-                print(f"Error scraping {url}: {e}")
+                logger.error(f"Error scraping {url}: {e}", exc_info=True)
 
         unique_lotteries = self._remove_duplicates(all_lotteries)
 
@@ -53,6 +57,7 @@ class FamilyMartScraper:
         lotteries = []
 
         try:
+            time.sleep(1)
             response = requests.get(url, headers=self.headers, timeout=30)
             response.raise_for_status()
 
@@ -83,9 +88,9 @@ class FamilyMartScraper:
                         lotteries.append(lottery)
 
         except requests.exceptions.HTTPError as e:
-            print(f"HTTP Error for {url}: {e.response.status_code}")
+            logger.error(f"HTTP Error for {url}: {e.response.status_code}")
         except Exception as e:
-            print(f"Error scraping {url}: {e}")
+            logger.error(f"Error scraping {url}: {e}", exc_info=True)
 
         return lotteries
 
@@ -133,8 +138,8 @@ class FamilyMartScraper:
                     'status': status
                 }
 
-        except Exception:
-            pass
+        except Exception as e:
+            logger.warning(f"Error: {e}", exc_info=False)
 
         return None
 
@@ -189,8 +194,8 @@ class FamilyMartScraper:
                     'status': status
                 }
 
-        except Exception:
-            pass
+        except Exception as e:
+            logger.warning(f"Error: {e}", exc_info=False)
 
         return None
 
@@ -220,6 +225,6 @@ if __name__ == '__main__':
     data = scraper.scrape()
 
     if data:
-        print(f"Found {len(data['lotteries'])} entries")
+        logger.info(f"Found {len(data['lotteries'])} entries")
         for lottery in data['lotteries']:
-            print(f"  - {lottery['product']}")
+            logger.info(f"  - {lottery['product']}")

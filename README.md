@@ -103,7 +103,7 @@
 # 依存関係をインストール
 pip install -r requirements.txt
 
-# スクレイピング実行
+# スクレイピング実行（タイムアウト推奨値: 15分）
 python main.py
 ```
 
@@ -111,7 +111,7 @@ python main.py
 
 1. このリポジトリをGitHubにプッシュ
 2. GitHub Actionsが自動的に有効化されます
-3. スケジュール実行: 毎日9:00 JST
+3. スケジュール実行: 1日4回（9:00, 12:00, 18:00, 21:00 JST）
 4. 手動実行: Actionsタブから「Run workflow」をクリック
 
 ## 📁 プロジェクト構造
@@ -211,14 +211,16 @@ pokemon-card-lottery-tracker/
 
 X(Twitter)からの情報収集を有効にする場合は追加で設定：
 
+**推奨方法（Bearer Token）：**
 - `X_BEARER_TOKEN`: X API Bearer Token（推奨）
-- または以下の組み合わせ：
-  - `X_API_KEY`: API Key
-  - `X_API_SECRET`: API Secret
-  - `X_ACCESS_TOKEN`: Access Token
-  - `X_ACCESS_TOKEN_SECRET`: Access Token Secret
 
-※X API認証情報がない場合でも、他のスクレイパーは正常に動作します
+**代替方法（OAuth1.0a）：**
+- `X_API_KEY`: API Key
+- `X_API_SECRET`: API Secret
+- `X_ACCESS_TOKEN`: Access Token
+- `X_ACCESS_TOKEN_SECRET`: Access Token Secret
+
+**注：** X API認証情報がない場合でも、他のスクレイパー（19ソース）は正常に動作します
 
 ### Gmailの場合のアプリパスワード取得
 

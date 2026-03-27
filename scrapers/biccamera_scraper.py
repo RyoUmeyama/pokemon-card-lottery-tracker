@@ -1,3 +1,7 @@
+import time
+import logging
+
+logger = logging.getLogger(__name__)
 """
 ビックカメラ抽選販売ページからポケモンカード抽選情報をスクレイピング
 """
@@ -36,7 +40,7 @@ class BiccameraScraper:
                 lotteries = self._scrape_url(url)
                 all_lotteries.extend(lotteries)
             except Exception as e:
-                print(f"Error scraping {url}: {e}")
+                logger.error(f"Error scraping {url}: {e}", exc_info=True)
 
         # 重複除去
         unique_lotteries = self._remove_duplicates(all_lotteries)
@@ -55,6 +59,7 @@ class BiccameraScraper:
         lotteries = []
 
         try:
+            time.sleep(1)
             response = requests.get(url, headers=self.headers, timeout=15)
             response.raise_for_status()
 
@@ -92,9 +97,9 @@ class BiccameraScraper:
                 lotteries.extend(table_lotteries)
 
         except requests.exceptions.HTTPError as e:
-            print(f"HTTP Error for {url}: {e.response.status_code}")
+            logger.error(f"HTTP Error for {url}: {e.response.status_code}")
         except Exception as e:
-            print(f"Error scraping {url}: {e}")
+            logger.error(f"Error scraping {url}: {e}", exc_info=True)
 
         return lotteries
 
@@ -285,7 +290,7 @@ if __name__ == '__main__':
         output_file = '../data/biccamera_latest.json'
         with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
-        print(f"Saved to {output_file}")
-        print(f"Found {len(data['lotteries'])} lottery entries")
+        logger.info(f"Saved to {output_file}")
+        logger.info(f"Found {len(data['lotteries'])} lottery entries")
         for lottery in data['lotteries']:
-            print(f"  - {lottery['product']}")
+            logger.info(f"  - {lottery['product']}")

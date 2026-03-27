@@ -1,3 +1,7 @@
+import time
+import logging
+
+logger = logging.getLogger(__name__)
 """
 楽天ブックス（books.rakuten.co.jp）からポケモンカード抽選情報をスクレイピング
 """
@@ -18,6 +22,7 @@ class RakutenBooksScraper:
     def scrape(self):
         """抽選情報をスクレイピング"""
         try:
+            time.sleep(1)
             response = requests.get(self.url, headers=self.headers, timeout=30)
             response.raise_for_status()
 
@@ -97,7 +102,7 @@ class RakutenBooksScraper:
             return result
 
         except Exception as e:
-            print(f"Error scraping books.rakuten.co.jp: {e}")
+            logger.error(f"Error scraping books.rakuten.co.jp: {e}", exc_info=True)
             import traceback
             traceback.print_exc()
             return None
@@ -112,5 +117,5 @@ if __name__ == '__main__':
         output_file = '../data/rakuten_books_latest.json'
         with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
-        print(f"Saved to {output_file}")
-        print(f"Found {len(data['lotteries'])} lottery entries")
+        logger.info(f"Saved to {output_file}")
+        logger.info(f"Found {len(data['lotteries'])} lottery entries")

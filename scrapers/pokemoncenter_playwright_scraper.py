@@ -5,6 +5,9 @@
 from bs4 import BeautifulSoup
 from datetime import datetime
 from .playwright_base import PlaywrightBaseScraper, PLAYWRIGHT_AVAILABLE
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class PokemonCenterPlaywrightScraper(PlaywrightBaseScraper):
@@ -43,7 +46,7 @@ class PokemonCenterPlaywrightScraper(PlaywrightBaseScraper):
                 has_active = result['has_active']
 
         except Exception as e:
-            print(f"Error scraping pokemon center: {e}")
+            logger.error(f"Error scraping pokemon center: {e}")
 
         unique_lotteries = self.remove_duplicates(lotteries)
 
@@ -139,7 +142,7 @@ class PokemonCenterPlaywrightScraper(PlaywrightBaseScraper):
                 }
 
         except Exception as e:
-            print(f"Parse error: {e}")
+            logger.error(f"Parse error: {e}")
 
         return None
 
@@ -167,8 +170,8 @@ class PokemonCenterPlaywrightScraper(PlaywrightBaseScraper):
                     'status': status
                 }
 
-        except Exception:
-            pass
+        except Exception as e:
+            logger.error(f"Error: {e}")
 
         return None
 
@@ -177,7 +180,7 @@ if __name__ == '__main__':
     scraper = PokemonCenterPlaywrightScraper()
     data = scraper.scrape()
 
-    print(f"Has active lottery: {data.get('has_active_lottery')}")
-    print(f"Found {len(data['lotteries'])} entries")
+    logger.info(f"Has active lottery: {data.get('has_active_lottery')}")
+    logger.info(f"Found {len(data['lotteries'])} entries")
     for lottery in data['lotteries']:
-        print(f"  - {lottery['product'][:50]}... ({lottery['status']})")
+        logger.info(f"  - {lottery['product'][:50]}... ({lottery['status']})")

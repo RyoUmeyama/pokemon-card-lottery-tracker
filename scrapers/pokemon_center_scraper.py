@@ -5,6 +5,9 @@ import requests
 from bs4 import BeautifulSoup
 import json
 from datetime import datetime
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class PokemonCenterScraper:
@@ -20,7 +23,11 @@ class PokemonCenterScraper:
             response = requests.get(self.url, headers=self.headers, timeout=30)
             response.raise_for_status()
 
-            soup = BeautifulSoup(response.content, 'lxml')
+            try:
+                soup = BeautifulSoup(response.content, 'lxml')
+            except Exception:
+                # lxml not available, fallback to html.parser
+                soup = BeautifulSoup(response.content, 'html.parser')
 
             # 抽選情報を抽出
             lotteries = []
@@ -46,7 +53,7 @@ class PokemonCenterScraper:
             return result
 
         except Exception as e:
-            print(f"Error scraping pokemoncenter-online.com: {e}")
+            logger.error(f"Error scraping pokemoncenter-online.com: : {e}")
             return None
 
     def _parse_lottery_item(self, item):
@@ -79,7 +86,7 @@ class PokemonCenterScraper:
             return lottery if lottery['product_name'] else None
 
         except Exception as e:
-            print(f"Error parsing lottery item: {e}")
+            logger.error(f"Error parsing lottery item: : {e}")
             return None
 
 
@@ -92,6 +99,6 @@ if __name__ == '__main__':
         output_file = '../data/pokemon_center_latest.json'
         with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
-        print(f"Saved to {output_file}")
-        print(f"Has active lottery: {data['has_active_lottery']}")
-        print(f"Found {len(data['lotteries'])} lottery entries")
+        logger.info(f"Saved to {output_file}")
+        logger.info(f"Has active lottery: {data['has_active_lottery']}")
+        logger.info(f"Found {len(data['lotteries'])} lottery entries")
