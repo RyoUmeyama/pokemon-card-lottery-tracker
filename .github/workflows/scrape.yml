@@ -67,3 +67,20 @@ jobs:
           git config user.email "actions@github.com"
           git add data/
           git diff --quiet && git diff --staged --quiet || (git commit -m "Update lottery data $(date +'%Y-%m-%d %H:%M:%S')" && git push)
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          python -c "
+          import smtplib
+          from email.mime.text import MIMEText
+          msg = MIMEText('Pokemon Card Tracker workflow failed. Check: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}')
+          msg['Subject'] = '⚠️ Pokemon Card Tracker - Workflow Failed'
+          msg['From'] = '${{ secrets.SMTP_USERNAME }}'
+          msg['To'] = '${{ secrets.RECIPIENT_EMAIL }}'
+          server = smtplib.SMTP('${{ secrets.SMTP_SERVER }}', int('${{ secrets.SMTP_PORT }}'))
+          server.starttls()
+          server.login('${{ secrets.SMTP_USERNAME }}', '${{ secrets.SMTP_PASSWORD }}')
+          server.sendmail(msg['From'], msg['To'], msg.as_string())
+          server.quit()
+          "
