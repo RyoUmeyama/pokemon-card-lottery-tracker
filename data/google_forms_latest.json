@@ -1,29 +1,40 @@
 {
   "source": "google-forms",
-  "scraped_at": "2026-03-30T10:48:35.556749",
+  "scraped_at": "2026-03-30T10:58:54.491874",
   "forms": [
     {
       "form_name": "トレカプラザ55",
       "store": "トレカプラザ55通販",
       "url": "https://docs.google.com/forms/d/e/1FAIpQLSf5h7fCUFaxELstaVEK36zcjFgifqmmlkY8UsGCq_iiGs8bkQ/viewform",
-      "scraped_at": "2026-03-30T10:48:31.891443",
-      "form_title": "",
+      "scraped_at": "2026-03-30T10:58:32.950156",
+      "form_title": "ポケモンカードゲーム 3月再入荷商品 抽選販売応募フォーム",
       "form_description": "",
-      "form_status": "unknown",
-      "is_accepting": false,
-      "is_pokemon_card": false
+      "form_status": "accepting",
+      "is_accepting": true,
+      "is_pokemon_card": true
     },
     {
       "form_name": "ノジマオンライン",
       "store": "ノジマオンライン",
       "url": "https://docs.google.com/forms/d/e/1FAIpQLSdYHmBreNk1egfE7F5YsVs7LEDoVkhA5r2onCH4rZvxwpOmDg/viewform",
-      "scraped_at": "2026-03-30T10:48:35.555294",
-      "form_title": "",
+      "scraped_at": "2026-03-30T10:58:54.490271",
+      "form_title": "【2025.2.16～受付分】シークレット販売会 エントリー受付",
       "form_description": "",
-      "form_status": "closed",
-      "is_accepting": false,
-      "is_pokemon_card": false
+      "form_status": "accepting",
+      "is_accepting": true,
+      "is_pokemon_card": true
     }
   ],
-  "lotteries": []
+  "lotteries": [
+    {
+      "product": "ポケモンカードゲーム 3月再入荷商品 抽選販売応募フォーム",
+      "store": "トレカプラザ55",
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSf5h7fCUFaxELstaVEK36zcjFgifqmmlkY8UsGCq_iiGs8bkQ/viewform",
+      "description": "",
+      "status": "accepting",
+      "source": "google-forms",
+      "scraped_at": "2026-03-30T10:58:32.950156",
+      "expiry_status": "unknown"
+    }
+  ]
 }
