@@ -57,14 +57,28 @@ POKEMON_CARD_KEYWORDS = [
     'ポケセン', 'トレカ',
 ]
 
+EXCLUDE_KEYWORDS = [
+    'ぬいぐるみ', 'フィギュア', 'ギフト', 'Tシャツ', 'アパレル',
+    'ハイキュー', '一番くじ', 'グッズセット', 'ミスド', 'クッション',
+    'タオル', 'バッグ', 'ポーチ', '母の日', 'スリッパ', 'パジャマ',
+    'キーホルダー', 'ストラップ', 'マグカップ', 'お菓子', 'お弁当',
+]
+
 
 def filter_expired(items: list) -> list:
     """期限切れの抽選・予約を除外"""
+    import re
     from datetime import date
     today = date.today()
     filtered = []
     for item in items:
         end_date_str = item.get('end_date', '') or item.get('deadline', '') or ''
+        if not end_date_str:
+            period = item.get('period', '') or ''
+            if period:
+                m = re.search(r'[～〜\-→]\s*(\d{1,2}/\d{1,2})', period)
+                if m:
+                    end_date_str = m.group(1)
         if not end_date_str:
             item['expiry_status'] = 'unknown'
             filtered.append(item)
@@ -104,9 +118,13 @@ def filter_pokemon_card_only(items: list) -> list:
             str(item.get('description', '')),
         ]).lower()
         if any(kw.lower() in text for kw in POKEMON_CARD_KEYWORDS):
-            filtered.append(item)
+            # ポケカKWマッチ後、除外KWに該当したら除外
+            if any(kw.lower() in text for kw in EXCLUDE_KEYWORDS):
+                logger.info(f"非カード商品除外: {item.get('product', '?')}")
+            else:
+                filtered.append(item)
         else:
-            logger.debug(f"ポケカ外除外: {item.get('product', '?')}")
+            logger.info(f"ポケカ外除外: {item.get('product', '?')}")
     return filtered
 
 
