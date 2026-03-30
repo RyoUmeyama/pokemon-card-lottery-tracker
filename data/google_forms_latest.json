@@ -1,0 +1,29 @@
+{
+  "source": "google-forms",
+  "scraped_at": "2026-03-30T19:39:18.508910",
+  "forms": [
+    {
+      "form_name": "トレカプラザ55",
+      "store": "トレカプラザ55通販",
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSf5h7fCUFaxELstaVEK36zcjFgifqmmlkY8UsGCq_iiGs8bkQ/viewform",
+      "scraped_at": "2026-03-30T19:39:14.721630",
+      "form_title": "",
+      "form_description": "",
+      "form_status": "unknown",
+      "is_accepting": false,
+      "is_pokemon_card": false
+    },
+    {
+      "form_name": "ノジマオンライン",
+      "store": "ノジマオンライン",
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSdYHmBreNk1egfE7F5YsVs7LEDoVkhA5r2onCH4rZvxwpOmDg/viewform",
+      "scraped_at": "2026-03-30T19:39:18.507757",
+      "form_title": "",
+      "form_description": "",
+      "form_status": "closed",
+      "is_accepting": false,
+      "is_pokemon_card": false
+    }
+  ],
+  "lotteries": []
+}

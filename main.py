@@ -29,6 +29,8 @@ from scrapers.familymart_scraper import FamilyMartScraper
 from scrapers.surugaya_scraper import SurugayaScraper
 from scrapers.geo_scraper import GeoScraper
 from scrapers.tsutaya_scraper import TsutayaScraper
+from scrapers.dragonstar_scraper import DragonstarScraper
+from scrapers.google_forms_scraper import GoogleFormsScraper
 
 # logging設定
 # 今後の改善: config/logging.yaml を作成し、以下のように外部化することを推奨
@@ -65,38 +67,97 @@ EXCLUDE_KEYWORDS = [
 ]
 
 
+def _parse_date_flexible(date_str: str, today) -> Optional:
+    """日付文字列を柔軟にパース（多様な形式対応）"""
+    import re
+    from datetime import date
+    date_str = date_str.strip()
+
+    # パターン1: 4桁年 + 月 + 日（複数区切り対応）
+    m = re.match(r'^(\d{4})[/\-年](\d{1,2})[/\-月](\d{1,2})日?$', date_str)
+    if m:
+        try:
+            return date(int(m.group(1)), int(m.group(2)), int(m.group(3)))
+        except ValueError:
+            pass
+
+    # パターン2: 月 + 日のみ（曜日など末尾括弧は削除）
+    date_str_clean = re.sub(r'（[^）]+）', '', date_str)
+    m = re.match(r'^(\d{1,2})[/月](\d{1,2})日?$', date_str_clean)
+    if m:
+        try:
+            return date(today.year, int(m.group(1)), int(m.group(2)))
+        except ValueError:
+            pass
+
+    # パターン3: strptime での形式試行
+    for fmt in ['%Y/%m/%d', '%Y-%m-%d', '%Y年%m月%d日', '%m月%d日', '%m/%d']:
+        try:
+            parsed = datetime.strptime(date_str, fmt).date()
+            if fmt in ['%m月%d日', '%m/%d']:
+                parsed = parsed.replace(year=today.year)
+            return parsed
+        except ValueError:
+            continue
+
+    return None
+
+
+def _extract_year_from_string(text: str) -> Optional:
+    """文字列から年号を抽出（2025, 2026等）"""
+    import re
+    m = re.search(r'(20\d{2})(?:年)?', text)
+    if m:
+        return int(m.group(1))
+    return None
+
+
 def filter_expired(items: list) -> list:
-    """期限切れの抽選・予約を除外"""
+    """期限切れの抽選・予約を除外（改良版：年号チェック＋多様な日付形式対応）"""
     import re
     from datetime import date
     today = date.today()
     filtered = []
+
     for item in items:
+        # ステップ1: 年号チェック（2025年以前を完全除外）
         end_date_str = item.get('end_date', '') or item.get('deadline', '') or ''
+        start_date_str = item.get('start_date', '') or ''
+        period_str = item.get('period', '') or ''
+
+        # 年号抽出対象
+        check_strings = [end_date_str, start_date_str, period_str]
+        skip_item = False
+        for check_str in check_strings:
+            if check_str:
+                year = _extract_year_from_string(check_str)
+                if year and year <= 2025:
+                    logger.info(f"2025年以前除外: {item.get('product', '?')} (year: {year})")
+                    skip_item = True
+                    break
+
+        if skip_item:
+            continue
+
+        # ステップ2: 期限日を抽出（end_dateがない場合、periodから抽出）
         if not end_date_str:
-            period = item.get('period', '') or ''
-            if period:
+            if period_str:
                 # 範囲形式: 「1/15～2/20」「2025/1/15～2025/2/20」→ 終了日を抽出
-                m = re.search(r'[～〜\-→]\s*(\d{1,4}[/年]\d{1,2}(?:[/月]\d{1,2}日?)?)', period)
+                m = re.search(r'[～〜\-→]\s*(\d{1,4}[/年]\d{1,2}(?:[/月]\d{1,2}日?)?)', period_str)
                 if m:
                     end_date_str = m.group(1)
                 else:
-                    # 単一日付: period自体を日付として使う
-                    end_date_str = period.strip()
+                    end_date_str = period_str.strip()
+
         if not end_date_str:
             item['expiry_status'] = 'unknown'
             filtered.append(item)
             continue
+
+        # ステップ3: 柔軟な日付パース
         try:
-            parsed = None
-            for fmt in ['%Y/%m/%d', '%Y-%m-%d', '%Y年%m月%d日', '%m/%d', '%m月%d日']:
-                try:
-                    parsed = datetime.strptime(end_date_str.strip(), fmt).date()
-                    if fmt in ['%m/%d', '%m月%d日']:
-                        parsed = parsed.replace(year=today.year)
-                    break
-                except ValueError:
-                    continue
+            parsed = _parse_date_flexible(end_date_str, today)
+
             if parsed is None:
                 item['expiry_status'] = 'unparseable'
                 filtered.append(item)
@@ -105,9 +166,11 @@ def filter_expired(items: list) -> list:
                 filtered.append(item)
             else:
                 logger.info(f"期限切れ除外: {item.get('product', '?')} (end: {end_date_str})")
-        except Exception:
+        except Exception as e:
+            logger.warning(f"日付パースエラー: {end_date_str} - {e}")
             item['expiry_status'] = 'error'
             filtered.append(item)
+
     return filtered
 
 
@@ -334,6 +397,16 @@ def main() -> None:
             'num': 24, 'name': 'TSUTAYA',
             'class': TsutayaScraper, 'kwargs': {},
             'filename': 'data/tsutaya_latest.json'
+        },
+        {
+            'num': 25, 'name': 'Google Forms抽選',
+            'class': GoogleFormsScraper, 'kwargs': {},
+            'filename': 'data/google_forms_latest.json'
+        },
+        {
+            'num': 26, 'name': 'ドラゴンスター',
+            'class': DragonstarScraper, 'kwargs': {},
+            'filename': 'data/dragonstar_latest.json'
         },
     ]
 

@@ -47,29 +47,20 @@ class NyukaNowScraper:
                     article = soup.find('main') or soup.find(class_='content')
 
                 if article:
-                    # 見出しとテーブルのペアを探す
-                    h2_sections = article.find_all('h2')
+                    # 記事内の全てのテーブルを対象（h2フィルタなしで緩和）
+                    all_tables = article.find_all('table')
+                    for table in all_tables:
+                        lottery_info = self._parse_lottery_table(table)
+                        if lottery_info:
+                            lotteries.extend(lottery_info)
 
-                    for h2 in h2_sections:
-                        section_title = h2.get_text(strip=True)
-
-                        # 抽選・予約受付中のセクションのみを対象
-                        if '抽選' in section_title or '予約' in section_title:
-                            # このh2の後ろにあるテーブルを全て取得
-                            next_elem = h2.find_next_sibling()
-                            while next_elem and next_elem.name != 'h2':
-                                if next_elem.name == 'table':
-                                    lottery_info = self._parse_lottery_table(next_elem)
-                                    if lottery_info:
-                                        lotteries.extend(lottery_info)
-                                elif next_elem.name in ['h3', 'h4']:
-                                    # h3の後ろのテーブルも確認
-                                    h3_table = next_elem.find_next_sibling('table')
-                                    if h3_table:
-                                        lottery_info = self._parse_lottery_table(h3_table)
-                                        if lottery_info:
-                                            lotteries.extend(lottery_info)
-                                next_elem = next_elem.find_next_sibling()
+                    # テーブルがない場合はリスト形式(ul/li)も探す
+                    if not all_tables:
+                        ul_elements = article.find_all('ul')
+                        for ul in ul_elements:
+                            lottery_info = self._parse_lottery_list(ul)
+                            if lottery_info:
+                                lotteries.extend(lottery_info)
 
                 # 重複を除外（商品名とURLの組み合わせで判定）
                 unique_lotteries = []
@@ -165,9 +156,9 @@ class NyukaNowScraper:
                         else:
                             lottery['detail_url'] = url
 
-                    # 直接URLが取得できなかった（在庫切れなど）場合は除外
+                    # 直接URLが取得できなかった場合はnyuka-nowのURLをそのまま使う
                     if not lottery['detail_url'] or lottery['detail_url'] == '':
-                        continue
+                        lottery['detail_url'] = self.url  # nyuka-nowの記事URLを使用
 
                     # Amazon、Yahoo!ショッピング、駿河屋、エディオンを除外
                     store_text = lottery['store'].lower()
@@ -189,9 +180,17 @@ class NyukaNowScraper:
 
                     # 空のデータは除外
                     if lottery['store'] and lottery['product']:
-                        # ポケモンカード関連かどうか確認
+                        # ポケモンカード関連かどうか確認（緩和版）
                         product_text = (lottery['product'] + ' ' + lottery['store']).lower()
-                        if any(kw.lower() in product_text for kw in self.pokemon_keywords):
+
+                        # ポケモンキーワードが含まれているか確認
+                        has_pokemon_keyword = any(kw.lower() in product_text for kw in self.pokemon_keywords)
+
+                        # キーワードがなくても「カード」を含む場合は対象に
+                        if not has_pokemon_keyword and 'カード' in lottery['product']:
+                            has_pokemon_keyword = True
+
+                        if has_pokemon_keyword:
                             lotteries.append(lottery)
 
         return lotteries

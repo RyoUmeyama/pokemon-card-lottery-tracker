@@ -1,6 +1,91 @@
 {
   "source": "nyuka-now.com",
-  "scraped_at": "2026-03-30T05:26:01.973270",
+  "scraped_at": "2026-03-30T19:38:48.412755",
   "update_date": "2026-03-30",
-  "lotteries": []
+  "lotteries": [
+    {
+      "store": "対象商品",
+      "product": "ピカチュウ at the Museumプロモカード（ジャンボカード）",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://nyuka-now.com/archives/2459",
+      "status": "unknown",
+      "expiry_status": "unknown"
+    },
+    {
+      "store": "配布条件",
+      "product": "1/22追記・ロンドン自然史博物館のショップ（店頭）での購入特典としてプロモ配布・オンラインストアでの購入商品に付属はしない。・イギリス国内のポケモンカード公式店舗など小売店でも購入特典として配布予定あり",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://nyuka-now.com/archives/2459",
+      "status": "unknown",
+      "expiry_status": "unknown"
+    },
+    {
+      "store": "対象商品詳細",
+      "product": "・ポケモンカードゲーム MEGA 拡張パック ニンジャスピナー 1BOX（30パック入り）5,400円（税込）・おひとり様1～2BOXまで申込可能・商品受取日程：2026年4月16日(木)～4月19日(日)（10時～22時30分）・受取場所：POKÉMON CARD LOUNGE（SHIBUYA TSUTAYA 5F）・キャッシュレス決済のみ",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://nyuka-now.com/archives/2459",
+      "status": "unknown",
+      "expiry_status": "unknown"
+    },
+    {
+      "store": "詳細ページ",
+      "product": "ポケモンカードラウンジ渋谷店の詳細ページ",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://cloud-pass.jp/pr/841a66aa392a1d4b14660208979ddc1a508f8c09590a2f28f48cf24354f92e0b",
+      "status": "unknown",
+      "expiry_status": "unknown"
+    },
+    {
+      "store": "対象商品詳細",
+      "product": "・商品名：ポケモンカードゲームMEGA 拡張パック「ニンジャスピナー」・購入可能数：お一人様1BOX・販売価格：5,400円（税込）・応募費用：無料（¥0）・対象店舗：フルコンプ秋葉原店、フルコンプラジオ会館店、フルコンプ渋谷東口店、フルコンプ池袋店、フルコンプ横浜店、フルコンプ川崎店、フルコンプ本厚木店、フルコンプ千葉店・当選者は応募店舗にて店頭受取",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://nyuka-now.com/archives/2459",
+      "status": "unknown",
+      "expiry_status": "unknown"
+    },
+    {
+      "store": "応募条件",
+      "product": "・応募にはLivePocket会員登録が必要・応募時に「プレイヤーID」（0を含む10桁の数字）が必要（ログインIDとは別）。未取得の方はポケモンカードゲーム公式HPより取得・1人1回・1店舗のみ応募可能（重複応募は無効）・当選発表：マイページにてご確認（3月30日〜3月31日中）・購入受取期間：4月2日(木)〜4月5日(日)（期間外不可）・受取時に当選チケット（QRコード）と公的身分証明書の提示が必要・当選者本人のみ応募店舗にて購入可能（代理購入・譲渡不可）・スクリーンショット・画像・コピーによる提示は無効（マイチケットからQRコードを直接表示）",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://nyuka-now.com/archives/2459",
+      "status": "unknown",
+      "expiry_status": "unknown"
+    },
+    {
+      "store": "詳細ページ",
+      "product": "POKEMON CARD LOUNGE 渋谷店の詳細ページ",
+      "lottery_type": "",
+      "start_date": "",
+      "end_date": "",
+      "announcement_date": "",
+      "conditions": "",
+      "detail_url": "https://cloud-pass.jp/pr/2f2c66677d76fabed929056d4e879e8b1e7844ed99af92c75f401afe2001f01d",
+      "status": "unknown",
+      "expiry_status": "unknown"
+    }
+  ]
 }

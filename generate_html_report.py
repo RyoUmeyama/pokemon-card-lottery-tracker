@@ -25,7 +25,8 @@ def normalize_schema(data: Dict[str, Any]) -> Dict[str, Any]:
     for source in data.get('sources', []):
         normalized_source = {
             'source': source.get('source', 'unknown'),
-            'lotteries': []
+            'lotteries': [],
+            'upcoming_products': []
         }
 
         # タイムスタンプがあれば記録
@@ -47,6 +48,17 @@ def normalize_schema(data: Dict[str, Any]) -> Dict[str, Any]:
             # 不要フィールドを除去（status, _source など）
 
             normalized_source['lotteries'].append(normalized_lottery)
+
+        # 今後の発売予定情報のスキーマ統一
+        for upcoming in source.get('upcoming_products', []):
+            normalized_upcoming = {
+                'product_name': upcoming.get('product_name', ''),
+                'release_date': upcoming.get('release_date', ''),
+                'lottery_schedule': upcoming.get('lottery_schedule', ''),
+                'store': upcoming.get('store', ''),
+                'detail_url': upcoming.get('detail_url', ''),
+            }
+            normalized_source['upcoming_products'].append(normalized_upcoming)
 
         normalized_sources.append(normalized_source)
 
@@ -81,7 +93,7 @@ def parse_date(date_string: Any) -> Any:
 
 
 def cleanup_old_data(data: Dict[str, Any], days: int = 30) -> Dict[str, Any]:
-    """M6: 30日以上前のデータを削除"""
+    """M6: 30日以上前のデータを削除＆2025年以前のデータを非表示"""
     if 'timestamp' not in data:
         return data
 
@@ -91,6 +103,7 @@ def cleanup_old_data(data: Dict[str, Any], days: int = 30) -> Dict[str, Any]:
         return data
 
     cutoff_time = base_time - timedelta(days=days)
+    cutoff_year = 2025  # 2025年以前のデータを非表示
 
     for source in data.get('sources', []):
         if 'lotteries' not in source:
@@ -102,9 +115,14 @@ def cleanup_old_data(data: Dict[str, Any], days: int = 30) -> Dict[str, Any]:
             start_date_str = lottery.get('start_date', '')
             if start_date_str:
                 start_dt = parse_date(start_date_str)
-                if isinstance(start_dt, datetime) and start_dt >= cutoff_time:
-                    filtered_lotteries.append(lottery)
-                elif not isinstance(start_dt, datetime):
+                if isinstance(start_dt, datetime):
+                    # 年が2025以下のデータは完全に除外
+                    if start_dt.year <= cutoff_year:
+                        continue
+                    # 30日以内のデータのみ保持
+                    if start_dt >= cutoff_time:
+                        filtered_lotteries.append(lottery)
+                else:
                     # パース失敗の場合は保持
                     filtered_lotteries.append(lottery)
             else:
@@ -150,12 +168,16 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
 
     timestamp = datetime.fromisoformat(data['timestamp'])
 
-    # 全抽選情報を収集
+    # 全抽選情報と今後の発売予定を収集
     all_lotteries = []
+    all_upcoming = []
     for source in data['sources']:
         for lottery in source.get('lotteries', []):
             lottery['_source'] = source['source']
             all_lotteries.append(lottery)
+        for upcoming in source.get('upcoming_products', []):
+            upcoming['_source'] = source['source']
+            all_upcoming.append(upcoming)
 
     html_content = f"""<!DOCTYPE html>
 <html lang="ja">
@@ -369,6 +391,57 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
             margin-bottom: 20px;
         }}
 
+        .upcoming-section {{
+            background: #fffbf0;
+            padding: 30px;
+            border-bottom: 1px solid #e0e0e0;
+        }}
+
+        .upcoming-section h2 {{
+            color: #ff6b35;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }}
+
+        .upcoming-card {{
+            background: white;
+            border: 2px solid #ffb347;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }}
+
+        .upcoming-card:hover {{
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.15);
+            transform: translateY(-2px);
+            border-color: #ff6b35;
+        }}
+
+        .upcoming-card .product-name {{
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }}
+
+        .upcoming-card .date-badge {{
+            display: inline-block;
+            background: #ff6b35;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }}
+
+        .upcoming-card .schedule-info {{
+            color: #555;
+            margin: 10px 0;
+            line-height: 1.5;
+        }}
+
         footer {{
             background: #f8f9fa;
             padding: 20px;
@@ -423,7 +496,60 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
         <div class="filter-controls">
             <input type="text" id="searchBox" placeholder="🔍 商品名、店舗名、抽選形式で検索..." onkeyup="filterLotteries()">
         </div>
+"""
 
+    # 今後の発売予定セクション
+    if all_upcoming:
+        html_content += """
+        <div class="upcoming-section">
+            <h2>🗓️ 今後の発売予定・抽選予定</h2>
+"""
+        for upcoming in all_upcoming:
+            product_name = upcoming.get('product_name', '')
+            release_date = upcoming.get('release_date', '')
+            lottery_schedule = upcoming.get('lottery_schedule', '')
+            store = upcoming.get('store', '')
+            url = upcoming.get('detail_url', '')
+            source = upcoming.get('_source', 'unknown')
+
+            # XSS対策
+            product_name_escaped = html.escape(product_name)
+            release_date_escaped = html.escape(release_date)
+            lottery_schedule_escaped = html.escape(lottery_schedule)
+            store_escaped = html.escape(store)
+            source_escaped = html.escape(source)
+
+            html_content += f"""
+            <div class="upcoming-card">
+                <div class="product-name">📦 {product_name_escaped}</div>
+"""
+            if release_date:
+                html_content += f"""
+                <div class="date-badge">📅 発売予定: {release_date_escaped}</div>
+"""
+            if lottery_schedule:
+                html_content += f"""
+                <div class="schedule-info">🎯 抽選予定: {lottery_schedule_escaped}</div>
+"""
+            if store:
+                html_content += f"""
+                <div class="schedule-info">🏪 {store_escaped}</div>
+"""
+            html_content += f"""
+                <div class="schedule-info" style="font-size: 0.85em; color: #999;">📌 {source_escaped}</div>
+"""
+            if url and url.startswith('http'):
+                html_content += f"""
+                <a href="{html.escape(url)}" target="_blank">🔗 詳細を見る</a>
+"""
+            html_content += """
+            </div>
+"""
+        html_content += """
+        </div>
+"""
+
+    html_content += """
         <div class="lotteries" id="lotteriesList">
 """
 

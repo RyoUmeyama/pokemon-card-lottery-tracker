@@ -34,13 +34,22 @@ class GmailNotifier:
         # 抽選情報を集計
         total_lottery_count = 0
         total_reservation_count = 0
+        total_first_come_first_served = 0
+        total_upcoming = 0
         sources_summary = []
+        first_come_first_served_items = []
+        upcoming_products = all_lotteries_data.get('upcoming_products', [])
 
         for source in all_lotteries_data.get('sources', []):
             lottery_count = len(source.get('lotteries', []))
             reservation_count = len(source.get('reservations', []))
             total_lottery_count += lottery_count
             total_reservation_count += reservation_count
+
+            # 先着販売中の商品を抽出
+            fcfs_items = [item for item in source.get('lotteries', []) if item.get('first_come_first_served')]
+            total_first_come_first_served += len(fcfs_items)
+            first_come_first_served_items.extend(fcfs_items)
 
             if lottery_count > 0 or reservation_count > 0:
                 source_name = source.get('source', 'Unknown')
@@ -57,8 +66,16 @@ class GmailNotifier:
             logger.info("📭 抽選・予約情報がないため通知をスキップします")
             return True
 
+        total_upcoming = len(upcoming_products)
+
         # メール本文を作成
-        email_body = self._create_email_body(sources_summary, total_lottery_count, total_reservation_count)
+        email_body = self._create_email_body(
+            sources_summary,
+            total_lottery_count,
+            total_reservation_count,
+            first_come_first_served_items,
+            upcoming_products
+        )
 
         # メールを送信（リトライ機能付き: exponential backoff 2s, 4s, 8s）
         msg = MIMEMultipart('alternative')
@@ -67,9 +84,11 @@ class GmailNotifier:
             subject_parts.append(f'抽選{total_lottery_count}件')
         if total_reservation_count > 0:
             subject_parts.append(f'予約{total_reservation_count}件')
+        if total_upcoming > 0:
+            subject_parts.append(f'{total_upcoming}件予定')
         subject_date = datetime.now().strftime("%Y/%m/%d")
         msg['Subject'] = (
-            f'🎴 ポケモンカード情報 ({", ".join(subject_parts)}) - {subject_date}'
+            f'🎴 ポケモンカード情報 ({" / ".join(subject_parts)}) - {subject_date}'
         )
         msg['From'] = self.smtp_username
         msg['To'] = self.recipient
@@ -135,13 +154,20 @@ class GmailNotifier:
         except (ValueError, TypeError):
             return False
 
-    def _create_email_body(self, sources_summary, total_lottery_count, total_reservation_count):
+    def _create_email_body(self, sources_summary, total_lottery_count, total_reservation_count, first_come_first_served_items=None, upcoming_products=None):
         """メール本文（HTML）を作成"""
+        if first_come_first_served_items is None:
+            first_come_first_served_items = []
+        if upcoming_products is None:
+            upcoming_products = []
+
         summary_parts = []
         if total_lottery_count > 0:
             summary_parts.append(f'{total_lottery_count}件の抽選情報')
         if total_reservation_count > 0:
             summary_parts.append(f'{total_reservation_count}件の予約情報')
+        if len(upcoming_products) > 0:
+            summary_parts.append(f'{len(upcoming_products)}件の今後の発売予定')
 
         html = f"""
 <!DOCTYPE html>
@@ -300,6 +326,27 @@ class GmailNotifier:
         </div>
 """
 
+        # 先着販売中セクション
+        if first_come_first_served_items:
+            html += """
+        <div class="source-section" style="background: #fffacd; border-color: #ffd700;">
+            <div class="section-title" style="color: #d4af37;">🔥 先着販売中</div>
+"""
+            for item in first_come_first_served_items[:5]:
+                product = item.get('product', '')
+                store = item.get('store', '')
+                url = item.get('detail_url', '#')
+                html += f"""
+            <div class="lottery-item" style="border-left-color: #ffd700;">
+                <div class="store-name">🏪 {store}</div>
+                <div class="product-name">⚡ {product}</div>
+                <a href="{url}" class="detail-link" target="_blank">🔗 今すぐ購入</a>
+            </div>
+"""
+            html += """
+        </div>
+"""
+
         # 各ソースの情報を追加
         for source in sources_summary:
             source_count_parts = []
@@ -401,6 +448,34 @@ class GmailNotifier:
             </div>
 """
 
+            html += """
+        </div>
+"""
+
+        # 今後の発売予定セクション
+        if upcoming_products:
+            html += """
+        <div class="source-section" style="background: #f0f8ff; border-color: #4169e1;">
+            <div class="section-title" style="color: #4169e1;">📅 今後の発売予定</div>
+"""
+            for product in upcoming_products[:5]:
+                name = product.get('name', '')
+                release_date = product.get('release_date', '')
+                description = product.get('description', '')
+                url = product.get('url', '')
+                html += f"""
+            <div class="lottery-item" style="border-left-color: #4169e1;">
+                <div class="product-name">📦 {name}</div>
+"""
+                if release_date:
+                    html += f'                <div class="store-name">📅 発売予定: {release_date}</div>\n'
+                if description:
+                    html += f'                <div class="store-name">{description}</div>\n'
+                if url:
+                    html += f'                <a href="{url}" class="detail-link" target="_blank">🔗 詳細を見る</a>\n'
+                html += """
+            </div>
+"""
             html += """
         </div>
 """
