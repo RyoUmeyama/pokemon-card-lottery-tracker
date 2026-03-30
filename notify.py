@@ -16,6 +16,8 @@ logger = logging.getLogger(__name__)
 class GmailNotifier:
     def __init__(self):
         # 環境変数から認証情報を取得（SMTP設定）
+        # 注意: SMTP_PORT 587 の場合は STARTTLS、465 の場合は SMTP_SSL を使用
+        # SMTP_USE_SSL の設定を検討する場合は、send_notification メソッドを参照
         self.smtp_server = os.environ.get('SMTP_SERVER', 'smtp.gmail.com')
         self.smtp_port = int(os.environ.get('SMTP_PORT', '465'))
         self.smtp_username = os.environ.get('SMTP_USERNAME')
@@ -65,7 +67,10 @@ class GmailNotifier:
             subject_parts.append(f'抽選{total_lottery_count}件')
         if total_reservation_count > 0:
             subject_parts.append(f'予約{total_reservation_count}件')
-        msg['Subject'] = f'🎴 ポケモンカード情報 ({", ".join(subject_parts)}) - {datetime.now().strftime("%Y/%m/%d")}'
+        subject_date = datetime.now().strftime("%Y/%m/%d")
+        msg['Subject'] = (
+            f'🎴 ポケモンカード情報 ({", ".join(subject_parts)}) - {subject_date}'
+        )
         msg['From'] = self.smtp_username
         msg['To'] = self.recipient
 
@@ -117,6 +122,18 @@ class GmailNotifier:
                     return False
 
         return False
+
+    def _is_new(self, item_timestamp):
+        """アイテムが24時間以内に追加されたかチェック"""
+        if not item_timestamp:
+            return False
+        try:
+            from datetime import timedelta
+            item_time = datetime.fromisoformat(item_timestamp)
+            current_time = datetime.now()
+            return (current_time - item_time) < timedelta(hours=24)
+        except (ValueError, TypeError):
+            return False
 
     def _create_email_body(self, sources_summary, total_lottery_count, total_reservation_count):
         """メール本文（HTML）を作成"""
@@ -216,18 +233,34 @@ class GmailNotifier:
             margin-bottom: 5px;
             font-weight: bold;
         }}
+        .deadline-highlight {{
+            background-color: #fff5e6;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }}
+        .badge-new {{
+            background: #4CAF50;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+            margin-left: 5px;
+            display: inline-block;
+        }}
         .detail-link {{
             display: inline-block;
             margin-top: 10px;
-            padding: 8px 15px;
-            background: #667eea;
+            padding: 12px 24px;
+            background: #ff6b6b;
             color: white;
             text-decoration: none;
-            border-radius: 5px;
-            font-size: 14px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
         }}
         .detail-link:hover {{
-            background: #5568d3;
+            background: #ee5a5a;
         }}
         .section-title {{
             font-size: 18px;
@@ -288,15 +321,31 @@ class GmailNotifier:
                 html += """
             <div class="section-title">🎯 抽選情報</div>
 """
+                # deadline 情報を追加
+                html += """
+            <div style="margin-bottom: 15px; font-size: 14px; color: #718096;">
+                <p>⏰ <span class="deadline-highlight">期限間近の情報は黄色ハイライト</span>で表示されています</p>
+            </div>
+"""
                 for lottery in source['lotteries'][:5]:
                     store = lottery.get('store', '')
                     product = lottery.get('product', '')
                     detail_url = lottery.get('detail_url', '#')
+                    timestamp = lottery.get('timestamp', '')
+                    end_date = lottery.get('end_date', '')
+                    is_new = self._is_new(timestamp)
+                    new_badge = '<span class="badge-new">🆕 NEW</span>' if is_new else ''
+
+                    # P1: end_date をハイライト
+                    deadline_info = ''
+                    if end_date:
+                        deadline_info = f'<div style="margin-top: 5px;"><span class="deadline-highlight">📅 締切: {end_date}</span></div>'
 
                     html += f"""
             <div class="lottery-item">
                 <div class="store-name">🏪 {store}</div>
-                <div class="product-name">📦 {product}</div>
+                <div class="product-name">📦 {product}{new_badge}</div>
+                {deadline_info}
                 <a href="{detail_url}" class="detail-link" target="_blank">🔗 詳細を見る</a>
             </div>
 """
@@ -321,11 +370,17 @@ class GmailNotifier:
                     availability = reservation.get('availability', '')
                     url = reservation.get('url', '#')
                     release_date = reservation.get('release_date', '')
+                    timestamp = reservation.get('timestamp', '')
+                    is_new = self._is_new(timestamp)
+                    new_badge = '<span class="badge-new">🆕 NEW</span>' if is_new else ''
+
+                    # P4: 価格表示
+                    price_info = f'<div class="price">💰 {price}</div>' if price else ''
 
                     html += f"""
             <div class="reservation-item">
-                <div class="product-name">📦 {title}</div>
-                <div class="price">💰 {price}</div>
+                <div class="product-name">📦 {title}{new_badge}</div>
+                {price_info}
                 <div class="availability">✅ {availability}</div>
 """
                     if release_date:

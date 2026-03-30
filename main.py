@@ -5,6 +5,7 @@ import json
 import os
 import logging
 from datetime import datetime
+from typing import Optional, Dict, List, Any
 from scrapers.nyuka_now_scraper import NyukaNowScraper
 from scrapers.pokemon_center_scraper import PokemonCenterScraper
 from scrapers.pokemoncenter_playwright_scraper import PokemonCenterPlaywrightScraper
@@ -27,6 +28,12 @@ from scrapers.aeon_playwright_scraper import AeonPlaywrightScraper
 from scrapers.familymart_scraper import FamilyMartScraper
 
 # logging設定
+# 今後の改善: config/logging.yaml を作成し、以下のように外部化することを推奨
+# import logging.config
+# logging.config.fileConfig('config/logging.yaml')
+# ただし、現在はmain.pyで直接設定することで簡潔性を優先している。
+DETAIL_DISPLAY_THRESHOLD = 3
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -35,7 +42,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def load_previous_data(filename):
+def load_previous_data(filename: str) -> Optional[Dict[str, Any]]:
     """前回のデータを読み込み"""
     if os.path.exists(filename):
         with open(filename, 'r', encoding='utf-8') as f:
@@ -43,15 +50,25 @@ def load_previous_data(filename):
     return None
 
 
-def save_data(data, filename):
+def save_data(data: Dict[str, Any], filename: str) -> None:
     """データを保存"""
     os.makedirs(os.path.dirname(filename), exist_ok=True)
     with open(filename, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 
-def build_composite_key(item, data_type):
-    """URL+タイトルの複合キーを生成（重複排除用）"""
+def build_composite_key(item: Dict[str, Any], data_type: str) -> str:
+    """URL+タイトルの複合キーを生成（重複排除用）
+
+    Args:
+        item: スクレイパーから取得した抽選/予約情報辞書
+        data_type: 'lottery' または 'reservation'
+                  - 'lottery': product フィールドを使用
+                  - 'reservation': title フィールドを使用
+
+    Returns:
+        str: "{url}|{title}" 形式の複合キー（重複検出に使用）
+    """
     if data_type == 'lottery':
         url = item.get('url', '')
         title = item.get('product', '')
@@ -61,7 +78,7 @@ def build_composite_key(item, data_type):
     return f"{url}|{title}"
 
 
-def detect_changes(old_data, new_data, data_type='lottery'):
+def detect_changes(old_data: Optional[Dict[str, Any]], new_data: Dict[str, Any], data_type: str = 'lottery') -> tuple[bool, List[str]]:
     """変更を検出（URL+タイトル複合キー対応）"""
     if not old_data:
         return True, "初回実行"
@@ -80,7 +97,7 @@ def detect_changes(old_data, new_data, data_type='lottery'):
     new_items = {build_composite_key(item, data_type) for item in new_data.get(key_name, [])}
 
     added = new_items - old_items
-    if added and len(added) <= 3:
+    if added and len(added) <= DETAIL_DISPLAY_THRESHOLD:
         changes.append(f"新規: {len(added)}件")
     elif added:
         changes.append(f"新規: {len(added)}件")
@@ -92,7 +109,7 @@ def detect_changes(old_data, new_data, data_type='lottery'):
     return len(changes) > 0, changes
 
 
-def main():
+def main() -> None:
     """メイン処理"""
     logger.info("=" * 60)
     logger.info("ポケモンカード抽選情報収集開始")
@@ -123,9 +140,8 @@ def main():
         },
         {
             'num': 4, 'name': 'ポケモンセンター公式(Playwright)',
-            'class': PokemonCenterPlaywrightScraper, 'kwargs': {},
-            'filename': 'data/pokemon_center_pw_latest.json',
-            'skip_on_empty': True
+            'skip': True, 'reason': 'WAF/アクセス拒否 (cmd_219: 403)'
+            # BLOCKED: PokemonCenterPlaywrightScraper - 403 Forbidden
         },
         {
             'num': 5, 'name': 'Amazon',
@@ -146,8 +162,8 @@ def main():
         },
         {
             'num': 8, 'name': 'ビックカメラ',
-            'class': BiccameraPlaywrightScraper, 'kwargs': {},
-            'filename': 'data/biccamera_latest.json'
+            'skip': True, 'reason': 'Timeout (cmd_219: 000) - URL調査必要'
+            # BLOCKED: BiccameraPlaywrightScraper - URL接続タイムアウト
         },
         {
             'num': 9, 'name': 'X(Twitter)',
@@ -156,12 +172,12 @@ def main():
         },
         {
             'num': 10, 'name': 'ジョーシン',
-            'class': JoshinPlaywrightScraper, 'kwargs': {},
-            'filename': 'data/joshin_latest.json'
+            'skip': True, 'reason': 'Timeout (cmd_219: 000) - URL調査必要'
+            # BLOCKED: JoshinPlaywrightScraper - URL接続タイムアウト
         },
         {
             'num': 11, 'name': 'エディオン',
-            'class': EdionPlaywrightScraper, 'kwargs': {},
+            'class': EdionScraper, 'kwargs': {},
             'filename': 'data/edion_latest.json'
         },
         {

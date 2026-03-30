@@ -6,11 +6,16 @@ import html
 import logging
 from datetime import datetime, timedelta
 from pathlib import Path
+from typing import Dict, List, Any
 
 logger = logging.getLogger(__name__)
 
+# 定数定義
+DEFAULT_CLEANUP_DAYS = 30
+MAX_CONDITION_LENGTH = 200
 
-def normalize_schema(data):
+
+def normalize_schema(data: Dict[str, Any]) -> Dict[str, Any]:
     """H8: all_lotteries.json スキーマ整理
     - キー命名統一
     - 不要フィールド削除
@@ -51,7 +56,7 @@ def normalize_schema(data):
     }
 
 
-def parse_date(date_string):
+def parse_date(date_string: Any) -> Any:
     """M7: 日付文字列をdatetime形式に正規化（パース失敗時は元文字列保持）"""
     if not date_string or not isinstance(date_string, str):
         return date_string
@@ -75,7 +80,7 @@ def parse_date(date_string):
     return date_string
 
 
-def cleanup_old_data(data, days=30):
+def cleanup_old_data(data: Dict[str, Any], days: int = 30) -> Dict[str, Any]:
     """M6: 30日以上前のデータを削除"""
     if 'timestamp' not in data:
         return data
@@ -111,7 +116,7 @@ def cleanup_old_data(data, days=30):
     return data
 
 
-def load_data(filename='data/all_lotteries.json'):
+def load_data(filename: str = 'data/all_lotteries.json') -> Dict[str, Any]:
     """データを読み込み（スキーマ検証 + クリーンアップ付き）"""
     with open(filename, 'r', encoding='utf-8') as f:
         data = json.load(f)
@@ -132,7 +137,7 @@ def load_data(filename='data/all_lotteries.json'):
                     raise ValueError(f"Source[{i}].lotteries[{j}]: Missing required field 'product'")
 
     # M6: 30日以上前のデータを削除
-    data = cleanup_old_data(data, days=30)
+    data = cleanup_old_data(data, days=DEFAULT_CLEANUP_DAYS)
 
     # H8: スキーマ統一（キー命名統一 + 不要フィールド削除）
     data = normalize_schema(data)
@@ -140,7 +145,7 @@ def load_data(filename='data/all_lotteries.json'):
     return data
 
 
-def generate_html_report(data, output_file='data/lottery_report.html'):
+def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_report.html') -> None:
     """HTMLレポートを生成"""
 
     timestamp = datetime.fromisoformat(data['timestamp'])
@@ -483,7 +488,7 @@ def generate_html_report(data, output_file='data/lottery_report.html'):
             html_content += f"""
                 <div class="detail-row">
                     <div class="icon">ℹ️</div>
-                    <div class="content">{conditions_escaped[:200]}{'...' if len(conditions) > 200 else ''}</div>
+                    <div class="content">{conditions_escaped[:MAX_CONDITION_LENGTH]}{'...' if len(conditions) > MAX_CONDITION_LENGTH else ''}</div>
                 </div>
 """
 
@@ -559,7 +564,7 @@ def generate_html_report(data, output_file='data/lottery_report.html'):
     return output_file
 
 
-def main():
+def main() -> None:
     try:
         data = load_data()
         output_file = generate_html_report(data)

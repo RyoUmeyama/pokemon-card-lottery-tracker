@@ -28,6 +28,10 @@ class PlaywrightBaseScraper:
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:123.0) Gecko/20100101 Firefox/123.0',
     ]
 
+    # Playwright timeout設定（ミリ秒単位）
+    DEFAULT_TIMEOUT = 60000  # ページロード: 60秒
+    DEFAULT_NAVIGATION_TIMEOUT = 45000  # ナビゲーション: 45秒
+
     def __init__(self):
         self.pokemon_keywords = [
             'ポケモンカード', 'ポケカ', 'pokemon', 'ポケモン',
@@ -37,8 +41,8 @@ class PlaywrightBaseScraper:
             'ムニキスゼロ', 'MEGAドリーム', 'メガエルレイド', 'ロケット団',
             '抽選', '予約'
         ]
-        self.timeout = 60000  # 60秒に延長
-        self.navigation_timeout = 45000  # ナビゲーションタイムアウト
+        self.timeout = self.DEFAULT_TIMEOUT
+        self.navigation_timeout = self.DEFAULT_NAVIGATION_TIMEOUT
 
     def is_pokemon_card(self, text):
         """ポケモンカード関連かチェック"""
