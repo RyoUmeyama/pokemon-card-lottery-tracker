@@ -79,9 +79,11 @@ class GoogleFormsScraper(PlaywrightBaseScraper):
         }
 
         # フォームタイトルを取得（複数セレクタ試行）
-        title_elem = soup.find('div', {'class': 'OA0qFb'})
+        title_elem = soup.find('div', {'role': 'heading'})
         if not title_elem:
             title_elem = soup.find('h1')
+        if not title_elem:
+            title_elem = soup.find('div', {'class': 'OA0qFb'})
         if not title_elem:
             title_elem = soup.find('div', {'class': 'freebirdFormviewerViewHeaderTitleRequiredLegend'})
         if title_elem:
@@ -123,16 +125,15 @@ class GoogleFormsScraper(PlaywrightBaseScraper):
             # フォームが取得でき、かつ受付中の場合のみ出力
             if form['is_accepting']:
                 lottery_item = {
-                    'product': form['form_title'] or form['form_name'],
-                    'store': form['store'],
-                    'form_name': form['form_name'],
+                    'product': form['form_title'] if form['form_title'] else form['form_name'],
+                    'store': form['form_name'],  # form_name をstore として使用
+                    'url': form['url'],  # フォームURL
                     'description': form['form_description'],
-                    'url': form['url'],
                     'status': form['form_status'],
                     'source': 'google-forms',
                     'scraped_at': form['scraped_at']
                 }
                 lotteries.append(lottery_item)
-                logger.info(f"Added lottery: {lottery_item['product']} from {form['store']}")
+                logger.info(f"Added lottery: {lottery_item['product']} from {lottery_item['store']}")
 
         return lotteries
