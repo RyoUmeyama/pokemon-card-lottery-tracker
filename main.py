@@ -175,9 +175,23 @@ def filter_expired(items: list) -> list:
 
 
 def filter_pokemon_card_only(items: list) -> list:
-    """ポケモンカード関連のみ残す"""
+    """ポケモンカード関連のみ残す
+
+    ホワイトリスト: ポケカ専門ショップ（ドラゴンスター等）は自動通過
+    """
+    # ポケカ専門ショップのホワイトリスト（キーワード不要で通す）
+    WHITELIST_STORES = ['ドラゴンスター']
+
     filtered = []
     for item in items:
+        store = item.get('store', '')
+
+        # ホワイトリスト対象は自動通過
+        if any(store_name in store for store_name in WHITELIST_STORES):
+            filtered.append(item)
+            continue
+
+        # それ以外はキーワードチェック
         text = ' '.join([
             str(item.get('product', '')),
             str(item.get('product_name', '')),

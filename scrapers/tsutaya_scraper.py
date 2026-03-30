@@ -17,7 +17,7 @@ class TsutayaScraper:
         # TSUTAYAオンラインのポケモンカード検索ページ
         self.base_url = "https://tsutaya.tsite.jp"
         self.search_urls = [
-            "https://tsutaya.tsite.jp/search/?keyword=ポケモンカード&category=game_card",
+            "https://tsutaya.tsite.jp/search/?keyword=ポケモンカード&sort=release_date&area=&status=",
         ]
         self.headers = {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
