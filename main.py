@@ -76,9 +76,13 @@ def filter_expired(items: list) -> list:
         if not end_date_str:
             period = item.get('period', '') or ''
             if period:
-                m = re.search(r'[～〜\-→]\s*(\d{1,2}/\d{1,2})', period)
+                # 範囲形式: 「1/15～2/20」「2025/1/15～2025/2/20」→ 終了日を抽出
+                m = re.search(r'[～〜\-→]\s*(\d{1,4}[/年]\d{1,2}(?:[/月]\d{1,2}日?)?)', period)
                 if m:
                     end_date_str = m.group(1)
+                else:
+                    # 単一日付: period自体を日付として使う
+                    end_date_str = period.strip()
         if not end_date_str:
             item['expiry_status'] = 'unknown'
             filtered.append(item)
