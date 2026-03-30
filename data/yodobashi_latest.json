@@ -1,6 +1,7 @@
 {
   "source": "ヨドバシカメラ (limited.yodobashi.com)",
   "source_url": "https://limited.yodobashi.com/",
-  "scraped_at": "2026-03-30T19:39:22.120678",
-  "lotteries": []
+  "scraped_at": "2026-03-30T10:46:28.133910",
+  "lotteries": [],
+  "error": "HTTP 403"
 }
