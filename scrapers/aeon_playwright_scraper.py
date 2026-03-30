@@ -85,6 +85,10 @@ class AeonPlaywrightScraper(PlaywrightBaseScraper):
             if not self.is_pokemon_card(text):
                 return None
 
+            # 抽選・予約・キャンペーン関連のキーワードがあるか確認
+            if not any(kw in text for kw in ['抽選', '予約', 'キャンペーン', '販売', 'BOX', 'パック']):
+                return None
+
             link = item.find('a', href=True)
             href = link.get('href', '') if link else ''
 

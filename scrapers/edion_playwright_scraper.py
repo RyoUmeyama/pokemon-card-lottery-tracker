@@ -32,10 +32,22 @@ class EdionPlaywrightScraper(PlaywrightBaseScraper):
         try:
             content = self.run_async(self.fetch_page_content(
                 self.search_url,
-                wait_selector='.item'
+                wait_selector='.item',
+                extra_wait=5
             ))
 
             if content:
+                # 403/404 エラーチェック
+                if any(code in content for code in ['403', '404', 'Not Found', 'Forbidden']):
+                    logger.warning("エディオン: HTTPエラー（403/404）")
+                    return {
+                        'source': self.source_name,
+                        'source_url': self.search_url,
+                        'scraped_at': datetime.now().isoformat(),
+                        'lotteries': [],
+                        'error': 'HTTP Error (403/404)'
+                    }
+
                 lotteries = self._parse_content(content)
         except Exception as e:
             logger.error(f"Error scraping edion: {e}")

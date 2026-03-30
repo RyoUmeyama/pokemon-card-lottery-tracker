@@ -85,6 +85,10 @@ class AmiAmiPlaywrightScraper(PlaywrightBaseScraper):
             if not self.is_pokemon_card(text):
                 return None
 
+            # あみあみはBOX/パック/予約商品に限定
+            if not any(kw in text for kw in ['BOX', 'ボックス', 'パック', '予約', '販売', '発売']):
+                return None
+
             link = item.find('a', href=True)
             href = link.get('href', '') if link else ''
 

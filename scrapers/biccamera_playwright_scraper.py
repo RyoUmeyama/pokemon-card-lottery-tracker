@@ -30,13 +30,35 @@ class BiccameraPlaywrightScraper(PlaywrightBaseScraper):
         lotteries = []
 
         try:
+            # ビックカメラはタイムアウト長めに設定（重い場合がある）
             content = self.run_async(self.fetch_page_content(
                 self.search_url,
-                wait_selector='.bcs_item'
+                wait_selector='.bcs_item',
+                extra_wait=8
             ))
 
             if content:
+                # 403エラーページのチェック
+                if '403' in content or 'forbidden' in content.lower():
+                    logger.warning("ビックカメラ: 403 Forbidden - アクセス制限中")
+                    return {
+                        'source': self.source_name,
+                        'source_url': self.search_url,
+                        'scraped_at': datetime.now().isoformat(),
+                        'lotteries': [],
+                        'error': '403 Forbidden'
+                    }
+
                 lotteries = self._parse_content(content)
+        except TimeoutError:
+            logger.error("Error scraping biccamera: Timeout - site may be slow or blocking")
+            return {
+                'source': self.source_name,
+                'source_url': self.search_url,
+                'scraped_at': datetime.now().isoformat(),
+                'lotteries': [],
+                'error': 'Timeout'
+            }
         except Exception as e:
             logger.error(f"Error scraping biccamera: {e}")
 

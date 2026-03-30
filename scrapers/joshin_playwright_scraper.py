@@ -30,13 +30,35 @@ class JoshinPlaywrightScraper(PlaywrightBaseScraper):
         lotteries = []
 
         try:
+            # ジョーシンもタイムアウト長めに設定
             content = self.run_async(self.fetch_page_content(
                 self.search_url,
-                wait_selector='.item'
+                wait_selector='.item',
+                extra_wait=8
             ))
 
             if content:
+                # 404/403 チェック
+                if any(code in content for code in ['404', 'Not Found', '403', 'Forbidden']):
+                    logger.warning("ジョーシン: アクセスエラー（404/403）")
+                    return {
+                        'source': self.source_name,
+                        'source_url': self.search_url,
+                        'scraped_at': datetime.now().isoformat(),
+                        'lotteries': [],
+                        'error': 'HTTP Error'
+                    }
+
                 lotteries = self._parse_content(content)
+        except TimeoutError:
+            logger.error("Error scraping joshin: Timeout")
+            return {
+                'source': self.source_name,
+                'source_url': self.search_url,
+                'scraped_at': datetime.now().isoformat(),
+                'lotteries': [],
+                'error': 'Timeout'
+            }
         except Exception as e:
             logger.error(f"Error scraping joshin: {e}")
 

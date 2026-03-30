@@ -19,6 +19,11 @@ class NyukaNowScraper:
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'
         }
         self.check_availability = check_availability  # 在庫チェックを行うかどうか
+        self.pokemon_keywords = [
+            'ポケモンカード', 'ポケカ', 'pokemon', 'ポケモン',
+            'スカーレット', 'バイオレット', 'テラスタル',
+            'シャイニートレジャー', 'バトルマスター', 'TCG'
+        ]
 
     def scrape(self):
         """抽選情報をスクレイピング（リトライ機構付き）"""
@@ -184,7 +189,10 @@ class NyukaNowScraper:
 
                     # 空のデータは除外
                     if lottery['store'] and lottery['product']:
-                        lotteries.append(lottery)
+                        # ポケモンカード関連かどうか確認
+                        product_text = (lottery['product'] + ' ' + lottery['store']).lower()
+                        if any(kw.lower() in product_text for kw in self.pokemon_keywords):
+                            lotteries.append(lottery)
 
         return lotteries
 

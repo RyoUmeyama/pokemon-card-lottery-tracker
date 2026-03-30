@@ -25,6 +25,11 @@ class AmazonReservationScraper:
             'Connection': 'keep-alive',
             'Upgrade-Insecure-Requests': '1'
         }
+        self.pokemon_keywords = [
+            'ポケモンカード', 'ポケカ', 'pokemon', 'Pokemon', 'ポケモン',
+            'スカーレット', 'バイオレット', 'テラスタル',
+            'シャイニートレジャー', 'バトルマスター', 'TCG'
+        ]
 
     def scrape(self):
         """ポケモンカードの予約情報をスクレイピング"""
@@ -111,7 +116,7 @@ class AmazonReservationScraper:
             title = title_elem.get_text(strip=True)
 
             # ポケモンカード関連でない場合はスキップ
-            if not any(keyword in title for keyword in ['ポケモンカード', 'ポケカ', 'Pokemon']):
+            if not any(keyword in title for keyword in self.pokemon_keywords):
                 return None
 
             # URL

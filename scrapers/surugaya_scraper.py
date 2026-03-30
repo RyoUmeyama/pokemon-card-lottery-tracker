@@ -1,0 +1,130 @@
+"""
+駿河屋（suruga-ya.jp）からのポケモンカード抽選・予約情報スクレイピング
+"""
+import requests
+from bs4 import BeautifulSoup
+import json
+from datetime import datetime
+import logging
+import time
+import re
+
+logger = logging.getLogger(__name__)
+
+
+class SurugayaScraper:
+    def __init__(self):
+        # 駿河屋のポケモンカード商品検索ページ
+        self.base_url = "https://www.suruga-ya.jp"
+        self.search_urls = [
+            "https://www.suruga-ya.jp/search?keyword=ポケモンカード&cabinet=1&sort=popular&condition=all"
+        ]
+        self.headers = {
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+            'Accept-Language': 'ja,en-US;q=0.7,en;q=0.3',
+            'Referer': 'https://www.suruga-ya.jp',
+        }
+        self.pokemon_keywords = [
+            'ポケモンカード', 'ポケカ', 'pokemon', 'ポケモン',
+            'スカーレット', 'バイオレット', 'ナイトワンダラー',
+            'テラスタル', 'クリムゾンヘイズ', 'シャイニートレジャー',
+            'レイジングサーフ', 'バトルマスター', 'TCG'
+        ]
+
+    def scrape(self):
+        """抽選・予約情報をスクレイピング"""
+        all_lotteries = []
+        all_reservations = []
+
+        for url in self.search_urls:
+            try:
+                logger.info(f"Scraping {url}")
+                lotteries, reservations = self._scrape_url(url)
+                all_lotteries.extend(lotteries)
+                all_reservations.extend(reservations)
+            except Exception as e:
+                logger.warning(f"Error scraping {url}: {e}")
+                continue
+
+        return {
+            "source": "suruga-ya.jp",
+            "scraped_at": datetime.now().isoformat(),
+            "lotteries": all_lotteries,
+            "reservations": all_reservations
+        }
+
+    def _scrape_url(self, url):
+        """指定URLをスクレイピング"""
+        lotteries = []
+        reservations = []
+
+        try:
+            response = requests.get(url, headers=self.headers, timeout=15)
+            if response.status_code != 200:
+                logger.warning(f"HTTP Error: {response.status_code}")
+                return lotteries, reservations
+
+            soup = BeautifulSoup(response.content, 'html.parser')
+
+            # 商品一覧を取得
+            product_items = soup.select('div.item_box, div.product-item')
+
+            for item in product_items:
+                try:
+                    # 商品名を取得
+                    name_elem = item.select_one('a.item_name, a.product-name')
+                    if not name_elem:
+                        continue
+
+                    product_name = name_elem.get_text(strip=True)
+
+                    # ポケモンキーワードフィルタ
+                    if not any(keyword in product_name for keyword in self.pokemon_keywords):
+                        continue
+
+                    # リンク取得
+                    product_link = name_elem.get('href', '')
+                    if product_link and not product_link.startswith('http'):
+                        product_link = self.base_url + product_link
+
+                    # 価格取得
+                    price_elem = item.select_one('span.price, span.sale-price')
+                    price = price_elem.get_text(strip=True) if price_elem else "価格未定"
+
+                    # ステータス確認（予約中/販売中/抽選中等）
+                    status_elem = item.select_one('span.status, span.badge')
+                    status = status_elem.get_text(strip=True) if status_elem else "未定"
+
+                    # 予約か抽選かを判定
+                    if '予約' in status or '予約受付' in status:
+                        reservations.append({
+                            'title': product_name,
+                            'price': price,
+                            'availability': status,
+                            'url': product_link,
+                            'source': 'suruga-ya.jp',
+                            'scraped_at': datetime.now().isoformat()
+                        })
+                    elif '抽選' in status or '抽選受付' in status:
+                        lotteries.append({
+                            'product': product_name,
+                            'price': price,
+                            'status': status,
+                            'url': product_link,
+                            'store': '駿河屋',
+                            'source': 'suruga-ya.jp',
+                            'scraped_at': datetime.now().isoformat()
+                        })
+                except Exception as e:
+                    logger.debug(f"Error parsing product item: {e}")
+                    continue
+
+            logger.info(f"Found {len(lotteries)} lottery entries and {len(reservations)} reservations")
+
+        except requests.RequestException as e:
+            logger.error(f"Request error: {e}")
+        except Exception as e:
+            logger.error(f"Scraping error: {e}")
+
+        return lotteries, reservations

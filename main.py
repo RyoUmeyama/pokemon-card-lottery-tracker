@@ -26,6 +26,9 @@ from scrapers.seven_eleven_scraper import SevenElevenScraper
 from scrapers.lawson_scraper import LawsonScraper
 from scrapers.aeon_playwright_scraper import AeonPlaywrightScraper
 from scrapers.familymart_scraper import FamilyMartScraper
+from scrapers.surugaya_scraper import SurugayaScraper
+from scrapers.geo_scraper import GeoScraper
+from scrapers.tsutaya_scraper import TsutayaScraper
 
 # logging設定
 # 今後の改善: config/logging.yaml を作成し、以下のように外部化することを推奨
@@ -40,6 +43,71 @@ logging.basicConfig(
     handlers=[logging.StreamHandler()]
 )
 logger = logging.getLogger(__name__)
+
+# ポケカキーワード定義
+POKEMON_CARD_KEYWORDS = [
+    'ポケモンカード', 'ポケカ', 'pokemon card', 'pokemon tcg',
+    'ポケモン カード', 'ポケモンtcg',
+    'スカーレット', 'バイオレット', 'テラスタル',
+    'バトルマスター', 'シャイニートレジャー',
+    'サイバージャッジ', 'ワイルドフォース',
+    'クリムゾンヘイズ', 'ステラミラクル',
+    'レイジングサーフ', 'ナイトワンダラー',
+    '変幻の仮面', 'プロモカード',
+    'ポケセン', 'トレカ',
+]
+
+
+def filter_expired(items: list) -> list:
+    """期限切れの抽選・予約を除外"""
+    from datetime import date
+    today = date.today()
+    filtered = []
+    for item in items:
+        end_date_str = item.get('end_date', '') or item.get('deadline', '') or ''
+        if not end_date_str:
+            item['expiry_status'] = 'unknown'
+            filtered.append(item)
+            continue
+        try:
+            parsed = None
+            for fmt in ['%Y/%m/%d', '%Y-%m-%d', '%Y年%m月%d日', '%m/%d', '%m月%d日']:
+                try:
+                    parsed = datetime.strptime(end_date_str.strip(), fmt).date()
+                    if fmt in ['%m/%d', '%m月%d日']:
+                        parsed = parsed.replace(year=today.year)
+                    break
+                except ValueError:
+                    continue
+            if parsed is None:
+                item['expiry_status'] = 'unparseable'
+                filtered.append(item)
+            elif parsed >= today:
+                item['expiry_status'] = 'active'
+                filtered.append(item)
+            else:
+                logger.info(f"期限切れ除外: {item.get('product', '?')} (end: {end_date_str})")
+        except Exception:
+            item['expiry_status'] = 'error'
+            filtered.append(item)
+    return filtered
+
+
+def filter_pokemon_card_only(items: list) -> list:
+    """ポケモンカード関連のみ残す"""
+    filtered = []
+    for item in items:
+        text = ' '.join([
+            str(item.get('product', '')),
+            str(item.get('product_name', '')),
+            str(item.get('title', '')),
+            str(item.get('description', '')),
+        ]).lower()
+        if any(kw.lower() in text for kw in POKEMON_CARD_KEYWORDS):
+            filtered.append(item)
+        else:
+            logger.debug(f"ポケカ外除外: {item.get('product', '?')}")
+    return filtered
 
 
 def load_previous_data(filename: str) -> Optional[Dict[str, Any]]:
@@ -230,6 +298,21 @@ def main() -> None:
             'class': FamilyMartScraper, 'kwargs': {},
             'filename': 'data/familymart_latest.json'
         },
+        {
+            'num': 22, 'name': '駿河屋',
+            'class': SurugayaScraper, 'kwargs': {},
+            'filename': 'data/surugaya_latest.json'
+        },
+        {
+            'num': 23, 'name': 'GEO',
+            'class': GeoScraper, 'kwargs': {},
+            'filename': 'data/geo_latest.json'
+        },
+        {
+            'num': 24, 'name': 'TSUTAYA',
+            'class': TsutayaScraper, 'kwargs': {},
+            'filename': 'data/tsutaya_latest.json'
+        },
     ]
 
     total_sources = len(scrapers)
@@ -261,10 +344,19 @@ def main() -> None:
             logger.info(f"✓ {name}: 抽選なし（スキップ）")
             continue
 
+        # フィルタ適用（抽選データの場合）
+        data_type = config.get('data_type', 'lottery')
+        if data_type == 'lottery':
+            before_count = len(data.get('lotteries', []))
+            data['lotteries'] = filter_pokemon_card_only(data.get('lotteries', []))
+            data['lotteries'] = filter_expired(data.get('lotteries', []))
+            after_count = len(data.get('lotteries', []))
+            if before_count > after_count:
+                logger.info(f"  フィルタ適用: {before_count}件 → {after_count}件")
+
         all_results['sources'].append(data)
 
         # 件数表示
-        data_type = config.get('data_type', 'lottery')
         key = 'reservations' if data_type == 'reservation' else 'lotteries'
         count = len(data.get(key, []))
         label = '予約' if data_type == 'reservation' else '抽選'

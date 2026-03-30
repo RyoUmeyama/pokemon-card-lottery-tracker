@@ -105,6 +105,10 @@ class PokemonCenterPlaywrightScraper(PlaywrightBaseScraper):
             if not text or len(text) < 10:
                 return None
 
+            # ポケモンカード関連かチェック（必須）
+            if not self.is_pokemon_card(text):
+                return None
+
             link = item.find('a', href=True) if item.name != 'a' else item
             href = link.get('href', '') if link else ''
 
@@ -149,6 +153,10 @@ class PokemonCenterPlaywrightScraper(PlaywrightBaseScraper):
     def _parse_lottery_link(self, link, href, text):
         """リンクから抽選情報を抽出"""
         try:
+            # ポケモンカード関連かチェック（フィルタリング）
+            if not self.is_pokemon_card(text):
+                return None
+
             if not href.startswith('http'):
                 href = self.base_url + href
 
