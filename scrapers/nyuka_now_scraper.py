@@ -80,6 +80,8 @@ class NyukaNowScraper:
                     key = (lottery.get('product', ''), lottery.get('detail_url', ''))
                     if key not in seen:
                         seen.add(key)
+                        # 各lottery itemに source フィールドを追加
+                        lottery['source'] = 'nyuka-now.com'
                         unique_lotteries.append(lottery)
 
                 result = {
@@ -151,11 +153,11 @@ class NyukaNowScraper:
         """テーブルから抽選情報を抽出"""
         lotteries = []
 
-        # テーブルの前にあるh3タグから商品名を取得
-        product_name = ''
+        # テーブルの前にあるh3タグから店舗名を取得
+        store_name = ''
         h3 = table.find_previous('h3')
         if h3:
-            product_name = h3.get_text(strip=True)
+            store_name = h3.get_text(strip=True)
 
         rows = table.find_all('tr')
 
@@ -163,23 +165,30 @@ class NyukaNowScraper:
             cells = row.find_all(['td', 'th'])
 
             # 最低限のセル数をチェック
-            if len(cells) >= 2:
+            if len(cells) >= 1:
                 cell_texts = [c.get_text(strip=True) for c in cells]
 
-                # ヘッダー行を除外（th のみのセルはヘッダー）
+                # ヘッダー行を除外（thタグのみの行はヘッダー：全セルがth）
                 is_header = all(cell.name == 'th' for cell in cells)
                 if is_header:
                     continue
 
-                # 店舗名と商品情報を抽出
-                store = cell_texts[0] if len(cell_texts) > 0 else ''
-                product_text = cell_texts[1] if len(cell_texts) > 1 else ''
+                # 最初のセルがthの場合、それはラベル（スキップしてtdデータのみを使う）
+                first_cell_is_th = cells[0].name == 'th' if cells else False
+                if first_cell_is_th:
+                    # th + td の構造：h3は店舗名、cell_texts[1]は商品情報
+                    store = store_name  # h3 から取得した店舗名を使う
+                    product = cell_texts[1] if len(cell_texts) > 1 else ''
+                else:
+                    # 通常の td のみの行：h3は店舗名、cell_texts[1]は商品情報
+                    store = store_name  # h3 から取得した店舗名を使う
+                    product = cell_texts[1] if len(cell_texts) > 1 else ''
 
                 # 店舗と商品の両方があれば抽出対象
-                if store and product_text:
+                if store and product:
                     lottery = {
                         'store': store,
-                        'product': product_name if product_name else product_text,
+                        'product': product,
                         'lottery_type': '',
                         'start_date': '',
                         'end_date': cell_texts[4] if len(cell_texts) > 4 else '',
@@ -235,9 +244,9 @@ class NyukaNowScraper:
                         continue
 
                     # 中身がない情報を除外（ヘッダー行など）
-                    if lottery['store'] in ['販売開始日時', '店舗/サイト名', '']:
+                    if lottery['store'] in ['販売開始日時', '店舗/サイト名', '対象商品', '店舗', 'Store', '']:
                         continue
-                    if lottery['product'] in ['詳細', '商品名', '']:
+                    if lottery['product'] in ['詳細', '商品名', '商品', 'Product', '']:
                         continue
 
                     # 空のデータは除外

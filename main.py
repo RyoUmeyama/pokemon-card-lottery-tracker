@@ -182,12 +182,21 @@ def filter_pokemon_card_only(items: list) -> list:
     # ポケカ専門ショップのホワイトリスト（キーワード不要で通す）
     WHITELIST_STORES = ['ドラゴンスター']
 
+    # 抽選情報集約サイトのホワイトリスト（複数商品を一覧にするため、全て通す）
+    WHITELIST_SOURCES = ['nyuka-now.com']
+
     filtered = []
     for item in items:
         store = item.get('store', '')
+        source = item.get('source', '')
 
         # ホワイトリスト対象は自動通過
         if any(store_name in store for store_name in WHITELIST_STORES):
+            filtered.append(item)
+            continue
+
+        # ホワイトリストソースも自動通過
+        if any(src in source for src in WHITELIST_SOURCES):
             filtered.append(item)
             continue
 
