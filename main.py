@@ -419,7 +419,8 @@ def main() -> None:
         {
             'num': 24, 'name': 'TSUTAYA',
             'class': TsutayaScraper, 'kwargs': {},
-            'filename': 'data/tsutaya_latest.json'
+            'filename': 'data/tsutaya_latest.json',
+            'skip': True, 'reason': '404エラー対応'
         },
         {
             'num': 25, 'name': 'Google Forms抽選',

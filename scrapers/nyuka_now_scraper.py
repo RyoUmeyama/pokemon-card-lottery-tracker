@@ -77,6 +77,15 @@ class NyukaNowScraper:
                 unique_lotteries = []
                 seen = set()
                 for lottery in lotteries:
+                    # 最小限の品質フィルター
+                    # (a) product が空の場合は除外
+                    if not lottery.get('product', ''):
+                        continue
+
+                    # (b) store が空の場合は除外
+                    if not lottery.get('store', ''):
+                        continue
+
                     key = (lottery.get('product', ''), lottery.get('detail_url', ''))
                     if key not in seen:
                         seen.add(key)

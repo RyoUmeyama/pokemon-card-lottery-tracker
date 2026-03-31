@@ -1,122 +1,486 @@
 {
-  "timestamp": "2026-03-31T01:15:01.001696",
+  "timestamp": "2026-03-31T10:27:31.876589",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2026-03-31T01:15:01.923787",
+      "scraped_at": "2026-03-31T10:28:15.322767",
       "update_date": "2026-03-31",
-      "lotteries": []
+      "lotteries": [
+        {
+          "store": "ノジマオンライン",
+          "product": "シークレット販売会対象商品（複数選択可能、複数IDでのエントリー無効）・ポケモンカードゲーム関連・ワンピースカードゲーム関連・ドラゴンボール超カードゲーム フュージョンワールド関連・その他、注目商品（ゲーム系に限らず）",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "ポケモン×ロンドン自然史博物館コラボ",
+          "product": "ピカチュウ at the Museumプロモカード（ジャンボカード）",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "ポケモン×ロンドン自然史博物館コラボ",
+          "product": "2026年1月26日から4月19日までロンドン自然史博物館、海外ポケモンセンターまたはオンラインショップでも販売予定",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "ポケモン×ロンドン自然史博物館コラボ",
+          "product": "先着配布",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "ポケモン×ロンドン自然史博物館コラボ",
+          "product": "1月26日(月)",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "ポケモン×ロンドン自然史博物館コラボ",
+          "product": "1/22追記・ロンドン自然史博物館のショップ（店頭）での購入特典としてプロモ配布・オンラインストアでの購入商品に付属はしない。・イギリス国内のポケモンカード公式店舗など小売店でも購入特典として配布予定あり",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "ポケモンカードラウンジ渋谷店",
+          "product": "・ポケモンカードゲーム MEGA 拡張パック ニンジャスピナー 1BOX（30パック入り）5,400円（税込）・おひとり様1～2BOXまで申込可能・商品受取日程：2026年4月16日(木)～4月19日(日)（10時～22時30分）・受取場所：POKÉMON CARD LOUNGE（SHIBUYA TSUTAYA 5F）・キャッシュレス決済のみ",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "ポケモンカードラウンジ渋谷店",
+          "product": "WEB抽選受付（当選者には店頭販売）",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "ポケモンカードラウンジ渋谷店",
+          "product": "3月27日(金)10:00",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "ポケモンカードラウンジ渋谷店",
+          "product": "3月29日(日)23:59",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "closed",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "ポケモンカードラウンジ渋谷店",
+          "product": "4月6日 18時以降順次",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "ポケモンカードラウンジ渋谷店",
+          "product": "・当選後の受取時に顔写真付き本人確認書類の提示が必要・当選者ご本人のみ購入可（代理不可）・おひとり様1回限りのエントリー・3歳未満への販売不可・商品の返品・交換・変更・日時変更不可・指定日に来店できない場合は受取不可・CLOUD PASSマイページよりチケット画面をご提示（スクリーンショット不可）",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "ポケモンカードラウンジ渋谷店",
+          "product": "ポケモンカードラウンジ渋谷店の詳細ページ",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://cloud-pass.jp/pr/841a66aa392a1d4b14660208979ddc1a508f8c09590a2f28f48cf24354f92e0b",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "フルコンプ 一部店舗",
+          "product": "・商品名：ポケモンカードゲームMEGA 拡張パック「ニンジャスピナー」・購入可能数：お一人様1BOX・販売価格：5,400円（税込）・応募費用：無料（¥0）・対象店舗：フルコンプ秋葉原店、フルコンプラジオ会館店、フルコンプ渋谷東口店、フルコンプ池袋店、フルコンプ横浜店、フルコンプ川崎店、フルコンプ本厚木店、フルコンプ千葉店・当選者は応募店舗にて店頭受取",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "フルコンプ 一部店舗",
+          "product": "・応募にはLivePocket会員登録が必要・応募時に「プレイヤーID」（0を含む10桁の数字）が必要（ログインIDとは別）。未取得の方はポケモンカードゲーム公式HPより取得・1人1回・1店舗のみ応募可能（重複応募は無効）・当選発表：マイページにてご確認（3月30日〜3月31日中）・購入受取期間：4月2日(木)〜4月5日(日)（期間外不可）・受取時に当選チケット（QRコード）と公的身分証明書の提示が必要・当選者本人のみ応募店舗にて購入可能（代理購入・譲渡不可）・スクリーンショット・画像・コピーによる提示は無効（マイチケットからQRコードを直接表示）",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "ジョーシン（アプリ）",
+          "product": "ジョーシンアプリのマイページ＞店舗限定キャンペーンエントリーより応募が可能です※ジョーシンカードに購入履歴がある会員が対象",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "TCGショップ193各店",
+          "product": "3月21日(土)12:00",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "TCGショップ193各店",
+          "product": "3月24日(火)20:00",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "closed",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "TCGショップ193各店",
+          "product": "2025年12月31日までに入会している193会員限定",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "TCGショップ193各店",
+          "product": "対象店舗：名駅太閤店、大須店、ザザシティ浜松店、秋葉原店、日本橋店",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "TCGショップ193各店",
+          "product": "TCGショップ193各店の詳細ページ",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://docs.google.com/forms/d/e/1FAIpQLSfJqzKABEtFkfxnK-u2A1ltdOiJ9wKmF-GeHeOmdshSIPceBQ/viewform",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "POKEMON CARD LOUNGE 渋谷店",
+          "product": "・スタートデッキ100 バトルコレクション 1点 891円（税込）・1人1～3点まで申込可能・商品受取日程：2026年4月10日（金）〜12日（日）10時〜22時30分・受取場所：POKÉMON CARD LOUNGE（SHIBUYA TSUTAYA 5F）・キャッシュレス決済のみ",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "POKEMON CARD LOUNGE 渋谷店",
+          "product": "3月20日(金)10:00",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "POKEMON CARD LOUNGE 渋谷店",
+          "product": "3月22日(日)23:59",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "closed",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "POKEMON CARD LOUNGE 渋谷店",
+          "product": "4月3日 18時以降順次",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "POKEMON CARD LOUNGE 渋谷店",
+          "product": "・受取時に顔写真付き本人確認書類の提示が必要（運転免許証・マイナンバーカード・パスポート等）・おひとり様1回限りのエントリー・3歳未満への販売不可・当選後のキャンセル・数量変更・受取日変更不可・当日チケット画面（CLOUD PASSマイページ）の提示が必要（スクリーンショット不可）・@cloud-pass.jpのドメイン受信設定を事前に行うこと",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "POKEMON CARD LOUNGE 渋谷店",
+          "product": "POKEMON CARD LOUNGE 渋谷店の詳細ページ",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://cloud-pass.jp/pr/2f2c66677d76fabed929056d4e879e8b1e7844ed99af92c75f401afe2001f01d",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "イエローサブマリン各店",
+          "product": "各店掲示のポスターより申込みページへ指定期間内の最低購入金額300円以上のレシートが必要。▼販売店舗イエローサブマリン　新宿店https://twitter.com/YS_SHINJYUKUイエローサブマリン　池袋ゲームショップhttps://twitter.com/YS_IKEBUKUROイエローサブマリン 秋葉原ラジオ会館本店https://twitter.com/YS_AKIHABARAGAMイエローサブマリン　立川店https://twitter.com/YS_TACHIKAWAイエローサブマリン プレイソフトhttps://twitter.com/YS_PLAYSOFTイエローサブマリン横浜店https://twitter.com/YS_YOKOHAMAイエローサブマリン横浜ムービル店https://twitter.com/YS_MOVILイエローサブマリン川崎店https://twitter.com/kawasak16976953イエローサブマリン町田GAME SHOPhttps://twitter.com/machida19イエローサブマリン千葉ゲームショップhttps://twitter.com/chibagameイエローサブマリン柏マルイ店https://twitter.com/YS_KASHIWAイエローサブマリン札幌GAME SHOP TCGフロアhttps://twitter.com/YS_SAPPORO1イエローサブマリン広島店https://twitter.com/YS_HIROSHIMAGSイエローサブマリン三宮店https://twitter.com/YS_SANNNOMIYAイエローサブマリン名古屋GAMESHOPhttps://twitter.com/YS_NAGOYAGAMEイエローサブマリン京都店https://twitter.com/YS_KYOTOイエローサブマリン姫路店https://twitter.com/YS_HIMEJIイエローサブマリン マジッカーズ福岡店https://twitter.com/YS_M_FUKUOKA※詳細は各店舗のツイートをご確認ください。",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://twitter.com/YS_SHINJYUKU",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        }
+      ]
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-03-31T01:15:13.378236",
+      "scraped_at": "2026-03-31T10:28:16.594871",
       "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2026-03-31T01:15:14.262057",
+      "scraped_at": "2026-03-31T10:28:16.804939",
       "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2026-03-31T01:15:20.796248",
+      "scraped_at": "2026-03-31T10:28:23.455784",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-03-31T01:15:45.609116",
+      "scraped_at": "2026-03-31T10:28:48.513113",
       "reservations": []
     },
     {
       "source": "ヨドバシカメラ (limited.yodobashi.com)",
       "source_url": "https://limited.yodobashi.com/",
-      "scraped_at": "2026-03-31T01:15:46.893623",
-      "lotteries": [],
-      "error": "HTTP 403"
+      "scraped_at": "2026-03-31T10:28:50.038260",
+      "lotteries": []
     },
     {
       "source": "X (Twitter) 公式アカウント",
-      "scraped_at": "2026-03-31T01:15:46.895129",
+      "scraped_at": "2026-03-31T10:28:50.040240",
       "lotteries": [],
       "error": "X API credentials not configured or tweepy not installed"
     },
     {
       "source": "エディオン (edion.com)",
       "source_url": "https://www.edion.com/detail.html?p_cd=00077889999",
-      "scraped_at": "2026-03-31T01:15:49.509120",
+      "scraped_at": "2026-03-31T10:28:52.790924",
       "lotteries": []
     },
     {
       "source": "ケーズデンキ (ksdenki.co.jp)",
       "source_url": null,
-      "scraped_at": "2026-03-31T01:15:49.509727",
+      "scraped_at": "2026-03-31T10:28:52.792842",
       "lotteries": []
     },
     {
       "source": "ノジマオンライン (online.nojima.co.jp)",
       "source_url": null,
-      "scraped_at": "2026-03-31T01:15:49.510095",
+      "scraped_at": "2026-03-31T10:28:52.793772",
       "lotteries": []
     },
     {
       "source": "イエローサブマリン (yellowsubmarine.co.jp)",
       "source_url": "https://www.yellowsubmarine.co.jp/",
-      "scraped_at": "2026-03-31T01:15:52.039725",
+      "scraped_at": "2026-03-31T10:28:54.471316",
       "lotteries": []
     },
     {
       "source": "カードショップセラ (cardshopserra.jp)",
       "source_url": "https://www.cardshopserra.jp/",
-      "scraped_at": "2026-03-31T01:15:52.040491",
+      "scraped_at": "2026-03-31T10:28:54.471620",
       "lotteries": [],
       "note": "DNS解決エラーのため現在無効化"
     },
     {
       "source": "セブンネットショッピング (7net.omni7.jp)",
       "source_url": "https://7net.omni7.jp/search/?keyword=ポケモンカード&searchKeywordFlg=1",
-      "scraped_at": "2026-03-31T01:15:57.147901",
+      "scraped_at": "2026-03-31T10:28:54.723481",
       "lotteries": []
     },
     {
       "source": "ローソン HMV (hmv.co.jp)",
       "source_url": "https://www.hmv.co.jp/search/?category=ALL&keyword=ポケモンカード",
-      "scraped_at": "2026-03-31T01:17:19.890366",
+      "scraped_at": "2026-03-31T10:30:16.711771",
       "lotteries": []
     },
     {
       "source": "イオン (aeonretail.jp)",
       "source_url": "https://www.aeonretail.jp/campaign/",
-      "scraped_at": "2026-03-31T01:17:37.350470",
+      "scraped_at": "2026-03-31T10:30:37.683852",
       "lotteries": []
     },
     {
       "source": "ファミリーマート (family.co.jp)",
       "source_url": "https://www.family.co.jp/campaign.html",
-      "scraped_at": "2026-03-31T01:17:39.461099",
+      "scraped_at": "2026-03-31T10:30:38.975828",
       "lotteries": []
     },
     {
       "source": "suruga-ya.jp",
-      "scraped_at": "2026-03-31T01:17:39.875998",
+      "scraped_at": "2026-03-31T10:30:40.507080",
       "lotteries": [],
       "reservations": []
     },
     {
       "source": "geo-online.co.jp",
-      "scraped_at": "2026-03-31T01:17:45.985004",
+      "scraped_at": "2026-03-31T10:30:41.118525",
       "lotteries": [],
       "reservations": []
     },
     {
       "source": "google-forms",
-      "scraped_at": "2026-03-31T01:17:59.142841",
+      "scraped_at": "2026-03-31T10:30:55.069184",
       "forms": [
         {
           "form_name": "トレカプラザ55",
           "store": "トレカプラザ55通販",
           "url": "https://docs.google.com/forms/d/e/1FAIpQLSf5h7fCUFaxELstaVEK36zcjFgifqmmlkY8UsGCq_iiGs8bkQ/viewform",
-          "scraped_at": "2026-03-31T01:17:52.579715",
+          "scraped_at": "2026-03-31T10:30:47.884945",
           "form_title": "ポケモンカードゲーム 3月再入荷商品 抽選販売応募フォーム",
           "form_description": "",
           "form_status": "accepting",
@@ -127,7 +491,7 @@
           "form_name": "ノジマオンライン",
           "store": "ノジマオンライン",
           "url": "https://docs.google.com/forms/d/e/1FAIpQLSdYHmBreNk1egfE7F5YsVs7LEDoVkhA5r2onCH4rZvxwpOmDg/viewform",
-          "scraped_at": "2026-03-31T01:17:59.140437",
+          "scraped_at": "2026-03-31T10:30:55.066806",
           "form_title": "【2025.2.16～受付分】シークレット販売会 エントリー受付",
           "form_description": "",
           "form_status": "accepting",
@@ -144,7 +508,7 @@
           "status": "accepting",
           "is_accepting": true,
           "source": "google-forms",
-          "scraped_at": "2026-03-31T01:17:52.579715",
+          "scraped_at": "2026-03-31T10:30:47.884945",
           "expiry_status": "unknown"
         }
       ]
@@ -152,19 +516,8 @@
     {
       "source": "ドラゴンスター (dorasuta.membercard.jp)",
       "source_url": "https://dorasuta.membercard.jp/lottery",
-      "scraped_at": "2026-03-31T01:18:09.185121",
-      "lotteries": [
-        {
-          "store": "ドラゴンスター",
-          "product": "抽選商品一覧",
-          "lottery_type": "抽選",
-          "period": "2026/03/30",
-          "price": "",
-          "detail_url": "https://dorasuta.membercard.jp/#",
-          "status": "closed",
-          "source": "ドラゴンスター (dorasuta.membercard.jp)"
-        }
-      ]
+      "scraped_at": "2026-03-31T10:31:04.301821",
+      "lotteries": []
     }
   ]
 }
