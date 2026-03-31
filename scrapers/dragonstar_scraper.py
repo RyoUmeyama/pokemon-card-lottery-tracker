@@ -67,13 +67,15 @@ class DragonstarScraper(PlaywrightBaseScraper):
                 lotteries.append(lottery)
 
         # コンテナで見つからない場合はリンクから探す
+        # ドラゴンスターはポケカ専門店なので、キーワードチェックなしで全リンク対象
         if not lotteries:
             links = soup.find_all('a', href=True)
             for link in links:
                 text = link.get_text(strip=True)
                 href = link.get('href', '')
 
-                if self.is_pokemon_card(text) and href:
+                # キーワードチェックをスキップ（ドラゴンスター専門店）
+                if href and len(text) >= 5:
                     lottery = self._parse_link(link, href, text)
                     if lottery:
                         lotteries.append(lottery)
@@ -84,9 +86,6 @@ class DragonstarScraper(PlaywrightBaseScraper):
         """抽選アイテムから情報を抽出"""
         try:
             text = item.get_text(strip=True)
-
-            if not self.is_pokemon_card(text):
-                return None
 
             # リンクを取得
             link = item.find('a', href=True)
@@ -108,10 +107,12 @@ class DragonstarScraper(PlaywrightBaseScraper):
                 # テキストから商品名を推定
                 lines = [line.strip() for line in text.split('\n') if line.strip()]
                 for line in lines:
-                    if self.is_pokemon_card(line) and len(line) >= 5:
+                    if len(line) >= 5:
                         product_name = line[:150]
                         break
 
+            # ドラゴンスターはポケカ専門店なので、キーワードチェックをスキップ
+            # （フィルタリングはmain.pyで実施）
             price = self.extract_price(text)
             period = self.extract_period(text)
             status = self.determine_status(text)
@@ -148,6 +149,8 @@ class DragonstarScraper(PlaywrightBaseScraper):
             period = self.extract_period(parent_text)
             status = self.determine_status(parent_text)
 
+            # ドラゴンスターはポケカ専門店なので、キーワードチェックをスキップ
+            # テキスト長チェックのみ実施
             if len(text) >= 5:
                 return {
                     'store': 'ドラゴンスター',

@@ -41,13 +41,24 @@ class NyukaNowScraper:
                 # 記事の更新日時を取得
                 update_date = self._extract_update_date(soup)
 
-                # 記事本文を取得
+                # 記事本文を取得（複数のセレクタを試行）
                 article = soup.find('article')
                 if not article:
-                    article = soup.find('main') or soup.find(class_='content')
+                    article = soup.find('main')
+                if not article:
+                    article = soup.find(class_='content')
+                if not article:
+                    article = soup.find(class_='post-content')
+                if not article:
+                    article = soup.find(class_='entry-content')
+                if not article:
+                    article = soup.find(id='post-content')
+                if not article:
+                    # 全体を対象にする
+                    article = soup
 
                 if article:
-                    # 記事内の全てのテーブルを対象（h2フィルタなしで緩和）
+                    # 全テーブルを対象に解析（シンプル化）
                     all_tables = article.find_all('table')
                     for table in all_tables:
                         lottery_info = self._parse_lottery_table(table)
@@ -101,9 +112,51 @@ class NyukaNowScraper:
                 return f"{date_match.group(1)}-{date_match.group(2):0>2}-{date_match.group(3):0>2}"
         return None
 
+    def _parse_accordion_table(self, table, product_name):
+        """accordion構造（h3 + table）から抽選情報を抽出"""
+        lotteries = []
+        rows = table.find_all('tr')
+
+        for row in rows:
+            cells = row.find_all(['td', 'th'])
+            if len(cells) >= 2:
+                # 最初のセル（th）が店舗名、2番目のセル（td）が商品リンク
+                store_name = cells[0].get_text(strip=True) if len(cells) > 0 else ''
+                product_link = cells[1].find('a') if len(cells) > 1 else None
+
+                if store_name and product_link:
+                    link_text = product_link.get_text(strip=True)
+                    link_href = product_link.get('href', '')
+
+                    lottery = {
+                        'store': store_name,
+                        'product': product_name,
+                        'lottery_type': '',
+                        'start_date': '',
+                        'end_date': '',
+                        'announcement_date': '',
+                        'conditions': '',
+                        'detail_url': link_href,
+                        'status': 'active'
+                    }
+
+                    # 除外店舗チェック
+                    if 'amazon' not in store_name.lower() and 'yahoo' not in store_name.lower() and \
+                       '駿河屋' not in store_name and 'エディオン' not in store_name:
+                        lotteries.append(lottery)
+
+        return lotteries
+
     def _parse_lottery_table(self, table):
         """テーブルから抽選情報を抽出"""
         lotteries = []
+
+        # テーブルの前にあるh3タグから商品名を取得
+        product_name = ''
+        h3 = table.find_previous('h3')
+        if h3:
+            product_name = h3.get_text(strip=True)
+
         rows = table.find_all('tr')
 
         for row in rows:
@@ -113,13 +166,22 @@ class NyukaNowScraper:
             if len(cells) >= 2:
                 cell_texts = [c.get_text(strip=True) for c in cells]
 
-                # データ行かヘッダー行かを判定（ヘッダーは除外）
-                if any(text for text in cell_texts if text and not any(header in text for header in ['対象商品', '抽選形式', '開始日', '終了日'])):
+                # ヘッダー行を除外（th のみのセルはヘッダー）
+                is_header = all(cell.name == 'th' for cell in cells)
+                if is_header:
+                    continue
+
+                # 店舗名と商品情報を抽出
+                store = cell_texts[0] if len(cell_texts) > 0 else ''
+                product_text = cell_texts[1] if len(cell_texts) > 1 else ''
+
+                # 店舗と商品の両方があれば抽出対象
+                if store and product_text:
                     lottery = {
-                        'store': cell_texts[0] if len(cell_texts) > 0 else '',
-                        'product': cell_texts[1] if len(cell_texts) > 1 else '',
-                        'lottery_type': cell_texts[2] if len(cell_texts) > 2 else '',
-                        'start_date': cell_texts[3] if len(cell_texts) > 3 else '',
+                        'store': store,
+                        'product': product_name if product_name else product_text,
+                        'lottery_type': '',
+                        'start_date': '',
                         'end_date': cell_texts[4] if len(cell_texts) > 4 else '',
                         'announcement_date': cell_texts[5] if len(cell_texts) > 5 else '',
                         'conditions': cell_texts[6] if len(cell_texts) > 6 else '',

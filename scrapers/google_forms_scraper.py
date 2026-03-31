@@ -58,7 +58,7 @@ class GoogleFormsScraper(PlaywrightBaseScraper):
             wait_for_js=True,
             scroll=False,
             extra_wait=5,
-            wait_selector='[role="form"]'  # フォーム要素の出現を待機
+            wait_selector='[role="form"], form, [class*="form"]'  # フォーム要素の複数検出
         ))
 
         if not content:
@@ -74,8 +74,8 @@ class GoogleFormsScraper(PlaywrightBaseScraper):
             'scraped_at': datetime.now().isoformat(),
             'form_title': '',
             'form_description': '',
-            'form_status': 'accepting',  # デフォルトをacceptingに変更
-            'is_accepting': True  # デフォルトをTrueに変更
+            'form_status': 'accepting',  # デフォルトをacceptingに設定
+            'is_accepting': True  # デフォルトをTrueに設定
         }
 
         # フォームタイトルを取得（複数セレクタ試行）
@@ -86,6 +86,9 @@ class GoogleFormsScraper(PlaywrightBaseScraper):
             title_elem = soup.find('div', {'class': 'OA0qFb'})
         if not title_elem:
             title_elem = soup.find('div', {'class': 'freebirdFormviewerViewHeaderTitleRequiredLegend'})
+        if not title_elem:
+            # より広いセレクタで検索
+            title_elem = soup.find(['h1', 'h2'], class_=lambda x: x and 'title' in str(x).lower())
         if title_elem:
             form_data['form_title'] = title_elem.get_text(strip=True)
 
@@ -93,6 +96,9 @@ class GoogleFormsScraper(PlaywrightBaseScraper):
         description_elem = soup.find('div', {'class': 'EWp5xe'})
         if not description_elem:
             description_elem = soup.find('div', {'class': 'freebirdFormviewerViewHeaderDescription'})
+        if not description_elem:
+            # より広いセレクタで検索
+            description_elem = soup.find('div', class_=lambda x: x and 'description' in str(x).lower())
         if description_elem:
             form_data['form_description'] = description_elem.get_text(strip=True)
 
@@ -100,20 +106,29 @@ class GoogleFormsScraper(PlaywrightBaseScraper):
         page_text = soup.get_text(separator=' ', strip=True).lower()
 
         # 受付終了判定（終了キーワードがあれば閉鎖）
-        if any(keyword in page_text for keyword in ['受付終了', '終了しました', 'closed form', 'form is closed']):
+        # より確実な閉鎖判定
+        closed_keywords = ['受付終了', '終了しました', 'closed form', 'form is closed',
+                          '応募は終了', 'この form はもう受け付けていません']
+        if any(keyword in page_text for keyword in closed_keywords):
             form_data['form_status'] = 'closed'
             form_data['is_accepting'] = False
         else:
-            # フォーム要素が存在すれば受付中と判断
-            if soup.find('[role="form"]') or soup.find('form') or 'input' in str(soup):
+            # フォーム要素が存在するか確認
+            form_element = soup.find('[role="form"]') or soup.find('form') or soup.find('input')
+            if form_element:
                 form_data['form_status'] = 'accepting'
                 form_data['is_accepting'] = True
             else:
-                form_data['form_status'] = 'unknown'
-                form_data['is_accepting'] = False
+                # コンテンツが取得されていれば受付中と仮定
+                if len(page_text) > 100:
+                    form_data['form_status'] = 'accepting'
+                    form_data['is_accepting'] = True
+                else:
+                    form_data['form_status'] = 'unknown'
+                    form_data['is_accepting'] = False
 
-        # ポケモンカード関連のキーワード検出（デフォルトはTrue）
-        form_data['is_pokemon_card'] = True  # Google Formsスクレイパーなので全て抽選対象
+        # ポケモンカード関連のキーワード検出（Google Formsスクレイパーなので常にTrue）
+        form_data['is_pokemon_card'] = True
 
         return form_data
 
@@ -122,18 +137,22 @@ class GoogleFormsScraper(PlaywrightBaseScraper):
         lotteries = []
 
         for form in forms:
-            # フォームが取得でき、かつ受付中の場合のみ出力
-            if form['is_accepting']:
+            # フォームタイトルまたはフォーム名があれば抽選情報として追加
+            # is_accepting=Falseでも、タイトルがあれば情報を保持する
+            product_name = form['form_title'] if form['form_title'] else form['form_name']
+
+            if product_name:  # タイトルまたはフォーム名があれば追加
                 lottery_item = {
-                    'product': form['form_title'] if form['form_title'] else form['form_name'],
-                    'store': form['form_name'],  # form_name をstore として使用
-                    'url': form['url'],  # フォームURL
+                    'product': product_name,
+                    'store': form['store'],  # store_name を使用（より正確）
+                    'url': form['url'],
                     'description': form['form_description'],
                     'status': form['form_status'],
+                    'is_accepting': form['is_accepting'],
                     'source': 'google-forms',
                     'scraped_at': form['scraped_at']
                 }
                 lotteries.append(lottery_item)
-                logger.info(f"Added lottery: {lottery_item['product']} from {lottery_item['store']}")
+                logger.info(f"Added lottery: {lottery_item['product']} from {lottery_item['store']} (status: {form['form_status']})")
 
         return lotteries
