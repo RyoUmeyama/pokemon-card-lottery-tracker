@@ -31,6 +31,7 @@ from scrapers.geo_scraper import GeoScraper
 from scrapers.tsutaya_scraper import TsutayaScraper
 from scrapers.dragonstar_scraper import DragonstarScraper
 from scrapers.google_forms_scraper import GoogleFormsScraper
+from scrapers.gamepedia_scraper import GamepediaScraper
 
 # logging設定
 # 今後の改善: config/logging.yaml を作成し、以下のように外部化することを推奨
@@ -199,7 +200,7 @@ def filter_pokemon_card_only(items: list) -> list:
     WHITELIST_STORES = []  # ドラゴンスター削除
 
     # 抽選情報集約サイトのホワイトリスト（複数商品を一覧にするため、全て通す）
-    WHITELIST_SOURCES = ['nyuka-now.com']
+    WHITELIST_SOURCES = ['nyuka-now.com', 'gamepedia.jp']
 
     filtered = []
     for item in items:
@@ -449,6 +450,12 @@ def main() -> None:
             'class': DragonstarScraper, 'kwargs': {},
             'filename': 'data/dragonstar_latest.json'
         },
+        {
+            'num': 27, 'name': 'Gamepedia（ポケセン情報取得用）',
+            'class': GamepediaScraper, 'kwargs': {},
+            'filename': 'data/gamepedia_latest.json',
+            'skip': False
+        },
     ]
 
     total_sources = len(scrapers)
@@ -483,6 +490,11 @@ def main() -> None:
         # フィルタ適用（抽選データの場合）
         data_type = config.get('data_type', 'lottery')
         if data_type == 'lottery':
+            # 各 item に source を付与（filter関数で source を参照するため）
+            for item in data.get('lotteries', []):
+                if 'source' not in item:
+                    item['source'] = data.get('source', '')
+
             before_count = len(data.get('lotteries', []))
             data['lotteries'] = filter_pokemon_card_only(data.get('lotteries', []))
             data['lotteries'] = filter_expired(data.get('lotteries', []))
@@ -517,6 +529,14 @@ def main() -> None:
     total_lotteries = sum(len(s.get('lotteries', [])) for s in all_results['sources'])
     total_reservations = sum(len(s.get('reservations', [])) for s in all_results['sources'])
     logger.info(f"\n合計: {total_lotteries}件の抽選情報、{total_reservations}件の予約情報を収集")
+
+    # URL検証（notify呼び出し前）
+    logger.info("\n🔗 detail_url検証を実行中...")
+    import subprocess
+    result = subprocess.run(['python3', 'scripts/verify_urls.py', '--remove'], capture_output=True, text=True)
+    print(result.stdout)
+    if result.returncode != 0:
+        logger.warning("URLチェックで無効なURLが検出されました")
 
     # Gmail通知
     if os.environ.get('ENABLE_EMAIL_NOTIFICATION') == 'true':

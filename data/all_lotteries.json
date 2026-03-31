@@ -1,145 +1,563 @@
 {
-  "timestamp": "2026-03-31T10:07:33.177602",
+  "timestamp": "2026-03-31T19:32:03.215957",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2026-03-31T10:07:34.114621",
+      "scraped_at": "2026-03-31T19:32:03.622758",
       "update_date": "2026-03-31",
-      "lotteries": [
-        {
-          "store": "しまむら公式オンラインストア",
-          "product": "ポケモンカード ニンジャスピナー",
-          "lottery_type": "アプリ抽選受付（当選者にはオンライン販売）",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "4月 6日（月）予定（当選者のみメール通知があります）",
-          "conditions": "",
-          "detail_url": "https://nyuka-now.com/archives/156404",
-          "status": "unknown",
-          "source": "nyuka-now.com",
-          "expiry_status": "unknown"
-        },
-        {
-          "store": "ポケモン×ロンドン自然史博物館コラボ",
-          "product": "ピカチュウ at the Museumプロモカード（ジャンボカード）",
-          "lottery_type": "",
-          "start_date": "",
-          "end_date": "",
-          "announcement_date": "",
-          "conditions": "",
-          "detail_url": "https://nyuka-now.com/archives/2459",
-          "status": "unknown",
-          "source": "nyuka-now.com",
-          "expiry_status": "unknown"
-        }
-      ]
+      "lotteries": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-03-31T10:07:45.741330",
+      "scraped_at": "2026-03-31T19:32:04.939470",
       "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2026-03-31T10:07:46.446071",
+      "scraped_at": "2026-03-31T19:32:05.252294",
       "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2026-03-31T10:07:52.907123",
+      "scraped_at": "2026-03-31T19:32:13.324672",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-03-31T10:08:17.971098",
+      "scraped_at": "2026-03-31T19:32:38.013279",
       "reservations": []
     },
     {
       "source": "ヨドバシカメラ (limited.yodobashi.com)",
       "source_url": "https://limited.yodobashi.com/",
-      "scraped_at": "2026-03-31T10:08:19.295811",
-      "lotteries": [],
-      "error": "HTTP 403"
+      "scraped_at": "2026-03-31T19:32:39.198663",
+      "lotteries": []
     },
     {
       "source": "X (Twitter) 公式アカウント",
-      "scraped_at": "2026-03-31T10:08:19.297056",
+      "scraped_at": "2026-03-31T19:32:39.200795",
       "lotteries": [],
       "error": "X API credentials not configured or tweepy not installed"
     },
     {
       "source": "エディオン (edion.com)",
       "source_url": "https://www.edion.com/detail.html?p_cd=00077889999",
-      "scraped_at": "2026-03-31T10:08:21.786067",
+      "scraped_at": "2026-03-31T19:32:41.452449",
       "lotteries": []
     },
     {
       "source": "ケーズデンキ (ksdenki.co.jp)",
       "source_url": null,
-      "scraped_at": "2026-03-31T10:08:21.786765",
+      "scraped_at": "2026-03-31T19:32:41.454658",
       "lotteries": []
     },
     {
       "source": "ノジマオンライン (online.nojima.co.jp)",
       "source_url": null,
-      "scraped_at": "2026-03-31T10:08:21.787077",
+      "scraped_at": "2026-03-31T19:32:41.455343",
       "lotteries": []
     },
     {
       "source": "イエローサブマリン (yellowsubmarine.co.jp)",
       "source_url": "https://www.yellowsubmarine.co.jp/",
-      "scraped_at": "2026-03-31T10:08:24.077816",
+      "scraped_at": "2026-03-31T19:32:42.998535",
       "lotteries": []
     },
     {
       "source": "カードショップセラ (cardshopserra.jp)",
       "source_url": "https://www.cardshopserra.jp/",
-      "scraped_at": "2026-03-31T10:08:24.078408",
+      "scraped_at": "2026-03-31T19:32:42.998917",
       "lotteries": [],
       "note": "DNS解決エラーのため現在無効化"
     },
     {
       "source": "セブンネットショッピング (7net.omni7.jp)",
       "source_url": "https://7net.omni7.jp/search/?keyword=ポケモンカード&searchKeywordFlg=1",
-      "scraped_at": "2026-03-31T10:08:29.086887",
+      "scraped_at": "2026-03-31T19:32:43.443230",
       "lotteries": []
     },
     {
       "source": "ローソン HMV (hmv.co.jp)",
       "source_url": "https://www.hmv.co.jp/search/?category=ALL&keyword=ポケモンカード",
-      "scraped_at": "2026-03-31T10:09:49.065716",
+      "scraped_at": "2026-03-31T19:34:07.423529",
       "lotteries": []
     },
     {
       "source": "イオン (aeonretail.jp)",
       "source_url": "https://www.aeonretail.jp/campaign/",
-      "scraped_at": "2026-03-31T10:10:05.473778",
+      "scraped_at": "2026-03-31T19:34:27.178260",
       "lotteries": []
     },
     {
       "source": "ファミリーマート (family.co.jp)",
       "source_url": "https://www.family.co.jp/campaign.html",
-      "scraped_at": "2026-03-31T10:10:07.267801",
+      "scraped_at": "2026-03-31T19:34:28.377433",
       "lotteries": []
     },
     {
       "source": "suruga-ya.jp",
-      "scraped_at": "2026-03-31T10:10:07.681005",
+      "scraped_at": "2026-03-31T19:34:29.435053",
       "lotteries": [],
       "reservations": []
     },
     {
       "source": "geo-online.co.jp",
-      "scraped_at": "2026-03-31T10:10:08.770888",
+      "scraped_at": "2026-03-31T19:34:29.869523",
       "lotteries": [],
       "reservations": []
     },
     {
       "source": "ドラゴンスター (dorasuta.membercard.jp)",
       "source_url": "https://dorasuta.membercard.jp/lottery",
-      "scraped_at": "2026-03-31T10:10:19.718052",
+      "scraped_at": "2026-03-31T19:34:39.419197",
       "lotteries": []
+    },
+    {
+      "source": "gamepedia.jp",
+      "scraped_at": "2026-03-31T19:34:41.392474",
+      "lotteries": [
+        {
+          "store": "Amazon",
+          "product": "ニンジャスピナー",
+          "lottery_type": "抽選",
+          "start_date": "2/16(月) 14:00",
+          "end_date": "不明",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124",
+          "status": "active",
+          "source": "gamepedia.jp",
+          "expiry_status": "unparseable"
+        },
+        {
+          "store": "ホビーステーション(2回目)",
+          "product": "ニンジャスピナー",
+          "lottery_type": "抽選",
+          "start_date": "3/31(火) 12:00",
+          "end_date": "4/2(木) 23:59",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124",
+          "status": "active",
+          "source": "gamepedia.jp",
+          "expiry_status": "unparseable"
+        },
+        {
+          "store": "しまむらパークアプリ",
+          "product": "ニンジャスピナー",
+          "lottery_type": "抽選",
+          "start_date": "3/31(火) 10:00",
+          "end_date": "4/5(日) 21:00",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124",
+          "status": "active",
+          "source": "gamepedia.jp",
+          "expiry_status": "unparseable"
+        },
+        {
+          "store": "Amazon",
+          "product": "ムニキスゼロ",
+          "lottery_type": "抽選",
+          "start_date": "12/22(月) 0:00",
+          "end_date": "不明",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124",
+          "status": "active",
+          "source": "gamepedia.jp",
+          "expiry_status": "unparseable"
+        },
+        {
+          "store": "ポケモンセンターオンライン",
+          "product": "ムニキスゼロ",
+          "lottery_type": "抽選",
+          "start_date": "12/23(火) 13:00",
+          "end_date": "12/25(木) 16:59",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124",
+          "status": "active",
+          "source": "gamepedia.jp",
+          "expiry_status": "unparseable"
+        },
+        {
+          "store": "ホビーステーション",
+          "product": "ムニキスゼロ",
+          "lottery_type": "抽選",
+          "start_date": "12/26(金) 12:00",
+          "end_date": "12/28(日) 23:59",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124",
+          "status": "active",
+          "source": "gamepedia.jp",
+          "expiry_status": "unparseable"
+        },
+        {
+          "store": "ノジマオンライン",
+          "product": "ムニキスゼロ",
+          "lottery_type": "抽選",
+          "start_date": "12/29(月) 11:00",
+          "end_date": "不明",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124",
+          "status": "active",
+          "source": "gamepedia.jp",
+          "expiry_status": "unparseable"
+        },
+        {
+          "store": "竜星のPAO",
+          "product": "ムニキスゼロ",
+          "lottery_type": "抽選",
+          "start_date": "12/27(土) 11:50",
+          "end_date": "12/29(月) 23:59",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124",
+          "status": "active",
+          "source": "gamepedia.jp",
+          "expiry_status": "unparseable"
+        }
+      ],
+      "upcoming_products": [
+        {
+          "product_name": "ニンジャスピナー",
+          "release_date": "3月13日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "ムニキスゼロ",
+          "release_date": "1月23日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "スタートデッキ100 バトルコレクション",
+          "release_date": "12月19日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "MEGAドリームex",
+          "release_date": "11月28日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "インフェルノX",
+          "release_date": "9月26日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "スターターセットMEGA メガゲンガーex",
+          "release_date": "9月5日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "メガブレイブ",
+          "release_date": "8月1日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "ブラックボルト",
+          "release_date": "6月6日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "ロケット団の栄光",
+          "release_date": "4月18日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "熱風のアリーナ",
+          "release_date": "3月14日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "スターターセットex マリィのモルペコ＆オーロンゲex",
+          "release_date": "2月21日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "バトルパートナーズ",
+          "release_date": "1月24日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "テラスタルフェスex",
+          "release_date": "12月6日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "スタートデッキGenerations ピカチュウex・カビゴンex",
+          "release_date": "11月22日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "超電ブレイカー",
+          "release_date": "10月18日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "楽園ドラゴーナ",
+          "release_date": "9月13日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "スターターセット ニンフィアex",
+          "release_date": "8月30日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "ステラミラクル",
+          "release_date": "7月19日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "ナイトワンダラー",
+          "release_date": "6月7日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "スペシャルジャンボカードセット オーガポン",
+          "release_date": "5月17日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "変幻の仮面",
+          "release_date": "4月26日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "クリムゾンヘイズ",
+          "release_date": "3月22日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "バトルアカデミー",
+          "release_date": "3月8日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "ワイルドフォース",
+          "release_date": "1月26日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "シャイニートレジャーex",
+          "release_date": "12月１日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "スペシャルデッキセットex フシギバナ・リザードン・カメックス",
+          "release_date": "11月10日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "ポケモンカードゲーム Classic",
+          "release_date": "10月下旬以降",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "古代の咆哮",
+          "release_date": "10月27日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "レイジングサーフ",
+          "release_date": "9月22日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "黒炎の支配者",
+          "release_date": "7月28日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "exスタートデッキ",
+          "release_date": "7月7日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "ポケモンカード151",
+          "release_date": "6月16日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "イーブイズ スペシャルBOX",
+          "release_date": "5月24日(水)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "exスペシャルセット",
+          "release_date": "5月19日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "スノーハザード",
+          "release_date": "4月14日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "「スターターセットex ピカチュウex＆パーモット」",
+          "release_date": "3月24日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "「スカーレットex」",
+          "release_date": "1月20日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "「ジャンボカードコレクション」",
+          "release_date": "12月16日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "「Vstarユニバース」",
+          "release_date": "12月2日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "「スペシャルデッキセットリザードンVSTAR vs レックウザVMAX」",
+          "release_date": "11月4日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "「パラダイムトリガー」",
+          "release_date": "10月21日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "「白熱のアルカナ」",
+          "release_date": "9月2日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "「VSTARスペシャルセット」",
+          "release_date": "8月5日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "「ロストアビス」",
+          "release_date": "7月15日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "「Pokemon GO」",
+          "release_date": "6月17日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "「ダークファンタズマ」",
+          "release_date": "5月13日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "「タイムゲイザー」",
+          "release_date": "4月8日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "「バトルリージョン」",
+          "release_date": "2月25日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "「草のリーフィアVSTAR」",
+          "release_date": "2月4日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        },
+        {
+          "product_name": "「スターバース」",
+          "release_date": "1月14日(金)",
+          "lottery_schedule": "",
+          "store": "",
+          "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
+        }
+      ]
     }
   ]
 }

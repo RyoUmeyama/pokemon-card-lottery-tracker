@@ -20,6 +20,7 @@ class PokemonCenterPlaywrightScraper(PlaywrightBaseScraper):
     def scrape(self):
         """Playwrightで抽選情報をスクレイピング"""
         if not PLAYWRIGHT_AVAILABLE:
+            logger.warning("playwright not installed")
             return {
                 'source': self.source_name,
                 'source_url': self.lottery_list_url,
@@ -31,32 +32,44 @@ class PokemonCenterPlaywrightScraper(PlaywrightBaseScraper):
 
         lotteries = []
         has_active = False
+        http_error = None
 
         try:
-            # 抽選一覧ページを取得
+            # 抽選一覧ページを取得（403でも続行）
             content = self.run_async(self.fetch_page_content(
                 self.lottery_list_url,
                 wait_selector='.lottery-list, .no-lottery, [class*="lottery"]',
-                extra_wait=3
+                extra_wait=4
             ))
 
             if content:
                 result = self._parse_lottery_list(content)
                 lotteries = result['lotteries']
                 has_active = result['has_active']
+            else:
+                # コンテンツ取得失敗（403等）の場合、ログのみ出力
+                logger.warning(f"Could not retrieve content from {self.lottery_list_url} (likely HTTP error or blocked)")
+                http_error = "403_or_blocked"
 
         except Exception as e:
-            logger.error(f"Error scraping pokemon center: {e}")
+            logger.error(f"Error scraping pokemon center: {e}", exc_info=True)
+            http_error = "exception"
 
         unique_lotteries = self.remove_duplicates(lotteries)
 
-        return {
+        result_dict = {
             'source': self.source_name,
             'source_url': self.lottery_list_url,
             'scraped_at': datetime.now().isoformat(),
             'has_active_lottery': has_active,
             'lotteries': unique_lotteries
         }
+
+        if http_error:
+            result_dict['retrieval_status'] = http_error
+            logger.info(f"Returning {len(unique_lotteries)} items despite {http_error}")
+
+        return result_dict
 
     def _parse_lottery_list(self, content):
         """抽選一覧ページをパース"""

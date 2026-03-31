@@ -3,6 +3,7 @@ Playwrightを使用したベーススクレイパー
 Bot対策のあるサイトに対応するためのヘッドレスブラウザ実装
 """
 import asyncio
+import os
 from datetime import datetime
 import logging
 import re
@@ -20,12 +21,13 @@ logger = logging.getLogger(__name__)
 class PlaywrightBaseScraper:
     """Playwrightを使用するスクレイパーの基底クラス"""
 
-    # 複数のUser-Agentをローテーション（2026年版）
+    # 複数のUser-Agentをローテーション（2026年版、最新Chrome対応）
     USER_AGENTS = [
-        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
-        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.3 Safari/605.1.15',
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0',
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
+        'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.4 Safari/605.1.15',
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:126.0) Gecko/20100101 Firefox/126.0',
     ]
 
     # Playwright timeout設定（ミリ秒単位）
@@ -106,9 +108,12 @@ class PlaywrightBaseScraper:
 
         try:
             async with async_playwright() as p:
+                # headlessモードを環境変数で制御（GitHub Actionsではheadless=True）
+                headless_mode = os.getenv('GITHUB_ACTIONS') is not None or os.getenv('CI') is not None
+
                 # より本物のブラウザに近い設定でlaunch
                 browser = await p.chromium.launch(
-                    headless=True,
+                    headless=headless_mode,
                     args=[
                         '--disable-blink-features=AutomationControlled',
                         '--disable-dev-shm-usage',
@@ -211,9 +216,12 @@ class PlaywrightBaseScraper:
                     wait_until='domcontentloaded'
                 )
 
+                # 403等のHTTPエラーの場合、ページコンテンツを試しに取得してみる
+                # （サーバー側の条件付きブロック対策）
                 if response and response.status >= 400:
-                    logger.error(f"HTTP Error {response.status} for {url}")
-                    return None
+                    logger.warning(f"HTTP {response.status} for {url}, attempting to retrieve content anyway")
+                    # 少し待ってからコンテンツを取得してみる
+                    await asyncio.sleep(2)
 
                 # networkidleを待つ（タイムアウトしても続行）
                 if wait_for_js:
@@ -238,7 +246,7 @@ class PlaywrightBaseScraper:
                     await asyncio.sleep(extra_wait)
 
                 content = await page.content()
-                return content
+                return content if content and len(content) > 100 else None
 
         except Exception as e:
             logger.error(f"Playwright error for {url}: {e}")

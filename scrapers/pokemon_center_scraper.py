@@ -14,11 +14,24 @@ class PokemonCenterScraper:
     def __init__(self):
         self.url = "https://www.pokemoncenter-online.com/lottery/apply.html"
         self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+            'Accept-Language': 'ja,en;q=0.9,en-US;q=0.8',
+            'Accept-Encoding': 'gzip, deflate, br',
+            'Referer': 'https://www.pokemoncenter-online.com/',
+            'Connection': 'keep-alive',
+            'Upgrade-Insecure-Requests': '1',
+            'Sec-Fetch-Dest': 'document',
+            'Sec-Fetch-Mode': 'navigate',
+            'Sec-Fetch-Site': 'same-origin',
+            'Cache-Control': 'max-age=0'
         }
 
     def scrape(self):
         """抽選情報をスクレイピング"""
+        lotteries = []
+        has_active = False
+
         try:
             response = requests.get(self.url, headers=self.headers, timeout=30)
             response.raise_for_status()
@@ -28,9 +41,6 @@ class PokemonCenterScraper:
             except Exception:
                 # lxml not available, fallback to html.parser
                 soup = BeautifulSoup(response.content, 'html.parser')
-
-            # 抽選情報を抽出
-            lotteries = []
 
             # 抽選商品のリストを探す
             lottery_items = soup.find_all(class_=lambda x: x and 'lottery' in x.lower())
@@ -42,19 +52,34 @@ class PokemonCenterScraper:
 
             # 「公開中の抽選がありません」のチェック
             no_lottery_msg = soup.find(text=lambda x: x and '公開中の抽選がありません' in x)
-
-            result = {
-                'source': 'pokemoncenter-online.com',
-                'scraped_at': datetime.now().isoformat(),
-                'has_active_lottery': len(lotteries) > 0 and not no_lottery_msg,
-                'lotteries': lotteries
-            }
-
-            return result
+            has_active = len(lotteries) > 0 and not no_lottery_msg
 
         except Exception as e:
-            logger.error(f"Error scraping pokemoncenter-online.com: : {e}")
-            return None
+            logger.warning(f"Error scraping pokemoncenter-online.com direct: {e}")
+            # fallback to gamepedia
+            logger.info("Attempting fallback to gamepedia scraper for Pokemon Center info...")
+            try:
+                from .gamepedia_scraper import GamepediaScraper
+                gp = GamepediaScraper()
+                gp_result = gp.scrape()
+                if gp_result and gp_result.get('lotteries'):
+                    # gamepediaからポケセン情報を抽出
+                    lotteries = [l for l in gp_result.get('lotteries', [])
+                               if 'ポケモンセンター' in l.get('store', '')]
+                    if lotteries:
+                        logger.info(f"Found {len(lotteries)} items from gamepedia fallback")
+                        has_active = True
+            except Exception as fallback_e:
+                logger.warning(f"Gamepedia fallback also failed: {fallback_e}")
+
+        result = {
+            'source': 'pokemoncenter-online.com',
+            'scraped_at': datetime.now().isoformat(),
+            'has_active_lottery': has_active,
+            'lotteries': lotteries
+        }
+
+        return result
 
     def _parse_lottery_item(self, item):
         """抽選アイテムから情報を抽出"""

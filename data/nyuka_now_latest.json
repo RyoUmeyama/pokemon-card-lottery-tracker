@@ -1,33 +1,6 @@
 {
   "source": "nyuka-now.com",
-  "scraped_at": "2026-03-31T10:07:34.114621",
+  "scraped_at": "2026-03-31T19:32:03.622758",
   "update_date": "2026-03-31",
-  "lotteries": [
-    {
-      "store": "しまむら公式オンラインストア",
-      "product": "ポケモンカード ニンジャスピナー",
-      "lottery_type": "アプリ抽選受付（当選者にはオンライン販売）",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "4月 6日（月）予定（当選者のみメール通知があります）",
-      "conditions": "",
-      "detail_url": "https://nyuka-now.com/archives/156404",
-      "status": "unknown",
-      "source": "nyuka-now.com",
-      "expiry_status": "unknown"
-    },
-    {
-      "store": "ポケモン×ロンドン自然史博物館コラボ",
-      "product": "ピカチュウ at the Museumプロモカード（ジャンボカード）",
-      "lottery_type": "",
-      "start_date": "",
-      "end_date": "",
-      "announcement_date": "",
-      "conditions": "",
-      "detail_url": "https://nyuka-now.com/archives/2459",
-      "status": "unknown",
-      "source": "nyuka-now.com",
-      "expiry_status": "unknown"
-    }
-  ]
+  "lotteries": []
 }
