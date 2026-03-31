@@ -119,16 +119,7 @@ def filter_expired(items: list) -> list:
     today = date.today()
     filtered = []
 
-    # ポケカ専門ショップのホワイトリスト（期限切れ判定をバイパス）
-    WHITELIST_STORES = ['ドラゴンスター']
-
     for item in items:
-        # ホワイトリスト対象は常に通す（期限切れ判定をスキップ）
-        store = item.get('store', '')
-        if any(store_name in store for store_name in WHITELIST_STORES):
-            filtered.append(item)
-            continue
-
         # ステップ1: 年号チェック（2025年以前を完全除外）
         end_date_str = item.get('end_date', '') or item.get('deadline', '') or ''
         start_date_str = item.get('start_date', '') or ''
@@ -192,7 +183,7 @@ def filter_pokemon_card_only(items: list) -> list:
     WHITELIST_STORES = ['ドラゴンスター']
 
     # 抽選情報集約サイトのホワイトリスト（複数商品を一覧にするため、全て通す）
-    WHITELIST_SOURCES = ['nyuka-now.com', 'ドラゴンスター (dorasuta.membercard.jp)']
+    WHITELIST_SOURCES = ['nyuka-now.com']
 
     filtered = []
     for item in items:
@@ -425,12 +416,11 @@ def main() -> None:
             'class': GeoScraper, 'kwargs': {},
             'filename': 'data/geo_latest.json'
         },
-        # {
-        #     'num': 24, 'name': 'TSUTAYA',
-        #     'skip': True, 'reason': 'HTTP 400/404 - サイトにポケカ情報なし (cmd_236)'
-        #     # DISABLED: TsutayaScraper - tsutaya.tsite.jp のポケモンカード検索ページが HTTP 400 を返す
-        #     # 正しい URL が見つからず、修復不可のため完全に無効化
-        # },
+        {
+            'num': 24, 'name': 'TSUTAYA',
+            'class': TsutayaScraper, 'kwargs': {},
+            'filename': 'data/tsutaya_latest.json'
+        },
         {
             'num': 25, 'name': 'Google Forms抽選',
             'class': GoogleFormsScraper, 'kwargs': {},
@@ -475,12 +465,6 @@ def main() -> None:
         # フィルタ適用（抽選データの場合）
         data_type = config.get('data_type', 'lottery')
         if data_type == 'lottery':
-            # 各item に source フィールドを追加（ホワイトリスト判定用）
-            source_name = data.get('source', '')
-            for item in data.get('lotteries', []):
-                if not item.get('source'):
-                    item['source'] = source_name
-
             before_count = len(data.get('lotteries', []))
             data['lotteries'] = filter_pokemon_card_only(data.get('lotteries', []))
             data['lotteries'] = filter_expired(data.get('lotteries', []))
