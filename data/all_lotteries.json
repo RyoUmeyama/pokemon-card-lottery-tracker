@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-03-31T09:44:32.194781",
+  "timestamp": "2026-03-31T00:49:56.411823",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2026-03-31T09:45:33.218638",
+      "scraped_at": "2026-03-31T00:50:37.895868",
       "update_date": "2026-03-31",
       "lotteries": [
         {
@@ -16,6 +16,7 @@
           "conditions": "",
           "detail_url": "https://nyuka-now.com/archives/2459",
           "status": "unknown",
+          "source": "nyuka-now.com",
           "expiry_status": "unknown"
         },
         {
@@ -28,6 +29,46 @@
           "conditions": "",
           "detail_url": "https://nyuka-now.com/archives/2459",
           "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "ポケモン×ロンドン自然史博物館コラボ",
+          "product": "2026年1月26日から4月19日までロンドン自然史博物館、海外ポケモンセンターまたはオンラインショップでも販売予定",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "ポケモン×ロンドン自然史博物館コラボ",
+          "product": "先着配布",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "ポケモン×ロンドン自然史博物館コラボ",
+          "product": "1月26日(月)",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
           "expiry_status": "unknown"
         },
         {
@@ -40,6 +81,7 @@
           "conditions": "",
           "detail_url": "https://nyuka-now.com/archives/2459",
           "status": "unknown",
+          "source": "nyuka-now.com",
           "expiry_status": "unknown"
         },
         {
@@ -52,6 +94,72 @@
           "conditions": "",
           "detail_url": "https://nyuka-now.com/archives/2459",
           "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "ポケモンカードラウンジ渋谷店",
+          "product": "WEB抽選受付（当選者には店頭販売）",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "ポケモンカードラウンジ渋谷店",
+          "product": "3月27日(金)10:00",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "ポケモンカードラウンジ渋谷店",
+          "product": "3月29日(日)23:59",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "closed",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "ポケモンカードラウンジ渋谷店",
+          "product": "4月6日 18時以降順次",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "ポケモンカードラウンジ渋谷店",
+          "product": "・当選後の受取時に顔写真付き本人確認書類の提示が必要・当選者ご本人のみ購入可（代理不可）・おひとり様1回限りのエントリー・3歳未満への販売不可・商品の返品・交換・変更・日時変更不可・指定日に来店できない場合は受取不可・CLOUD PASSマイページよりチケット画面をご提示（スクリーンショット不可）",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
           "expiry_status": "unknown"
         },
         {
@@ -64,6 +172,7 @@
           "conditions": "",
           "detail_url": "https://cloud-pass.jp/pr/841a66aa392a1d4b14660208979ddc1a508f8c09590a2f28f48cf24354f92e0b",
           "status": "unknown",
+          "source": "nyuka-now.com",
           "expiry_status": "unknown"
         },
         {
@@ -76,6 +185,7 @@
           "conditions": "",
           "detail_url": "https://nyuka-now.com/archives/2459",
           "status": "unknown",
+          "source": "nyuka-now.com",
           "expiry_status": "unknown"
         },
         {
@@ -88,6 +198,150 @@
           "conditions": "",
           "detail_url": "https://nyuka-now.com/archives/2459",
           "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "ジョーシン（アプリ）",
+          "product": "ジョーシンアプリのマイページ＞店舗限定キャンペーンエントリーより応募が可能です※ジョーシンカードに購入履歴がある会員が対象",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "TCGショップ193各店",
+          "product": "3月21日(土)12:00",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "TCGショップ193各店",
+          "product": "3月24日(火)20:00",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "closed",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "TCGショップ193各店",
+          "product": "2025年12月31日までに入会している193会員限定",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "TCGショップ193各店",
+          "product": "対象店舗：名駅太閤店、大須店、ザザシティ浜松店、秋葉原店、日本橋店",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "TCGショップ193各店",
+          "product": "TCGショップ193各店の詳細ページ",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://docs.google.com/forms/d/e/1FAIpQLSfJqzKABEtFkfxnK-u2A1ltdOiJ9wKmF-GeHeOmdshSIPceBQ/viewform",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "POKEMON CARD LOUNGE 渋谷店",
+          "product": "・スタートデッキ100 バトルコレクション 1点 891円（税込）・1人1～3点まで申込可能・商品受取日程：2026年4月10日（金）〜12日（日）10時〜22時30分・受取場所：POKÉMON CARD LOUNGE（SHIBUYA TSUTAYA 5F）・キャッシュレス決済のみ",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "POKEMON CARD LOUNGE 渋谷店",
+          "product": "3月20日(金)10:00",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "POKEMON CARD LOUNGE 渋谷店",
+          "product": "3月22日(日)23:59",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "closed",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "POKEMON CARD LOUNGE 渋谷店",
+          "product": "4月3日 18時以降順次",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "POKEMON CARD LOUNGE 渋谷店",
+          "product": "・受取時に顔写真付き本人確認書類の提示が必要（運転免許証・マイナンバーカード・パスポート等）・おひとり様1回限りのエントリー・3歳未満への販売不可・当選後のキャンセル・数量変更・受取日変更不可・当日チケット画面（CLOUD PASSマイページ）の提示が必要（スクリーンショット不可）・@cloud-pass.jpのドメイン受信設定を事前に行うこと",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://nyuka-now.com/archives/2459",
+          "status": "unknown",
+          "source": "nyuka-now.com",
           "expiry_status": "unknown"
         },
         {
@@ -100,131 +354,140 @@
           "conditions": "",
           "detail_url": "https://cloud-pass.jp/pr/2f2c66677d76fabed929056d4e879e8b1e7844ed99af92c75f401afe2001f01d",
           "status": "unknown",
+          "source": "nyuka-now.com",
+          "expiry_status": "unknown"
+        },
+        {
+          "store": "イエローサブマリン各店",
+          "product": "各店掲示のポスターより申込みページへ指定期間内の最低購入金額300円以上のレシートが必要。▼販売店舗イエローサブマリン　新宿店https://twitter.com/YS_SHINJYUKUイエローサブマリン　池袋ゲームショップhttps://twitter.com/YS_IKEBUKUROイエローサブマリン 秋葉原ラジオ会館本店https://twitter.com/YS_AKIHABARAGAMイエローサブマリン　立川店https://twitter.com/YS_TACHIKAWAイエローサブマリン プレイソフトhttps://twitter.com/YS_PLAYSOFTイエローサブマリン横浜店https://twitter.com/YS_YOKOHAMAイエローサブマリン横浜ムービル店https://twitter.com/YS_MOVILイエローサブマリン川崎店https://twitter.com/kawasak16976953イエローサブマリン町田GAME SHOPhttps://twitter.com/machida19イエローサブマリン千葉ゲームショップhttps://twitter.com/chibagameイエローサブマリン柏マルイ店https://twitter.com/YS_KASHIWAイエローサブマリン札幌GAME SHOP TCGフロアhttps://twitter.com/YS_SAPPORO1イエローサブマリン広島店https://twitter.com/YS_HIROSHIMAGSイエローサブマリン三宮店https://twitter.com/YS_SANNNOMIYAイエローサブマリン名古屋GAMESHOPhttps://twitter.com/YS_NAGOYAGAMEイエローサブマリン京都店https://twitter.com/YS_KYOTOイエローサブマリン姫路店https://twitter.com/YS_HIMEJIイエローサブマリン マジッカーズ福岡店https://twitter.com/YS_M_FUKUOKA※詳細は各店舗のツイートをご確認ください。",
+          "lottery_type": "",
+          "start_date": "",
+          "end_date": "",
+          "announcement_date": "",
+          "conditions": "",
+          "detail_url": "https://twitter.com/YS_SHINJYUKU",
+          "status": "unknown",
+          "source": "nyuka-now.com",
           "expiry_status": "unknown"
         }
       ]
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-03-31T09:45:34.521315",
+      "scraped_at": "2026-03-31T00:50:49.660025",
       "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2026-03-31T09:45:34.886985",
+      "scraped_at": "2026-03-31T00:50:50.332044",
       "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2026-03-31T09:45:41.809785",
+      "scraped_at": "2026-03-31T00:50:57.189078",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-03-31T09:46:07.888308",
+      "scraped_at": "2026-03-31T00:51:22.092554",
       "reservations": []
     },
     {
       "source": "ヨドバシカメラ (limited.yodobashi.com)",
       "source_url": "https://limited.yodobashi.com/",
-      "scraped_at": "2026-03-31T09:46:09.358627",
-      "lotteries": []
+      "scraped_at": "2026-03-31T00:51:23.455618",
+      "lotteries": [],
+      "error": "HTTP 403"
     },
     {
       "source": "X (Twitter) 公式アカウント",
-      "scraped_at": "2026-03-31T09:46:09.360234",
+      "scraped_at": "2026-03-31T00:51:23.456943",
       "lotteries": [],
       "error": "X API credentials not configured or tweepy not installed"
     },
     {
       "source": "エディオン (edion.com)",
       "source_url": "https://www.edion.com/detail.html?p_cd=00077889999",
-      "scraped_at": "2026-03-31T09:46:11.954394",
+      "scraped_at": "2026-03-31T00:51:26.079220",
       "lotteries": []
     },
     {
       "source": "ケーズデンキ (ksdenki.co.jp)",
       "source_url": null,
-      "scraped_at": "2026-03-31T09:46:11.955714",
+      "scraped_at": "2026-03-31T00:51:26.079813",
       "lotteries": []
     },
     {
       "source": "ノジマオンライン (online.nojima.co.jp)",
       "source_url": null,
-      "scraped_at": "2026-03-31T09:46:11.956178",
+      "scraped_at": "2026-03-31T00:51:26.080116",
       "lotteries": []
     },
     {
       "source": "イエローサブマリン (yellowsubmarine.co.jp)",
       "source_url": "https://www.yellowsubmarine.co.jp/",
-      "scraped_at": "2026-03-31T09:46:14.338522",
+      "scraped_at": "2026-03-31T00:51:28.503370",
       "lotteries": []
     },
     {
       "source": "カードショップセラ (cardshopserra.jp)",
       "source_url": "https://www.cardshopserra.jp/",
-      "scraped_at": "2026-03-31T09:46:14.338872",
+      "scraped_at": "2026-03-31T00:51:28.503824",
       "lotteries": [],
       "note": "DNS解決エラーのため現在無効化"
     },
     {
       "source": "セブンネットショッピング (7net.omni7.jp)",
       "source_url": "https://7net.omni7.jp/search/?keyword=ポケモンカード&searchKeywordFlg=1",
-      "scraped_at": "2026-03-31T09:46:14.449848",
-      "lotteries": []
-    },
-    {
-      "source": "セブンネットショッピング (7net.omni7.jp)",
-      "source_url": "https://7net.omni7.jp/general/010007/230428pokemoncard",
-      "scraped_at": "2026-03-31T09:47:36.850393",
+      "scraped_at": "2026-03-31T00:51:32.738880",
       "lotteries": []
     },
     {
       "source": "ローソン HMV (hmv.co.jp)",
       "source_url": "https://www.hmv.co.jp/search/?category=ALL&keyword=ポケモンカード",
-      "scraped_at": "2026-03-31T09:47:38.642199",
+      "scraped_at": "2026-03-31T00:52:54.180223",
       "lotteries": []
     },
     {
       "source": "イオン (aeonretail.jp)",
       "source_url": "https://www.aeonretail.jp/campaign/",
-      "scraped_at": "2026-03-31T09:47:59.114451",
+      "scraped_at": "2026-03-31T00:53:12.186029",
       "lotteries": []
     },
     {
       "source": "ファミリーマート (family.co.jp)",
       "source_url": "https://www.family.co.jp/campaign.html",
-      "scraped_at": "2026-03-31T09:48:01.723512",
+      "scraped_at": "2026-03-31T00:53:13.600602",
       "lotteries": []
     },
     {
       "source": "suruga-ya.jp",
-      "scraped_at": "2026-03-31T09:48:02.794870",
+      "scraped_at": "2026-03-31T00:53:13.665976",
       "lotteries": [],
       "reservations": []
     },
     {
       "source": "geo-online.co.jp",
-      "scraped_at": "2026-03-31T09:48:04.979694",
+      "scraped_at": "2026-03-31T00:53:15.065578",
       "lotteries": [],
       "reservations": []
     },
     {
       "source": "tsutaya.tsite.jp",
-      "scraped_at": "2026-03-31T09:48:05.286745",
+      "scraped_at": "2026-03-31T00:53:15.501633",
       "lotteries": [],
       "reservations": []
     },
     {
       "source": "google-forms",
-      "scraped_at": "2026-03-31T09:48:21.702896",
+      "scraped_at": "2026-03-31T00:53:28.899680",
       "forms": [
         {
           "form_name": "トレカプラザ55",
           "store": "トレカプラザ55通販",
           "url": "https://docs.google.com/forms/d/e/1FAIpQLSf5h7fCUFaxELstaVEK36zcjFgifqmmlkY8UsGCq_iiGs8bkQ/viewform",
-          "scraped_at": "2026-03-31T09:48:13.158623",
+          "scraped_at": "2026-03-31T00:53:22.173772",
           "form_title": "ポケモンカードゲーム 3月再入荷商品 抽選販売応募フォーム",
           "form_description": "",
           "form_status": "accepting",
@@ -235,7 +498,7 @@
           "form_name": "ノジマオンライン",
           "store": "ノジマオンライン",
           "url": "https://docs.google.com/forms/d/e/1FAIpQLSdYHmBreNk1egfE7F5YsVs7LEDoVkhA5r2onCH4rZvxwpOmDg/viewform",
-          "scraped_at": "2026-03-31T09:48:21.700948",
+          "scraped_at": "2026-03-31T00:53:28.897299",
           "form_title": "【2025.2.16～受付分】シークレット販売会 エントリー受付",
           "form_description": "",
           "form_status": "accepting",
@@ -252,7 +515,7 @@
           "status": "accepting",
           "is_accepting": true,
           "source": "google-forms",
-          "scraped_at": "2026-03-31T09:48:13.158623",
+          "scraped_at": "2026-03-31T00:53:22.173772",
           "expiry_status": "unknown"
         }
       ]
@@ -260,7 +523,7 @@
     {
       "source": "ドラゴンスター (dorasuta.membercard.jp)",
       "source_url": "https://dorasuta.membercard.jp/lottery",
-      "scraped_at": "2026-03-31T09:48:32.314375",
+      "scraped_at": "2026-03-31T00:53:38.526752",
       "lotteries": []
     }
   ]
