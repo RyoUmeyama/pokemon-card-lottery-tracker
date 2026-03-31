@@ -120,11 +120,19 @@ def filter_expired(items: list) -> list:
     filtered = []
 
     # ポケカ専門ショップのホワイトリスト（期限切れ判定をバイパス）
-    WHITELIST_STORES = ['ドラゴンスター']
+    WHITELIST_STORES = []  # ドラゴンスター削除
 
     for item in items:
-        # ホワイトリスト対象は常に通す（期限切れ判定をスキップ）
+        # ドラゴンスター固有フィルタ：status==closed または detail_url が # で終わるエントリを除外
         store = item.get('store', '')
+        if 'ドラゴンスター' in store:
+            status = item.get('status', '')
+            detail_url = item.get('detail_url', '')
+            if status == 'closed' or (detail_url and detail_url.endswith('#')):
+                logger.info(f"ドラゴンスター除外: {item.get('product', '?')} (status: {status}, url: {detail_url})")
+                continue
+
+        # ホワイトリスト対象は常に通す（期限切れ判定をスキップ）
         if any(store_name in store for store_name in WHITELIST_STORES):
             filtered.append(item)
             continue
@@ -188,7 +196,7 @@ def filter_pokemon_card_only(items: list) -> list:
     ホワイトリスト: ポケカ専門ショップ（ドラゴンスター等）は自動通過
     """
     # ポケカ専門ショップのホワイトリスト（キーワード不要で通す）
-    WHITELIST_STORES = ['ドラゴンスター']
+    WHITELIST_STORES = []  # ドラゴンスター削除
 
     # 抽選情報集約サイトのホワイトリスト（複数商品を一覧にするため、全て通す）
     WHITELIST_SOURCES = ['nyuka-now.com']
@@ -433,7 +441,8 @@ def main() -> None:
         {
             'num': 25, 'name': 'Google Forms抽選',
             'class': GoogleFormsScraper, 'kwargs': {},
-            'filename': 'data/google_forms_latest.json'
+            'filename': 'data/google_forms_latest.json',
+            'skip': True
         },
         {
             'num': 26, 'name': 'ドラゴンスター',
