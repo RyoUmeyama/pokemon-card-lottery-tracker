@@ -1,0 +1,12 @@
+cmd_id: cmd_238b
+cmd_label: "緊急追加修正 - detail_url/product修正"
+agent_id: ashigaru3
+timestamp: "2026-03-31T11:30:00"
+status: completed
+summary: "問題1/2を修正。detail_urlを実装、productを簡潔化。"
+before: "detail_url=空、product=複数連結"
+after: "detail_url=全設定、product=1商品名"
+modifications:
+  - "問題1: テーブル/h3内aタグからURLを取得（フォールバック実装）"
+  - "問題2: 改行/複数商品で分割して最初のみ抽出"
+test_result: "7件 | 全detail_url非空 | product簡潔化確認"

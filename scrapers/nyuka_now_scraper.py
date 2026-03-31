@@ -24,6 +24,22 @@ class NyukaNowScraper:
             'スカーレット', 'バイオレット', 'テラスタル',
             'シャイニートレジャー', 'バトルマスター', 'TCG'
         ]
+        # 除外店舗リスト
+        self.excluded_stores = [
+            'amazon', 'Amazon', 'AMAZON',
+            'yahoo', 'Yahoo', 'YAHOO',
+            'ノジマオンライン', 'ノジマ',
+            'アイリスプラザ', 'アイリス',
+            'ヤマシロヤ', 'ジョーシン',
+            'ドラゴンスター', '竜のしっぽ', '古本市場',
+            'ホビーステーション', 'トレカプラザ', 'TCGショップ193',
+            'ポケモンカードラウンジ', 'POKEMON CARD LOUNGE'
+        ]
+        # 終了ラベルキーワード（より明示的なフレーズに限定）
+        self.closed_keywords = [
+            '受付終了', '販売終了', '抽選終了', '受付は終了',
+            'closed', 'Closed', 'CLOSED'
+        ]
 
     def scrape(self):
         """抽選情報をスクレイピング（リトライ機構付き）"""
@@ -228,7 +244,20 @@ class NyukaNowScraper:
                 return lotteries  # 空リストを返す（このテーブルはスキップ）
             store_name = self._normalize_store_name(h3_text)
 
+        # 除外店舗チェック
+        for excluded_store in self.excluded_stores:
+            if excluded_store in store_name:
+                logger.info(f"除外店舗: {store_name} (除外リスト: {excluded_store})")
+                return lotteries
+
         rows = table.find_all('tr')
+
+        # テーブル全体の終了ラベル検出（テーブル内のtdに終了キーワード）
+        table_text = table.get_text()
+        for closed_kw in self.closed_keywords:
+            if closed_kw in table_text:
+                logger.info(f"終了ラベル検出: {store_name} (キーワード: {closed_kw})")
+                return lotteries
 
         # Type2: th/tdペア辞書を作成して、対象商品・期間を抽出
         info_dict = self._parse_th_td_pairs(rows)
@@ -240,6 +269,18 @@ class NyukaNowScraper:
         if not product:
             product = info_dict.get('ポケモンカード商品', '')
 
+        # 複数商品が連結されている場合は、最初の商品のみを抽出
+        if product:
+            # 改行で分割して最初のものを取得
+            product_lines = product.split('\n')
+            product = product_lines[0].strip() if product_lines else product
+
+            # それでも複数商品が含まれている場合（例：「商品Aポケモンカード商品B」）
+            # 「ポケモンカード」で分割して最初のものを取得
+            if 'ポケモンカード' in product and product.count('ポケモンカード') > 1:
+                parts = product.split('ポケモンカード')
+                product = 'ポケモンカード' + parts[1] if len(parts) > 1 else product
+
         # 終了日時を取得（期限切れチェック用）
         end_date_str = info_dict.get('終了日時', '')
         if not end_date_str:
@@ -247,15 +288,34 @@ class NyukaNowScraper:
         if not end_date_str:
             end_date_str = info_dict.get('締切', '')
 
-        # 期限切れチェック（終了日が今日2026/3/31より前 → スキップ）
+        # 期限切れチェック（終了日が今日2026/3/31以前 → スキップ）
         if end_date_str:
             import datetime
             today = datetime.date(2026, 3, 31)
             if self._is_date_expired(end_date_str, today):
+                logger.info(f"期限切れ除外: {store_name} - {product} (end_date: {end_date_str})")
                 return lotteries  # 期限切れ → スキップ
 
         # store_nameと productが両方存在する場合のみ抽出
         if store_name and product:
+            # detail_urlを取得（テーブル内またはh3内のaタグを探す）
+            detail_url = ''
+
+            # テーブル内のaタグを探す
+            link = table.find('a', href=True)
+            if link:
+                detail_url = link.get('href', '')
+
+            # テーブル内にaタグがない場合、h3内を探す
+            if not detail_url and h3:
+                h3_link = h3.find('a', href=True)
+                if h3_link:
+                    detail_url = h3_link.get('href', '')
+
+            # URLが見つからない場合はフォールバック
+            if not detail_url:
+                detail_url = 'https://nyuka-now.com/archives/2459'
+
             lottery = {
                 'store': store_name,
                 'product': product,
@@ -264,7 +324,7 @@ class NyukaNowScraper:
                 'end_date': end_date_str,
                 'announcement_date': info_dict.get('当選発表', ''),
                 'conditions': info_dict.get('応募条件', ''),
-                'detail_url': '',
+                'detail_url': detail_url,
                 'status': self._determine_status(product)
             }
 

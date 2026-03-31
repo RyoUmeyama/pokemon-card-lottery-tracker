@@ -1,6 +1,16 @@
 {
   "source": "ドラゴンスター (dorasuta.membercard.jp)",
   "source_url": "https://dorasuta.membercard.jp/lottery",
-  "scraped_at": "2026-03-31T02:58:06.348203",
-  "lotteries": []
+  "scraped_at": "2026-03-31T13:10:25.986759",
+  "lotteries": [
+    {
+      "store": "ドラゴンスター",
+      "product": "抽選商品一覧",
+      "lottery_type": "抽選",
+      "period": "2026/03/30",
+      "price": "",
+      "detail_url": "https://dorasuta.membercard.jp/#",
+      "status": "closed"
+    }
+  ]
 }

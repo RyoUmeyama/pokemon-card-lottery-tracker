@@ -1,0 +1,34 @@
+cmd_id: cmd_239
+cmd_label: "検証任務 - nyuka-now 6-7件目確認"
+agent_id: ashigaru3
+timestamp: "2026-03-31T12:30:00"
+status: completed
+summary: "ヤマシロヤ/ジョーシン両者ともすでに終了。3/31時点で応募受付不可。"
+findings:
+  item6:
+    store: "ヤマシロヤ オンラインショップ"
+    product: "ポケモンカード MEGAドリームex"
+    detail_url: "https://nyuka-now.com/archives/154697"
+    http_status: "200"
+    is_accessible: "true"
+    is_accepting: "false"
+    html_status: "終了ラベル付き"
+    closedform_links: "5個（全て閉鎖済み）"
+    last_update: "2026年3月26日(木)"
+    verdict: "INVALID"
+    reason: "応募期間終了済み。Google Formsも全てClosedForm化。"
+
+  item7:
+    store: "ジョーシン（アプリ）"
+    product: "ポケモンカード ムニキスゼロ"
+    detail_url: "https://nyuka-now.com/archives/156402"
+    http_status: "200"
+    is_accessible: "true"
+    is_accepting: "false"
+    html_status: "終了ラベル付き"
+    closedform_links: "1個（閉鎖済み）"
+    last_update: "2026年3月23日(月)"
+    verdict: "INVALID"
+    reason: "応募期間終了済み。アプリ限定だがエントリー不可。"
+
+conclusion: "両者とも3/31時点で終了。スクレイパーの期限切れフィルタが未検出。"

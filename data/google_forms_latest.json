@@ -1,12 +1,12 @@
 {
   "source": "google-forms",
-  "scraped_at": "2026-03-31T02:57:42.376650",
+  "scraped_at": "2026-03-31T13:10:17.447967",
   "forms": [
     {
       "form_name": "トレカプラザ55",
       "store": "トレカプラザ55通販",
       "url": "https://docs.google.com/forms/d/e/1FAIpQLSf5h7fCUFaxELstaVEK36zcjFgifqmmlkY8UsGCq_iiGs8bkQ/viewform",
-      "scraped_at": "2026-03-31T02:57:35.681407",
+      "scraped_at": "2026-03-31T13:10:10.232286",
       "form_title": "ポケモンカードゲーム 3月再入荷商品 抽選販売応募フォーム",
       "form_description": "",
       "form_status": "accepting",
@@ -17,7 +17,7 @@
       "form_name": "ノジマオンライン",
       "store": "ノジマオンライン",
       "url": "https://docs.google.com/forms/d/e/1FAIpQLSdYHmBreNk1egfE7F5YsVs7LEDoVkhA5r2onCH4rZvxwpOmDg/viewform",
-      "scraped_at": "2026-03-31T02:57:42.374232",
+      "scraped_at": "2026-03-31T13:10:17.445689",
       "form_title": "【2025.2.16～受付分】シークレット販売会 エントリー受付",
       "form_description": "",
       "form_status": "accepting",
@@ -34,7 +34,7 @@
       "status": "accepting",
       "is_accepting": true,
       "source": "google-forms",
-      "scraped_at": "2026-03-31T02:57:35.681407",
+      "scraped_at": "2026-03-31T13:10:10.232286",
       "expiry_status": "unknown"
     }
   ]
