@@ -123,6 +123,62 @@ class NyukaNowScraper:
                 return f"{date_match.group(1)}-{date_match.group(2):0>2}-{date_match.group(3):0>2}"
         return None
 
+    def _normalize_store_name(self, store_name):
+        """store名を正規化（空白・改行除去）"""
+        if not store_name:
+            return ''
+        # 複数の空白・改行を単一空白に統一
+        normalized = re.sub(r'[\s\n\r]+', ' ', store_name)
+        # 両端の空白を除去
+        return normalized.strip()
+
+    def _parse_th_td_pairs(self, rows):
+        """th/tdペアから抽選情報を辞書化して抽出
+        戻り値: {ラベル: 値} の辞書"""
+        info_dict = {}
+
+        for row in rows:
+            cells = row.find_all(['th', 'td'])
+            # th + tdの構造を探す
+            if len(cells) >= 2:
+                for i in range(len(cells) - 1):
+                    if cells[i].name == 'th' and cells[i + 1].name == 'td':
+                        label = cells[i].get_text(strip=True)
+                        value = cells[i + 1].get_text(strip=True)
+                        if label and value:
+                            info_dict[label] = value
+
+        return info_dict
+
+    def _is_date_expired(self, date_str, today):
+        """日付文字列が今日より前かチェック
+        Args:
+            date_str: 日付文字列（例：「2026年3月31日」「3月31日」「3/31」等）
+            today: datetime.date オブジェクト
+        Returns:
+            True: 期限切れ / False: 有効
+        """
+        try:
+            # 「2026年3月31日」「3月31日」「3/31」等の形式に対応
+            # 月日を抽出（簡易版）
+            month_match = re.search(r'(\d{1,2})月', date_str)
+            day_match = re.search(r'(\d{1,2})日', date_str)
+
+            if month_match and day_match:
+                month = int(month_match.group(1))
+                day = int(day_match.group(1))
+
+                # 年を抽出（なければ2026と仮定）
+                year_match = re.search(r'(\d{4})年', date_str)
+                year = int(year_match.group(1)) if year_match else 2026
+
+                end_date = datetime.date(year, month, day)
+                return end_date < today
+        except Exception:
+            pass
+
+        return False  # 解析失敗時はスキップしない
+
     def _parse_accordion_table(self, table, product_name):
         """accordion構造（h3 + table）から抽選情報を抽出"""
         lotteries = []
@@ -159,119 +215,67 @@ class NyukaNowScraper:
         return lotteries
 
     def _parse_lottery_table(self, table):
-        """テーブルから抽選情報を抽出"""
+        """テーブルから抽選情報を抽出（Type1/Type2判定付き）"""
         lotteries = []
 
         # テーブルの前にあるh3タグから店舗名を取得
         store_name = ''
         h3 = table.find_previous('h3')
         if h3:
-            store_name = h3.get_text(strip=True)
+            h3_text = h3.get_text(strip=True)
+            # Type1判定: h3に「在庫あり」を含む → 在庫情報テーブル → スキップ
+            if '在庫あり' in h3_text:
+                return lotteries  # 空リストを返す（このテーブルはスキップ）
+            store_name = self._normalize_store_name(h3_text)
 
         rows = table.find_all('tr')
 
-        for row in rows:
-            cells = row.find_all(['td', 'th'])
+        # Type2: th/tdペア辞書を作成して、対象商品・期間を抽出
+        info_dict = self._parse_th_td_pairs(rows)
 
-            # 最低限のセル数をチェック
-            if len(cells) >= 1:
-                cell_texts = [c.get_text(strip=True) for c in cells]
+        # 「対象商品」を取得
+        product = info_dict.get('対象商品', '')
+        if not product:
+            product = info_dict.get('商品名', '')
+        if not product:
+            product = info_dict.get('ポケモンカード商品', '')
 
-                # ヘッダー行を除外（thタグのみの行はヘッダー：全セルがth）
-                is_header = all(cell.name == 'th' for cell in cells)
-                if is_header:
-                    continue
+        # 終了日時を取得（期限切れチェック用）
+        end_date_str = info_dict.get('終了日時', '')
+        if not end_date_str:
+            end_date_str = info_dict.get('応募終了', '')
+        if not end_date_str:
+            end_date_str = info_dict.get('締切', '')
 
-                # 最初のセルがthの場合、それはラベル（スキップしてtdデータのみを使う）
-                first_cell_is_th = cells[0].name == 'th' if cells else False
-                if first_cell_is_th:
-                    # th + td の構造：h3は店舗名、cell_texts[1]は商品情報
-                    store = store_name  # h3 から取得した店舗名を使う
-                    product = cell_texts[1] if len(cell_texts) > 1 else ''
-                else:
-                    # 通常の td のみの行：h3は店舗名、cell_texts[1]は商品情報
-                    store = store_name  # h3 から取得した店舗名を使う
-                    product = cell_texts[1] if len(cell_texts) > 1 else ''
+        # 期限切れチェック（終了日が今日2026/3/31より前 → スキップ）
+        if end_date_str:
+            import datetime
+            today = datetime.date(2026, 3, 31)
+            if self._is_date_expired(end_date_str, today):
+                return lotteries  # 期限切れ → スキップ
 
-                # 店舗と商品の両方があれば抽出対象
-                if store and product:
-                    lottery = {
-                        'store': store,
-                        'product': product,
-                        'lottery_type': '',
-                        'start_date': '',
-                        'end_date': cell_texts[4] if len(cell_texts) > 4 else '',
-                        'announcement_date': cell_texts[5] if len(cell_texts) > 5 else '',
-                        'conditions': cell_texts[6] if len(cell_texts) > 6 else '',
-                        'detail_url': '',
-                        'status': self._determine_status(' '.join(cell_texts))
-                    }
+        # store_nameと productが両方存在する場合のみ抽出
+        if store_name and product:
+            lottery = {
+                'store': store_name,
+                'product': product,
+                'lottery_type': info_dict.get('抽選形式', ''),
+                'start_date': info_dict.get('開始日時', ''),
+                'end_date': end_date_str,
+                'announcement_date': info_dict.get('当選発表', ''),
+                'conditions': info_dict.get('応募条件', ''),
+                'detail_url': '',
+                'status': self._determine_status(product)
+            }
 
-                    # リンクを抽出
-                    link = row.find('a')
-                    if link and link.get('href'):
-                        url = link['href']
+            # ポケモンカード関連かどうか確認（緩和版）
+            product_text = (product + ' ' + store_name).lower()
+            has_pokemon_keyword = any(kw.lower() in product_text for kw in self.pokemon_keywords)
+            if not has_pokemon_keyword and 'カード' in product:
+                has_pokemon_keyword = True
 
-                        # chusen.infoの場合は直接実URLを取得
-                        if 'chusen.info' in url:
-                            actual_url = self._extract_url_from_chusen_info(url)
-                            if actual_url:
-                                url = actual_url
-                                # 在庫チェック
-                                if self.check_availability:
-                                    if not self._check_availability(url):
-                                        continue  # 在庫切れの場合はスキップ
-                            lottery['detail_url'] = url
-                        # 入荷Nowの記事ページから実際の販売・抽選ページのURLを取得
-                        elif 'nyuka-now.com' in url:
-                            direct_url = self._extract_direct_url(url)
-                            if direct_url:
-                                lottery['detail_url'] = direct_url
-                            elif self.check_availability:
-                                # 在庫チェックが有効で、直接URLが取得できない場合はスキップ
-                                continue
-                            else:
-                                # 在庫チェックが無効の場合はnyuka-now.comのURLをそのまま使用
-                                lottery['detail_url'] = url
-                        else:
-                            lottery['detail_url'] = url
-
-                    # 直接URLが取得できなかった場合はnyuka-nowのURLをそのまま使う
-                    if not lottery['detail_url'] or lottery['detail_url'] == '':
-                        lottery['detail_url'] = self.url  # nyuka-nowの記事URLを使用
-
-                    # Amazon、Yahoo!ショッピング、駿河屋、エディオンを除外
-                    store_text = lottery['store'].lower()
-                    url_text = lottery['detail_url'].lower()
-                    if 'amazon' in store_text or 'amazon' in url_text:
-                        continue
-                    if 'yahoo' in store_text or 'yahoo' in url_text or 'shopping.yahoo' in url_text:
-                        continue
-                    if '駿河屋' in lottery['store'] or 'suruga' in url_text:
-                        continue
-                    if 'エディオン' in lottery['store'] or 'edion' in url_text:
-                        continue
-
-                    # 中身がない情報を除外（ヘッダー行など）
-                    if lottery['store'] in ['販売開始日時', '店舗/サイト名', '対象商品', '店舗', 'Store', '']:
-                        continue
-                    if lottery['product'] in ['詳細', '商品名', '商品', 'Product', '']:
-                        continue
-
-                    # 空のデータは除外
-                    if lottery['store'] and lottery['product']:
-                        # ポケモンカード関連かどうか確認（緩和版）
-                        product_text = (lottery['product'] + ' ' + lottery['store']).lower()
-
-                        # ポケモンキーワードが含まれているか確認
-                        has_pokemon_keyword = any(kw.lower() in product_text for kw in self.pokemon_keywords)
-
-                        # キーワードがなくても「カード」を含む場合は対象に
-                        if not has_pokemon_keyword and 'カード' in lottery['product']:
-                            has_pokemon_keyword = True
-
-                        if has_pokemon_keyword:
-                            lotteries.append(lottery)
+            if has_pokemon_keyword:
+                lotteries.append(lottery)
 
         return lotteries
 

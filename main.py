@@ -119,7 +119,15 @@ def filter_expired(items: list) -> list:
     today = date.today()
     filtered = []
 
+    # ポケカ専門ショップのホワイトリスト（期限切れ判定をバイパス）
+    WHITELIST_STORES = ['ドラゴンスター']
+
     for item in items:
+        # ホワイトリスト対象は常に通す（期限切れ判定をスキップ）
+        store = item.get('store', '')
+        if any(store_name in store for store_name in WHITELIST_STORES):
+            filtered.append(item)
+            continue
         # ステップ1: 年号チェック（2025年以前を完全除外）
         end_date_str = item.get('end_date', '') or item.get('deadline', '') or ''
         start_date_str = item.get('start_date', '') or ''
