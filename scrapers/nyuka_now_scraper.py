@@ -24,6 +24,12 @@ class NyukaNowScraper:
             'スカーレット', 'バイオレット', 'テラスタル',
             'シャイニートレジャー', 'バトルマスター', 'TCG'
         ]
+        # 除外すべきセクション見出しパターン
+        self.excluded_section_patterns = [
+            '直近の販売履歴', '通知履歴', 'ポケモン×', 'コラボ',
+            '過去の', '終了した', 'その他', 'おすすめ',
+            'ニュース', '推奨', 'FAQ', '質問', 'サービス'
+        ]
 
     def scrape(self):
         """抽選情報をスクレイピング（リトライ機構付き）"""
@@ -77,7 +83,23 @@ class NyukaNowScraper:
                 unique_lotteries = []
                 seen = set()
                 for lottery in lotteries:
-                    key = (lottery.get('product', ''), lottery.get('detail_url', ''))
+                    product = lottery.get('product', '')
+
+                    # 品質フィルター: 商品名の妥当性チェック
+                    # 1. テキスト長チェック (5文字未満 or 100文字以上)
+                    if len(product) < 5 or len(product) >= 100:
+                        continue
+
+                    # 2. 日付のみのパターン除外 (例: "3月27日(金)10:00", "4月6日 18時以降順次")
+                    if re.match(r'^\d{1,2}月\d{1,2}日', product):
+                        continue
+
+                    # 3. 販売方法のみのパターン除外
+                    if product in ['WEB抽選受付（当選者には店頭販売）', 'WEB抽選受付（当選者にはオンライン販売）',
+                                   '先着配布', '追記', 'WEB抽選受付', '先着販売']:
+                        continue
+
+                    key = (product, lottery.get('detail_url', ''))
                     if key not in seen:
                         seen.add(key)
                         # 各lottery itemに source フィールドを追加
@@ -113,6 +135,25 @@ class NyukaNowScraper:
             if date_match:
                 return f"{date_match.group(1)}-{date_match.group(2):0>2}-{date_match.group(3):0>2}"
         return None
+
+    def _is_valid_store_name(self, store_name):
+        """store名が有効か判定（除外パターンチェック）"""
+        if not store_name:
+            return False
+        # 除外パターンに該当するか確認
+        for pattern in self.excluded_section_patterns:
+            if pattern in store_name:
+                return False
+        return True
+
+    def _normalize_store_name(self, store_name):
+        """store名を正規化（空白・改行除去）"""
+        if not store_name:
+            return ''
+        # 複数の空白・改行を単一空白に統一
+        normalized = re.sub(r'[\s\n\r]+', ' ', store_name)
+        # 両端の空白を除去
+        return normalized.strip()
 
     def _parse_accordion_table(self, table, product_name):
         """accordion構造（h3 + table）から抽選情報を抽出"""
@@ -150,16 +191,47 @@ class NyukaNowScraper:
         return lotteries
 
     def _parse_lottery_table(self, table):
-        """テーブルから抽選情報を抽出"""
+        """テーブルから抽選情報を抽出（ヘッダー動的マッピング対応）"""
         lotteries = []
 
-        # テーブルの前にあるh3タグから店舗名を取得
+        # テーブルの前にあるh3タグから店舗名を取得（除外パターン・正規化付き）
         store_name = ''
         h3 = table.find_previous('h3')
         if h3:
-            store_name = h3.get_text(strip=True)
+            raw_store_name = h3.get_text(strip=True)
+            # 正規化と有効性チェック
+            normalized_name = self._normalize_store_name(raw_store_name)
+            if self._is_valid_store_name(normalized_name):
+                store_name = normalized_name
 
         rows = table.find_all('tr')
+
+        # ★ ステップ1: 全行をスキャンしてヘッダーパターン（最初のセルがth + 続くセルがtd）を検出
+        header_mapping = {}  # 列ラベル → インデックス（2番目のセル td の値がヘッダー）
+
+        for idx, row in enumerate(rows[:5]):  # 最初の5行をスキャン
+            cells = row.find_all(['td', 'th'])
+
+            # パターン：最初のセルがth（列ラベル）+ 2番目のセルがtd（データ）
+            if (len(cells) >= 2 and
+                cells[0].name == 'th' and
+                cells[1].name == 'td' and
+                len(cells[1].get_text(strip=True)) < 50):  # ラベルは短い
+
+                # 最初のセルがヘッダーキーワード候補
+                header_text = cells[0].get_text(strip=True)
+
+                # キーワードマッチングで列ラベルを判定
+                if any(kw in header_text for kw in ['終了日', '応募終了', '締切', 'End']):
+                    header_mapping['end_date'] = header_text
+                elif any(kw in header_text for kw in ['開始日', '応募開始', 'Start']):
+                    header_mapping['start_date'] = header_text
+                elif any(kw in header_text for kw in ['抽選形式', '販売形式', 'Type']):
+                    header_mapping['lottery_type'] = header_text
+                elif any(kw in header_text for kw in ['当選発表', '発表日']):
+                    header_mapping['announcement_date'] = header_text
+                elif any(kw in header_text for kw in ['応募条件', '条件']):
+                    header_mapping['conditions'] = header_text
 
         for row in rows:
             cells = row.find_all(['td', 'th'])
@@ -168,32 +240,44 @@ class NyukaNowScraper:
             if len(cells) >= 1:
                 cell_texts = [c.get_text(strip=True) for c in cells]
 
-                # ヘッダー行を除外（thタグのみの行はヘッダー：全セルがth）
-                is_header = all(cell.name == 'th' for cell in cells)
-                if is_header:
+                # ヘッダー行を除外：thタグを含む行は全てスキップ（ラベル値ペア含む）
+                has_th = any(cell.name == 'th' for cell in cells)
+                if has_th:
                     continue
 
-                # 最初のセルがthの場合、それはラベル（スキップしてtdデータのみを使う）
-                first_cell_is_th = cells[0].name == 'th' if cells else False
-                if first_cell_is_th:
-                    # th + td の構造：h3は店舗名、cell_texts[1]は商品情報
-                    store = store_name  # h3 から取得した店舗名を使う
-                    product = cell_texts[1] if len(cell_texts) > 1 else ''
-                else:
-                    # 通常の td のみの行：h3は店舗名、cell_texts[1]は商品情報
-                    store = store_name  # h3 から取得した店舗名を使う
-                    product = cell_texts[1] if len(cell_texts) > 1 else ''
+                # ここ以降、全てのセルは td のみ
+                store = store_name  # h3 から取得した店舗名を使う
+                product = cell_texts[1] if len(cell_texts) > 1 else ''
 
                 # 店舗と商品の両方があれば抽出対象
                 if store and product:
+                    # 品質フィルタ：productの品質チェック
+                    # (a) 10文字未満は除外（「先着配布」「1月26日(月)」等のゴミデータ）
+                    if len(product) < 10:
+                        continue
+
+                    # (b) 日付のみの場合は除外
+                    if re.match(r'^[0-9/月日年()（）\s]+$', product):
+                        continue
+
+                    # (c) 先頭100文字で切り詰め（長すぎる説明文を防止）
+                    product = product[:100]
+
+                    # フォールバック：th がない場合は固定インデックス
+                    lottery_type = ''
+                    start_date = ''
+                    end_date = cell_texts[4] if len(cell_texts) > 4 else ''
+                    announcement_date = cell_texts[5] if len(cell_texts) > 5 else ''
+                    conditions = cell_texts[6] if len(cell_texts) > 6 else ''
+
                     lottery = {
                         'store': store,
                         'product': product,
-                        'lottery_type': '',
-                        'start_date': '',
-                        'end_date': cell_texts[4] if len(cell_texts) > 4 else '',
-                        'announcement_date': cell_texts[5] if len(cell_texts) > 5 else '',
-                        'conditions': cell_texts[6] if len(cell_texts) > 6 else '',
+                        'lottery_type': lottery_type,
+                        'start_date': start_date,
+                        'end_date': end_date,
+                        'announcement_date': announcement_date,
+                        'conditions': conditions,
                         'detail_url': '',
                         'status': self._determine_status(' '.join(cell_texts))
                     }

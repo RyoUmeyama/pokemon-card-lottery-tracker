@@ -1,0 +1,10 @@
+cmd_id: cmd_236
+status: completed
+timestamp: "2026-03-31T10:15:00"
+summary: "store名判定改善完了"
+changes:
+  - "excluded_section_patterns定義（11パターン）"
+  - "_is_valid_store_name()実装"
+  - "_normalize_store_name()実装"
+  - "h3取得時に除外判定・正規化統合（197-205行）"
+verified: "✓ Import+実行確認・RACE-001準拠"
