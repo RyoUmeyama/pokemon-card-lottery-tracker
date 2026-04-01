@@ -37,7 +37,7 @@ class RakutenBooksScraper:
             seen_products = set()  # 重複排除用
 
             # 「抽選受付は終了しました」などのメッセージをチェック
-            if '抽選受付は終了' in page_text or '受付終了' in page_text or '受付は終了' in page_text:
+            if any(msg in page_text for msg in ['抽選受付は終了', '受付終了', '受付は終了']):
                 # 抽選終了の場合は空リストを返す
                 return {
                     'source': 'books.rakuten.co.jp',
@@ -72,7 +72,7 @@ class RakutenBooksScraper:
                 if any(keyword in product_name for keyword in exclude_keywords):
                     continue
 
-                # 【】条件を削除し、商品名を直接対象とする
+                # 商品データを作成
                 lottery = {
                     'store': '楽天ブックス',
                     'product': product_name,
@@ -91,18 +91,14 @@ class RakutenBooksScraper:
                     seen_products.add(product_name)
                     lotteries.append(lottery)
 
-            # 抽選情報が見つからない場合は空のリストを返す
-            result = {
+            return {
                 'source': 'books.rakuten.co.jp',
                 'scraped_at': datetime.now().isoformat(),
                 'lotteries': lotteries
             }
 
-            return result
-
         except Exception as e:
             logger.error(f"Error scraping books.rakuten.co.jp: {e}", exc_info=True)
-            traceback.print_exc()
             return None
 
 

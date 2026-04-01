@@ -13,11 +13,8 @@ from typing import Any, Dict, List, Optional
 import yaml
 
 from constants import EXCLUDE_KEYWORDS, POKEMON_KEYWORDS
-from utils import (
-    _extract_year_from_string,
-    _parse_date_flexible,
-    build_composite_key,
-)
+from utils import (_extract_year_from_string, _parse_date_flexible,
+                   build_composite_key)
 # Scraper imports moved to dynamic loading via config/scrapers.yaml
 # (All imports are now loaded dynamically in load_scrapers_from_config())
 

@@ -22,14 +22,13 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+.pytest_cache/
+.coverage
 
 # Environment variables
 .env
 .env.local
-
-# Data files
-!data/.gitkeep
-# JSONファイルとHTMLレポートはGit管理対象（収集データの履歴を残すため）
+*.env
 
 # Logs
 logs/
@@ -45,6 +44,19 @@ logs/
 # OS
 .DS_Store
 Thumbs.db
+
+# Test & temporary
+test_*.py
+*_test.py
+*.tmp
+temp/
+*.bak
+*.backup
+
+# Data files (backup & latest)
+data/*_backup*.db
+data/*_backup*.json
+data/*_latest.json
 
 # Notification configs (contains sensitive tokens)
 config/notification.json

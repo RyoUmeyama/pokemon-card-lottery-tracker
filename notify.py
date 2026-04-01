@@ -264,6 +264,9 @@ class GmailNotifier:
                 filtered_sources_summary.append(filtered_source)
 
         summary_parts = []
+        # 合計件数を先頭に追加
+        total_count = total_lottery_count + total_reservation_count + total_upcoming
+        summary_parts.append(f'📊 全{total_count}件の情報')
         if len(deadline_soon_items) > 0:
             summary_parts.append(f'🔥期限間近{len(deadline_soon_items)}件')
         if total_lottery_count > 0:

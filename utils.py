@@ -37,12 +37,18 @@ def _parse_date_flexible(date_str: str, today) -> Optional:
         except ValueError:
             pass
 
-    # パターン4: strptime での形式試行
+    # パターン4: strptime での形式試行（年なし日付は明示的に年を付与）
+    year_formats = ['%m月%d日', '%m/%d']
     for fmt in ['%Y/%m/%d', '%Y-%m-%d', '%Y年%m月%d日', '%m月%d日', '%m/%d']:
         try:
-            parsed = datetime.strptime(date_str, fmt).date()
-            if fmt in ['%m月%d日', '%m/%d']:
-                parsed = parsed.replace(year=today.year)
+            if fmt in year_formats:
+                # 年なし形式は明示的に現在年を付与してからパース
+                if fmt == '%m月%d日':
+                    parsed = datetime.strptime(f"{today.year}年{date_str}", '%Y年%m月%d日').date()
+                else:  # '%m/%d'
+                    parsed = datetime.strptime(f"{today.year}/{date_str}", '%Y/%m/%d').date()
+            else:
+                parsed = datetime.strptime(date_str, fmt).date()
             return parsed
         except ValueError:
             continue
