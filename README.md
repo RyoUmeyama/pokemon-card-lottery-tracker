@@ -69,8 +69,8 @@ pip install -r requirements.txt
 # スクレイピング実行（タイムアウト推奨値: 15分）
 python main.py
 
-# テスト実行（cmd_248で46テスト全て成功）
-python3 -m pytest tests/          # 全テスト実行（46テスト）
+# テスト実行（cmd_250で106テスト全て成功）
+python3 -m pytest tests/          # 全テスト実行（106テスト）
 python3 -m pytest tests/ -v       # 詳細表示
 python3 -m pytest tests/test_main.py::TestDetectChanges -v  # 特定テストのみ実行
 ```
@@ -251,7 +251,7 @@ python main.py
 - [x] 0件アラート機能
 - [x] メール拡張表示（期限間近15件、先着販売15件等）
 - [x] ログ出力機能（logs/, RotatingFileHandler対応）
-- [x] テストスイート（46テスト）
+- [x] テストスイート（106テスト）【cmd_250更新】
 - [x] ヨドバシカメラ対応
 - [x] ビックカメラ対応
 - [x] X(Twitter)公式アカウント監視
@@ -276,6 +276,21 @@ python main.py
   - CSS パルスアニメーション（新着表示）
   - ステータス別色分け（アクティブ/終了/予定）
 - [x] モバイル対応改善（CSS media queries）【cmd_247】
+- [x] config/scrapers.yaml によるスクレイパー動的管理【cmd_247】
+  - YAML設定から動的インポート（importlib活用）
+  - アクティブ12 / skip13 の管理
+- [x] skipスクレイパー再調査・修復判定【cmd_249】
+  - WAF/Timeout/ログイン認証系は修復困難と判定
+  - 現在のskip設定は最適と確認
+- [x] notify.py型チェック修復【cmd_249】
+  - sources_summary のdict/list両対応
+- [x] ログ出力強化【cmd_250】
+  - RotatingFileHandler（5MB×3世代）確認
+  - ログフォーマット：タイムスタンプ（ミリ秒）+ 関数名 + 行番号
+  - コンソール vs ファイル出力で異なるフォーマット
+- [x] README 最終更新【cmd_251】
+  - スクレイパー情報を 18→12/skip13 に更新
+  - テスト数を 46→106 に更新
 
 ### 今後の実装予定
 - [ ] 在庫チェック機能の再実装（高速化・並列処理）

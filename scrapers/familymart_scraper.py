@@ -1,28 +1,24 @@
-import logging
-import time
-
-logger = logging.getLogger(__name__)
 """
 ファミリーマート（FamilyMart）からポケモンカード抽選・予約情報をスクレイピング
 ファミマの公式サイトとキャンペーンページを監視
 """
-from bs4 import BeautifulSoup
+import logging
 import json
 from datetime import datetime
 import re
 
+from .requests_base import RequestsBaseScraper
 
-class FamilyMartScraper:
+logger = logging.getLogger(__name__)
+
+
+class FamilyMartScraper(RequestsBaseScraper):
     def __init__(self):
-        # ファミリーマートの公式サイト・キャンペーンページ
+        super().__init__(timeout=30, wait_time=1)
         self.urls = [
             "https://www.family.co.jp/campaign.html",
         ]
-        self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-            'Accept-Language': 'ja,en-US;q=0.7,en;q=0.3',
-        }
+        self.source_name = 'family.co.jp'
         self.pokemon_keywords = [
             'ポケモンカード', 'ポケカ', 'pokemon', 'ポケモン',
             'スカーレット', 'バイオレット', 'テラスタル',

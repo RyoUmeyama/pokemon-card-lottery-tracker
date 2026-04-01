@@ -1,26 +1,23 @@
-import logging
-import time
-
-logger = logging.getLogger(__name__)
 """
 カードショップセラ（Card Shop Serra）からポケモンカード抽選・予約情報をスクレイピング
 トレカ専門店として有名なカードショップ
 """
-from bs4 import BeautifulSoup
+import logging
 import json
 from datetime import datetime
 import re
 
+from .requests_base import RequestsBaseScraper
 
-class CardShopSerraScraper:
+logger = logging.getLogger(__name__)
+
+
+class CardShopSerraScraper(RequestsBaseScraper):
     def __init__(self):
+        super().__init__(timeout=30, wait_time=1)
         # カードショップセラ（ドメインが解決できないため無効化）
         self.urls = []  # DNS解決エラーのためスキップ
-        self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-            'Accept-Language': 'ja,en-US;q=0.7,en;q=0.3',
-        }
+        self.source_name = 'cardshopserra.jp'
         self.pokemon_keywords = [
             'ポケモンカード', 'ポケカ', 'pokemon', 'ポケモン',
             'スカーレット', 'バイオレット', 'テラスタル',
@@ -55,11 +52,13 @@ class CardShopSerraScraper:
         lotteries = []
 
         try:
-            time.sleep(1)
-            response = requests.get(url, headers=self.headers, timeout=30)
-            response.raise_for_status()
+            html_content = self.fetch_html(url)
+            if not html_content:
+                return lotteries
 
-            soup = BeautifulSoup(response.content, 'html.parser')
+            soup = self.parse_soup(html_content)
+            if not soup:
+                return lotteries
 
             # 商品アイテムを探す
             product_items = soup.find_all(['div', 'li', 'article'], class_=lambda x: x and any(
@@ -82,8 +81,6 @@ class CardShopSerraScraper:
                     if lottery:
                         lotteries.append(lottery)
 
-        except requests.exceptions.HTTPError as e:
-            logger.error(f"HTTP Error for {url}: {e.response.status_code}")
         except Exception as e:
             logger.error(f"Error scraping {url}: {e}", exc_info=True)
 

@@ -1,30 +1,24 @@
 """
 TSUTAYAオンラインからのポケモンカード予約・抽選情報スクレイピング
 """
-from datetime import datetime
-import json
 import logging
 import re
-import time
+from datetime import datetime
 
-from bs4 import BeautifulSoup
+import requests
+from .requests_base import RequestsBaseScraper
 
 logger = logging.getLogger(__name__)
 
 
-class TsutayaScraper:
+class TsutayaScraper(RequestsBaseScraper):
     def __init__(self):
+        super().__init__()
         # TSUTAYAオンラインのポケモンカード検索ページ
         self.base_url = "https://tsutaya.tsite.jp"
         self.search_urls = [
             "https://tsutaya.tsite.jp/search/?keyword=ポケモンカード&sort=release_date&area=&status=",
         ]
-        self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-            'Accept-Language': 'ja,en-US;q=0.7,en;q=0.3',
-            'Referer': 'https://tsutaya.tsite.jp',
-        }
         self.pokemon_keywords = [
             'ポケモンカード', 'ポケカ', 'pokemon', 'ポケモン',
             'スカーレット', 'バイオレット', 'ナイトワンダラー',
@@ -60,9 +54,9 @@ class TsutayaScraper:
         reservations = []
 
         try:
-            response = requests.get(url, headers=self.headers, timeout=15)
-            if response.status_code != 200:
-                logger.warning(f"HTTP Error: {response.status_code}")
+            response = self.fetch(url)
+            if not response:
+                logger.warning(f"Failed to fetch {url}")
                 return lotteries, reservations
 
             soup = BeautifulSoup(response.content, 'html.parser')

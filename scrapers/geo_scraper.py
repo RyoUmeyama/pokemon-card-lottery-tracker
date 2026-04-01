@@ -5,26 +5,20 @@ from datetime import datetime
 import json
 import logging
 import re
-import time
 
-from bs4 import BeautifulSoup
+from .requests_base import RequestsBaseScraper
 
 logger = logging.getLogger(__name__)
 
 
-class GeoScraper:
+class GeoScraper(RequestsBaseScraper):
     def __init__(self):
-        # GEOオンラインストアのポケモンカード検索ページ
+        super().__init__(timeout=30, wait_time=1)
         self.base_url = "https://www.geo-online.co.jp"
         self.search_urls = [
             "https://www.geo-online.co.jp/search?q=ポケモンカード&category=game_card",
         ]
-        self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-            'Accept-Language': 'ja,en-US;q=0.7,en;q=0.3',
-            'Referer': 'https://www.geo-online.co.jp',
-        }
+        self.source_name = 'geo-online.co.jp'
         self.pokemon_keywords = [
             'ポケモンカード', 'ポケカ', 'pokemon', 'ポケモン',
             'スカーレット', 'バイオレット', 'ナイトワンダラー',

@@ -71,15 +71,14 @@ class AmazonReservationScraper(RequestsBaseScraper):
                 'ref': 'nb_sb_noss'
             }
 
-            response = requests.get(
-                self.search_url,
-                params=params,
-                headers=self.headers,
-                timeout=30
-            )
-            response.raise_for_status()
+            url = self.search_url + '?' + '&'.join(f"{k}={v}" for k, v in params.items())
+            html_content = self.fetch_html(url)
+            if not html_content:
+                return products
 
-            soup = BeautifulSoup(response.content, 'html.parser')
+            soup = self.parse_soup(html_content)
+            if not soup:
+                return products
 
             # 商品要素を取得
             items = soup.select('[data-component-type="s-search-result"]')
