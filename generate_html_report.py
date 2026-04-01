@@ -837,7 +837,7 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
             try:
                 from datetime import datetime
                 return (0, datetime.strptime(end_date[:10], '%Y-%m-%d') if len(end_date) >= 10 else datetime.max)
-            except:
+            except (ValueError, TypeError):
                 return (1, end_date)
         return (1, '')
 

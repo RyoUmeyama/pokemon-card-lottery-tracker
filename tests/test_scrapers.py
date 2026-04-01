@@ -73,3 +73,39 @@ class TestPlaywrightBaseScraper:
         assert scraper.timeout == 60000
         assert scraper.navigation_timeout == 45000
         assert scraper.pokemon_keywords is not None
+
+    def test_remove_duplicates(self, scraper):
+        """重複除去テスト"""
+        lotteries = [
+            {'product': 'A', 'detail_url': 'http://a.com', 'store': 'Store1'},
+            {'product': 'A', 'detail_url': 'http://a.com', 'store': 'Store1'},
+            {'product': 'B', 'detail_url': 'http://b.com', 'store': 'Store2'},
+        ]
+        result = scraper.remove_duplicates(lotteries)
+        assert len(result) == 2
+        assert result[0]['product'] == 'A'
+        assert result[1]['product'] == 'B'
+
+    def test_remove_duplicates_empty(self, scraper):
+        """重複除去テスト - 空配列"""
+        result = scraper.remove_duplicates([])
+        assert result == []
+
+    def test_remove_duplicates_no_product(self, scraper):
+        """重複除去テスト - productフィールドなし"""
+        lotteries = [
+            {'detail_url': 'http://a.com'},
+            {'product': 'A', 'detail_url': 'http://b.com'},
+        ]
+        result = scraper.remove_duplicates(lotteries)
+        assert len(result) == 1
+        assert result[0]['product'] == 'A'
+
+    def test_extract_period_edge_cases(self, scraper):
+        """期間抽出テスト - エッジケース"""
+        # 複数の区切り文字対応
+        assert scraper.extract_period('4/1～4/30') != ''
+        assert scraper.extract_period('4月1日～4月30日') != ''
+        # 複合形式
+        result = scraper.extract_period('受付期間: 2026年4月1日 ～ 2026年4月30日')
+        assert '2026' in result or '4月' in result or '4/1' in result or '04-01' in result

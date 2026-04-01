@@ -206,14 +206,14 @@ class PlaywrightBaseScraper:
                 if wait_for_js:
                     try:
                         await page.wait_for_load_state('networkidle', timeout=15000)
-                    except Exception:
+                    except TimeoutError:
                         pass
 
                 # 特定のセレクタを待つ場合
                 if wait_selector:
                     try:
                         await page.wait_for_selector(wait_selector, timeout=15000)
-                    except Exception:
+                    except TimeoutError:
                         pass  # セレクタが見つからなくても続行
 
                 # ページ全体をスクロールして遅延読み込みコンテンツを取得
@@ -227,25 +227,28 @@ class PlaywrightBaseScraper:
                 content = await page.content()
                 return content if content and len(content) > 100 else None
 
-        except Exception as e:
+        except (TimeoutError, RuntimeError, ConnectionError) as e:
             logger.error(f"Playwright error for {url}: {e}")
+            return None
+        except Exception as e:
+            logger.error(f"Unexpected Playwright error for {url}: {e}")
             return None
         finally:
             # リソースの確実な解放（try/finallyで保証）
             if page:
                 try:
                     await page.close()
-                except Exception:
+                except (TimeoutError, RuntimeError):
                     pass
             if context:
                 try:
                     await context.close()
-                except Exception:
+                except (TimeoutError, RuntimeError):
                     pass
             if browser:
                 try:
                     await browser.close()
-                except Exception:
+                except (TimeoutError, RuntimeError):
                     pass
 
     async def _smooth_scroll(self, page):

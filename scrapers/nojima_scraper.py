@@ -1,27 +1,23 @@
-import logging
-import time
-
-logger = logging.getLogger(__name__)
 """
 ノジマ（Nojima）からポケモンカード抽選情報をスクレイピング
 """
-import requests
-from bs4 import BeautifulSoup
+import logging
 import json
 from datetime import datetime
 import re
 
+from .requests_base import RequestsBaseScraper
 
-class NojimaScraper:
+logger = logging.getLogger(__name__)
+
+
+class NojimaScraper(RequestsBaseScraper):
     def __init__(self):
+        super().__init__(timeout=30, wait_time=1)
         # ノジマオンライン（403エラーが頻発するため簡略化）
         self.urls = []
         self.search_url = None  # Bot対策で403エラーになるためスキップ
-        self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-            'Accept-Language': 'ja,en-US;q=0.7,en;q=0.3',
-        }
+        self.source_name = 'online.nojima.co.jp'
         self.pokemon_keywords = [
             'ポケモンカード', 'ポケカ', 'pokemon', 'ポケモン',
             'スカーレット', 'バイオレット', 'テラスタル',

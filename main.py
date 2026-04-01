@@ -157,7 +157,7 @@ def filter_expired(items: list) -> list:
                 filtered.append(item)
             else:
                 logger.info(f"期限切れ除外: {item.get('product', '?')} (end: {end_date_str})")
-        except Exception as e:
+        except (ValueError, TypeError) as e:
             logger.warning(f"日付パースエラーで除外: {end_date_str} - {e}")
 
     return filtered
@@ -270,9 +270,17 @@ async def execute_scraper(config: Dict[str, Any], semaphore: asyncio.Semaphore, 
 
         try:
             scraper = config['class'](**config['kwargs'])
+        except (TypeError, AttributeError) as e:
+            logger.warning(f"✗ {name}の初期化に失敗: {e}")
+            return None
+
+        try:
             data = scraper.scrape()
-        except Exception as e:
+        except (RuntimeError, ConnectionError, TimeoutError) as e:
             logger.warning(f"✗ {name}の取得に失敗: {e}")
+            return None
+        except Exception as e:
+            logger.warning(f"✗ {name}の取得で予期しないエラー: {e}")
             return None
 
         if not data:

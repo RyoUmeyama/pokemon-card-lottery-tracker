@@ -5,29 +5,30 @@ from datetime import datetime
 import json
 import logging
 import re
-import time
 
-import requests
-from bs4 import BeautifulSoup
+from .requests_base import RequestsBaseScraper
 
 logger = logging.getLogger(__name__)
 
 
-class RakutenBooksScraper:
+class RakutenBooksScraper(RequestsBaseScraper):
     def __init__(self):
+        super().__init__(timeout=30, wait_time=1)
         self.url = "https://books.rakuten.co.jp/event/game/card/entry/"
-        self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'
-        }
+        self.source_name = 'books.rakuten.co.jp'
 
     def scrape(self):
         """抽選情報をスクレイピング"""
         try:
-            time.sleep(1)
-            response = requests.get(self.url, headers=self.headers, timeout=30)
-            response.raise_for_status()
+            # HTTPリクエストを送信
+            html_content = self.fetch_html(self.url)
+            if not html_content:
+                return self.handle_error(Exception("Failed to fetch HTML"), "RakutenBooks")
 
-            soup = BeautifulSoup(response.content, 'html.parser')
+            # HTMLを解析
+            soup = self.parse_soup(html_content)
+            if not soup:
+                return self.handle_error(Exception("Failed to parse HTML"), "RakutenBooks")
 
             # ページテキストを抽出
             page_text = soup.get_text()
@@ -98,8 +99,7 @@ class RakutenBooksScraper:
             }
 
         except Exception as e:
-            logger.error(f"Error scraping books.rakuten.co.jp: {e}", exc_info=True)
-            return None
+            return self.handle_error(e, "RakutenBooks")
 
 
 if __name__ == '__main__':

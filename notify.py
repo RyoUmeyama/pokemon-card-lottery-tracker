@@ -237,6 +237,24 @@ class GmailNotifier:
         except (ValueError, TypeError):
             return False
 
+    def _is_active(self, start_date_str, end_date_str):
+        """抽選が「受付中」かどうか判定"""
+        if not end_date_str:
+            return False
+        # 受付終了していなければ受付中と判定
+        return not self._is_ended(end_date_str)
+
+    def _sort_lotteries_by_status(self, lotteries):
+        """抽選を受付中優先でソート"""
+        active = []
+        inactive = []
+        for lottery in lotteries:
+            if self._is_active(lottery.get('start_date', ''), lottery.get('end_date', '')):
+                active.append(lottery)
+            else:
+                inactive.append(lottery)
+        return active + inactive
+
     def _create_email_body(self, sources_summary, total_lottery_count, total_reservation_count, first_come_first_served_items=None, upcoming_products=None, deadline_soon_items=None, zero_alert=False, zero_alert_sources=None):
         """メール本文（HTML）を作成"""
         if first_come_first_served_items is None:
@@ -250,9 +268,10 @@ class GmailNotifier:
 
         # フィルタ: 各ソースのロッテリーから受付終了済みをさらに除外
         filtered_sources_summary = []
-        for source in sources_summary:
+        sources_list = sources_summary.values() if isinstance(sources_summary, dict) else sources_summary
+        for source in sources_list:
             filtered_source = {
-                'name': source['name'],
+                'name': source.get('name', 'Unknown'),
                 'lottery_count': 0,
                 'reservation_count': source.get('reservation_count', 0),
                 'lotteries': [item for item in source.get('lotteries', []) if not self._is_ended(item.get('end_date', ''))],
@@ -265,6 +284,7 @@ class GmailNotifier:
 
         summary_parts = []
         # 合計件数を先頭に追加
+        total_upcoming = len(upcoming_products) if upcoming_products else 0
         total_count = total_lottery_count + total_reservation_count + total_upcoming
         summary_parts.append(f'📊 全{total_count}件の情報')
         if len(deadline_soon_items) > 0:
@@ -486,13 +506,13 @@ class GmailNotifier:
         </div>
 """
 
-        # 先着販売中セクション
+        # 先着販売中セクション（上限15件）
         if first_come_first_served_items:
             html += f"""
         <div class="source-section" style="background: #fffacd; border-color: #ffd700;">
             <div class="section-title" style="color: #d4af37;">🔥 先着販売中 - 全{len(first_come_first_served_items)}件</div>
 """
-            for item in first_come_first_served_items:
+            for item in first_come_first_served_items[:15]:
                 product = item.get('product', '')
                 store = item.get('store', '')
                 url = item.get('detail_url', '#')
@@ -501,6 +521,13 @@ class GmailNotifier:
                 <div class="store-name">🏪 {store}</div>
                 <div class="product-name">⚡ {product}</div>
                 <a href="{url}" class="detail-link" target="_blank">🔗 今すぐ購入</a>
+            </div>
+"""
+            if len(first_come_first_served_items) > 15:
+                remaining = len(first_come_first_served_items) - 15
+                html += f"""
+            <div style="text-align: center; color: #718096; margin-top: 15px;">
+                ... 他 {remaining} 件
             </div>
 """
             html += """
@@ -523,7 +550,7 @@ class GmailNotifier:
             </div>
 """
 
-            # 抽選情報を追加
+            # 抽選情報を追加（上限15件、受付中優先でソート）
             if source['lottery_count'] > 0:
                 html += f"""
             <div class="section-title">🎯 抽選情報 - 全{len(source['lotteries'])}件</div>
@@ -534,7 +561,9 @@ class GmailNotifier:
                 <p>⏰ <span class="deadline-highlight">期限間近の情報は黄色ハイライト</span>で表示されています</p>
             </div>
 """
-                for lottery in source['lotteries']:
+                # 受付中の抽選を最上部に配置
+                sorted_lotteries = self._sort_lotteries_by_status(source['lotteries'])
+                for lottery in sorted_lotteries[:15]:
                     store = lottery.get('store', '')
                     product = lottery.get('product', '')
                     detail_url = lottery.get('detail_url', '#')
@@ -556,13 +585,20 @@ class GmailNotifier:
                 <a href="{detail_url}" class="detail-link" target="_blank">🔗 詳細を見る</a>
             </div>
 """
+                if len(source['lotteries']) > 15:
+                    remaining = len(source['lotteries']) - 15
+                    html += f"""
+            <div style="text-align: center; color: #718096; margin-top: 15px;">
+                ... 他 {remaining} 件
+            </div>
+"""
 
-            # 予約情報を追加
+            # 予約情報を追加（上限15件）
             if source['reservation_count'] > 0:
                 html += """
             <div class="section-title">📅 予約情報 - 全{0}件</div>
 """.format(source['reservation_count'])
-                for reservation in source['reservations']:
+                for reservation in source['reservations'][:15]:
                     title = reservation.get('title', '')
                     price = reservation.get('price', '')
                     availability = reservation.get('availability', '')
@@ -589,18 +625,25 @@ class GmailNotifier:
                 <a href="{url}" class="detail-link" target="_blank">🔗 予約ページを見る</a>
             </div>
 """
+                if len(source['reservations']) > 15:
+                    remaining = len(source['reservations']) - 15
+                    html += f"""
+            <div style="text-align: center; color: #718096; margin-top: 15px;">
+                ... 他 {remaining} 件
+            </div>
+"""
 
             html += """
         </div>
 """
 
-        # 🗓️ 今後の抽選予定セクション（各ソースの upcoming_products を集約）
+        # 🗓️ 今後の抽選予定セクション（各ソースの upcoming_products を集約、上限15件）
         if upcoming_products:
             html += f"""
         <div class="source-section" style="background: #f0f8ff; border-color: #4169e1;">
             <div class="section-title" style="color: #4169e1;">🗓️ 今後の抽選予定 - 全{len(upcoming_products)}件</div>
 """
-            for product in upcoming_products:
+            for product in upcoming_products[:15]:
                 # gamepediaスキーマ対応: product_name または name
                 name = product.get('product_name', '') or product.get('name', '')
                 release_date = product.get('release_date', '')

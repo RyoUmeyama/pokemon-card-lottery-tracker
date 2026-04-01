@@ -1,29 +1,23 @@
-import logging
-import time
-
-logger = logging.getLogger(__name__)
 """
 ビックカメラ抽選販売ページからポケモンカード抽選情報をスクレイピング
 """
-import requests
-from bs4 import BeautifulSoup
+import logging
 import json
 from datetime import datetime
 import re
 
+from .requests_base import RequestsBaseScraper
 
-class BiccameraScraper:
+logger = logging.getLogger(__name__)
+
+
+class BiccameraScraper(RequestsBaseScraper):
     def __init__(self):
-        # ビックカメラの抽選販売ページ
-        # ビックカメラのポケモンカード検索結果ページ
+        super().__init__(timeout=30, wait_time=1)
         self.urls = [
             "https://www.biccamera.com/bc/category/?q=ポケモンカード",
         ]
-        self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-            'Accept-Language': 'ja,en-US;q=0.7,en;q=0.3',
-        }
+        self.source_name = 'biccamera.com'
         self.pokemon_keywords = [
             'ポケモンカード', 'ポケカ', 'pokemon', 'ポケモン',
             'スカーレット', 'バイオレット', 'ナイトワンダラー',
@@ -59,11 +53,15 @@ class BiccameraScraper:
         lotteries = []
 
         try:
-            time.sleep(1)
-            response = requests.get(url, headers=self.headers, timeout=15)
-            response.raise_for_status()
+            # HTTPリクエストを送信
+            html_content = self.fetch_html(url)
+            if not html_content:
+                return lotteries
 
-            soup = BeautifulSoup(response.content, 'html.parser')
+            # HTMLを解析
+            soup = self.parse_soup(html_content)
+            if not soup:
+                return lotteries
 
             # 抽選商品リンクを探す
             all_links = soup.find_all('a', href=True)

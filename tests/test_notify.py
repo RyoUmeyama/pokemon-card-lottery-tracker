@@ -80,3 +80,61 @@ class TestGmailNotifier:
         assert notifier.smtp_username is None or isinstance(notifier.smtp_username, str)
         assert notifier.smtp_password is None or isinstance(notifier.smtp_password, str)
         assert notifier.recipient is None or isinstance(notifier.recipient, str)
+
+    def test_is_new_true(self, notifier):
+        """新着判定 - 24時間以内"""
+        recent_timestamp = (datetime.now() - timedelta(hours=1)).isoformat()
+        assert notifier._is_new(recent_timestamp) is True
+
+    def test_is_new_false(self, notifier):
+        """新着判定 - 24時間以上前"""
+        old_timestamp = (datetime.now() - timedelta(hours=25)).isoformat()
+        assert notifier._is_new(old_timestamp) is False
+
+    def test_is_new_invalid(self, notifier):
+        """新着判定 - 無効なタイムスタンプ"""
+        assert notifier._is_new('') is False
+        assert notifier._is_new(None) is False
+
+    def test_create_email_body_basic(self, notifier):
+        """メール本文生成 - 基本形式"""
+        sources_summary = [
+            {
+                'name': 'source1',
+                'lotteries': [
+                    {'product': 'テスト', 'end_date': (datetime.now() + timedelta(days=5)).strftime('%Y-%m-%d')}
+                ],
+                'reservations': [],
+                'lottery_count': 1,
+                'reservation_count': 0
+            }
+        ]
+        body = notifier._create_email_body(sources_summary, 1, 0)
+        assert body is not None
+        assert isinstance(body, str)
+
+    def test_create_email_body_with_deadline_soon(self, notifier):
+        """メール本文生成 - 期限間近アイテム含む"""
+        sources_summary = []
+        deadline_soon = [
+            {
+                'product': '期限間近商品',
+                'store': 'テスト店舗',
+                'end_date': (datetime.now() + timedelta(days=2)).strftime('%Y-%m-%d'),
+                'detail_url': 'https://example.com',
+            }
+        ]
+        body = notifier._create_email_body(sources_summary, 0, 0, deadline_soon_items=deadline_soon)
+        assert body is not None
+        assert isinstance(body, str)
+
+    def test_create_email_body_with_zero_alert(self, notifier):
+        """メール本文生成 - 0件アラート"""
+        sources_summary = []
+        body = notifier._create_email_body(
+            sources_summary, 0, 0,
+            zero_alert=True,
+            zero_alert_sources=['source1', 'source2']
+        )
+        assert body is not None
+        assert isinstance(body, str)
