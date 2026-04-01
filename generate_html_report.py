@@ -322,10 +322,18 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
             padding: 30px;
         }}
 
+        .table-wrapper {{
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-top: 20px;
+        }}
+
         table {{
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            margin-top: 0;
+            min-width: 500px;
         }}
 
         table thead {{
@@ -629,27 +637,46 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
             font-size: 0.9em;
         }}
 
+        @media (max-width: 1024px) {{
+            header h1 {{
+                font-size: 2em;
+            }}
+
+            table {{
+                font-size: 0.9em;
+            }}
+
+            table th, table td {{
+                padding: 10px;
+            }}
+        }}
+
         @media (max-width: 768px) {{
             body {{
                 padding: 10px;
+                font-size: 14px;
+            }}
+
+            header {{
+                padding: 25px;
             }}
 
             header h1 {{
-                font-size: 1.8em;
-                margin-bottom: 10px;
+                font-size: 1.6em;
+                margin-bottom: 8px;
             }}
 
             header .subtitle {{
-                font-size: 0.95em;
+                font-size: 0.9em;
             }}
 
             .container {{
                 border-radius: 10px;
-                padding: 15px;
             }}
 
             .stats {{
                 grid-template-columns: 1fr;
+                gap: 10px;
             }}
 
             .stat-card {{
@@ -657,7 +684,19 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
             }}
 
             .stat-card .number {{
-                font-size: 1.5em;
+                font-size: 1.4em;
+            }}
+
+            .stat-card .label {{
+                font-size: 0.85em;
+            }}
+
+            .summary {{
+                padding: 20px;
+            }}
+
+            .summary h2 {{
+                font-size: 1.3em;
             }}
 
             .filter-controls {{
@@ -666,24 +705,37 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
 
             .filter-controls input {{
                 font-size: 16px;
-                padding: 10px 15px;
+                padding: 12px 15px;
+            }}
+
+            .table-wrapper {{
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                margin: 10px -15px;
+                padding: 0 15px;
             }}
 
             table {{
-                font-size: 0.85em;
-            }}
-
-            table th, table td {{
-                padding: 8px 5px;
+                font-size: 0.8em;
+                min-width: 100%;
             }}
 
             table th {{
+                padding: 8px 4px;
                 font-size: 0.75em;
+                white-space: nowrap;
+            }}
+
+            table td {{
+                padding: 8px 4px;
+                word-break: break-word;
             }}
 
             table td a {{
-                padding: 4px 8px;
-                font-size: 0.75em;
+                padding: 3px 6px;
+                font-size: 0.7em;
+                display: block;
+                margin-top: 3px;
             }}
 
             .lotteries {{
@@ -692,29 +744,177 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
 
             .lottery-card {{
                 padding: 15px;
-                margin-bottom: 15px;
+                margin-bottom: 12px;
+                border-radius: 10px;
             }}
 
             .lottery-card .header {{
                 flex-direction: column;
-                gap: 10px;
+                gap: 8px;
+            }}
+
+            .lottery-card .store {{
+                font-size: 1em;
             }}
 
             .lottery-card .product {{
-                font-size: 1.1em;
+                font-size: 1em;
+                margin-bottom: 10px;
+            }}
+
+            .lottery-card .detail-row {{
+                margin: 8px 0;
+                font-size: 0.9em;
+            }}
+
+            .lottery-card .detail-row .icon {{
+                width: 20px;
+            }}
+
+            .lottery-card a {{
+                padding: 10px 20px;
+                font-size: 0.9em;
+                margin-top: 10px;
+            }}
+
+            .upcoming-section {{
+                padding: 20px;
+            }}
+
+            .upcoming-section h2 {{
+                font-size: 1.3em;
             }}
 
             .upcoming-card {{
                 padding: 15px;
+                margin-bottom: 12px;
             }}
 
             .upcoming-card .product-name {{
-                font-size: 1em;
+                font-size: 0.95em;
+            }}
+
+            .upcoming-card .date-badge {{
+                font-size: 0.8em;
+            }}
+
+            .upcoming-card .schedule-info {{
+                font-size: 0.9em;
             }}
 
             footer {{
                 padding: 15px;
+                font-size: 0.8em;
+            }}
+        }}
+
+        @media (max-width: 480px) {{
+            body {{
+                padding: 8px;
+                font-size: 13px;
+            }}
+
+            header {{
+                padding: 15px;
+            }}
+
+            header h1 {{
+                font-size: 1.3em;
+                margin-bottom: 5px;
+            }}
+
+            header .subtitle {{
+                font-size: 0.8em;
+            }}
+
+            .stats {{
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }}
+
+            .stat-card {{
+                padding: 12px;
+            }}
+
+            .stat-card .number {{
+                font-size: 1.2em;
+            }}
+
+            .stat-card .label {{
+                font-size: 0.75em;
+            }}
+
+            .summary {{
+                padding: 15px;
+            }}
+
+            .summary h2 {{
+                font-size: 1.1em;
+                margin-bottom: 15px;
+            }}
+
+            .filter-controls {{
+                padding: 12px;
+            }}
+
+            .filter-controls input {{
+                font-size: 16px;
+                padding: 10px;
+            }}
+
+            .table-wrapper {{
+                margin: 10px -8px;
+                padding: 0 8px;
+            }}
+
+            table {{
+                font-size: 0.75em;
+            }}
+
+            table th {{
+                padding: 6px 2px;
+                font-size: 0.7em;
+            }}
+
+            table td {{
+                padding: 6px 2px;
+            }}
+
+            table td a {{
+                padding: 2px 4px;
+                font-size: 0.65em;
+            }}
+
+            .lotteries {{
+                padding: 12px;
+            }}
+
+            .lottery-card {{
+                padding: 12px;
+                margin-bottom: 10px;
+            }}
+
+            .lottery-card .store {{
+                font-size: 0.9em;
+            }}
+
+            .lottery-card .product {{
+                font-size: 0.9em;
+                margin-bottom: 8px;
+            }}
+
+            .lottery-card .detail-row {{
                 font-size: 0.85em;
+            }}
+
+            .lottery-card a {{
+                padding: 8px 16px;
+                font-size: 0.85em;
+            }}
+
+            footer {{
+                padding: 12px;
+                font-size: 0.75em;
             }}
         }}
     </style>

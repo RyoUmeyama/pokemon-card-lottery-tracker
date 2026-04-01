@@ -45,11 +45,13 @@ class AmiAmiScraper(RequestsBaseScraper):
         lotteries = []
 
         try:
-            time.sleep(1)
-            response = requests.get(self.search_url, headers=self.headers, timeout=30)
-            response.raise_for_status()
+            html_content = self.fetch_html(self.search_url)
+            if not html_content:
+                return lotteries
 
-            soup = BeautifulSoup(response.content, 'html.parser')
+            soup = self.parse_soup(html_content)
+            if not soup:
+                return lotteries
 
             # 商品アイテムを探す
             product_items = soup.find_all(['div', 'li'], class_=lambda x: x and any(
@@ -70,8 +72,6 @@ class AmiAmiScraper(RequestsBaseScraper):
                     if lottery:
                         lotteries.append(lottery)
 
-        except requests.exceptions.HTTPError as e:
-            logger.error(f"HTTP Error: {e.response.status_code}")
         except Exception as e:
             logger.error(f"Error scraping search results: {e}", exc_info=True)
 

@@ -52,11 +52,13 @@ class FamilyMartScraper(RequestsBaseScraper):
         lotteries = []
 
         try:
-            time.sleep(1)
-            response = requests.get(url, headers=self.headers, timeout=30)
-            response.raise_for_status()
+            html_content = self.fetch_html(url)
+            if not html_content:
+                return lotteries
 
-            soup = BeautifulSoup(response.content, 'html.parser')
+            soup = self.parse_soup(html_content)
+            if not soup:
+                return lotteries
 
             # キャンペーン・商品アイテムを探す
             all_links = soup.find_all('a', href=True)

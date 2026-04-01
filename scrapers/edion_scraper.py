@@ -84,11 +84,6 @@ class EdionScraper(RequestsBaseScraper):
                     if lottery:
                         lotteries.append(lottery)
 
-        except requests.exceptions.HTTPError as e:
-            if e.response.status_code == 403:
-                logger.info(f"Access forbidden for {url} (bot protection)")
-            else:
-                logger.error(f"HTTP Error for {url}: {e.response.status_code}")
         except Exception as e:
             logger.error(f"Error scraping {url}: {e}", exc_info=True)
 

@@ -5,8 +5,6 @@ import logging
 import re
 from datetime import datetime
 
-from bs4 import BeautifulSoup
-
 from .requests_base import RequestsBaseScraper
 
 logger = logging.getLogger(__name__)
@@ -14,8 +12,9 @@ logger = logging.getLogger(__name__)
 
 class YodobashiScraper(RequestsBaseScraper):
     def __init__(self):
-        super().__init__()
+        super().__init__(timeout=30, wait_time=1)
         self.url = "https://limited.yodobashi.com/"
+        self.source_name = 'yodobashi.com'
         self.pokemon_keywords = [
             'ポケモンカード', 'ポケカ', 'pokemon', 'ポケモン',
             'スカーレット', 'バイオレット', 'ナイトワンダラー',
@@ -26,11 +25,13 @@ class YodobashiScraper(RequestsBaseScraper):
     def scrape(self):
         """抽選情報をスクレイピング"""
         try:
-            response = self.fetch(self.url)
-            if not response:
+            html_content = self.fetch_html(self.url)
+            if not html_content:
                 return {'source': 'ヨドバシカメラ (yodobashi.com)', 'lotteries': []}
 
-            soup = BeautifulSoup(response.content, 'html.parser')
+            soup = self.parse_soup(html_content)
+            if not soup:
+                return {'source': 'ヨドバシカメラ (yodobashi.com)', 'lotteries': []}
 
             lotteries = []
 

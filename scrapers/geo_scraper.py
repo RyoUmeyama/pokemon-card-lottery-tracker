@@ -54,12 +54,13 @@ class GeoScraper(RequestsBaseScraper):
         reservations = []
 
         try:
-            response = requests.get(url, headers=self.headers, timeout=15)
-            if response.status_code != 200:
-                logger.warning(f"HTTP Error: {response.status_code}")
+            html_content = self.fetch_html(url)
+            if not html_content:
                 return lotteries, reservations
 
-            soup = BeautifulSoup(response.content, 'html.parser')
+            soup = self.parse_soup(html_content)
+            if not soup:
+                return lotteries, reservations
 
             # 商品一覧を取得
             product_items = soup.select('div.product-item, div.goods-item, li.goods-list-item')

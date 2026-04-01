@@ -77,9 +77,9 @@ class PlaywrightBaseScraper:
             return 'upcoming'
         return 'unknown'
 
-    async def fetch_page_content(self, url, wait_selector=None, wait_for_js=True, scroll=True, extra_wait=2):
+    async def fetch_page_content(self, url, wait_selector=None, wait_for_js=True, scroll=True, extra_wait=2, max_retries=1):
         """
-        Playwrightでページコンテンツを取得
+        Playwrightでページコンテンツを取得（1回retry対応）
 
         Args:
             url: 取得するURL
@@ -87,11 +87,24 @@ class PlaywrightBaseScraper:
             wait_for_js: JSの実行完了を待つか
             scroll: ページをスクロールするか
             extra_wait: 追加の待機時間（秒）
+            max_retries: 最大retry回数（デフォルト1回）
         """
         if not PLAYWRIGHT_AVAILABLE:
             logger.warning("playwright is not installed")
             return None
 
+        for attempt in range(max_retries + 1):
+            result = await self._fetch_page_content_internal(url, wait_selector, wait_for_js, scroll, extra_wait, attempt)
+            if result is not None:
+                return result
+            if attempt < max_retries:
+                logger.info(f"Retry {attempt + 1}/{max_retries} for {url}")
+                await asyncio.sleep(2)  # retry前に2秒待機
+
+        return None
+
+    async def _fetch_page_content_internal(self, url, wait_selector, wait_for_js, scroll, extra_wait, attempt=0):
+        """内部処理用の fetch_page_content（retry ロジック外）"""
         browser = None
         context = None
         page = None

@@ -87,18 +87,75 @@ def load_scrapers_from_config(config_path: str = 'config/scrapers.yaml') -> List
         return []
 
 
-def filter_expired(items: list) -> list:
-    """期限切れの抽選・予約を除外（改良版：年号チェック＋多様な日付形式対応）"""
+def _check_year(item: Dict[str, Any]) -> bool:
+    """2025年以前のアイテムをチェック
+
+    Args:
+        item: スクレイピング結果のアイテム
+
+    Returns:
+        True if 2025年以前 (should skip), False otherwise
+    """
+    end_date_str = item.get('end_date', '') or item.get('deadline', '') or ''
+    start_date_str = item.get('start_date', '') or ''
+    period_str = item.get('period', '') or ''
+
+    for check_str in [end_date_str, start_date_str, period_str]:
+        if check_str:
+            year = _extract_year_from_string(check_str)
+            if year and year <= 2025:
+                logger.info(f"2025年以前除外: {item.get('product', '?')} (year: {year})")
+                return True
+    return False
+
+
+def _extract_end_date(item: Dict[str, Any]) -> str:
+    """期限日を抽出
+
+    Args:
+        item: スクレイピング結果のアイテム
+
+    Returns:
+        期限日文字列
+    """
     import re
+    end_date_str = item.get('end_date', '') or item.get('deadline', '') or ''
+    period_str = item.get('period', '') or ''
+
+    if not end_date_str and period_str:
+        # 範囲形式: 「1/15～2/20」→ 終了日を抽出
+        m = re.search(r'[～〜\-→]\s*(\d{1,4}[/年]\d{1,2}(?:[/月]\d{1,2}日?)?)', period_str)
+        if m:
+            end_date_str = m.group(1)
+        else:
+            end_date_str = period_str.strip()
+
+    return end_date_str
+
+
+def filter_expired(items: list) -> list:
+    """期限切れの抽選・予約を除外（年号チェック＋多様な日付形式対応）
+
+    処理フロー：
+    1. ドラゴンスター固有フィルタ（status==closed または url終了マーク）
+    2. 年号チェック（2025年以前を除外）
+    3. 期限日抽出（end_date or period）
+    4. 日付パース（柔軟フォーマット対応）
+    5. 期限切れ判定
+
+    Args:
+        items: スクレイピング結果のアイテムリスト
+
+    Returns:
+        フィルタ済みのアイテムリスト
+    """
     from datetime import date
     today = date.today()
     filtered = []
-
-    # ポケカ専門ショップのホワイトリスト（期限切れ判定をバイパス）
     WHITELIST_STORES = []  # ドラゴンスター削除
 
     for item in items:
-        # ドラゴンスター固有フィルタ：status==closed または detail_url が # で終わるエントリを除外
+        # ドラゴンスター固有フィルタ
         store = item.get('store', '')
         if 'ドラゴンスター' in store:
             status = item.get('status', '')
@@ -107,50 +164,28 @@ def filter_expired(items: list) -> list:
                 logger.info(f"ドラゴンスター除外: {item.get('product', '?')} (status: {status}, url: {detail_url})")
                 continue
 
-        # ホワイトリスト対象は常に通す（期限切れ判定をスキップ）
+        # ホワイトリスト対象は常に通す
         if any(store_name in store for store_name in WHITELIST_STORES):
             filtered.append(item)
             continue
-        # ステップ1: 年号チェック（2025年以前を完全除外）
-        end_date_str = item.get('end_date', '') or item.get('deadline', '') or ''
-        start_date_str = item.get('start_date', '') or ''
-        period_str = item.get('period', '') or ''
 
-        # 年号抽出対象
-        check_strings = [end_date_str, start_date_str, period_str]
-        skip_item = False
-        for check_str in check_strings:
-            if check_str:
-                year = _extract_year_from_string(check_str)
-                if year and year <= 2025:
-                    logger.info(f"2025年以前除外: {item.get('product', '?')} (year: {year})")
-                    skip_item = True
-                    break
-
-        if skip_item:
+        # 年号チェック
+        if _check_year(item):
             continue
 
-        # ステップ2: 期限日を抽出（end_dateがない場合、periodから抽出）
-        if not end_date_str:
-            if period_str:
-                # 範囲形式: 「1/15～2/20」「2025/1/15～2025/2/20」→ 終了日を抽出
-                m = re.search(r'[～〜\-→]\s*(\d{1,4}[/年]\d{1,2}(?:[/月]\d{1,2}日?)?)', period_str)
-                if m:
-                    end_date_str = m.group(1)
-                else:
-                    end_date_str = period_str.strip()
+        # 期限日抽出
+        end_date_str = _extract_end_date(item)
 
         if not end_date_str:
             item['expiry_status'] = 'unknown'
             filtered.append(item)
             continue
 
-        # ステップ3: 柔軟な日付パース
+        # 日付パース
         try:
             parsed = _parse_date_flexible(end_date_str, today)
 
             if parsed is None:
-                # パース失敗は除外（expiry_status='unparseable'として除外）
                 logger.info(f"日付パース失敗で除外: {item.get('product', '?')} (end: {end_date_str})")
             elif parsed >= today:
                 item['expiry_status'] = 'active'
@@ -223,7 +258,18 @@ def save_data(data: Dict[str, Any], filename: str) -> None:
 
 
 def detect_changes(old_data: Optional[Dict[str, Any]], new_data: Dict[str, Any], data_type: str = 'lottery') -> tuple[bool, List[str]]:
-    """変更を検出（URL+タイトル複合キー対応）"""
+    """前回データとの差分を検出
+
+    Args:
+        old_data: 前回のスクレイピング結果
+        new_data: 今回のスクレイピング結果
+        data_type: データタイプ ('lottery' または 'reservation')
+
+    Returns:
+        (has_changes: bool, changes: List[str])
+        - has_changes: 変更があったか
+        - changes: 変更内容のリスト
+    """
     if not old_data:
         return True, ["初回実行"]
 
@@ -323,13 +369,26 @@ async def execute_scraper(config: Dict[str, Any], semaphore: asyncio.Semaphore, 
 
 
 async def run_scrapers_async(scrapers: List[Dict[str, Any]], all_results: Dict[str, Any]) -> None:
-    """asyncio.gatherでスクレイパーを並列実行"""
+    """複数のスクレイパーを非同期で並列実行
+
+    asyncio.gather を使用して複数のスクレイパーを並列実行し、
+    同時実行数を Semaphore で制限（最大5個）する。
+
+    Args:
+        scrapers: スクレイパー設定のリスト
+        all_results: 結果を蓄積する辞書（in-place更新）
+            - sources: スクレイパー結果のリスト
+            - zero_alert_sources: 0件を返したスクレイパー名のリスト
+
+    Returns:
+        None（all_results を in-place で更新）
+    """
     total_sources = len(scrapers)
     semaphore = asyncio.Semaphore(5)  # 同時実行数を5に制限
-    
+
     tasks = [execute_scraper(config, semaphore, total_sources) for config in scrapers]
     results = await asyncio.gather(*tasks, return_exceptions=True)
-    
+
     for result in results:
         if result is None or isinstance(result, Exception):
             continue
@@ -340,7 +399,20 @@ async def run_scrapers_async(scrapers: List[Dict[str, Any]], all_results: Dict[s
 
 
 def main() -> None:
-    """メイン処理"""
+    """メイン処理フロー
+
+    以下の処理を順番に実行：
+    1. config/scrapers.yaml からスクレイパー設定を読み込み
+    2. 複数のスクレイパーを非同期で並列実行（最大5個同時）
+    3. ポケカ関連キーワードでフィルタリング
+    4. 期限切れアイテムを除外
+    5. 統合データを data/all_lotteries.json に保存
+    6. URL検証スクリプト実行（無効URLを削除）
+    7. Gmail通知を送信（環境変数 ENABLE_EMAIL_NOTIFICATION で制御）
+
+    Returns:
+        None
+    """
     logger.info("=" * 60)
     logger.info("ポケモンカード抽選情報収集開始")
     logger.info(f"実行時刻: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")

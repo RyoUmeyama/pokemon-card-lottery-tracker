@@ -5,8 +5,6 @@ import logging
 import re
 from datetime import datetime
 
-from bs4 import BeautifulSoup
-
 from .requests_base import RequestsBaseScraper
 
 logger = logging.getLogger(__name__)
@@ -14,11 +12,11 @@ logger = logging.getLogger(__name__)
 
 class YellowSubmarineScraper(RequestsBaseScraper):
     def __init__(self):
-        super().__init__()
-        # イエローサブマリンのトップページ（旧URLは404）
+        super().__init__(timeout=30, wait_time=1)
         self.urls = [
             "https://www.yellowsubmarine.co.jp/",
         ]
+        self.source_name = 'yellowsubmarine.co.jp'
         self.pokemon_keywords = [
             'ポケモンカード', 'ポケカ', 'pokemon', 'ポケモン',
             'スカーレット', 'バイオレット', 'テラスタル',
