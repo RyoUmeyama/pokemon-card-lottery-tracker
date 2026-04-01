@@ -166,9 +166,12 @@ class GmailNotifier:
             subject_parts.append(f'予約{total_reservation_count}件')
         if total_upcoming > 0:
             subject_parts.append(f'{total_upcoming}件予定')
+
+        # 合計件数を計算
+        total_count = total_lottery_count + total_reservation_count + total_upcoming
         subject_date = datetime.now().strftime("%Y/%m/%d")
         msg['Subject'] = (
-            f'🎴 ポケモンカード情報 ({" / ".join(subject_parts)}) - {subject_date}'
+            f'🎴 ポケモンカード情報 (全{total_count}件 / {" / ".join(subject_parts)}) - {subject_date}'
         )
         msg['From'] = self.smtp_username
         msg['To'] = self.recipient
@@ -450,11 +453,11 @@ class GmailNotifier:
 
         # 期限間近セクション（最上部に表示）
         if deadline_soon_items:
-            html += """
+            html += f"""
         <div class="source-section" style="background: #ffe6e6; border-color: #ff4444; border-width: 3px;">
-            <div class="section-title" style="color: #d32f2f;">🔥 期限間近（3日以内）</div>
+            <div class="section-title" style="color: #d32f2f;">🔥 期限間近（3日以内） - 全{len(deadline_soon_items)}件</div>
 """
-            for item in deadline_soon_items[:15]:
+            for item in deadline_soon_items:
                 product = item.get('product', '')
                 store = item.get('store', '')
                 end_date = item.get('end_date', '')
@@ -482,11 +485,11 @@ class GmailNotifier:
 
         # 先着販売中セクション
         if first_come_first_served_items:
-            html += """
+            html += f"""
         <div class="source-section" style="background: #fffacd; border-color: #ffd700;">
-            <div class="section-title" style="color: #d4af37;">🔥 先着販売中</div>
+            <div class="section-title" style="color: #d4af37;">🔥 先着販売中 - 全{len(first_come_first_served_items)}件</div>
 """
-            for item in first_come_first_served_items[:10]:
+            for item in first_come_first_served_items:
                 product = item.get('product', '')
                 store = item.get('store', '')
                 url = item.get('detail_url', '#')
@@ -495,13 +498,6 @@ class GmailNotifier:
                 <div class="store-name">🏪 {store}</div>
                 <div class="product-name">⚡ {product}</div>
                 <a href="{url}" class="detail-link" target="_blank">🔗 今すぐ購入</a>
-            </div>
-"""
-            if len(first_come_first_served_items) > 10:
-                remaining = len(first_come_first_served_items) - 10
-                html += f"""
-            <div style="text-align: center; color: #718096; margin-top: 15px;">
-                ... 他 {remaining} 件
             </div>
 """
             html += """
@@ -524,10 +520,10 @@ class GmailNotifier:
             </div>
 """
 
-            # 抽選情報を追加（最大5件まで表示）
+            # 抽選情報を追加
             if source['lottery_count'] > 0:
-                html += """
-            <div class="section-title">🎯 抽選情報</div>
+                html += f"""
+            <div class="section-title">🎯 抽選情報 - 全{len(source['lotteries'])}件</div>
 """
                 # deadline 情報を追加
                 html += """
@@ -535,7 +531,7 @@ class GmailNotifier:
                 <p>⏰ <span class="deadline-highlight">期限間近の情報は黄色ハイライト</span>で表示されています</p>
             </div>
 """
-                for lottery in source['lotteries'][:8]:
+                for lottery in source['lotteries']:
                     store = lottery.get('store', '')
                     product = lottery.get('product', '')
                     detail_url = lottery.get('detail_url', '#')
@@ -558,21 +554,12 @@ class GmailNotifier:
             </div>
 """
 
-                # 8件以上ある場合は省略メッセージ
-                if len(source['lotteries']) > 8:
-                    remaining = len(source['lotteries']) - 8
-                    html += f"""
-            <div style="text-align: center; color: #718096; margin-top: 15px;">
-                ... 他 {remaining} 件
-            </div>
-"""
-
-            # 予約情報を追加（最大5件まで表示）
+            # 予約情報を追加
             if source['reservation_count'] > 0:
                 html += """
-            <div class="section-title">📅 予約情報</div>
-"""
-                for reservation in source['reservations'][:8]:
+            <div class="section-title">📅 予約情報 - 全{0}件</div>
+""".format(source['reservation_count'])
+                for reservation in source['reservations']:
                     title = reservation.get('title', '')
                     price = reservation.get('price', '')
                     availability = reservation.get('availability', '')
@@ -600,26 +587,17 @@ class GmailNotifier:
             </div>
 """
 
-                # 8件以上ある場合は省略メッセージ
-                if len(source['reservations']) > 8:
-                    remaining = len(source['reservations']) - 8
-                    html += f"""
-            <div style="text-align: center; color: #718096; margin-top: 15px;">
-                ... 他 {remaining} 件
-            </div>
-"""
-
             html += """
         </div>
 """
 
         # 🗓️ 今後の抽選予定セクション（各ソースの upcoming_products を集約）
         if upcoming_products:
-            html += """
+            html += f"""
         <div class="source-section" style="background: #f0f8ff; border-color: #4169e1;">
-            <div class="section-title" style="color: #4169e1;">🗓️ 今後の抽選予定</div>
+            <div class="section-title" style="color: #4169e1;">🗓️ 今後の抽選予定 - 全{len(upcoming_products)}件</div>
 """
-            for product in upcoming_products[:15]:
+            for product in upcoming_products:
                 # gamepediaスキーマ対応: product_name または name
                 name = product.get('product_name', '') or product.get('name', '')
                 release_date = product.get('release_date', '')
@@ -649,14 +627,6 @@ class GmailNotifier:
                 if url:
                     html += f'                <a href="{url}" class="detail-link" target="_blank">🔗 詳細を見る</a>\n'
                 html += """
-            </div>
-"""
-            # 15件以上ある場合は省略メッセージ
-            if len(upcoming_products) > 15:
-                remaining = len(upcoming_products) - 15
-                html += f"""
-            <div style="text-align: center; color: #718096; margin-top: 15px;">
-                ... 他 {remaining} 件
             </div>
 """
             html += """

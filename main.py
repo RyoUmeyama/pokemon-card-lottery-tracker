@@ -233,6 +233,12 @@ def detect_changes(old_data: Optional[Dict[str, Any]], new_data: Dict[str, Any],
     changes = []
     key_name = 'lotteries' if data_type == 'lottery' else 'reservations'
 
+    old_count = len(old_data.get(key_name, []))
+    new_count = len(new_data.get(key_name, []))
+
+    if old_count != new_count:
+        changes.append(f"件数が変化: {old_count} → {new_count}")
+
     old_items = old_data.get(key_name, [])
     new_items = new_data.get(key_name, [])
 
@@ -242,12 +248,12 @@ def detect_changes(old_data: Optional[Dict[str, Any]], new_data: Dict[str, Any],
     # 新規アイテム
     added = new_keys - old_keys
     if added:
-        changes.append(f"新規{len(added)}件")
+        changes.append(f"新規: {len(added)}件")
 
     # 削除されたアイテム
     removed = old_keys - new_keys
     if removed:
-        changes.append(f"終了{len(removed)}件")
+        changes.append(f"終了: {len(removed)}件")
 
     has_changes = len(changes) > 0
     return has_changes, changes

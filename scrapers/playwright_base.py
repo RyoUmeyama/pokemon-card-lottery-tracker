@@ -2,12 +2,12 @@
 Playwrightを使用したベーススクレイパー
 Bot対策のあるサイトに対応するためのヘッドレスブラウザ実装
 """
+from datetime import datetime
 import asyncio
 import logging
 import os
 import random
 import re
-from datetime import datetime
 
 try:
     from playwright.async_api import async_playwright

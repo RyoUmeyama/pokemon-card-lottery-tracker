@@ -2,12 +2,13 @@
 楽天ブックス予約情報スクレイパー
 ポケモンカードの予約可能商品を検出
 """
-import requests
-from bs4 import BeautifulSoup
 from datetime import datetime
 import json
-import time
 import logging
+import time
+
+from bs4 import BeautifulSoup
+import requests
 
 logger = logging.getLogger(__name__)
 

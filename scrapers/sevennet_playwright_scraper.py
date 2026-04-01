@@ -2,11 +2,13 @@
 セブンネットショッピング - Playwright版スクレイパー
 Bot対策(Incapsula)を回避するためヘッドレスブラウザを使用
 """
-from bs4 import BeautifulSoup
 from datetime import datetime
-from .playwright_base import PlaywrightBaseScraper, PLAYWRIGHT_AVAILABLE
-import re
 import logging
+import re
+
+from bs4 import BeautifulSoup
+
+from .playwright_base import PlaywrightBaseScraper, PLAYWRIGHT_AVAILABLE
 
 logger = logging.getLogger(__name__)
 

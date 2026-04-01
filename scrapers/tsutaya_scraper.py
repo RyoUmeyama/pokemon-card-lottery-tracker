@@ -1,13 +1,14 @@
 """
 TSUTAYAオンラインからのポケモンカード予約・抽選情報スクレイピング
 """
-import requests
-from bs4 import BeautifulSoup
-import json
 from datetime import datetime
+import json
 import logging
-import time
 import re
+import time
+
+from bs4 import BeautifulSoup
+import requests
 
 logger = logging.getLogger(__name__)
 

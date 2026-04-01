@@ -1,13 +1,14 @@
 """
 駿河屋（suruga-ya.jp）からのポケモンカード抽選・予約情報スクレイピング
 """
-import requests
-from bs4 import BeautifulSoup
-import json
 from datetime import datetime
+import json
 import logging
-import time
 import re
+import time
+
+from bs4 import BeautifulSoup
+import requests
 
 logger = logging.getLogger(__name__)
 

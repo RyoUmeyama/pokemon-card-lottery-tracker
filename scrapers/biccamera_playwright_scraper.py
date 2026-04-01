@@ -2,10 +2,12 @@
 ビックカメラ - Playwright版スクレイパー
 Bot対策を回避するためヘッドレスブラウザを使用
 """
-from bs4 import BeautifulSoup
 from datetime import datetime
-from .playwright_base import PlaywrightBaseScraper, PLAYWRIGHT_AVAILABLE
 import logging
+
+from bs4 import BeautifulSoup
+
+from .playwright_base import PlaywrightBaseScraper, PLAYWRIGHT_AVAILABLE
 
 logger = logging.getLogger(__name__)
 

@@ -1,12 +1,11 @@
 """
 楽天ブックス（books.rakuten.co.jp）からポケモンカード抽選情報をスクレイピング
 """
+from datetime import datetime
 import json
 import logging
 import re
 import time
-import traceback
-from datetime import datetime
 
 import requests
 from bs4 import BeautifulSoup
@@ -30,14 +29,12 @@ class RakutenBooksScraper:
 
             soup = BeautifulSoup(response.content, 'html.parser')
 
+            # ページテキストを抽出
+            page_text = soup.get_text()
+
             # 抽選情報を抽出
             lotteries = []
-
-            # ページ全体から商品情報を探す
-            products = soup.find_all(['h2', 'h3', 'h4', 'div'], class_=re.compile(r'product|item|entry|lottery', re.I))
-
-            # 抽選受付中かどうかを確認
-            page_text = soup.get_text()
+            seen_products = set()  # 重複排除用
 
             # 「抽選受付は終了しました」などのメッセージをチェック
             if '抽選受付は終了' in page_text or '受付終了' in page_text or '受付は終了' in page_text:
@@ -89,8 +86,9 @@ class RakutenBooksScraper:
                     'entry_period': entry_period
                 }
 
-                # 重複チェック
-                if not any(l['product'] == product_name for l in lotteries):
+                # 重複チェック（setで高速化）
+                if product_name not in seen_products:
+                    seen_products.add(product_name)
                     lotteries.append(lottery)
 
             # 抽選情報が見つからない場合は空のリストを返す

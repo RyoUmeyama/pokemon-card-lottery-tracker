@@ -2,13 +2,14 @@
 イオン（AEON）からポケモンカード抽選・予約情報をスクレイピング
 イオンスタイルオンラインを監視
 """
-import requests
-from bs4 import BeautifulSoup
-import json
 from datetime import datetime
+import json
+import logging
 import re
 import time
-import logging
+
+from bs4 import BeautifulSoup
+import requests
 
 logger = logging.getLogger(__name__)
 
