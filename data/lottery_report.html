@@ -108,6 +108,128 @@
             padding: 30px;
         }
 
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+
+        table th {
+            padding: 15px;
+            text-align: left;
+            cursor: pointer;
+            user-select: none;
+            white-space: nowrap;
+        }
+
+        table th:hover {
+            background: linear-gradient(135deg, #5568d3 0%, #6a3d91 100%);
+        }
+
+        table th.sortable::after {
+            content: ' ↕️';
+            opacity: 0.5;
+        }
+
+        table th.sorted-asc::after {
+            content: ' ↑';
+            opacity: 1;
+        }
+
+        table th.sorted-desc::after {
+            content: ' ↓';
+            opacity: 1;
+        }
+
+        table tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+            transition: background-color 0.2s;
+        }
+
+        table tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        table td {
+            padding: 12px 15px;
+        }
+
+        table td.store {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        table td.deadline {
+            color: #d32f2f;
+            font-weight: 500;
+        }
+
+        table td a {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.85em;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        table td a:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.4);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 700;
+            margin: 3px 0;
+        }
+
+        .status-badge.active {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+        }
+
+        .status-badge.ended {
+            background: linear-gradient(135deg, #999999 0%, #777777 100%);
+            color: white;
+        }
+
+        .status-badge.upcoming {
+            background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+            color: white;
+        }
+
+        .status-badge.new {
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
         .lottery-card {
             background: white;
             border: 2px solid #e0e0e0;
@@ -145,6 +267,30 @@
             border-radius: 20px;
             font-size: 0.85em;
             font-weight: 600;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .status-badge.active {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .status-badge.ended {
+            background: #999999;
+            color: white;
+        }
+
+        .status-badge.upcoming {
+            background: #FF9800;
+            color: white;
         }
 
         .lottery-card .product {
@@ -270,13 +416,91 @@
         }
 
         @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
             header h1 {
                 font-size: 1.8em;
+                margin-bottom: 10px;
+            }
+
+            header .subtitle {
+                font-size: 0.95em;
+            }
+
+            .container {
+                border-radius: 10px;
+                padding: 15px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-card {
+                padding: 15px;
+            }
+
+            .stat-card .number {
+                font-size: 1.5em;
+            }
+
+            .filter-controls {
+                padding: 15px;
+            }
+
+            .filter-controls input {
+                font-size: 16px;
+                padding: 10px 15px;
+            }
+
+            table {
+                font-size: 0.85em;
+            }
+
+            table th, table td {
+                padding: 8px 5px;
+            }
+
+            table th {
+                font-size: 0.75em;
+            }
+
+            table td a {
+                padding: 4px 8px;
+                font-size: 0.75em;
+            }
+
+            .lotteries {
+                padding: 15px;
+            }
+
+            .lottery-card {
+                padding: 15px;
+                margin-bottom: 15px;
             }
 
             .lottery-card .header {
                 flex-direction: column;
                 gap: 10px;
+            }
+
+            .lottery-card .product {
+                font-size: 1.1em;
+            }
+
+            .upcoming-card {
+                padding: 15px;
+            }
+
+            .upcoming-card .product-name {
+                font-size: 1em;
+            }
+
+            footer {
+                padding: 15px;
+                font-size: 0.85em;
             }
         }
     </style>
@@ -285,93 +509,43 @@
     <div class="container">
         <header>
             <h1>🎴 ポケモンカード抽選・販売情報</h1>
-            <div class="subtitle">最終更新: 2026年04月01日 06:57:33</div>
+            <div class="subtitle">最終更新: 2026年04月01日 08:15:23</div>
         </header>
 
         <div class="summary">
             <h2>📊 サマリー</h2>
             <div class="stats">
 
-                <div class="stat-card">
-                    <div class="number">0</div>
-                    <div class="label">books.rakuten.co.jp</div>
-                    
-                </div>
-
-                <div class="stat-card">
-                    <div class="number">0</div>
-                    <div class="label">amazon.co.jp</div>
-                    
-                </div>
-
-                <div class="stat-card">
-                    <div class="number">0</div>
-                    <div class="label">books.rakuten.co.jp</div>
-                    
-                </div>
-
-                <div class="stat-card">
-                    <div class="number">0</div>
-                    <div class="label">X (Twitter) 公式アカウント</div>
-                    
-                </div>
-
-                <div class="stat-card">
-                    <div class="number">0</div>
-                    <div class="label">ノジマオンライン (online.nojima.co.jp)</div>
-                    
-                </div>
-
-                <div class="stat-card">
-                    <div class="number">0</div>
-                    <div class="label">イエローサブマリン (yellowsubmarine.co.jp)</div>
-                    
-                </div>
-
-                <div class="stat-card">
-                    <div class="number">0</div>
-                    <div class="label">カードショップセラ (cardshopserra.jp)</div>
-                    
-                </div>
-
-                <div class="stat-card">
-                    <div class="number">0</div>
-                    <div class="label">セブンネットショッピング (7net.omni7.jp)</div>
-                    
-                </div>
-
-                <div class="stat-card">
-                    <div class="number">0</div>
-                    <div class="label">ローソン HMV (hmv.co.jp)</div>
-                    
-                </div>
-
-                <div class="stat-card">
-                    <div class="number">0</div>
-                    <div class="label">ファミリーマート (family.co.jp)</div>
-                    
-                </div>
-
-                <div class="stat-card">
-                    <div class="number">0</div>
-                    <div class="label">suruga-ya.jp</div>
-                    
-                </div>
-
-                <div class="stat-card">
-                    <div class="number">0</div>
-                    <div class="label">geo-online.co.jp</div>
-                    
-                </div>
-
             </div>
         </div>
 
         <div class="filter-controls">
-            <input type="text" id="searchBox" placeholder="🔍 商品名、店舗名、抽選形式で検索..." onkeyup="filterLotteries()">
+            <div style="display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap;">
+                <input type="text" id="searchBox" placeholder="🔍 商品名、店舗名、抽選形式で検索..." onkeyup="filterLotteries()" style="flex: 1; min-width: 200px;">
+                <select id="sortSelect" onchange="sortLotteries()" style="padding: 12px 15px; border: 2px solid #ddd; border-radius: 25px; font-size: 1em; cursor: pointer; background: white; color: #333; font-weight: 500;">
+                    <option value="deadline">📅 期限順（近い順）</option>
+                    <option value="store">🏪 店舗名順</option>
+                    <option value="newest">🆕 新着順</option>
+                </select>
+            </div>
         </div>
 
         <div class="lotteries" id="lotteriesList">
+            <table id="lotteriesTable">
+                <thead>
+                    <tr>
+                        <th class="sortable" data-column="store">🏪 店舗名</th>
+                        <th class="sortable" data-column="product">📦 商品名</th>
+                        <th class="sortable" data-column="deadline">📅 締切日</th>
+                        <th class="sortable" data-column="status">ステータス</th>
+                        <th class="sortable" data-column="type">抽選形式</th>
+                        <th>詳細</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
 
             <div class="no-results">
                 <div class="emoji">🔍</div>
@@ -386,38 +560,112 @@
     </div>
 
     <script>
+        let currentSort = { column: 'deadline', direction: 'asc' };
+
         function filterLotteries() {
             const searchText = document.getElementById('searchBox').value.toLowerCase();
-            const cards = document.querySelectorAll('.lottery-card');
+            const rows = document.querySelectorAll('#lotteriesTable tbody tr');
             let visibleCount = 0;
 
-            cards.forEach(card => {
-                const searchData = card.getAttribute('data-search');
+            rows.forEach(row => {
+                const searchData = row.getAttribute('data-search');
                 if (searchData.includes(searchText)) {
-                    card.style.display = 'block';
+                    row.style.display = '';
                     visibleCount++;
                 } else {
-                    card.style.display = 'none';
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        function sortLotteries() {
+            const sortSelect = document.getElementById('sortSelect').value;
+            const tbody = document.querySelector('#lotteriesTable tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+
+            rows.sort((a, b) => {
+                if (sortSelect === 'deadline') {
+                    // 期限順（近い順）
+                    const aDeadline = a.getAttribute('data-deadline') || '';
+                    const bDeadline = b.getAttribute('data-deadline') || '';
+                    return aDeadline.localeCompare(bDeadline);
+                } else if (sortSelect === 'store') {
+                    // 店舗名順
+                    const aStore = a.getAttribute('data-store') || '';
+                    const bStore = b.getAttribute('data-store') || '';
+                    return aStore.localeCompare(bStore, 'ja');
+                } else if (sortSelect === 'newest') {
+                    // 新着順（新しい順）
+                    const aTimestamp = a.getAttribute('data-timestamp') || '0000-00-00';
+                    const bTimestamp = b.getAttribute('data-timestamp') || '0000-00-00';
+                    return bTimestamp.localeCompare(aTimestamp);  // 逆順（新しい順）
+                }
+                return 0;
+            });
+
+            // ソート結果を反映
+            rows.forEach(row => tbody.appendChild(row));
+        }
+
+        function sortTable(column) {
+            const table = document.getElementById('lotteriesTable');
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr:not([style*="display: none"])'));
+
+            // ソート方向の切り替え
+            if (currentSort.column === column) {
+                currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+            } else {
+                currentSort.column = column;
+                currentSort.direction = 'asc';
+            }
+
+            // ソート実行
+            const columnIndex = {'store': 0, 'product': 1, 'deadline': 2, 'status': 3, 'type': 4}[column];
+            rows.sort((a, b) => {
+                let aVal = a.children[columnIndex].getAttribute('data-sort-value') || a.children[columnIndex].textContent;
+                let bVal = b.children[columnIndex].getAttribute('data-sort-value') || b.children[columnIndex].textContent;
+
+                // 数値ソート試行
+                const aNum = parseFloat(aVal);
+                const bNum = parseFloat(bVal);
+                if (!isNaN(aNum) && !isNaN(bNum)) {
+                    return currentSort.direction === 'asc' ? aNum - bNum : bNum - aNum;
+                }
+
+                // 文字列ソート
+                if (currentSort.direction === 'asc') {
+                    return aVal.localeCompare(bVal);
+                } else {
+                    return bVal.localeCompare(aVal);
                 }
             });
 
-            // 検索結果がない場合のメッセージ表示
-            const lotteriesList = document.getElementById('lotteriesList');
-            let noResultsDiv = document.getElementById('noResults');
+            // ソート結果を反映
+            rows.forEach(row => tbody.appendChild(row));
 
-            if (visibleCount === 0 && searchText !== '') {
-                if (!noResultsDiv) {
-                    noResultsDiv = document.createElement('div');
-                    noResultsDiv.id = 'noResults';
-                    noResultsDiv.className = 'no-results';
-                    noResultsDiv.innerHTML = '<div class="emoji">🔍</div><div>検索結果が見つかりませんでした</div>';
-                    lotteriesList.appendChild(noResultsDiv);
+            // ヘッダのソート状態を更新
+            document.querySelectorAll('#lotteriesTable th.sortable').forEach(th => {
+                th.classList.remove('sorted-asc', 'sorted-desc');
+                if (th.getAttribute('data-column') === column) {
+                    th.classList.add(currentSort.direction === 'asc' ? 'sorted-asc' : 'sorted-desc');
                 }
-                noResultsDiv.style.display = 'block';
-            } else if (noResultsDiv) {
-                noResultsDiv.style.display = 'none';
-            }
+            });
         }
+
+        // ヘッダクリック時にソート実行
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('#lotteriesTable th.sortable').forEach(th => {
+                th.addEventListener('click', () => {
+                    sortTable(th.getAttribute('data-column'));
+                });
+            });
+
+            // デフォルトで deadline でソート
+            sortTable('deadline');
+            // ドロップダウンのデフォルト値を設定
+            document.getElementById('sortSelect').value = 'deadline';
+        });
     </script>
 </body>
 </html>
