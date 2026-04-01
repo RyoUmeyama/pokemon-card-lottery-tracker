@@ -151,8 +151,13 @@ class GamepediaScraper:
         return lottery
 
     def _extract_upcoming_products(self, soup):
-        """今後の発売日情報セクションから予定情報を抽出"""
+        """今後の発売日情報セクションから予定情報を抽出
+
+        過去日付の商品は除外する。
+        """
         upcoming = []
+        today = date.today()
+        excluded_count = 0
 
         # 「今後の発売日情報」を含むテキストを探す
         for text_node in soup.find_all(string=True):
@@ -180,6 +185,12 @@ class GamepediaScraper:
                                 if product_name and release_date:
                                     # 日付フォーマットの確認（ヘッダー行をスキップ）
                                     if '発売日' not in release_date:
+                                        # 日付パース＋過去チェック
+                                        parsed_date = self._parse_date(release_date)
+                                        if parsed_date and parsed_date < today:
+                                            excluded_count += 1
+                                            continue  # 過去日付は除外
+
                                         item = {
                                             'product_name': product_name,
                                             'release_date': release_date,
@@ -192,20 +203,39 @@ class GamepediaScraper:
                     current = current.find_next()
                 break
 
+        if excluded_count > 0:
+            logger.info(f'{excluded_count}件の過去商品を除外')
+
         return upcoming
 
     def _parse_date(self, date_str):
         """
         日付文字列をパースして date オブジェクトを返す
         対応形式: '3/13(金)', '3月13日', '2026年3月13日'
+
+        年が指定されていない場合、月から年を推定：
+        - 今月より6ヶ月以上前の月なら前年の該当月と判定
+        - それ以外は今年の該当月と判定
         """
         try:
+            today = date.today()
+
             # 形式1: '3/13(金)' or '3/13'
             match = re.search(r'(\d{1,2})/(\d{1,2})', date_str)
             if match:
                 month, day = int(match.group(1)), int(match.group(2))
-                # 年が指定されていなければ2026と仮定
-                year = 2026
+
+                # 年が指定されていないため推定
+                if month < today.month:
+                    # 同一年の過去月
+                    year = today.year
+                elif month > today.month + 6:
+                    # 6ヶ月以上先：今年
+                    year = today.year
+                else:
+                    # 6ヶ月以内の未来月：翌年
+                    year = today.year + 1
+
                 try:
                     return date(year, month, day)
                 except ValueError:
@@ -214,7 +244,22 @@ class GamepediaScraper:
             # 形式2: '3月13日' or '2026年3月13日'
             match = re.search(r'(?:(\d{4})年)?(\d{1,2})月(\d{1,2})日', date_str)
             if match:
-                year = int(match.group(1)) if match.group(1) else 2026
+                if match.group(1):
+                    # 年が明示されている場合
+                    year = int(match.group(1))
+                else:
+                    # 年が指定されていないため推定
+                    month = int(match.group(2))
+                    if month < today.month:
+                        # 同一年の過去月
+                        year = today.year
+                    elif month > today.month + 6:
+                        # 6ヶ月以上先：今年
+                        year = today.year
+                    else:
+                        # 6ヶ月以内の未来月：翌年
+                        year = today.year + 1
+
                 month = int(match.group(2))
                 day = int(match.group(3))
                 try:

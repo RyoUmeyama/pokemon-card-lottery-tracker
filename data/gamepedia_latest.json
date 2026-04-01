@@ -1,6 +1,6 @@
 {
   "source": "gamepedia.jp",
-  "scraped_at": "2026-04-01T01:27:55.004855",
+  "scraped_at": "2026-04-01T10:53:59.570841",
   "lotteries": [
     {
       "store": "Amazon",
@@ -93,20 +93,6 @@
   ],
   "upcoming_products": [
     {
-      "product_name": "ニンジャスピナー",
-      "release_date": "3月13日(金)",
-      "lottery_schedule": "",
-      "store": "",
-      "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
-    },
-    {
-      "product_name": "ムニキスゼロ",
-      "release_date": "1月23日(金)",
-      "lottery_schedule": "",
-      "store": "",
-      "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
-    },
-    {
       "product_name": "スタートデッキ100 バトルコレクション",
       "release_date": "12月19日(金)",
       "lottery_schedule": "",
@@ -151,27 +137,6 @@
     {
       "product_name": "ロケット団の栄光",
       "release_date": "4月18日(金)",
-      "lottery_schedule": "",
-      "store": "",
-      "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
-    },
-    {
-      "product_name": "熱風のアリーナ",
-      "release_date": "3月14日(金)",
-      "lottery_schedule": "",
-      "store": "",
-      "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
-    },
-    {
-      "product_name": "スターターセットex マリィのモルペコ＆オーロンゲex",
-      "release_date": "2月21日(金)",
-      "lottery_schedule": "",
-      "store": "",
-      "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
-    },
-    {
-      "product_name": "バトルパートナーズ",
-      "release_date": "1月24日(金)",
       "lottery_schedule": "",
       "store": "",
       "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
@@ -235,27 +200,6 @@
     {
       "product_name": "変幻の仮面",
       "release_date": "4月26日(金)",
-      "lottery_schedule": "",
-      "store": "",
-      "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
-    },
-    {
-      "product_name": "クリムゾンヘイズ",
-      "release_date": "3月22日(金)",
-      "lottery_schedule": "",
-      "store": "",
-      "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
-    },
-    {
-      "product_name": "バトルアカデミー",
-      "release_date": "3月8日(金)",
-      "lottery_schedule": "",
-      "store": "",
-      "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
-    },
-    {
-      "product_name": "ワイルドフォース",
-      "release_date": "1月26日(金)",
       "lottery_schedule": "",
       "store": "",
       "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
@@ -338,20 +282,6 @@
       "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
     },
     {
-      "product_name": "「スターターセットex ピカチュウex＆パーモット」",
-      "release_date": "3月24日(金)",
-      "lottery_schedule": "",
-      "store": "",
-      "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
-    },
-    {
-      "product_name": "「スカーレットex」",
-      "release_date": "1月20日(金)",
-      "lottery_schedule": "",
-      "store": "",
-      "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
-    },
-    {
       "product_name": "「ジャンボカードコレクション」",
       "release_date": "12月16日(金)",
       "lottery_schedule": "",
@@ -417,27 +347,6 @@
     {
       "product_name": "「タイムゲイザー」",
       "release_date": "4月8日(金)",
-      "lottery_schedule": "",
-      "store": "",
-      "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
-    },
-    {
-      "product_name": "「バトルリージョン」",
-      "release_date": "2月25日(金)",
-      "lottery_schedule": "",
-      "store": "",
-      "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
-    },
-    {
-      "product_name": "「草のリーフィアVSTAR」",
-      "release_date": "2月4日(金)",
-      "lottery_schedule": "",
-      "store": "",
-      "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
-    },
-    {
-      "product_name": "「スターバース」",
-      "release_date": "1月14日(金)",
       "lottery_schedule": "",
       "store": "",
       "detail_url": "https://premium.gamepedia.jp/pokeca/archives/124"
