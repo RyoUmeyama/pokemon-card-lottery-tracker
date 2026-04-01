@@ -202,7 +202,7 @@ class AmazonReservationScraper:
             if '/dp/' in url:
                 asin = url.split('/dp/')[1].split('/')[0].split('?')[0]
                 return asin
-        except:
+        except (IndexError, AttributeError):
             pass
         return None
 
