@@ -118,8 +118,9 @@ class SevenNetPlaywrightScraper(PlaywrightBaseScraper):
             if not self.is_pokemon_card(text):
                 return None
 
-            # 抽選・予約関連のキーワードがあるか確認（必須チェック）
-            if not any(kw in text for kw in ['抽選', '予約', 'BOX', 'ボックス', 'パック', '販売']):
+            # 抽選・予約関連のキーワードを確認（緩和版：いずれかのキーワード or リンクあり）
+            has_keyword = any(kw in text for kw in ['抽選', '予約', 'BOX', 'ボックス', 'パック', '販売', '特集'])
+            if not has_keyword and not link:
                 return None
 
             # ノイズ除外：商品名が短すぎないか確認
