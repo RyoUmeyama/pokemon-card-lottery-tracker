@@ -30,10 +30,28 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/ms-playwright
+            ~/.cache/ms-playwright-*
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
 
       - name: Install Playwright browsers
         run: |
@@ -43,7 +61,7 @@ jobs:
       - name: Run tests
         run: |
           pip install pytest
-          python -m pytest tests/
+          python -m pytest tests/ -q
 
       - name: Run scraper
         env:
@@ -73,19 +91,52 @@ jobs:
           git add data/
           git diff --quiet && git diff --staged --quiet || (git commit -m "Update lottery data $(date +'%Y-%m-%d %H:%M:%S')" && git push)
 
-      - name: Notify on failure
-        if: failure()
+      - name: Notify on success
+        if: success()
+        env:
+          SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
+          RUN_ID: ${{ github.run_id }}
+          REPO: ${{ github.repository }}
         run: |
-          python -c "
-          import smtplib
+          python << 'EOFPYTHON'
+          import os, smtplib
           from email.mime.text import MIMEText
-          msg = MIMEText('Pokemon Card Tracker workflow failed. Check: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}')
-          msg['Subject'] = '⚠️ Pokemon Card Tracker - Workflow Failed'
-          msg['From'] = '${{ secrets.SMTP_USERNAME }}'
-          msg['To'] = '${{ secrets.RECIPIENT_EMAIL }}'
-          server = smtplib.SMTP('${{ secrets.SMTP_SERVER }}', int('${{ secrets.SMTP_PORT }}'))
+          msg = MIMEText('Workflow completed successfully!\n\nTests passed and lottery data updated.\n\nRun: https://github.com/' + os.environ.get('REPO','') + '/actions/runs/' + os.environ.get('RUN_ID',''))
+          msg['Subject'] = '✅ Pokemon Card Tracker - Success'
+          msg['From'] = os.environ.get('SMTP_USERNAME','')
+          msg['To'] = os.environ.get('RECIPIENT_EMAIL','')
+          server = smtplib.SMTP(os.environ.get('SMTP_SERVER',''), int(os.environ.get('SMTP_PORT','')))
           server.starttls()
-          server.login('${{ secrets.SMTP_USERNAME }}', '${{ secrets.SMTP_PASSWORD }}')
+          server.login(os.environ.get('SMTP_USERNAME',''), os.environ.get('SMTP_PASSWORD',''))
           server.sendmail(msg['From'], msg['To'], msg.as_string())
           server.quit()
-          "
+          EOFPYTHON
+
+      - name: Notify on failure
+        if: failure()
+        env:
+          SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
+          RUN_ID: ${{ github.run_id }}
+          REPO: ${{ github.repository }}
+        run: |
+          python << 'EOFPYTHON'
+          import os, smtplib
+          from email.mime.text import MIMEText
+          msg = MIMEText('Workflow failed. Check logs: https://github.com/' + os.environ.get('REPO','') + '/actions/runs/' + os.environ.get('RUN_ID',''))
+          msg['Subject'] = '⚠️ Pokemon Card Tracker - Failed'
+          msg['From'] = os.environ.get('SMTP_USERNAME','')
+          msg['To'] = os.environ.get('RECIPIENT_EMAIL','')
+          server = smtplib.SMTP(os.environ.get('SMTP_SERVER',''), int(os.environ.get('SMTP_PORT','')))
+          server.starttls()
+          server.login(os.environ.get('SMTP_USERNAME',''), os.environ.get('SMTP_PASSWORD',''))
+          server.sendmail(msg['From'], msg['To'], msg.as_string())
+          server.quit()
+          EOFPYTHON
