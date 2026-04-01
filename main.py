@@ -1,17 +1,23 @@
 """
 ポケモンカード抽選情報収集メインスクリプト
 """
-import json
-import os
-import logging
-from logging.handlers import RotatingFileHandler
-import yaml
-import importlib
 import asyncio
+import importlib
+import json
+import logging
+import os
 from datetime import datetime
-from typing import Optional, Dict, List, Any
-from utils import _parse_date_flexible, _extract_year_from_string, build_composite_key
-from constants import POKEMON_KEYWORDS, EXCLUDE_KEYWORDS
+from logging.handlers import RotatingFileHandler
+from typing import Any, Dict, List, Optional
+
+import yaml
+
+from constants import EXCLUDE_KEYWORDS, POKEMON_KEYWORDS
+from utils import (
+    _extract_year_from_string,
+    _parse_date_flexible,
+    build_composite_key,
+)
 # Scraper imports moved to dynamic loading via config/scrapers.yaml
 # (All imports are now loaded dynamically in load_scrapers_from_config())
 
@@ -222,12 +228,29 @@ def save_data(data: Dict[str, Any], filename: str) -> None:
 def detect_changes(old_data: Optional[Dict[str, Any]], new_data: Dict[str, Any], data_type: str = 'lottery') -> tuple[bool, List[str]]:
     """変更を検出（URL+タイトル複合キー対応）"""
     if not old_data:
-        return True, "初回実行"
+        return True, ["初回実行"]
 
     changes = []
     key_name = 'lotteries' if data_type == 'lottery' else 'reservations'
 
-    old_count = len(old_data.get(key_name, []))
+    old_items = old_data.get(key_name, [])
+    new_items = new_data.get(key_name, [])
+
+    old_keys = {build_composite_key(item, data_type) for item in old_items}
+    new_keys = {build_composite_key(item, data_type) for item in new_items}
+
+    # 新規アイテム
+    added = new_keys - old_keys
+    if added:
+        changes.append(f"新規{len(added)}件")
+
+    # 削除されたアイテム
+    removed = old_keys - new_keys
+    if removed:
+        changes.append(f"終了{len(removed)}件")
+
+    has_changes = len(changes) > 0
+    return has_changes, changes
 
 
 async def execute_scraper(config: Dict[str, Any], semaphore: asyncio.Semaphore, total_sources: int) -> Optional[Dict[str, Any]]:

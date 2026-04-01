@@ -1,12 +1,12 @@
 """
 ポケモンカード抽選情報のHTMLレポート生成
 """
-import json
 import html
+import json
 import logging
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Dict, List, Any
+from typing import Any, Dict, List
 
 logger = logging.getLogger(__name__)
 
@@ -110,6 +110,19 @@ def get_lottery_status(lottery: Dict[str, Any]) -> str:
             return '予定'
 
     return '受付中'
+
+
+def is_new_lottery(timestamp: str) -> bool:
+    """24時間以内に追加されたかチェック（新着判定）"""
+    if not timestamp or not isinstance(timestamp, str):
+        return False
+    try:
+        from datetime import timedelta
+        item_time = datetime.fromisoformat(timestamp)
+        current_time = datetime.now()
+        return (current_time - item_time) < timedelta(hours=24)
+    except (ValueError, TypeError):
+        return False
 
 
 def cleanup_old_data(data: Dict[str, Any], days: int = 30) -> Dict[str, Any]:
@@ -391,11 +404,44 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
 
         .status-badge {{
             display: inline-block;
-            padding: 5px 10px;
-            border-radius: 10px;
-            font-size: 0.8em;
-            font-weight: 600;
-            margin-left: 5px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 700;
+            margin: 3px 0;
+        }}
+
+        .status-badge.active {{
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+        }}
+
+        .status-badge.ended {{
+            background: linear-gradient(135deg, #999999 0%, #777777 100%);
+            color: white;
+        }}
+
+        .status-badge.upcoming {{
+            background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+            color: white;
+        }}
+
+        .status-badge.new {{
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+            color: white;
+            animation: pulse 2s infinite;
+        }}
+
+        @keyframes pulse {{
+            0% {{
+                opacity: 1;
+            }}
+            50% {{
+                opacity: 0.7;
+            }}
+            100% {{
+                opacity: 1;
+            }}
         }}
 
         .lottery-card {{
@@ -584,13 +630,91 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
         }}
 
         @media (max-width: 768px) {{
+            body {{
+                padding: 10px;
+            }}
+
             header h1 {{
                 font-size: 1.8em;
+                margin-bottom: 10px;
+            }}
+
+            header .subtitle {{
+                font-size: 0.95em;
+            }}
+
+            .container {{
+                border-radius: 10px;
+                padding: 15px;
+            }}
+
+            .stats {{
+                grid-template-columns: 1fr;
+            }}
+
+            .stat-card {{
+                padding: 15px;
+            }}
+
+            .stat-card .number {{
+                font-size: 1.5em;
+            }}
+
+            .filter-controls {{
+                padding: 15px;
+            }}
+
+            .filter-controls input {{
+                font-size: 16px;
+                padding: 10px 15px;
+            }}
+
+            table {{
+                font-size: 0.85em;
+            }}
+
+            table th, table td {{
+                padding: 8px 5px;
+            }}
+
+            table th {{
+                font-size: 0.75em;
+            }}
+
+            table td a {{
+                padding: 4px 8px;
+                font-size: 0.75em;
+            }}
+
+            .lotteries {{
+                padding: 15px;
+            }}
+
+            .lottery-card {{
+                padding: 15px;
+                margin-bottom: 15px;
             }}
 
             .lottery-card .header {{
                 flex-direction: column;
                 gap: 10px;
+            }}
+
+            .lottery-card .product {{
+                font-size: 1.1em;
+            }}
+
+            .upcoming-card {{
+                padding: 15px;
+            }}
+
+            .upcoming-card .product-name {{
+                font-size: 1em;
+            }}
+
+            footer {{
+                padding: 15px;
+                font-size: 0.85em;
             }}
         }}
     </style>
@@ -627,7 +751,14 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
         </div>
 
         <div class="filter-controls">
-            <input type="text" id="searchBox" placeholder="🔍 商品名、店舗名、抽選形式で検索..." onkeyup="filterLotteries()">
+            <div style="display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap;">
+                <input type="text" id="searchBox" placeholder="🔍 商品名、店舗名、抽選形式で検索..." onkeyup="filterLotteries()" style="flex: 1; min-width: 200px;">
+                <select id="sortSelect" onchange="sortLotteries()" style="padding: 12px 15px; border: 2px solid #ddd; border-radius: 25px; font-size: 1em; cursor: pointer; background: white; color: #333; font-weight: 500;">
+                    <option value="deadline">📅 期限順（近い順）</option>
+                    <option value="store">🏪 店舗名順</option>
+                    <option value="newest">🆕 新着順</option>
+                </select>
+            </div>
         </div>
 """
 
@@ -728,7 +859,16 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
         status = get_lottery_status(lottery)
         status_class_map = {'受付中': 'active', '終了': 'ended', '予定': 'upcoming'}
         status_class = status_class_map.get(status, 'active')
-        status_badge = f'<span class="status-badge {status_class}">●{status}</span>'
+
+        # 新着判定
+        timestamp = lottery.get('timestamp', '')
+        is_new = is_new_lottery(timestamp)
+
+        # バッジテキストと多重バッジ
+        badge_html = f'<span class="status-badge {status_class}">●{status}</span>'
+        if is_new:
+            badge_html += '<span class="status-badge new">🆕 新着</span>'
+        status_badge = badge_html
 
         # H5: XSS対策 - html.escape() で ユーザー由来データをエスケープ
         store_escaped = html.escape(store)
@@ -738,9 +878,9 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
         announcement_escaped = html.escape(announcement)
         conditions_escaped = html.escape(conditions)
 
-        # テーブル行として出力
+        # テーブル行として出力（timestamp は既に定義済み）
         html_content += f"""
-                    <tr data-search="{product.lower()} {store.lower()} {lottery_type.lower()}">
+                    <tr data-search="{product.lower()} {store.lower()} {lottery_type.lower()}" data-timestamp="{html.escape(timestamp)}" data-store="{store_escaped}" data-deadline="{html.escape(end_date)}">
                         <td class="store" data-sort-value="{store_escaped}">{store_escaped}</td>
                         <td data-sort-value="{product_escaped}">{product_escaped}</td>
                         <td class="deadline" data-sort-value="{html.escape(end_date)}">{html.escape(end_date)}</td>
@@ -795,6 +935,35 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
                     row.style.display = 'none';
                 }}
             }});
+        }}
+
+        function sortLotteries() {{
+            const sortSelect = document.getElementById('sortSelect').value;
+            const tbody = document.querySelector('#lotteriesTable tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+
+            rows.sort((a, b) => {{
+                if (sortSelect === 'deadline') {{
+                    // 期限順（近い順）
+                    const aDeadline = a.getAttribute('data-deadline') || '';
+                    const bDeadline = b.getAttribute('data-deadline') || '';
+                    return aDeadline.localeCompare(bDeadline);
+                }} else if (sortSelect === 'store') {{
+                    // 店舗名順
+                    const aStore = a.getAttribute('data-store') || '';
+                    const bStore = b.getAttribute('data-store') || '';
+                    return aStore.localeCompare(bStore, 'ja');
+                }} else if (sortSelect === 'newest') {{
+                    // 新着順（新しい順）
+                    const aTimestamp = a.getAttribute('data-timestamp') || '0000-00-00';
+                    const bTimestamp = b.getAttribute('data-timestamp') || '0000-00-00';
+                    return bTimestamp.localeCompare(aTimestamp);  // 逆順（新しい順）
+                }}
+                return 0;
+            }});
+
+            // ソート結果を反映
+            rows.forEach(row => tbody.appendChild(row));
         }}
 
         function sortTable(column) {{
@@ -853,6 +1022,8 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
 
             // デフォルトで deadline でソート
             sortTable('deadline');
+            // ドロップダウンのデフォルト値を設定
+            document.getElementById('sortSelect').value = 'deadline';
         }});
     </script>
 </body>

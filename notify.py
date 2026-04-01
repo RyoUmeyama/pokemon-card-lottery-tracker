@@ -1,14 +1,14 @@
 """
 Gmail通知機能
 """
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 import json
-import os
-from datetime import datetime
 import logging
+import os
+import smtplib
 import time
+from datetime import datetime
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 logger = logging.getLogger(__name__)
 
@@ -125,6 +125,13 @@ class GmailNotifier:
 
         total_upcoming = len(upcoming_products)
 
+        # 新着件数と期限間近件数をカウント
+        all_lotteries_flat = []
+        for source in sources_summary:
+            all_lotteries_flat.extend(source.get('lotteries', []))
+        new_items_count = sum(1 for item in all_lotteries_flat if self._is_new(item.get('timestamp', '')))
+        deadline_soon_count = len(deadline_soon_items)
+
         # メール本文を作成（期限間近データを最上部に表示）
         email_body = self._create_email_body(
             sources_summary,
@@ -146,6 +153,13 @@ class GmailNotifier:
 
         if zero_alert:
             subject_parts.append('⚠️0件')
+
+        # ステータスサマリーを先頭に追加
+        if new_items_count > 0:
+            subject_parts.append(f'🆕新着{new_items_count}件')
+        if deadline_soon_count > 0:
+            subject_parts.append(f'🔥期限間近{deadline_soon_count}件')
+
         if total_lottery_count > 0:
             subject_parts.append(f'抽選{total_lottery_count}件')
         if total_reservation_count > 0:
@@ -230,6 +244,21 @@ class GmailNotifier:
             deadline_soon_items = []
         if zero_alert_sources is None:
             zero_alert_sources = []
+
+        # フィルタ: 各ソースのロッテリーから受付終了済みをさらに除外
+        filtered_sources_summary = []
+        for source in sources_summary:
+            filtered_source = {
+                'name': source['name'],
+                'lottery_count': 0,
+                'reservation_count': source.get('reservation_count', 0),
+                'lotteries': [item for item in source.get('lotteries', []) if not self._is_ended(item.get('end_date', ''))],
+                'reservations': source.get('reservations', [])
+            }
+            # ロッテリーが1件でもあれば、またはリザベーションがあれば含める
+            if filtered_source['lotteries'] or filtered_source['reservations']:
+                filtered_source['lottery_count'] = len(filtered_source['lotteries'])
+                filtered_sources_summary.append(filtered_source)
 
         summary_parts = []
         if len(deadline_soon_items) > 0:
@@ -425,7 +454,7 @@ class GmailNotifier:
         <div class="source-section" style="background: #ffe6e6; border-color: #ff4444; border-width: 3px;">
             <div class="section-title" style="color: #d32f2f;">🔥 期限間近（3日以内）</div>
 """
-            for item in deadline_soon_items[:10]:
+            for item in deadline_soon_items[:15]:
                 product = item.get('product', '')
                 store = item.get('store', '')
                 end_date = item.get('end_date', '')
@@ -440,8 +469,8 @@ class GmailNotifier:
                 <a href="{url}" class="detail-link" target="_blank">🔗 詳細を見る</a>
             </div>
 """
-            if len(deadline_soon_items) > 10:
-                remaining = len(deadline_soon_items) - 10
+            if len(deadline_soon_items) > 15:
+                remaining = len(deadline_soon_items) - 15
                 html += f"""
             <div style="text-align: center; color: #718096; margin-top: 15px;">
                 ... 他 {remaining} 件
@@ -457,7 +486,7 @@ class GmailNotifier:
         <div class="source-section" style="background: #fffacd; border-color: #ffd700;">
             <div class="section-title" style="color: #d4af37;">🔥 先着販売中</div>
 """
-            for item in first_come_first_served_items[:5]:
+            for item in first_come_first_served_items[:10]:
                 product = item.get('product', '')
                 store = item.get('store', '')
                 url = item.get('detail_url', '#')
@@ -468,12 +497,19 @@ class GmailNotifier:
                 <a href="{url}" class="detail-link" target="_blank">🔗 今すぐ購入</a>
             </div>
 """
+            if len(first_come_first_served_items) > 10:
+                remaining = len(first_come_first_served_items) - 10
+                html += f"""
+            <div style="text-align: center; color: #718096; margin-top: 15px;">
+                ... 他 {remaining} 件
+            </div>
+"""
             html += """
         </div>
 """
 
-        # 各ソースの情報を追加
-        for source in sources_summary:
+        # 各ソースの情報を追加（受付終了済みを除外したフィルタ済みデータを使用）
+        for source in filtered_sources_summary:
             source_count_parts = []
             if source['lottery_count'] > 0:
                 source_count_parts.append(f'抽選{source["lottery_count"]}件')
@@ -499,7 +535,7 @@ class GmailNotifier:
                 <p>⏰ <span class="deadline-highlight">期限間近の情報は黄色ハイライト</span>で表示されています</p>
             </div>
 """
-                for lottery in source['lotteries'][:5]:
+                for lottery in source['lotteries'][:8]:
                     store = lottery.get('store', '')
                     product = lottery.get('product', '')
                     detail_url = lottery.get('detail_url', '#')
@@ -522,9 +558,9 @@ class GmailNotifier:
             </div>
 """
 
-                # 5件以上ある場合は省略メッセージ
-                if len(source['lotteries']) > 5:
-                    remaining = len(source['lotteries']) - 5
+                # 8件以上ある場合は省略メッセージ
+                if len(source['lotteries']) > 8:
+                    remaining = len(source['lotteries']) - 8
                     html += f"""
             <div style="text-align: center; color: #718096; margin-top: 15px;">
                 ... 他 {remaining} 件
@@ -536,7 +572,7 @@ class GmailNotifier:
                 html += """
             <div class="section-title">📅 予約情報</div>
 """
-                for reservation in source['reservations'][:5]:
+                for reservation in source['reservations'][:8]:
                     title = reservation.get('title', '')
                     price = reservation.get('price', '')
                     availability = reservation.get('availability', '')
@@ -564,9 +600,9 @@ class GmailNotifier:
             </div>
 """
 
-                # 5件以上ある場合は省略メッセージ
-                if len(source['reservations']) > 5:
-                    remaining = len(source['reservations']) - 5
+                # 8件以上ある場合は省略メッセージ
+                if len(source['reservations']) > 8:
+                    remaining = len(source['reservations']) - 8
                     html += f"""
             <div style="text-align: center; color: #718096; margin-top: 15px;">
                 ... 他 {remaining} 件
@@ -583,7 +619,7 @@ class GmailNotifier:
         <div class="source-section" style="background: #f0f8ff; border-color: #4169e1;">
             <div class="section-title" style="color: #4169e1;">🗓️ 今後の抽選予定</div>
 """
-            for product in upcoming_products[:10]:
+            for product in upcoming_products[:15]:
                 # gamepediaスキーマ対応: product_name または name
                 name = product.get('product_name', '') or product.get('name', '')
                 release_date = product.get('release_date', '')
@@ -615,9 +651,9 @@ class GmailNotifier:
                 html += """
             </div>
 """
-            # 10件以上ある場合は省略メッセージ
-            if len(upcoming_products) > 10:
-                remaining = len(upcoming_products) - 10
+            # 15件以上ある場合は省略メッセージ
+            if len(upcoming_products) > 15:
+                remaining = len(upcoming_products) - 15
                 html += f"""
             <div style="text-align: center; color: #718096; margin-top: 15px;">
                 ... 他 {remaining} 件

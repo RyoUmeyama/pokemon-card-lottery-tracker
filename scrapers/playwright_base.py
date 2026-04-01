@@ -3,11 +3,11 @@ Playwrightを使用したベーススクレイパー
 Bot対策のあるサイトに対応するためのヘッドレスブラウザ実装
 """
 import asyncio
-import os
-from datetime import datetime
 import logging
-import re
+import os
 import random
+import re
+from datetime import datetime
 
 try:
     from playwright.async_api import async_playwright
@@ -15,7 +15,7 @@ try:
 except ImportError:
     PLAYWRIGHT_AVAILABLE = False
 
-from constants import USER_AGENTS, DEFAULT_HEADERS, DEFAULT_TIMEOUT, DEFAULT_NAVIGATION_TIMEOUT
+from constants import DEFAULT_HEADERS, DEFAULT_NAVIGATION_TIMEOUT, DEFAULT_TIMEOUT, USER_AGENTS
 
 logger = logging.getLogger(__name__)
 

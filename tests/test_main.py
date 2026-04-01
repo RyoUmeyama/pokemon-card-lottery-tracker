@@ -51,7 +51,7 @@ class TestDetectChanges(unittest.TestCase):
         new_data = {'lotteries': [{'product': 'A', 'url': 'http://a.com'}]}
         has_changes, message = detect_changes(None, new_data, 'lottery')
         self.assertTrue(has_changes)
-        self.assertEqual(message, "初回実行")
+        self.assertEqual(message, ["初回実行"])
 
     def test_no_changes(self):
         """データに変更がない場合"""

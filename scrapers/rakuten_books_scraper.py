@@ -1,15 +1,17 @@
-import time
-import logging
-
-logger = logging.getLogger(__name__)
 """
 楽天ブックス（books.rakuten.co.jp）からポケモンカード抽選情報をスクレイピング
 """
+import json
+import logging
+import re
+import time
+import traceback
+from datetime import datetime
+
 import requests
 from bs4 import BeautifulSoup
-import json
-from datetime import datetime
-import re
+
+logger = logging.getLogger(__name__)
 
 
 class RakutenBooksScraper:
@@ -102,7 +104,6 @@ class RakutenBooksScraper:
 
         except Exception as e:
             logger.error(f"Error scraping books.rakuten.co.jp: {e}", exc_info=True)
-            import traceback
             traceback.print_exc()
             return None
 
