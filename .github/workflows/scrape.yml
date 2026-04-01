@@ -93,6 +93,7 @@ jobs:
 
       - name: Notify on success
         if: success()
+        continue-on-error: true
         env:
           SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
           SMTP_PORT: ${{ secrets.SMTP_PORT }}
@@ -109,8 +110,10 @@ jobs:
           msg['Subject'] = '✅ Pokemon Card Tracker - Success'
           msg['From'] = os.environ.get('SMTP_USERNAME','')
           msg['To'] = os.environ.get('RECIPIENT_EMAIL','')
-          server = smtplib.SMTP(os.environ.get('SMTP_SERVER',''), int(os.environ.get('SMTP_PORT','')))
+          server = smtplib.SMTP(os.environ.get('SMTP_SERVER',''), int(os.environ.get('SMTP_PORT','')), timeout=30)
+          server.ehlo()
           server.starttls()
+          server.ehlo()
           server.login(os.environ.get('SMTP_USERNAME',''), os.environ.get('SMTP_PASSWORD',''))
           server.sendmail(msg['From'], msg['To'], msg.as_string())
           server.quit()
@@ -118,6 +121,7 @@ jobs:
 
       - name: Notify on failure
         if: failure()
+        continue-on-error: true
         env:
           SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
           SMTP_PORT: ${{ secrets.SMTP_PORT }}
@@ -134,8 +138,10 @@ jobs:
           msg['Subject'] = '⚠️ Pokemon Card Tracker - Failed'
           msg['From'] = os.environ.get('SMTP_USERNAME','')
           msg['To'] = os.environ.get('RECIPIENT_EMAIL','')
-          server = smtplib.SMTP(os.environ.get('SMTP_SERVER',''), int(os.environ.get('SMTP_PORT','')))
+          server = smtplib.SMTP(os.environ.get('SMTP_SERVER',''), int(os.environ.get('SMTP_PORT','')), timeout=30)
+          server.ehlo()
           server.starttls()
+          server.ehlo()
           server.login(os.environ.get('SMTP_USERNAME',''), os.environ.get('SMTP_PASSWORD',''))
           server.sendmail(msg['From'], msg['To'], msg.as_string())
           server.quit()
