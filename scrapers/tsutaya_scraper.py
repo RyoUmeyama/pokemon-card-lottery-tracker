@@ -13,9 +13,9 @@ logger = logging.getLogger(__name__)
 
 class TsutayaScraper(RequestsBaseScraper):
     def __init__(self):
-        super().__init__()
-        # TSUTAYAオンラインのポケモンカード検索ページ
+        super().__init__(timeout=30, wait_time=1)
         self.base_url = "https://tsutaya.tsite.jp"
+        self.source_name = 'tsutaya.tsite.jp'
         self.search_urls = [
             "https://tsutaya.tsite.jp/search/?keyword=ポケモンカード&sort=release_date&area=&status=",
         ]
@@ -54,12 +54,14 @@ class TsutayaScraper(RequestsBaseScraper):
         reservations = []
 
         try:
-            response = self.fetch(url)
-            if not response:
+            html_content = self.fetch_html(url)
+            if not html_content:
                 logger.warning(f"Failed to fetch {url}")
                 return lotteries, reservations
 
-            soup = BeautifulSoup(response.content, 'html.parser')
+            soup = self.parse_soup(html_content)
+            if not soup:
+                return lotteries, reservations
 
             # 商品一覧を取得
             product_items = soup.select('div.product-box, div.item-box, li.item-list')
