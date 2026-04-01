@@ -45,16 +45,22 @@ class SevenNetPlaywrightScraper(PlaywrightBaseScraper):
 
         for url, name in urls_to_try:
             try:
+                # セレクタ待機なしで全コンテンツ取得（JS実行後に自動待機10秒）
                 content = self.run_async(self.fetch_page_content(
                     url,
-                    wait_selector='[class*="product"], [class*="item"], [class*="goods"]',
-                    extra_wait=5
+                    wait_selector=None,
+                    wait_for_js=True,
+                    extra_wait=8
                 ))
 
                 if content:
                     # Incapsulaブロックチェック
                     if 'Incapsula' in content or 'Request unsuccessful' in content:
                         logger.warning(f"セブンネット{name}: Incapsulaでブロック")
+                        continue
+                    # コンテンツサイズで判定（セブンネット通常ページは100KB以上）
+                    if len(content) < 50000:
+                        logger.warning(f"セブンネット{name}: コンテンツサイズ不足({len(content)}bytes)")
                         continue
                     parsed = self._parse_content(content)
                     lotteries.extend(parsed)

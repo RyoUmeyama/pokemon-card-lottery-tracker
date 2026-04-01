@@ -20,10 +20,10 @@ from scrapers.joshin_scraper import JoshinScraper
 from scrapers.nojima_scraper import NojimaScraper
 from scrapers.yellow_submarine_scraper import YellowSubmarineScraper
 from scrapers.cardshop_serra_scraper import CardShopSerraScraper
-from scrapers.sevennet_playwright_scraper import SevenNetPlaywrightScraper
+# from scrapers.sevennet_playwright_scraper import SevenNetPlaywrightScraper  # DISABLED: cmd_245
 from scrapers.seven_eleven_scraper import SevenElevenScraper
 from scrapers.lawson_scraper import LawsonScraper
-from scrapers.aeon_playwright_scraper import AeonPlaywrightScraper
+# from scrapers.aeon_playwright_scraper import AeonPlaywrightScraper  # DISABLED: cmd_245
 from scrapers.familymart_scraper import FamilyMartScraper
 from scrapers.surugaya_scraper import SurugayaScraper
 from scrapers.geo_scraper import GeoScraper
@@ -397,9 +397,8 @@ def main() -> None:
         },
         {
             'num': 18, 'name': 'セブンネット抽選(Playwright)',
-            'class': SevenNetPlaywrightScraper, 'kwargs': {},
-            'filename': 'data/sevennet_lottery_latest.json',
-            'skip_on_empty': True
+            'skip': True, 'reason': 'WAF完全ブロック (cmd_245: 修復困難)'
+            # BLOCKED: SevenNetPlaywrightScraper - WAF
         },
         {
             'num': 19, 'name': 'ローソンHMV',
@@ -408,8 +407,8 @@ def main() -> None:
         },
         {
             'num': 20, 'name': 'イオン',
-            'class': AeonPlaywrightScraper, 'kwargs': {},
-            'filename': 'data/aeon_latest.json'
+            'skip': True, 'reason': 'コンテンツなし (cmd_245: 修復困難)'
+            # BLOCKED: AeonPlaywrightScraper - コンテンツなし
         },
         {
             'num': 21, 'name': 'ファミリーマート',
