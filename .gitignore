@@ -54,9 +54,14 @@ temp/
 *.backup
 
 # Data files (backup & latest)
+data/
 data/*_backup*.db
 data/*_backup*.json
 data/*_latest.json
 
 # Notification configs (contains sensitive tokens)
 config/notification.json
+
+# Queue & reports
+queue/
+*.yaml.bak

@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 class AmazonReservationScraper(RequestsBaseScraper):
     def __init__(self):
-        super().__init__(timeout=30, wait_time=2)
+        super().__init__(timeout=30, wait_time=1)
         self.base_url = "https://www.amazon.co.jp"
         self.search_url = "https://www.amazon.co.jp/s"
         self.source_name = 'amazon.co.jp'

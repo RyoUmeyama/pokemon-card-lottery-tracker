@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 class RakutenReservationScraper(RequestsBaseScraper):
     def __init__(self):
-        super().__init__(timeout=30, wait_time=2)
+        super().__init__(timeout=30, wait_time=1)
         self.base_url = "https://books.rakuten.co.jp"
         self.search_url = "https://books.rakuten.co.jp/search"
         self.source_name = 'books.rakuten.co.jp'

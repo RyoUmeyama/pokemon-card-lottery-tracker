@@ -29,11 +29,10 @@ class GmailNotifier:
         if not date_string or not isinstance(date_string, str):
             return None
 
-        from datetime import datetime as dt
         formats = ['%Y-%m-%d', '%Y/%m/%d', '%Y年%m月%d日']
         for fmt in formats:
             try:
-                return dt.strptime(date_string, fmt)
+                return datetime.strptime(date_string, fmt)
             except ValueError:
                 continue
         return None
@@ -125,6 +124,9 @@ class GmailNotifier:
 
         total_upcoming = len(upcoming_products)
 
+        # 0件アラート判定
+        zero_alert = all_lotteries_data.get('zero_alert', False)
+
         # 新着件数と期限間近件数をカウント
         all_lotteries_flat = []
         for source in sources_summary:
@@ -147,9 +149,6 @@ class GmailNotifier:
         # メールを送信（リトライ機能付き: exponential backoff 2s, 4s, 8s）
         msg = MIMEMultipart('alternative')
         subject_parts = []
-
-        # 0件アラート判定
-        zero_alert = all_lotteries_data.get('zero_alert', False)
 
         if zero_alert:
             subject_parts.append('⚠️0件')
