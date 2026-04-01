@@ -51,6 +51,12 @@ class GmailNotifier:
             total_first_come_first_served += len(fcfs_items)
             first_come_first_served_items.extend(fcfs_items)
 
+            # 各ソースの upcoming_products を集約
+            source_upcoming = source.get('upcoming_products', [])
+            if source_upcoming:
+                upcoming_products.extend(source_upcoming)
+                total_upcoming += len(source_upcoming)
+
             if lottery_count > 0 or reservation_count > 0:
                 source_name = source.get('source', 'Unknown')
                 sources_summary.append({
@@ -452,28 +458,50 @@ class GmailNotifier:
         </div>
 """
 
-        # 今後の発売予定セクション
+        # 🗓️ 今後の抽選予定セクション（各ソースの upcoming_products を集約）
         if upcoming_products:
             html += """
         <div class="source-section" style="background: #f0f8ff; border-color: #4169e1;">
-            <div class="section-title" style="color: #4169e1;">📅 今後の発売予定</div>
+            <div class="section-title" style="color: #4169e1;">🗓️ 今後の抽選予定</div>
 """
-            for product in upcoming_products[:5]:
-                name = product.get('name', '')
+            for product in upcoming_products[:10]:
+                # gamepediaスキーマ対応: product_name または name
+                name = product.get('product_name', '') or product.get('name', '')
                 release_date = product.get('release_date', '')
                 description = product.get('description', '')
-                url = product.get('url', '')
+                url = product.get('detail_url', '') or product.get('url', '')
+                store = product.get('store', '')
+                # gamepediaの lottery_schedule を lottery_start として扱う
+                lottery_start = product.get('lottery_schedule', '') or product.get('lottery_start', '')
+
+                # ポケモンセンターの場合は★マークで目立たせる
+                is_pokemon_center = store and 'ポケモンセンター' in store
+                star_mark = '★ ' if is_pokemon_center else ''
+                store_display = f'🏪 {star_mark}{store}' if store else ''
+
                 html += f"""
             <div class="lottery-item" style="border-left-color: #4169e1;">
                 <div class="product-name">📦 {name}</div>
 """
+                if store_display:
+                    html += f'                <div class="store-name">{store_display}</div>\n'
                 if release_date:
-                    html += f'                <div class="store-name">📅 発売予定: {release_date}</div>\n'
+                    html += f'                <div class="store-name">📅 発売日: {release_date}</div>\n'
+                if lottery_start:
+                    html += f'                <div class="store-name">🎯 抽選開始: {lottery_start}</div>\n'
                 if description:
                     html += f'                <div class="store-name">{description}</div>\n'
                 if url:
                     html += f'                <a href="{url}" class="detail-link" target="_blank">🔗 詳細を見る</a>\n'
                 html += """
+            </div>
+"""
+            # 10件以上ある場合は省略メッセージ
+            if len(upcoming_products) > 10:
+                remaining = len(upcoming_products) - 10
+                html += f"""
+            <div style="text-align: center; color: #718096; margin-top: 15px;">
+                ... 他 {remaining} 件
             </div>
 """
             html += """

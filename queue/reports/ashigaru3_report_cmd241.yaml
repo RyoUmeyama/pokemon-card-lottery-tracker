@@ -1,0 +1,17 @@
+cmd_id: cmd_241
+cmd_label: "フェーズ2 - notify.py メール本文改善"
+agent_id: ashigaru3
+timestamp: "2026-04-01T10:30:00"
+status: completed
+summary: "notify.py に upcoming_products 集約機能を追加。メール本文に『🗓️ 今後の抽選予定』セクション統合。"
+modifications:
+  - "send_notification()で各ソースのupcoming_productsを集約（gamepedia.jp:50件含む）"
+  - "メール本文の『🗓️ 今後の抽選予定』セクションを拡張（最大10件表示）"
+  - "gamepediaスキーマ対応: product_name/lottery_schedule/detail_url をマッピング"
+  - "ポケモンセンター情報に★マーク表示（ただしgamepediaではstore空のため表示なし）"
+test_result: "✓ Import成功 ✓ メール本文生成確認"
+upcoming_stats:
+  total_sources: 20
+  gamepedia_upcoming: 50
+  other_upcoming: 0
+  aggregated_total: 50
