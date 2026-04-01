@@ -6,7 +6,6 @@ logger = logging.getLogger(__name__)
 ファミリーマート（FamilyMart）からポケモンカード抽選・予約情報をスクレイピング
 ファミマの公式サイトとキャンペーンページを監視
 """
-import requests
 from bs4 import BeautifulSoup
 import json
 from datetime import datetime

@@ -6,7 +6,6 @@ logger = logging.getLogger(__name__)
 カードショップセラ（Card Shop Serra）からポケモンカード抽選・予約情報をスクレイピング
 トレカ専門店として有名なカードショップ
 """
-import requests
 from bs4 import BeautifulSoup
 import json
 from datetime import datetime

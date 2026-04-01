@@ -5,7 +5,6 @@ logger = logging.getLogger(__name__)
 """
 あみあみ（AmiAmi）からポケモンカード抽選・予約情報をスクレイピング
 """
-import requests
 from bs4 import BeautifulSoup
 import json
 from datetime import datetime

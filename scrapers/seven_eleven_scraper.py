@@ -9,7 +9,6 @@ import re
 import time
 
 from bs4 import BeautifulSoup
-import requests
 
 logger = logging.getLogger(__name__)
 

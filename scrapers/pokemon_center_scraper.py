@@ -5,28 +5,16 @@ from datetime import datetime
 import json
 import logging
 
-from bs4 import BeautifulSoup
-import requests
+from .requests_base import RequestsBaseScraper
 
 logger = logging.getLogger(__name__)
 
 
-class PokemonCenterScraper:
+class PokemonCenterScraper(RequestsBaseScraper):
     def __init__(self):
+        super().__init__(timeout=30, wait_time=1)
         self.url = "https://www.pokemoncenter-online.com/lottery/apply.html"
-        self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-            'Accept-Language': 'ja,en;q=0.9,en-US;q=0.8',
-            'Accept-Encoding': 'gzip, deflate, br',
-            'Referer': 'https://www.pokemoncenter-online.com/',
-            'Connection': 'keep-alive',
-            'Upgrade-Insecure-Requests': '1',
-            'Sec-Fetch-Dest': 'document',
-            'Sec-Fetch-Mode': 'navigate',
-            'Sec-Fetch-Site': 'same-origin',
-            'Cache-Control': 'max-age=0'
-        }
+        self.source_name = 'pokemoncenter-online.com'
 
     def scrape(self):
         """抽選情報をスクレイピング"""
@@ -34,14 +22,23 @@ class PokemonCenterScraper:
         has_active = False
 
         try:
-            response = requests.get(self.url, headers=self.headers, timeout=30)
-            response.raise_for_status()
+            html_content = self.fetch_html(self.url)
+            if not html_content:
+                return {
+                    'source': 'pokemoncenter-online.com',
+                    'scraped_at': datetime.now().isoformat(),
+                    'has_active_lottery': False,
+                    'lotteries': []
+                }
 
-            try:
-                soup = BeautifulSoup(response.content, 'lxml')
-            except Exception:
-                # lxml not available, fallback to html.parser
-                soup = BeautifulSoup(response.content, 'html.parser')
+            soup = self.parse_soup(html_content)
+            if not soup:
+                return {
+                    'source': 'pokemoncenter-online.com',
+                    'scraped_at': datetime.now().isoformat(),
+                    'has_active_lottery': False,
+                    'lotteries': []
+                }
 
             # 抽選商品のリストを探す
             lottery_items = soup.find_all(class_=lambda x: x and 'lottery' in x.lower())

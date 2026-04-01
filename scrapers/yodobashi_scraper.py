@@ -1,25 +1,21 @@
-import logging
-import time
-
-logger = logging.getLogger(__name__)
 """
 ヨドバシカメラ抽選販売ページからポケモンカード抽選情報をスクレイピング
 """
-import requests
-from bs4 import BeautifulSoup
-import json
-from datetime import datetime
+import logging
 import re
+from datetime import datetime
+
+from bs4 import BeautifulSoup
+
+from .requests_base import RequestsBaseScraper
+
+logger = logging.getLogger(__name__)
 
 
-class YodobashiScraper:
+class YodobashiScraper(RequestsBaseScraper):
     def __init__(self):
+        super().__init__()
         self.url = "https://limited.yodobashi.com/"
-        self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-            'Accept-Language': 'ja,en-US;q=0.7,en;q=0.3',
-        }
         self.pokemon_keywords = [
             'ポケモンカード', 'ポケカ', 'pokemon', 'ポケモン',
             'スカーレット', 'バイオレット', 'ナイトワンダラー',
@@ -30,9 +26,9 @@ class YodobashiScraper:
     def scrape(self):
         """抽選情報をスクレイピング"""
         try:
-            time.sleep(1)
-            response = requests.get(self.url, headers=self.headers, timeout=30)
-            response.raise_for_status()
+            response = self.fetch(self.url)
+            if not response:
+                return {'source': 'ヨドバシカメラ (yodobashi.com)', 'lotteries': []}
 
             soup = BeautifulSoup(response.content, 'html.parser')
 

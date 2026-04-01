@@ -6,23 +6,18 @@ from datetime import datetime
 import json
 import logging
 import re
-import time
 
-from bs4 import BeautifulSoup
-import requests
+from .requests_base import RequestsBaseScraper
 
 logger = logging.getLogger(__name__)
 
 
-class AeonScraper:
+class AeonScraper(RequestsBaseScraper):
     def __init__(self):
+        super().__init__(timeout=30, wait_time=1)
         # イオン（403エラーが発生するため現在無効化）
         self.search_url = None  # Bot対策で403エラーになるためスキップ
-        self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-            'Accept-Language': 'ja,en-US;q=0.7,en;q=0.3',
-        }
+        self.source_name = 'aeonretail.com'
         self.pokemon_keywords = [
             'ポケモンカード', 'ポケカ', 'pokemon', 'ポケモン',
             'スカーレット', 'バイオレット', 'テラスタル',
@@ -51,23 +46,13 @@ class AeonScraper:
         lotteries = []
 
         try:
-            response = None
-            for attempt in range(3):
-                time.sleep(1)
-                try:
-                    response = requests.get(self.search_url, headers=self.headers, timeout=30)
-                    response.raise_for_status()
-                    break
-                except (requests.exceptions.ConnectionError, requests.exceptions.Timeout) as e:
-                    if attempt < 2:
-                        logger.warning(f"Retry {attempt+1}/3 for {self.search_url}: {e}")
-                        continue
-                    raise
-
-            if response is None:
+            html_content = self.fetch_html(self.search_url)
+            if not html_content:
                 return lotteries
 
-            soup = BeautifulSoup(response.content, 'html.parser')
+            soup = self.parse_soup(html_content)
+            if not soup:
+                return lotteries
 
             # 商品アイテムを探す
             product_items = soup.find_all(['div', 'li', 'article'], class_=lambda x: x and any(
@@ -90,8 +75,6 @@ class AeonScraper:
                     if lottery:
                         lotteries.append(lottery)
 
-        except requests.exceptions.HTTPError as e:
-            logger.error(f"HTTP Error: {e.response.status_code}")
         except Exception as e:
             logger.error(f"Error scraping search results: {e}", exc_info=True)
 

@@ -1,29 +1,24 @@
-import logging
-import time
-
-logger = logging.getLogger(__name__)
 """
 イエローサブマリン（Yellow Submarine）からポケモンカード抽選・予約情報をスクレイピング
 """
-import requests
-from bs4 import BeautifulSoup
-import json
-from datetime import datetime
+import logging
 import re
+from datetime import datetime
+
+from bs4 import BeautifulSoup
+
+from .requests_base import RequestsBaseScraper
+
+logger = logging.getLogger(__name__)
 
 
-class YellowSubmarineScraper:
+class YellowSubmarineScraper(RequestsBaseScraper):
     def __init__(self):
+        super().__init__()
         # イエローサブマリンのトップページ（旧URLは404）
         self.urls = [
             "https://www.yellowsubmarine.co.jp/",
         ]
-        self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-            'Accept-Language': 'ja,en-US;q=0.7,en;q=0.3',
-            'Accept-Encoding': 'gzip, deflate',
-        }
         self.pokemon_keywords = [
             'ポケモンカード', 'ポケカ', 'pokemon', 'ポケモン',
             'スカーレット', 'バイオレット', 'テラスタル',
@@ -57,9 +52,9 @@ class YellowSubmarineScraper:
         lotteries = []
 
         try:
-            time.sleep(1)
-            response = requests.get(url, headers=self.headers, timeout=30)
-            response.raise_for_status()
+            response = self.fetch(url)
+            if not response:
+                return lotteries
 
             # エンコーディングを検出
             response.encoding = response.apparent_encoding or 'shift_jis'

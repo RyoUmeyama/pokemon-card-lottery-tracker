@@ -5,27 +5,18 @@ Amazon予約情報スクレイパー
 from datetime import datetime
 import json
 import logging
-import time
 
-from bs4 import BeautifulSoup
-import requests
-
+from .requests_base import RequestsBaseScraper
 
 logger = logging.getLogger(__name__)
 
 
-class AmazonReservationScraper:
+class AmazonReservationScraper(RequestsBaseScraper):
     def __init__(self):
+        super().__init__(timeout=30, wait_time=2)
         self.base_url = "https://www.amazon.co.jp"
         self.search_url = "https://www.amazon.co.jp/s"
-        self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-            'Accept-Language': 'ja,en-US;q=0.7,en;q=0.3',
-            'Accept-Encoding': 'gzip, deflate, br',
-            'Connection': 'keep-alive',
-            'Upgrade-Insecure-Requests': '1'
-        }
+        self.source_name = 'amazon.co.jp'
         self.pokemon_keywords = [
             'ポケモンカード', 'ポケカ', 'pokemon', 'Pokemon', 'ポケモン',
             'スカーレット', 'バイオレット', 'テラスタル',
@@ -48,7 +39,6 @@ class AmazonReservationScraper:
                 logger.info(f"  検索中: {keyword}")
                 keyword_products = self._search_products(keyword)
                 products.extend(keyword_products)
-                time.sleep(2)  # レート制限対策
 
             # 重複除外
             unique_products = self._remove_duplicates(products)

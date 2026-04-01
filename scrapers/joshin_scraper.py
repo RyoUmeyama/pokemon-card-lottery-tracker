@@ -6,7 +6,6 @@ import json
 from datetime import datetime
 import re
 
-import requests
 from .requests_base import RequestsBaseScraper
 
 logger = logging.getLogger(__name__)

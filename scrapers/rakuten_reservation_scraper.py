@@ -5,23 +5,18 @@
 from datetime import datetime
 import json
 import logging
-import time
 
-from bs4 import BeautifulSoup
-import requests
+from .requests_base import RequestsBaseScraper
 
 logger = logging.getLogger(__name__)
 
 
-class RakutenReservationScraper:
+class RakutenReservationScraper(RequestsBaseScraper):
     def __init__(self):
+        super().__init__(timeout=30, wait_time=2)
         self.base_url = "https://books.rakuten.co.jp"
         self.search_url = "https://books.rakuten.co.jp/search"
-        self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-            'Accept-Language': 'ja,en-US;q=0.7,en;q=0.3'
-        }
+        self.source_name = 'books.rakuten.co.jp'
 
     def scrape(self):
         """ポケモンカードの予約情報をスクレイピング"""
@@ -62,25 +57,15 @@ class RakutenReservationScraper:
         products = []
 
         try:
-            params = {
-                'sv': '30',
-                'f': '0',
-                'g': '001',
-                'v': '2',
-                'e': '0',
-                's': '5',  # 発売日順
-                'sitem': keyword,
-            }
+            search_url = f"{self.search_url}?sv=30&f=0&g=001&v=2&e=0&s=5&sitem={keyword}"
 
-            response = requests.get(
-                self.search_url,
-                params=params,
-                headers=self.headers,
-                timeout=30
-            )
-            response.raise_for_status()
+            html_content = self.fetch_html(search_url)
+            if not html_content:
+                return products
 
-            soup = BeautifulSoup(response.content, 'html.parser')
+            soup = self.parse_soup(html_content)
+            if not soup:
+                return products
 
             # 商品要素を取得
             items = soup.select('.item-list .item')
