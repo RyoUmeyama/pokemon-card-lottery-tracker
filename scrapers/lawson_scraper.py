@@ -1,27 +1,23 @@
-import logging
-import time
-
-logger = logging.getLogger(__name__)
 """
 ローソン（Lawson）からポケモンカード抽選・予約情報をスクレイピング
 ローソンHMVオンラインを監視
 """
-import requests
-from bs4 import BeautifulSoup
+import logging
 import json
 from datetime import datetime
 import re
 
+import requests
+from .requests_base import RequestsBaseScraper
 
-class LawsonScraper:
+logger = logging.getLogger(__name__)
+
+
+class LawsonScraper(RequestsBaseScraper):
     def __init__(self):
-        # HMV&BOOKS onlineのポケモンカード検索
+        super().__init__(timeout=30, wait_time=1)
         self.search_url = "https://www.hmv.co.jp/search/?category=ALL&keyword=ポケモンカード"
-        self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-            'Accept-Language': 'ja,en-US;q=0.7,en;q=0.3',
-        }
+        self.source_name = 'hmv.co.jp'
         self.pokemon_keywords = [
             'ポケモンカード', 'ポケカ', 'pokemon', 'ポケモン',
             'スカーレット', 'バイオレット', 'テラスタル',
@@ -54,11 +50,13 @@ class LawsonScraper:
         lotteries = []
 
         try:
-            time.sleep(1)
-            response = requests.get(self.search_url, headers=self.headers, timeout=30)
-            response.raise_for_status()
+            html_content = self.fetch_html(self.search_url)
+            if not html_content:
+                return lotteries
 
-            soup = BeautifulSoup(response.content, 'html.parser')
+            soup = self.parse_soup(html_content)
+            if not soup:
+                return lotteries
 
             # 商品アイテムを探す
             product_items = soup.find_all(['div', 'li', 'article'], class_=lambda x: x and any(

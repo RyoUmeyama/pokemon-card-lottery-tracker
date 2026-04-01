@@ -5,27 +5,20 @@ from datetime import datetime
 import json
 import logging
 import re
-import time
 
-from bs4 import BeautifulSoup
-import requests
+from .requests_base import RequestsBaseScraper
 
 logger = logging.getLogger(__name__)
 
 
-class SurugayaScraper:
+class SurugayaScraper(RequestsBaseScraper):
     def __init__(self):
-        # 駿河屋のポケモンカード商品検索ページ
+        super().__init__(timeout=30, wait_time=1)
         self.base_url = "https://www.suruga-ya.jp"
         self.search_urls = [
             "https://www.suruga-ya.jp/search?keyword=ポケモンカード&cabinet=1&sort=popular&condition=all"
         ]
-        self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-            'Accept-Language': 'ja,en-US;q=0.7,en;q=0.3',
-            'Referer': 'https://www.suruga-ya.jp',
-        }
+        self.source_name = 'suruga-ya.jp'
         self.pokemon_keywords = [
             'ポケモンカード', 'ポケカ', 'pokemon', 'ポケモン',
             'スカーレット', 'バイオレット', 'ナイトワンダラー',
@@ -61,12 +54,13 @@ class SurugayaScraper:
         reservations = []
 
         try:
-            response = requests.get(url, headers=self.headers, timeout=15)
-            if response.status_code != 200:
-                logger.warning(f"HTTP Error: {response.status_code}")
+            html_content = self.fetch_html(url)
+            if not html_content:
                 return lotteries, reservations
 
-            soup = BeautifulSoup(response.content, 'html.parser')
+            soup = self.parse_soup(html_content)
+            if not soup:
+                return lotteries, reservations
 
             # 商品一覧を取得
             product_items = soup.select('div.item_box, div.product-item')
