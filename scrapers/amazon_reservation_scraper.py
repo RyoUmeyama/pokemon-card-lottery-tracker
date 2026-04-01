@@ -109,8 +109,8 @@ class AmazonReservationScraper:
     def _parse_product(self, item):
         """商品情報を抽出"""
         try:
-            # タイトル
-            title_elem = item.select_one('h2 a span')
+            # タイトル（h2 span を探す）
+            title_elem = item.select_one('h2 span')
             if not title_elem:
                 return None
             title = title_elem.get_text(strip=True)
@@ -119,8 +119,11 @@ class AmazonReservationScraper:
             if not any(keyword in title for keyword in self.pokemon_keywords):
                 return None
 
-            # URL
-            link_elem = item.select_one('h2 a')
+            # URL（h2 を囲むaタグを探す）
+            h2 = item.select_one('h2')
+            if not h2:
+                return None
+            link_elem = h2.find_parent('a', href=True)
             if not link_elem or not link_elem.get('href'):
                 return None
             url = self.base_url + link_elem['href']
@@ -161,8 +164,11 @@ class AmazonReservationScraper:
         }
 
         try:
+            # item全体のテキスト
+            item_text = item.get_text()
+
             # 配送情報エリア
-            delivery_elem = item.select_one('[data-component-type="s-search-result"] [class*="deliver"]')
+            delivery_elem = item.select_one('[class*="deliver"]')
             if delivery_elem:
                 delivery_text = delivery_elem.get_text(strip=True)
 
@@ -170,18 +176,19 @@ class AmazonReservationScraper:
                     result['is_reservation'] = True
                     result['is_available'] = True
                     result['status'] = '予約受付中'
-                elif '在庫あり' in delivery_text or '通常配送無料' in delivery_text:
+                elif '日にお届け' in delivery_text or '発売予定' in delivery_text:
+                    # 配送日があれば購入可能と判定
+                    result['is_available'] = True
+                    result['status'] = '購入可能'
+                elif '在庫あり' in delivery_text or '配送料無料' in delivery_text:
                     result['is_available'] = True
                     result['status'] = '在庫あり'
 
-            # 価格の下のテキスト
-            price_area = item.select_one('.a-price-whole')
-            if price_area:
-                parent_text = price_area.parent.parent.get_text(strip=True)
-                if '予約' in parent_text:
-                    result['is_reservation'] = True
-                    result['is_available'] = True
-                    result['status'] = '予約受付中'
+            # 価格があれば購入可能
+            price_elem = item.select_one('.a-price .a-offscreen')
+            if price_elem and not result['is_available']:
+                result['is_available'] = True
+                result['status'] = '購入可能'
 
         except Exception:
             pass

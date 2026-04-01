@@ -1,0 +1,16 @@
+worker_id: ashigaru5
+cmd_id: cmd_244
+timestamp: "2026-04-01T04:15:00"
+status: done
+result:
+  sevennet_playwright:
+    diagnosis: "Incapsula Infrastructure WAF検知。全URL・全回避策で継続ブロック"
+    fixable: false
+    action: "skip=True推奨。API利用は検討価値あり"
+  aeon_playwright:
+    diagnosis: "Playwright成功だがサイト側にポケカ情報なし。スクレイパー責任外"
+    fixable: false
+    action: "定期情報なし扱い。API検索検討価値あり"
+  main_py_status: "両スクレイパー現在有効。修復不可のため skip=True設定推奨"
+skill_candidate:
+  found: false

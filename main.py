@@ -6,17 +6,17 @@ import os
 import logging
 from datetime import datetime
 from typing import Optional, Dict, List, Any
-from scrapers.pokemon_center_scraper import PokemonCenterScraper
-from scrapers.pokemoncenter_playwright_scraper import PokemonCenterPlaywrightScraper
+# from scrapers.pokemon_center_scraper import PokemonCenterScraper  # DISABLED: cmd_244
+# from scrapers.pokemoncenter_playwright_scraper import PokemonCenterPlaywrightScraper  # DISABLED: cmd_244
 from scrapers.rakuten_books_scraper import RakutenBooksScraper
 from scrapers.amazon_reservation_scraper import AmazonReservationScraper
 from scrapers.rakuten_reservation_scraper import RakutenReservationScraper
-from scrapers.yodobashi_scraper import YodobashiScraper
+# from scrapers.yodobashi_scraper import YodobashiScraper  # DISABLED: cmd_244
 from scrapers.x_lottery_scraper import XLotteryScraper
 from scrapers.biccamera_scraper import BiccameraScraper
 from scrapers.joshin_scraper import JoshinScraper
-from scrapers.edion_scraper import EdionScraper
-from scrapers.ksdenki_scraper import KsDenkiScraper
+# from scrapers.edion_scraper import EdionScraper  # DISABLED: cmd_244
+# from scrapers.ksdenki_scraper import KsDenkiScraper  # DISABLED: cmd_244
 from scrapers.nojima_scraper import NojimaScraper
 from scrapers.yellow_submarine_scraper import YellowSubmarineScraper
 from scrapers.cardshop_serra_scraper import CardShopSerraScraper
@@ -28,7 +28,7 @@ from scrapers.familymart_scraper import FamilyMartScraper
 from scrapers.surugaya_scraper import SurugayaScraper
 from scrapers.geo_scraper import GeoScraper
 from scrapers.tsutaya_scraper import TsutayaScraper
-from scrapers.dragonstar_scraper import DragonstarScraper
+# from scrapers.dragonstar_scraper import DragonstarScraper  # DISABLED: cmd_244
 from scrapers.google_forms_scraper import GoogleFormsScraper
 
 # logging設定
@@ -321,8 +321,8 @@ def main() -> None:
         },
         {
             'num': 3, 'name': 'ポケモンセンター公式',
-            'class': PokemonCenterScraper, 'kwargs': {},
-            'filename': 'data/pokemon_center_latest.json'
+            'skip': True, 'reason': 'ログイン認証+SPA (cmd_244: 修復困難)'
+            # BLOCKED: PokemonCenterScraper - 認証必須
         },
         {
             'num': 4, 'name': 'ポケモンセンター公式(Playwright)',
@@ -343,8 +343,8 @@ def main() -> None:
         },
         {
             'num': 7, 'name': 'ヨドバシカメラ',
-            'class': YodobashiScraper, 'kwargs': {},
-            'filename': 'data/yodobashi_latest.json'
+            'skip': True, 'reason': '受付終了 (cmd_244: 修復困難)'
+            # BLOCKED: YodobashiScraper - 受付終了
         },
         {
             'num': 8, 'name': 'ビックカメラ',
@@ -363,13 +363,13 @@ def main() -> None:
         },
         {
             'num': 11, 'name': 'エディオン',
-            'class': EdionScraper, 'kwargs': {},
-            'filename': 'data/edion_latest.json'
+            'skip': True, 'reason': 'JavaScript必須 (cmd_244: 修復困難)'
+            # BLOCKED: EdionScraper - JavaScript必須
         },
         {
             'num': 12, 'name': 'ケーズデンキ',
-            'class': KsDenkiScraper, 'kwargs': {},
-            'filename': 'data/ksdenki_latest.json'
+            'skip': True, 'reason': 'URL無効 (cmd_244: 修復困難)'
+            # BLOCKED: KsDenkiScraper - URL無効
         },
         {
             'num': 13, 'name': 'ノジマ',
@@ -440,8 +440,8 @@ def main() -> None:
         },
         {
             'num': 26, 'name': 'ドラゴンスター',
-            'class': DragonstarScraper, 'kwargs': {},
-            'filename': 'data/dragonstar_latest.json'
+            'skip': True, 'reason': '不正確なデータ (cmd_244: 修復困難)'
+            # BLOCKED: DragonstarScraper - 不正確なデータ
         },
     ]
 

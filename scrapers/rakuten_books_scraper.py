@@ -73,24 +73,23 @@ class RakutenBooksScraper:
                 if any(keyword in product_name for keyword in exclude_keywords):
                     continue
 
-                # 【】で囲まれた商品名のみを対象
-                if '【' in product_name and '】' in product_name:
-                    lottery = {
-                        'store': '楽天ブックス',
-                        'product': product_name,
-                        'lottery_type': '抽選販売',
-                        'start_date': '',
-                        'end_date': '',
-                        'announcement_date': '',
-                        'conditions': '楽天会員登録必須',
-                        'detail_url': self.url,
-                        'status': 'active' if entry_period else 'unknown',
-                        'entry_period': entry_period
-                    }
+                # 【】条件を削除し、商品名を直接対象とする
+                lottery = {
+                    'store': '楽天ブックス',
+                    'product': product_name,
+                    'lottery_type': '抽選販売',
+                    'start_date': '',
+                    'end_date': '',
+                    'announcement_date': '',
+                    'conditions': '楽天会員登録必須',
+                    'detail_url': self.url,
+                    'status': 'active' if entry_period else 'unknown',
+                    'entry_period': entry_period
+                }
 
-                    # 重複チェック
-                    if not any(l['product'] == product_name for l in lotteries):
-                        lotteries.append(lottery)
+                # 重複チェック
+                if not any(l['product'] == product_name for l in lotteries):
+                    lotteries.append(lottery)
 
             # 抽選情報が見つからない場合は空のリストを返す
             result = {
