@@ -1,0 +1,191 @@
+scrapers:
+  - num: 1
+    name: '楽天ブックス'
+    module: 'scrapers.rakuten_books_scraper'
+    class: 'RakutenBooksScraper'
+    filename: 'data/rakuten_books_latest.json'
+    skip: false
+    kwargs: {}
+
+  - num: 3
+    name: 'ポケモンセンター公式'
+    module: 'scrapers.pokemon_center_scraper'
+    class: 'PokemonCenterScraper'
+    skip: true
+    reason: 'ログイン認証+SPA (cmd_244: 修復困難)'
+
+  - num: 4
+    name: 'ポケモンセンター公式(Playwright)'
+    module: 'scrapers.pokemoncenter_playwright_scraper'
+    class: 'PokemonCenterPlaywrightScraper'
+    skip: true
+    reason: 'WAF/アクセス拒否 (cmd_219: 403)'
+
+  - num: 5
+    name: 'Amazon'
+    module: 'scrapers.amazon_reservation_scraper'
+    class: 'AmazonReservationScraper'
+    filename: 'data/amazon_reservation_latest.json'
+    data_type: 'reservation'
+    skip: false
+    kwargs: {}
+
+  - num: 6
+    name: '楽天ブックス予約'
+    module: 'scrapers.rakuten_reservation_scraper'
+    class: 'RakutenReservationScraper'
+    filename: 'data/rakuten_reservation_latest.json'
+    data_type: 'reservation'
+    skip: false
+    kwargs: {}
+
+  - num: 7
+    name: 'ヨドバシカメラ'
+    module: 'scrapers.yodobashi_scraper'
+    class: 'YodobashiScraper'
+    skip: true
+    reason: '受付終了 (cmd_244: 修復困難)'
+
+  - num: 8
+    name: 'ビックカメラ'
+    module: 'scrapers.biccamera_scraper'
+    class: 'BiccameraScraper'
+    skip: true
+    reason: 'Timeout (cmd_219: 000) - URL調査必要'
+
+  - num: 9
+    name: 'X(Twitter)'
+    module: 'scrapers.x_lottery_scraper'
+    class: 'XLotteryScraper'
+    filename: 'data/x_lottery_latest.json'
+    skip: false
+    kwargs: {}
+
+  - num: 10
+    name: 'ジョーシン'
+    module: 'scrapers.joshin_scraper'
+    class: 'JoshinScraper'
+    skip: true
+    reason: 'Timeout (cmd_219: 000) - URL調査必要'
+
+  - num: 11
+    name: 'エディオン'
+    module: 'scrapers.edion_scraper'
+    class: 'EdionScraper'
+    skip: true
+    reason: 'JavaScript必須 (cmd_244: 修復困難)'
+
+  - num: 12
+    name: 'ケーズデンキ'
+    module: 'scrapers.ksdenki_scraper'
+    class: 'KsDenkiScraper'
+    skip: true
+    reason: 'URL無効 (cmd_244: 修復困難)'
+
+  - num: 13
+    name: 'ノジマ'
+    module: 'scrapers.nojima_scraper'
+    class: 'NojimaScraper'
+    filename: 'data/nojima_latest.json'
+    skip: false
+    kwargs: {}
+
+  - num: 14
+    name: 'あみあみ'
+    module: 'scrapers.amiami_scraper'
+    class: 'AmiAmiScraper'
+    skip: true
+    reason: 'サプライ品中心のため除外'
+
+  - num: 15
+    name: 'イエローサブマリン'
+    module: 'scrapers.yellow_submarine_scraper'
+    class: 'YellowSubmarineScraper'
+    filename: 'data/yellow_submarine_latest.json'
+    skip: false
+    kwargs: {}
+
+  - num: 16
+    name: 'カードショップセラ'
+    module: 'scrapers.cardshop_serra_scraper'
+    class: 'CardShopSerraScraper'
+    filename: 'data/cardshop_serra_latest.json'
+    skip: false
+    kwargs: {}
+
+  - num: 17
+    name: 'セブンネットショッピング'
+    module: 'scrapers.seven_eleven_scraper'
+    class: 'SevenElevenScraper'
+    filename: 'data/seven_eleven_latest.json'
+    skip: false
+    kwargs:
+      check_availability: true
+
+  - num: 18
+    name: 'セブンネット抽選(Playwright)'
+    module: 'scrapers.sevennet_playwright_scraper'
+    class: 'SevenNetPlaywrightScraper'
+    skip: true
+    reason: 'WAF完全ブロック (cmd_245: 修復困難)'
+
+  - num: 19
+    name: 'ローソンHMV'
+    module: 'scrapers.lawson_scraper'
+    class: 'LawsonScraper'
+    filename: 'data/lawson_latest.json'
+    skip: false
+    kwargs: {}
+
+  - num: 20
+    name: 'イオン'
+    module: 'scrapers.aeon_playwright_scraper'
+    class: 'AeonPlaywrightScraper'
+    skip: true
+    reason: 'コンテンツなし (cmd_245: 修復困難)'
+
+  - num: 21
+    name: 'ファミリーマート'
+    module: 'scrapers.familymart_scraper'
+    class: 'FamilyMartScraper'
+    filename: 'data/familymart_latest.json'
+    skip: false
+    kwargs: {}
+
+  - num: 22
+    name: '駿河屋'
+    module: 'scrapers.surugaya_scraper'
+    class: 'SurugayaScraper'
+    filename: 'data/surugaya_latest.json'
+    skip: false
+    kwargs: {}
+
+  - num: 23
+    name: 'GEO'
+    module: 'scrapers.geo_scraper'
+    class: 'GeoScraper'
+    filename: 'data/geo_latest.json'
+    skip: false
+    kwargs: {}
+
+  - num: 24
+    name: 'TSUTAYA'
+    module: 'scrapers.tsutaya_scraper'
+    class: 'TsutayaScraper'
+    filename: 'data/tsutaya_latest.json'
+    skip: true
+    reason: '404エラー対応'
+
+  - num: 25
+    name: 'Google Forms抽選'
+    module: 'scrapers.google_forms_scraper'
+    class: 'GoogleFormsScraper'
+    filename: 'data/google_forms_latest.json'
+    skip: true
+
+  - num: 26
+    name: 'ドラゴンスター'
+    module: 'scrapers.dragonstar_scraper'
+    class: 'DragonstarScraper'
+    skip: true
+    reason: '不正確なデータ (cmd_244: 修復困難)'

@@ -228,81 +228,26 @@ def detect_changes(old_data: Optional[Dict[str, Any]], new_data: Dict[str, Any],
     key_name = 'lotteries' if data_type == 'lottery' else 'reservations'
 
     old_count = len(old_data.get(key_name, []))
+    new_count = len(new_data.get(key_name, []))
 
+    if old_count != new_count:
+        changes.append(f"件数が変化: {old_count} → {new_count}")
 
-async def execute_scraper(config: Dict[str, Any], semaphore: asyncio.Semaphore, total_sources: int) -> Optional[Dict[str, Any]]:
-    """単一スクレイパーを実行（Semaphoreで同時実行数制限）"""
-    async with semaphore:
-        num = config['num']
-        name = config['name']
+    # 複合キーで重複排除しながら比較
+    old_items = {build_composite_key(item, data_type) for item in old_data.get(key_name, [])}
+    new_items = {build_composite_key(item, data_type) for item in new_data.get(key_name, [])}
 
-        if config.get('skip'):
-            logger.info(f"[{num}/{total_sources}] {name}をスキップ")
-            return None
+    added = new_items - old_items
+    if added and len(added) <= DETAIL_DISPLAY_THRESHOLD:
+        changes.append(f"新規: {len(added)}件")
+    elif added:
+        changes.append(f"新規: {len(added)}件")
 
-        logger.info(f"[{num}/{total_sources}] {name}をチェック中...")
+    removed = old_items - new_items
+    if removed:
+        changes.append(f"終了: {len(removed)}件")
 
-        try:
-            scraper = config['class'](**config['kwargs'])
-            data = scraper.scrape()
-        except Exception as e:
-            logger.warning(f"✗ {name}の取得に失敗: {e}")
-            return None
-
-        if not data:
-            logger.warning(f"✗ {name}の取得に失敗")
-            return None
-
-        if config.get('skip_on_empty') and not data.get('lotteries'):
-            logger.info(f"✓ {name}: 抽選なし（スキップ）")
-            return None
-
-        data_type = config.get('data_type', 'lottery')
-        if data_type == 'lottery':
-            for item in data.get('lotteries', []):
-                if 'source' not in item:
-                    item['source'] = data.get('source', '')
-
-            before_count = len(data.get('lotteries', []))
-            data['lotteries'] = filter_pokemon_card_only(data.get('lotteries', []))
-            data['lotteries'] = filter_expired(data.get('lotteries', []))
-            after_count = len(data.get('lotteries', []))
-            if before_count > after_count:
-                logger.info(f"  フィルタ適用: {before_count}件 → {after_count}件")
-
-        key = 'reservations' if data_type == 'reservation' else 'lotteries'
-        count = len(data.get(key, []))
-        label = '予約' if data_type == 'reservation' else '抽選'
-        logger.info(f"✓ {name}: {count}件の{label}情報を取得")
-
-        if count == 0:
-            logger.warning(f"⚠️  {name}: 0件の{label}情報")
-            return {'data': data, 'zero_alert': True, 'name': name}
-
-        prev_data = load_previous_data(config['filename'])
-        has_changes, changes = detect_changes(prev_data, data, data_type)
-        if has_changes and changes != ["初回実行"]:
-            logger.info(f"  変更検出: {changes}")
-
-        save_data(data, config['filename'])
-        return {'data': data, 'zero_alert': False, 'name': name}
-
-
-async def run_scrapers_async(scrapers: List[Dict[str, Any]], all_results: Dict[str, Any]) -> None:
-    """asyncio.gatherでスクレイパーを並列実行"""
-    total_sources = len(scrapers)
-    semaphore = asyncio.Semaphore(5)  # 同時実行数を5に制限
-    
-    tasks = [execute_scraper(config, semaphore, total_sources) for config in scrapers]
-    results = await asyncio.gather(*tasks, return_exceptions=True)
-    
-    for result in results:
-        if result is None or isinstance(result, Exception):
-            continue
-        if isinstance(result, dict) and 'data' in result:
-            all_results['sources'].append(result['data'])
-            if result['zero_alert']:
-                all_results['zero_alert_sources'].append(result['name'])
+    return len(changes) > 0, changes
 
 
 def main() -> None:
@@ -315,18 +260,81 @@ def main() -> None:
     all_results = {
         'timestamp': datetime.now().isoformat(),
         'sources': [],
-        'zero_alert': False,
-        'zero_alert_sources': []
+        'zero_alert': False,  # 0件アラートフラグ
+        'zero_alert_sources': []  # 0件スクレイパーのリスト
     }
 
+    # スクレイパー定義を config/scrapers.yaml から動的読み込み
     scrapers = load_scrapers_from_config('config/scrapers.yaml')
 
     if not scrapers:
         logger.error("Failed to load scrapers from config/scrapers.yaml")
         return
 
-    # asyncio.run で並列実行
-    asyncio.run(run_scrapers_async(scrapers, all_results))
+    total_sources = len(scrapers)
+
+    # ループでスクレイパー処理実行 (H1対応)
+    for config in scrapers:
+        num = config['num']
+        name = config['name']
+
+        if config.get('skip'):
+            logger.info(f"\n[{num}/{total_sources}] {name}をスキップ（{config.get('reason', '')}）")
+            continue
+
+        logger.info(f"\n[{num}/{total_sources}] {name}をチェック中...")
+
+        try:
+            scraper = config['class'](**config['kwargs'])
+            data = scraper.scrape()
+        except Exception as e:
+            logger.warning(f"✗ {name}の取得に失敗: {e}")
+            continue
+
+        if not data:
+            logger.warning(f"✗ {name}の取得に失敗")
+            continue
+
+        # skip_on_empty: 空の場合はスキップ
+        if config.get('skip_on_empty') and not data.get('lotteries'):
+            logger.info(f"✓ {name}: 抽選なし（スキップ）")
+            continue
+
+        # フィルタ適用（抽選データの場合）
+        data_type = config.get('data_type', 'lottery')
+        if data_type == 'lottery':
+            # 各 item に source を付与（filter関数で source を参照するため）
+            for item in data.get('lotteries', []):
+                if 'source' not in item:
+                    item['source'] = data.get('source', '')
+
+            before_count = len(data.get('lotteries', []))
+            data['lotteries'] = filter_pokemon_card_only(data.get('lotteries', []))
+            data['lotteries'] = filter_expired(data.get('lotteries', []))
+            after_count = len(data.get('lotteries', []))
+            if before_count > after_count:
+                logger.info(f"  フィルタ適用: {before_count}件 → {after_count}件")
+
+        all_results['sources'].append(data)
+
+        # 件数表示
+        key = 'reservations' if data_type == 'reservation' else 'lotteries'
+        count = len(data.get(key, []))
+        label = '予約' if data_type == 'reservation' else '抽選'
+        logger.info(f"✓ {name}: {count}件の{label}情報を取得")
+
+        # 0件アラート（各スクレイパー）
+        if count == 0:
+            logger.warning(f"⚠️  {name}: 0件の{label}情報（異常の可能性）")
+            all_results['zero_alert_sources'].append(name)
+
+        # 変更検出
+        prev_data = load_previous_data(config['filename'])
+        has_changes, changes = detect_changes(prev_data, data, data_type)
+        if has_changes and changes != ["初回実行"]:
+            logger.info(f"  変更検出: {changes}")
+
+        save_data(data, config['filename'])
 
     # 統合データを保存
     save_data(all_results, 'data/all_lotteries.json')
@@ -347,7 +355,7 @@ def main() -> None:
     elif all_results['zero_alert_sources']:
         logger.warning(f"⚠️  以下のスクレイパーで0件: {', '.join(all_results['zero_alert_sources'])}")
 
-    # URL検証
+    # URL検証（notify呼び出し前）
     logger.info("\n🔗 detail_url検証を実行中...")
     import subprocess
     result = subprocess.run(['python3', 'scripts/verify_urls.py', '--remove'], capture_output=True, text=True)

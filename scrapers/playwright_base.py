@@ -15,24 +15,13 @@ try:
 except ImportError:
     PLAYWRIGHT_AVAILABLE = False
 
+from constants import USER_AGENTS, DEFAULT_HEADERS, DEFAULT_TIMEOUT, DEFAULT_NAVIGATION_TIMEOUT
+
 logger = logging.getLogger(__name__)
 
 
 class PlaywrightBaseScraper:
     """Playwrightを使用するスクレイパーの基底クラス"""
-
-    # 複数のUser-Agentをローテーション（2026年版、最新Chrome対応）
-    USER_AGENTS = [
-        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
-        'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
-        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.4 Safari/605.1.15',
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:126.0) Gecko/20100101 Firefox/126.0',
-    ]
-
-    # Playwright timeout設定（ミリ秒単位）
-    DEFAULT_TIMEOUT = 60000  # ページロード: 60秒
-    DEFAULT_NAVIGATION_TIMEOUT = 45000  # ナビゲーション: 45秒
 
     def __init__(self):
         self.pokemon_keywords = [
@@ -43,8 +32,9 @@ class PlaywrightBaseScraper:
             'ムニキスゼロ', 'MEGAドリーム', 'メガエルレイド', 'ロケット団',
             '抽選', '予約'
         ]
-        self.timeout = self.DEFAULT_TIMEOUT
-        self.navigation_timeout = self.DEFAULT_NAVIGATION_TIMEOUT
+        self.user_agents = USER_AGENTS
+        self.timeout = DEFAULT_TIMEOUT
+        self.navigation_timeout = DEFAULT_NAVIGATION_TIMEOUT
 
     def is_pokemon_card(self, text):
         """ポケモンカード関連かチェック"""
@@ -126,7 +116,7 @@ class PlaywrightBaseScraper:
                 )
 
                 # ランダムなUser-Agentを選択
-                user_agent = random.choice(self.USER_AGENTS)
+                user_agent = random.choice(self.user_agents)
 
                 context = await browser.new_context(
                     user_agent=user_agent,
@@ -134,18 +124,7 @@ class PlaywrightBaseScraper:
                     locale='ja-JP',
                     timezone_id='Asia/Tokyo',
                     # Webdriver検出を回避
-                    extra_http_headers={
-                        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
-                        'Accept-Language': 'ja,en-US;q=0.9,en;q=0.8',
-                        'Accept-Encoding': 'gzip, deflate, br',
-                        'Connection': 'keep-alive',
-                        'Upgrade-Insecure-Requests': '1',
-                        'Sec-Fetch-Dest': 'document',
-                        'Sec-Fetch-Mode': 'navigate',
-                        'Sec-Fetch-Site': 'none',
-                        'Sec-Fetch-User': '?1',
-                        'Cache-Control': 'max-age=0',
-                    }
+                    extra_http_headers=DEFAULT_HEADERS
                 )
 
                 page = await context.new_page()

@@ -1,0 +1,30 @@
+worker_id: ashigaru5
+cmd_id: cmd_246
+task_id: cmd246_performance
+timestamp: "2026-04-01T14:45:00"
+status: done
+result:
+  observation1_scraping_speed:
+    bs4_average: "1.50秒"
+    playwright_average: "45.46秒"
+    ratio: "Playwrightは30倍遅い"
+  observation2_memory:
+    bs4_delta: "+2-6MB"
+    playwright_delta: "+1-2MB"
+    analysis: "メモリはほぼ同等"
+  observation3_github_actions:
+    timeout_limit: "15分"
+    estimated_current: "1.7分"
+    status: "余裕あり。但しPlaywright導入で速度低下可能性"
+  observation4_skip_settings:
+    sevennet_skipped: true
+    reason_sevennet: "WAF完全ブロック (cmd_245報告)"
+    aeon_skipped: true
+    reason_aeon: "コンテンツなし (cmd_245報告)"
+    current_active: "9個のスクレイパー"
+  optimization_candidates:
+    parallel_execution: "4並列化で55%削減可能"
+    playwright_skip: "無効化で90%削減可能"
+    combined_effect: "skip+並列で97%削減可能"
+skill_candidate:
+  found: false

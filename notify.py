@@ -24,6 +24,46 @@ class GmailNotifier:
         self.smtp_password = os.environ.get('SMTP_PASSWORD')
         self.recipient = os.environ.get('RECIPIENT_EMAIL')
 
+    def _parse_date(self, date_string):
+        """日付文字列をdatetime オブジェクトに変換"""
+        if not date_string or not isinstance(date_string, str):
+            return None
+
+        from datetime import datetime as dt
+        formats = ['%Y-%m-%d', '%Y/%m/%d', '%Y年%m月%d日']
+        for fmt in formats:
+            try:
+                return dt.strptime(date_string, fmt)
+            except ValueError:
+                continue
+        return None
+
+    def _is_ended(self, end_date_str):
+        """抽選が終了しているか判定（end_date < 今日）"""
+        if not end_date_str:
+            return False
+        end_date = self._parse_date(end_date_str)
+        if not end_date:
+            return False
+        return end_date.date() < datetime.now().date()
+
+    def _days_until_deadline(self, end_date_str):
+        """期限までの日数を計算（負なら既に終了）"""
+        if not end_date_str:
+            return None
+        end_date = self._parse_date(end_date_str)
+        if not end_date:
+            return None
+        delta = (end_date.date() - datetime.now().date()).days
+        return delta
+
+    def _is_deadline_soon(self, end_date_str, days=3):
+        """期限が間近か判定（3日以内）"""
+        days_left = self._days_until_deadline(end_date_str)
+        if days_left is None:
+            return False
+        return 0 <= days_left <= days
+
     def send_notification(self, all_lotteries_data):
         """抽選情報をメールで通知"""
         if not self.smtp_username or not self.smtp_password or not self.recipient:
@@ -31,25 +71,36 @@ class GmailNotifier:
             logger.warning("環境変数 SMTP_USERNAME, SMTP_PASSWORD, RECIPIENT_EMAIL を設定してください")
             return False
 
-        # 抽選情報を集計
+        # 抽選情報を集計（受付終了済みを除外）
         total_lottery_count = 0
         total_reservation_count = 0
         total_first_come_first_served = 0
         total_upcoming = 0
         sources_summary = []
         first_come_first_served_items = []
+        deadline_soon_items = []  # 期限間近（3日以内）
         upcoming_products = all_lotteries_data.get('upcoming_products', [])
 
         for source in all_lotteries_data.get('sources', []):
-            lottery_count = len(source.get('lotteries', []))
+            # 受付終了済みを除外したロッテリーをフィルタ
+            filtered_lotteries = [
+                item for item in source.get('lotteries', [])
+                if not self._is_ended(item.get('end_date', ''))
+            ]
+
+            lottery_count = len(filtered_lotteries)
             reservation_count = len(source.get('reservations', []))
             total_lottery_count += lottery_count
             total_reservation_count += reservation_count
 
-            # 先着販売中の商品を抽出
-            fcfs_items = [item for item in source.get('lotteries', []) if item.get('first_come_first_served')]
+            # 先着販売中の商品を抽出（受付終了済みを除外）
+            fcfs_items = [item for item in filtered_lotteries if item.get('first_come_first_served')]
             total_first_come_first_served += len(fcfs_items)
             first_come_first_served_items.extend(fcfs_items)
+
+            # 期限間近（3日以内）を抽出
+            deadline_soon = [item for item in filtered_lotteries if self._is_deadline_soon(item.get('end_date', ''))]
+            deadline_soon_items.extend(deadline_soon)
 
             # 各ソースの upcoming_products を集約
             source_upcoming = source.get('upcoming_products', [])
@@ -63,7 +114,7 @@ class GmailNotifier:
                     'name': source_name,
                     'lottery_count': lottery_count,
                     'reservation_count': reservation_count,
-                    'lotteries': source.get('lotteries', []),
+                    'lotteries': filtered_lotteries,  # 受付終了済みを除外したもの
                     'reservations': source.get('reservations', [])
                 })
 
@@ -74,18 +125,27 @@ class GmailNotifier:
 
         total_upcoming = len(upcoming_products)
 
-        # メール本文を作成
+        # メール本文を作成（期限間近データを最上部に表示）
         email_body = self._create_email_body(
             sources_summary,
             total_lottery_count,
             total_reservation_count,
             first_come_first_served_items,
-            upcoming_products
+            upcoming_products,
+            deadline_soon_items,
+            zero_alert=zero_alert,
+            zero_alert_sources=all_lotteries_data.get('zero_alert_sources', [])
         )
 
         # メールを送信（リトライ機能付き: exponential backoff 2s, 4s, 8s）
         msg = MIMEMultipart('alternative')
         subject_parts = []
+
+        # 0件アラート判定
+        zero_alert = all_lotteries_data.get('zero_alert', False)
+
+        if zero_alert:
+            subject_parts.append('⚠️0件')
         if total_lottery_count > 0:
             subject_parts.append(f'抽選{total_lottery_count}件')
         if total_reservation_count > 0:
@@ -160,14 +220,20 @@ class GmailNotifier:
         except (ValueError, TypeError):
             return False
 
-    def _create_email_body(self, sources_summary, total_lottery_count, total_reservation_count, first_come_first_served_items=None, upcoming_products=None):
+    def _create_email_body(self, sources_summary, total_lottery_count, total_reservation_count, first_come_first_served_items=None, upcoming_products=None, deadline_soon_items=None, zero_alert=False, zero_alert_sources=None):
         """メール本文（HTML）を作成"""
         if first_come_first_served_items is None:
             first_come_first_served_items = []
         if upcoming_products is None:
             upcoming_products = []
+        if deadline_soon_items is None:
+            deadline_soon_items = []
+        if zero_alert_sources is None:
+            zero_alert_sources = []
 
         summary_parts = []
+        if len(deadline_soon_items) > 0:
+            summary_parts.append(f'🔥期限間近{len(deadline_soon_items)}件')
         if total_lottery_count > 0:
             summary_parts.append(f'{total_lottery_count}件の抽選情報')
         if total_reservation_count > 0:
@@ -329,6 +395,59 @@ class GmailNotifier:
 
         <div class="summary">
             {'と'.join(summary_parts)}
+        </div>
+"""
+
+        # 0件アラートセクション（最上部に表示）
+        if zero_alert:
+            html += """
+        <div class="source-section" style="background: #ffe6e6; border-color: #ff0000; border-width: 3px;">
+            <div class="section-title" style="color: #d32f2f; font-size: 20px;">⚠️ 警告: 全スクレイパーで0件</div>
+            <div style="padding: 15px; background: #fff5f5; border-radius: 5px; margin-top: 10px;">
+                <p style="color: #d32f2f; font-weight: bold;">データ取得に重大な問題の可能性があります。</p>
+                <p style="color: #666;">スクレイパーのエラーまたはウェブサイトの大幅な変更が考えられます。</p>
+            </div>
+        </div>
+"""
+        elif zero_alert_sources:
+            html += f"""
+        <div class="source-section" style="background: #fff3cd; border-color: #ff9800;">
+            <div class="section-title" style="color: #ff9800;">⚠️  以下のスクレイパーで0件</div>
+            <div style="padding: 15px; background: #fffacd; border-radius: 5px; margin-top: 10px;">
+                <p>{', '.join(zero_alert_sources)}</p>
+            </div>
+        </div>
+"""
+
+        # 期限間近セクション（最上部に表示）
+        if deadline_soon_items:
+            html += """
+        <div class="source-section" style="background: #ffe6e6; border-color: #ff4444; border-width: 3px;">
+            <div class="section-title" style="color: #d32f2f;">🔥 期限間近（3日以内）</div>
+"""
+            for item in deadline_soon_items[:10]:
+                product = item.get('product', '')
+                store = item.get('store', '')
+                end_date = item.get('end_date', '')
+                days_left = self._days_until_deadline(end_date)
+                days_text = f'あと{days_left}日' if days_left is not None else ''
+                url = item.get('detail_url', '#')
+                html += f"""
+            <div class="lottery-item" style="border-left-color: #ff4444; background: #fff5f5;">
+                <div class="store-name">🏪 {store}</div>
+                <div class="product-name">📦 {product}</div>
+                <div style="margin-top: 5px; color: #d32f2f; font-weight: bold;">⏰ 期限: {end_date} ({days_text})</div>
+                <a href="{url}" class="detail-link" target="_blank">🔗 詳細を見る</a>
+            </div>
+"""
+            if len(deadline_soon_items) > 10:
+                remaining = len(deadline_soon_items) - 10
+                html += f"""
+            <div style="text-align: center; color: #718096; margin-top: 15px;">
+                ... 他 {remaining} 件
+            </div>
+"""
+            html += """
         </div>
 """
 

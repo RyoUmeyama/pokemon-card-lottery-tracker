@@ -92,6 +92,26 @@ def parse_date(date_string: Any) -> Any:
     return date_string
 
 
+def get_lottery_status(lottery: Dict[str, Any]) -> str:
+    """抽選のステータスを判定（受付中/終了/予定）"""
+    start_date_str = lottery.get('start_date', '')
+    end_date_str = lottery.get('end_date', '')
+    today = datetime.now().date()
+
+    start_date = parse_date(start_date_str)
+    end_date = parse_date(end_date_str)
+
+    # datetime オブジェクトに変換できたかチェック
+    if isinstance(end_date, datetime):
+        if end_date.date() < today:
+            return '終了'
+    if isinstance(start_date, datetime):
+        if start_date.date() > today:
+            return '予定'
+
+    return '受付中'
+
+
 def cleanup_old_data(data: Dict[str, Any], days: int = 30) -> Dict[str, Any]:
     """M6: 30日以上前のデータを削除＆2025年以前のデータを非表示"""
     if 'timestamp' not in data:
@@ -289,6 +309,95 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
             padding: 30px;
         }}
 
+        table {{
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }}
+
+        table thead {{
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }}
+
+        table th {{
+            padding: 15px;
+            text-align: left;
+            cursor: pointer;
+            user-select: none;
+            white-space: nowrap;
+        }}
+
+        table th:hover {{
+            background: linear-gradient(135deg, #5568d3 0%, #6a3d91 100%);
+        }}
+
+        table th.sortable::after {{
+            content: ' ↕️';
+            opacity: 0.5;
+        }}
+
+        table th.sorted-asc::after {{
+            content: ' ↑';
+            opacity: 1;
+        }}
+
+        table th.sorted-desc::after {{
+            content: ' ↓';
+            opacity: 1;
+        }}
+
+        table tbody tr {{
+            border-bottom: 1px solid #e0e0e0;
+            transition: background-color 0.2s;
+        }}
+
+        table tbody tr:hover {{
+            background-color: #f5f5f5;
+        }}
+
+        table td {{
+            padding: 12px 15px;
+        }}
+
+        table td.store {{
+            font-weight: bold;
+            color: #667eea;
+        }}
+
+        table td.deadline {{
+            color: #d32f2f;
+            font-weight: 500;
+        }}
+
+        table td a {{
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.85em;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }}
+
+        table td a:hover {{
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.4);
+        }}
+
+        .status-badge {{
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-left: 5px;
+        }}
+
         .lottery-card {{
             background: white;
             border: 2px solid #e0e0e0;
@@ -326,6 +435,30 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
             border-radius: 20px;
             font-size: 0.85em;
             font-weight: 600;
+        }}
+
+        .status-badge {{
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-left: 10px;
+        }}
+
+        .status-badge.active {{
+            background: #4CAF50;
+            color: white;
+        }}
+
+        .status-badge.ended {{
+            background: #999999;
+            color: white;
+        }}
+
+        .status-badge.upcoming {{
+            background: #FF9800;
+            color: white;
         }}
 
         .lottery-card .product {{
@@ -551,10 +684,36 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
 
     html_content += """
         <div class="lotteries" id="lotteriesList">
+            <table id="lotteriesTable">
+                <thead>
+                    <tr>
+                        <th class="sortable" data-column="store">🏪 店舗名</th>
+                        <th class="sortable" data-column="product">📦 商品名</th>
+                        <th class="sortable" data-column="deadline">📅 締切日</th>
+                        <th class="sortable" data-column="status">ステータス</th>
+                        <th class="sortable" data-column="type">抽選形式</th>
+                        <th>詳細</th>
+                    </tr>
+                </thead>
+                <tbody>
 """
 
-    # 各抽選情報をカード形式で表示
-    for i, lottery in enumerate(all_lotteries, 1):
+    # 締切日でデフォルトソート（昇順）
+    def get_sort_key(lottery):
+        end_date = lottery.get('end_date', '')
+        if isinstance(end_date, str):
+            # YYYY-MM-DD 形式で ソート（パース困難な場合は最後に）
+            try:
+                from datetime import datetime
+                return (0, datetime.strptime(end_date[:10], '%Y-%m-%d') if len(end_date) >= 10 else datetime.max)
+            except:
+                return (1, end_date)
+        return (1, '')
+
+    all_lotteries_sorted = sorted(all_lotteries, key=get_sort_key)
+
+    # 各抽選情報をテーブル行として表示
+    for i, lottery in enumerate(all_lotteries_sorted, 1):
         store = lottery.get('store', '')
         product = lottery.get('product', '')
         lottery_type = lottery.get('lottery_type', '')
@@ -565,6 +724,12 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
         url = lottery.get('detail_url', '')
         source = lottery.get('_source', 'unknown')
 
+        # ステータスバッジを取得
+        status = get_lottery_status(lottery)
+        status_class_map = {'受付中': 'active', '終了': 'ended', '予定': 'upcoming'}
+        status_class = status_class_map.get(status, 'active')
+        status_badge = f'<span class="status-badge {status_class}">●{status}</span>'
+
         # H5: XSS対策 - html.escape() で ユーザー由来データをエスケープ
         store_escaped = html.escape(store)
         product_escaped = html.escape(product)
@@ -573,59 +738,28 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
         announcement_escaped = html.escape(announcement)
         conditions_escaped = html.escape(conditions)
 
+        # テーブル行として出力
         html_content += f"""
-            <div class="lottery-card" data-search="{product.lower()} {store.lower()} {lottery_type.lower()}">
-                <div class="header">
-                    <div class="store">{'🕐' if '(' in store and ')' in store else '🏪'} {store_escaped}</div>
-                    <div class="source">📌 {source_escaped}</div>
-                </div>
-
-                <div class="product">📦 {product_escaped}</div>
+                    <tr data-search="{product.lower()} {store.lower()} {lottery_type.lower()}">
+                        <td class="store" data-sort-value="{store_escaped}">{store_escaped}</td>
+                        <td data-sort-value="{product_escaped}">{product_escaped}</td>
+                        <td class="deadline" data-sort-value="{html.escape(end_date)}">{html.escape(end_date)}</td>
+                        <td>{status_badge}</td>
+                        <td data-sort-value="{lottery_type_escaped}">{lottery_type_escaped if lottery_type else '—'}</td>
+                        <td>
 """
-
-        if lottery_type:
-            html_content += f"""
-                <div class="lottery-type">🎯 {lottery_type_escaped}</div>
-"""
-
-        if start_date or end_date:
-            period_text = ""
-            if start_date:
-                period_text += f"開始: {html.escape(start_date)}"
-            if end_date:
-                period_text += f" / 終了: {html.escape(end_date)}" if period_text else f"終了: {html.escape(end_date)}"
-
-            html_content += f"""
-                <div class="detail-row">
-                    <div class="icon">📅</div>
-                    <div class="content">{period_text}</div>
-                </div>
-"""
-
-        if announcement:
-            html_content += f"""
-                <div class="detail-row">
-                    <div class="icon">🎊</div>
-                    <div class="content">当選発表: {announcement_escaped}</div>
-                </div>
-"""
-
-        if conditions and len(conditions) > 5:
-            html_content += f"""
-                <div class="detail-row">
-                    <div class="icon">ℹ️</div>
-                    <div class="content">{conditions_escaped[:MAX_CONDITION_LENGTH]}{'...' if len(conditions) > MAX_CONDITION_LENGTH else ''}</div>
-                </div>
-"""
-
         if url and url.startswith('http'):
-            # URLはエスケープしない（href属性内で使用）
-            html_content += f"""
-                <a href="{html.escape(url)}" target="_blank">🔗 詳細を見る</a>
+            html_content += f'<a href="{html.escape(url)}" target="_blank">詳細</a>'
+        else:
+            html_content += '—'
+        html_content += """
+                        </td>
+                    </tr>
 """
 
-        html_content += """
-            </div>
+    html_content += """
+                </tbody>
+            </table>
 """
 
     if not all_lotteries:
@@ -645,38 +779,81 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
     </div>
 
     <script>
+        let currentSort = {{ column: 'deadline', direction: 'asc' }};
+
         function filterLotteries() {{
             const searchText = document.getElementById('searchBox').value.toLowerCase();
-            const cards = document.querySelectorAll('.lottery-card');
+            const rows = document.querySelectorAll('#lotteriesTable tbody tr');
             let visibleCount = 0;
 
-            cards.forEach(card => {{
-                const searchData = card.getAttribute('data-search');
+            rows.forEach(row => {{
+                const searchData = row.getAttribute('data-search');
                 if (searchData.includes(searchText)) {{
-                    card.style.display = 'block';
+                    row.style.display = '';
                     visibleCount++;
                 }} else {{
-                    card.style.display = 'none';
+                    row.style.display = 'none';
+                }}
+            }});
+        }}
+
+        function sortTable(column) {{
+            const table = document.getElementById('lotteriesTable');
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr:not([style*="display: none"])'));
+
+            // ソート方向の切り替え
+            if (currentSort.column === column) {{
+                currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+            }} else {{
+                currentSort.column = column;
+                currentSort.direction = 'asc';
+            }}
+
+            // ソート実行
+            const columnIndex = {{'store': 0, 'product': 1, 'deadline': 2, 'status': 3, 'type': 4}}[column];
+            rows.sort((a, b) => {{
+                let aVal = a.children[columnIndex].getAttribute('data-sort-value') || a.children[columnIndex].textContent;
+                let bVal = b.children[columnIndex].getAttribute('data-sort-value') || b.children[columnIndex].textContent;
+
+                // 数値ソート試行
+                const aNum = parseFloat(aVal);
+                const bNum = parseFloat(bVal);
+                if (!isNaN(aNum) && !isNaN(bNum)) {{
+                    return currentSort.direction === 'asc' ? aNum - bNum : bNum - aNum;
+                }}
+
+                // 文字列ソート
+                if (currentSort.direction === 'asc') {{
+                    return aVal.localeCompare(bVal);
+                }} else {{
+                    return bVal.localeCompare(aVal);
                 }}
             }});
 
-            // 検索結果がない場合のメッセージ表示
-            const lotteriesList = document.getElementById('lotteriesList');
-            let noResultsDiv = document.getElementById('noResults');
+            // ソート結果を反映
+            rows.forEach(row => tbody.appendChild(row));
 
-            if (visibleCount === 0 && searchText !== '') {{
-                if (!noResultsDiv) {{
-                    noResultsDiv = document.createElement('div');
-                    noResultsDiv.id = 'noResults';
-                    noResultsDiv.className = 'no-results';
-                    noResultsDiv.innerHTML = '<div class="emoji">🔍</div><div>検索結果が見つかりませんでした</div>';
-                    lotteriesList.appendChild(noResultsDiv);
+            // ヘッダのソート状態を更新
+            document.querySelectorAll('#lotteriesTable th.sortable').forEach(th => {{
+                th.classList.remove('sorted-asc', 'sorted-desc');
+                if (th.getAttribute('data-column') === column) {{
+                    th.classList.add(currentSort.direction === 'asc' ? 'sorted-asc' : 'sorted-desc');
                 }}
-                noResultsDiv.style.display = 'block';
-            }} else if (noResultsDiv) {{
-                noResultsDiv.style.display = 'none';
-            }}
+            }});
         }}
+
+        // ヘッダクリック時にソート実行
+        document.addEventListener('DOMContentLoaded', () => {{
+            document.querySelectorAll('#lotteriesTable th.sortable').forEach(th => {{
+                th.addEventListener('click', () => {{
+                    sortTable(th.getAttribute('data-column'));
+                }});
+            }});
+
+            // デフォルトで deadline でソート
+            sortTable('deadline');
+        }});
     </script>
 </body>
 </html>

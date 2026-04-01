@@ -40,6 +40,11 @@ jobs:
           playwright install chromium
           playwright install-deps chromium
 
+      - name: Run tests
+        run: |
+          pip install pytest
+          python -m pytest tests/
+
       - name: Run scraper
         env:
           ENABLE_EMAIL_NOTIFICATION: 'true'
