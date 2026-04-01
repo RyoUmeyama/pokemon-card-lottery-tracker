@@ -6,7 +6,6 @@ import os
 import logging
 from datetime import datetime
 from typing import Optional, Dict, List, Any
-from scrapers.nyuka_now_scraper import NyukaNowScraper
 from scrapers.pokemon_center_scraper import PokemonCenterScraper
 from scrapers.pokemoncenter_playwright_scraper import PokemonCenterPlaywrightScraper
 from scrapers.rakuten_books_scraper import RakutenBooksScraper
@@ -31,7 +30,6 @@ from scrapers.geo_scraper import GeoScraper
 from scrapers.tsutaya_scraper import TsutayaScraper
 from scrapers.dragonstar_scraper import DragonstarScraper
 from scrapers.google_forms_scraper import GoogleFormsScraper
-from scrapers.gamepedia_scraper import GamepediaScraper
 
 # logging設定
 # 今後の改善: config/logging.yaml を作成し、以下のように外部化することを推奨
@@ -200,7 +198,7 @@ def filter_pokemon_card_only(items: list) -> list:
     WHITELIST_STORES = []  # ドラゴンスター削除
 
     # 抽選情報集約サイトのホワイトリスト（複数商品を一覧にするため、全て通す）
-    WHITELIST_SOURCES = ['nyuka-now.com', 'gamepedia.jp']
+    WHITELIST_SOURCES = []
 
     filtered = []
     for item in items:
@@ -317,12 +315,7 @@ def main() -> None:
     # スクレイパー定義 (H1対応: ループ化用)
     scrapers = [
         {
-            'num': 1, 'name': '入荷Now',
-            'class': NyukaNowScraper, 'kwargs': {'check_availability': True},
-            'filename': 'data/nyuka_now_latest.json'
-        },
-        {
-            'num': 2, 'name': '楽天ブックス',
+            'num': 1, 'name': '楽天ブックス',
             'class': RakutenBooksScraper, 'kwargs': {},
             'filename': 'data/rakuten_books_latest.json'
         },
@@ -449,12 +442,6 @@ def main() -> None:
             'num': 26, 'name': 'ドラゴンスター',
             'class': DragonstarScraper, 'kwargs': {},
             'filename': 'data/dragonstar_latest.json'
-        },
-        {
-            'num': 27, 'name': 'Gamepedia（ポケセン情報取得用）',
-            'class': GamepediaScraper, 'kwargs': {},
-            'filename': 'data/gamepedia_latest.json',
-            'skip': False
         },
     ]
 
