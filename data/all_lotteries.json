@@ -1,121 +1,122 @@
 {
-  "timestamp": "2026-04-01T10:21:31.649963",
+  "timestamp": "2026-04-01T01:25:04.646990",
   "sources": [
     {
       "source": "nyuka-now.com",
-      "scraped_at": "2026-04-01T10:21:32.291198",
+      "scraped_at": "2026-04-01T01:25:05.584239",
       "update_date": "2026-04-01",
       "lotteries": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-04-01T10:21:33.507099",
+      "scraped_at": "2026-04-01T01:25:17.087307",
       "lotteries": []
     },
     {
       "source": "pokemoncenter-online.com",
-      "scraped_at": "2026-04-01T10:21:33.701902",
+      "scraped_at": "2026-04-01T01:25:17.908827",
       "has_active_lottery": false,
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2026-04-01T10:21:45.471037",
+      "scraped_at": "2026-04-01T01:25:25.091101",
       "reservations": []
     },
     {
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-04-01T10:22:10.966133",
+      "scraped_at": "2026-04-01T01:25:49.977190",
       "reservations": []
     },
     {
       "source": "ヨドバシカメラ (limited.yodobashi.com)",
       "source_url": "https://limited.yodobashi.com/",
-      "scraped_at": "2026-04-01T10:22:12.304559",
-      "lotteries": []
+      "scraped_at": "2026-04-01T01:25:51.367376",
+      "lotteries": [],
+      "error": "HTTP 403"
     },
     {
       "source": "X (Twitter) 公式アカウント",
-      "scraped_at": "2026-04-01T10:22:12.308906",
+      "scraped_at": "2026-04-01T01:25:51.368647",
       "lotteries": [],
       "error": "X API credentials not configured or tweepy not installed"
     },
     {
       "source": "エディオン (edion.com)",
       "source_url": "https://www.edion.com/detail.html?p_cd=00077889999",
-      "scraped_at": "2026-04-01T10:22:15.084547",
+      "scraped_at": "2026-04-01T01:25:54.017462",
       "lotteries": []
     },
     {
       "source": "ケーズデンキ (ksdenki.co.jp)",
       "source_url": null,
-      "scraped_at": "2026-04-01T10:22:15.086827",
+      "scraped_at": "2026-04-01T01:25:54.018172",
       "lotteries": []
     },
     {
       "source": "ノジマオンライン (online.nojima.co.jp)",
       "source_url": null,
-      "scraped_at": "2026-04-01T10:22:15.087743",
+      "scraped_at": "2026-04-01T01:25:54.018497",
       "lotteries": []
     },
     {
       "source": "イエローサブマリン (yellowsubmarine.co.jp)",
       "source_url": "https://www.yellowsubmarine.co.jp/",
-      "scraped_at": "2026-04-01T10:22:17.660881",
+      "scraped_at": "2026-04-01T01:25:56.395681",
       "lotteries": []
     },
     {
       "source": "カードショップセラ (cardshopserra.jp)",
       "source_url": "https://www.cardshopserra.jp/",
-      "scraped_at": "2026-04-01T10:22:17.661375",
+      "scraped_at": "2026-04-01T01:25:56.396345",
       "lotteries": [],
       "note": "DNS解決エラーのため現在無効化"
     },
     {
       "source": "セブンネットショッピング (7net.omni7.jp)",
       "source_url": "https://7net.omni7.jp/search/?keyword=ポケモンカード&searchKeywordFlg=1",
-      "scraped_at": "2026-04-01T10:22:21.416699",
+      "scraped_at": "2026-04-01T01:26:02.272397",
       "lotteries": []
     },
     {
       "source": "ローソン HMV (hmv.co.jp)",
       "source_url": "https://www.hmv.co.jp/search/?category=ALL&keyword=ポケモンカード",
-      "scraped_at": "2026-04-01T10:23:36.019683",
+      "scraped_at": "2026-04-01T01:27:21.814461",
       "lotteries": []
     },
     {
       "source": "イオン (aeonretail.jp)",
       "source_url": "https://www.aeonretail.jp/campaign/",
-      "scraped_at": "2026-04-01T10:23:54.879045",
+      "scraped_at": "2026-04-01T01:27:40.342017",
       "lotteries": []
     },
     {
       "source": "ファミリーマート (family.co.jp)",
       "source_url": "https://www.family.co.jp/campaign.html",
-      "scraped_at": "2026-04-01T10:23:56.139671",
+      "scraped_at": "2026-04-01T01:27:42.297755",
       "lotteries": []
     },
     {
       "source": "suruga-ya.jp",
-      "scraped_at": "2026-04-01T10:23:59.545045",
+      "scraped_at": "2026-04-01T01:27:42.844230",
       "lotteries": [],
       "reservations": []
     },
     {
       "source": "geo-online.co.jp",
-      "scraped_at": "2026-04-01T10:24:00.036010",
+      "scraped_at": "2026-04-01T01:27:44.356076",
       "lotteries": [],
       "reservations": []
     },
     {
       "source": "ドラゴンスター (dorasuta.membercard.jp)",
       "source_url": "https://dorasuta.membercard.jp/lottery",
-      "scraped_at": "2026-04-01T10:24:10.316731",
+      "scraped_at": "2026-04-01T01:27:54.573948",
       "lotteries": []
     },
     {
       "source": "gamepedia.jp",
-      "scraped_at": "2026-04-01T10:24:10.955444",
+      "scraped_at": "2026-04-01T01:27:55.004855",
       "lotteries": [
         {
           "store": "Amazon",
