@@ -347,13 +347,37 @@ class PlaywrightBaseScraper:
                     logger.warning(f"Error closing event loop: {e}")
 
     def remove_duplicates(self, lotteries):
-        """重複を除去"""
+        """
+        重複を除去
+
+        Args:
+            lotteries: 抽選情報リスト
+
+        Returns:
+            重複を除去したリスト
+        """
+        from urllib.parse import urljoin
+
         seen = set()
         unique = []
 
         for lottery in lotteries:
-            key = (lottery.get('product', ''), lottery.get('detail_url', ''))
-            if key not in seen and lottery.get('product'):
+            product = lottery.get('product', '')
+            detail_url = lottery.get('detail_url', '')
+
+            # detail_url を正規化（相対パスの場合は base_url でjoin）
+            if detail_url and hasattr(self, 'base_url'):
+                detail_url = urljoin(self.base_url, detail_url)
+
+            # product が空文字の場合は detail_url のみで判定
+            if not product:
+                key = (detail_url,)
+            else:
+                key = (product, detail_url)
+
+            # 重複判定：product が空でない場合のみ追加
+            # または product が空だが detail_url がある場合も追加
+            if key not in seen and (product or detail_url):
                 seen.add(key)
                 unique.append(lottery)
 

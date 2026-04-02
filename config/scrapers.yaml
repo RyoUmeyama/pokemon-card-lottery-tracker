@@ -51,9 +51,8 @@ scrapers:
   module: scrapers.biccamera_scraper
   class: BiccameraScraper
   skip: true
-  reason: 'Timeout (調査: 2026-04-02, 次回: 2026-05-02, cmd_219: 000) - URL調査必要'
+  reason: 'dead_url_unreachable (cmd_263: URL確認 2026-04-02, curl:000, タイムアウト)'
   last_success_date: null
-  special_note: url_verification_needed
 - num: 9
   name: X(Twitter)
   module: scrapers.x_lottery_scraper
@@ -67,9 +66,8 @@ scrapers:
   module: scrapers.joshin_scraper
   class: JoshinScraper
   skip: true
-  reason: 'Timeout (調査: 2026-04-02, 次回: 2026-05-02, cmd_219: 000) - URL調査必要'
+  reason: 'dead_url_unreachable (cmd_263: URL確認 2026-04-02, curl:000, タイムアウト)'
   last_success_date: null
-  special_note: url_verification_needed
 - num: 11
   name: エディオン
   module: scrapers.edion_scraper
@@ -82,9 +80,8 @@ scrapers:
   module: scrapers.ksdenki_scraper
   class: KsDenkiScraper
   skip: true
-  reason: 'URL無効 (調査: 2026-04-02, 次回: 2026-05-02, cmd_244: 修復困難)'
+  reason: 'dead_url_404 (cmd_263: URL確認 2026-04-02, スクレイパーで urls=[]、URL不明)'
   last_success_date: null
-  special_note: url_verification_needed
 - num: 13
   name: ノジマ
   module: scrapers.nojima_scraper
@@ -177,9 +174,8 @@ scrapers:
   class: TsutayaScraper
   filename: data/tsutaya_latest.json
   skip: true
-  reason: '404エラー対応 (調査: 2026-04-02, 次回: 2026-05-02)'
+  reason: 'dead_url_unreachable (cmd_263: URL確認 2026-04-02, curl:400, リクエストエラー)'
   last_success_date: null
-  special_note: url_verification_needed
 - num: 25
   name: Google Forms抽選
   module: scrapers.google_forms_scraper
