@@ -127,6 +127,7 @@ class FamilyMartScraper(RequestsBaseScraper):
 
             if len(link_text) > 5:
                 return {
+                'timestamp': datetime.now().isoformat(),
                     'store': 'ファミリーマート',
                     'product': link_text,
                     'lottery_type': '抽選販売' if '抽選' in combined_text else 'キャンペーン',
@@ -183,6 +184,7 @@ class FamilyMartScraper(RequestsBaseScraper):
 
             if product_name and href:
                 return {
+                'timestamp': datetime.now().isoformat(),
                     'store': 'ファミリーマート',
                     'product': product_name,
                     'lottery_type': '抽選販売' if '抽選' in text else 'キャンペーン',

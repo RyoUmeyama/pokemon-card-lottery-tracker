@@ -24,6 +24,7 @@ class PokemonCenterPlaywrightScraper(PlaywrightBaseScraper):
         if not PLAYWRIGHT_AVAILABLE:
             logger.warning("playwright not installed")
             return {
+                'timestamp': datetime.now().isoformat(),
                 'source': self.source_name,
                 'source_url': self.lottery_list_url,
                 'scraped_at': datetime.now().isoformat(),
@@ -151,6 +152,7 @@ class PokemonCenterPlaywrightScraper(PlaywrightBaseScraper):
 
             if product_name and href:
                 return {
+                'timestamp': datetime.now().isoformat(),
                     'store': 'ポケモンセンターオンライン',
                     'product': product_name,
                     'lottery_type': '抽選販売',
@@ -184,6 +186,7 @@ class PokemonCenterPlaywrightScraper(PlaywrightBaseScraper):
 
             if len(text) > 5:
                 return {
+                'timestamp': datetime.now().isoformat(),
                     'store': 'ポケモンセンターオンライン',
                     'product': text,
                     'lottery_type': '抽選販売',

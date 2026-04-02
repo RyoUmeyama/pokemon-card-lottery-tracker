@@ -47,6 +47,7 @@ class GoogleFormsScraper(PlaywrightBaseScraper):
                 continue
 
         return {
+                'timestamp': datetime.now().isoformat(),
             "source": "google-forms",
             "scraped_at": datetime.now().isoformat(),
             "forms": all_forms,

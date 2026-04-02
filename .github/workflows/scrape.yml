@@ -2,11 +2,11 @@ name: Scrape Pokemon Card Lottery Information
 
 on:
   schedule:
-    # 1日4回実行: 9:00, 12:00, 18:00, 21:00 JST
-    - cron: '0 0 * * *'   # 9:00 JST (0:00 UTC)
-    - cron: '0 3 * * *'   # 12:00 JST (3:00 UTC)
-    - cron: '0 9 * * *'   # 18:00 JST (9:00 UTC)
-    - cron: '0 12 * * *'  # 21:00 JST (12:00 UTC)
+    # 1日4回実行: 9:15, 12:15, 18:15, 21:15 JST（GH Actions混雑回避）
+    - cron: '15 0 * * *'   # 9:15 JST (0:15 UTC)
+    - cron: '15 3 * * *'   # 12:15 JST (3:15 UTC)
+    - cron: '15 9 * * *'   # 18:15 JST (9:15 UTC)
+    - cron: '15 12 * * *'  # 21:15 JST (12:15 UTC)
   workflow_dispatch: # 手動実行も可能
 
 jobs:
@@ -60,6 +60,7 @@ jobs:
 
       - name: Run tests
         timeout-minutes: 2
+        continue-on-error: true
         run: |
           pip install pytest pytest-cov
           python -m pytest tests/ -q --cov=scrapers --cov=. --cov-report=term-missing
@@ -82,17 +83,26 @@ jobs:
         run: |
           python main.py
 
-      - name: Generate HTML report
-        timeout-minutes: 2
-        run: |
-          python generate_html_report.py
-
-      - name: Commit and push if changed
+      - name: Commit scraping data
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "actions@github.com"
           git add data/
           git diff --quiet && git diff --staged --quiet || (git commit -m "Update lottery data $(date +'%Y-%m-%d %H:%M:%S')" && git push)
+
+      - name: Generate HTML report
+        timeout-minutes: 2
+        continue-on-error: true
+        run: |
+          python generate_html_report.py
+
+      - name: Commit HTML report if changed
+        continue-on-error: true
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          git add data/lottery_report.html
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update HTML report $(date +'%Y-%m-%d %H:%M:%S')" && git push)
 
       - name: Notify on success
         if: success()

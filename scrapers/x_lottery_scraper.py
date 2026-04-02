@@ -82,6 +82,7 @@ class XLotteryScraper:
         # API認証を確認
         if not self._init_client():
             return {
+                'timestamp': datetime.now().isoformat(),
                 'source': 'X (Twitter) 公式アカウント',
                 'scraped_at': datetime.now().isoformat(),
                 'lotteries': [],

@@ -5,6 +5,8 @@ import logging
 import json
 from datetime import datetime
 import re
+import requests
+from requests.exceptions import HTTPError, ConnectionError, Timeout
 
 from .requests_base import RequestsBaseScraper
 
@@ -94,10 +96,14 @@ class BiccameraScraper(RequestsBaseScraper):
                 table_lotteries = self._parse_lottery_table(table)
                 lotteries.extend(table_lotteries)
 
-        except requests.exceptions.HTTPError as e:
+        except HTTPError as e:
             logger.error(f"HTTP Error for {url}: {e.response.status_code}")
+        except ConnectionError as e:
+            logger.error(f"Connection Error for {url}: {e}")
+        except Timeout as e:
+            logger.error(f"Timeout Error for {url}: {e}")
         except Exception as e:
-            logger.error(f"Error scraping {url}: {e}", exc_info=True)
+            logger.error(f"スクレイピング失敗: {url} - {e}", exc_info=True)
 
         return lotteries
 
@@ -128,13 +134,16 @@ class BiccameraScraper(RequestsBaseScraper):
             if parent:
                 parent_text = parent.get_text()
 
-                # 期間を抽出
-                period_match = re.search(r'(\d{1,2}[/月]\d{1,2}[日]?\s*[〜～\-]\s*\d{1,2}[/月]\d{1,2}[日]?)', parent_text)
+                # 期間を抽出 ('3月1日〜3月15日' と '3/1-3/15' の両方に対応)
+                period_match = re.search(
+                    r'(\d{1,2}(?:月|\/)?\d{1,2}(?:日)?\s*[〜～\-]\s*\d{1,2}(?:月|\/)?\d{1,2}(?:日)?)',
+                    parent_text
+                )
                 if period_match:
                     period = period_match.group(1)
 
-                # 価格を抽出
-                price_match = re.search(r'[\d,]+円', parent_text)
+                # 価格を抽出 ('¥1,000' と '1,000円' の両方に対応)
+                price_match = re.search(r'(?:¥|￥)[\d,]+|[\d,]+円', parent_text)
                 if price_match:
                     price = price_match.group()
 
@@ -158,7 +167,11 @@ class BiccameraScraper(RequestsBaseScraper):
 
             return lottery if link_text and len(link_text) > 5 else None
 
+        except (AttributeError, KeyError) as e:
+            logger.debug(f"スクレイピング失敗（属性エラー）: {e}")
+            return None
         except Exception as e:
+            logger.error(f"スクレイピング失敗: {e}")
             return None
 
     def _parse_product_card(self, card):
@@ -190,15 +203,18 @@ class BiccameraScraper(RequestsBaseScraper):
                         product_name = line[:100]
                         break
 
-            # 期間を抽出
+            # 期間を抽出 ('3月1日〜3月15日' と '3/1-3/15' の両方に対応)
             period = ''
-            period_match = re.search(r'(\d{1,2}[/月]\d{1,2}[日]?\s*[〜～\-]\s*\d{1,2}[/月]\d{1,2}[日]?)', text)
+            period_match = re.search(
+                r'(\d{1,2}(?:月|\/)?\d{1,2}(?:日)?\s*[〜～\-]\s*\d{1,2}(?:月|\/)?\d{1,2}(?:日)?)',
+                text
+            )
             if period_match:
                 period = period_match.group(1)
 
-            # 価格を抽出
+            # 価格を抽出 ('¥1,000' と '1,000円' の両方に対応)
             price = ''
-            price_match = re.search(r'[\d,]+円', text)
+            price_match = re.search(r'(?:¥|￥)[\d,]+|[\d,]+円', text)
             if price_match:
                 price = price_match.group()
 
@@ -214,8 +230,10 @@ class BiccameraScraper(RequestsBaseScraper):
                 }
                 return lottery
 
+        except (AttributeError, KeyError) as e:
+            logger.debug(f"スクレイピング失敗（属性エラー）: {e}")
         except Exception as e:
-            pass
+            logger.error(f"スクレイピング失敗: {e}")
 
         return None
 
@@ -261,8 +279,10 @@ class BiccameraScraper(RequestsBaseScraper):
                         }
                         lotteries.append(lottery)
 
+        except (AttributeError, KeyError) as e:
+            logger.debug(f"テーブル解析失敗（属性エラー）: {e}")
         except Exception as e:
-            pass
+            logger.error(f"テーブル解析失敗: {e}")
 
         return lotteries
 

@@ -25,6 +25,7 @@ class PokemonCenterScraper(RequestsBaseScraper):
             html_content = self.fetch_html(self.url)
             if not html_content:
                 return {
+                'timestamp': datetime.now().isoformat(),
                     'source': 'pokemoncenter-online.com',
                     'scraped_at': datetime.now().isoformat(),
                     'has_active_lottery': False,
@@ -34,6 +35,7 @@ class PokemonCenterScraper(RequestsBaseScraper):
             soup = self.parse_soup(html_content)
             if not soup:
                 return {
+                'timestamp': datetime.now().isoformat(),
                     'source': 'pokemoncenter-online.com',
                     'scraped_at': datetime.now().isoformat(),
                     'has_active_lottery': False,

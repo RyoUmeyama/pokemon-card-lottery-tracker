@@ -158,6 +158,7 @@ class LawsonScraper(RequestsBaseScraper):
 
             if product_name and href:
                 return {
+                'timestamp': datetime.now().isoformat(),
                     'store': 'ローソン HMV',
                     'product': product_name,
                     'lottery_type': '抽選販売' if '抽選' in text else '予約販売',
@@ -226,6 +227,7 @@ class LawsonScraper(RequestsBaseScraper):
 
             if len(link_text) > 10:
                 return {
+                'timestamp': datetime.now().isoformat(),
                     'store': 'ローソン HMV',
                     'product': link_text,
                     'lottery_type': '抽選販売' if '抽選' in link_text else '予約販売',

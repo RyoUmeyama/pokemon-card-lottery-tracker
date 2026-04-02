@@ -22,6 +22,7 @@ class DragonstarScraper(PlaywrightBaseScraper):
         """Playwrightで抽選情報をスクレイピング"""
         if not PLAYWRIGHT_AVAILABLE:
             return {
+                'timestamp': datetime.now().isoformat(),
                 'source': self.source_name,
                 'source_url': self.search_url,
                 'scraped_at': datetime.now().isoformat(),
@@ -47,6 +48,7 @@ class DragonstarScraper(PlaywrightBaseScraper):
         unique_lotteries = self.remove_duplicates(lotteries)
 
         return {
+                'timestamp': datetime.now().isoformat(),
             'source': self.source_name,
             'source_url': self.search_url,
             'scraped_at': datetime.now().isoformat(),
@@ -121,6 +123,7 @@ class DragonstarScraper(PlaywrightBaseScraper):
 
             if product_name and href:
                 return {
+                'timestamp': datetime.now().isoformat(),
                     'store': 'ドラゴンスター',
                     'product': product_name,
                     'lottery_type': '抽選',
@@ -155,6 +158,7 @@ class DragonstarScraper(PlaywrightBaseScraper):
             # テキスト長チェックのみ実施
             if len(text) >= 5:
                 return {
+                'timestamp': datetime.now().isoformat(),
                     'store': 'ドラゴンスター',
                     'product': text[:150],
                     'lottery_type': '抽選',

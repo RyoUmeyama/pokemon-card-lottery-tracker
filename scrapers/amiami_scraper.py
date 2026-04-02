@@ -130,6 +130,7 @@ class AmiAmiScraper(RequestsBaseScraper):
 
             if product_name and href:
                 return {
+                'timestamp': datetime.now().isoformat(),
                     'store': 'あみあみ',
                     'product': product_name,
                     'lottery_type': '予約販売',
@@ -175,6 +176,7 @@ class AmiAmiScraper(RequestsBaseScraper):
 
             if len(link_text) > 10:
                 return {
+                'timestamp': datetime.now().isoformat(),
                     'store': 'あみあみ',
                     'product': link_text,
                     'lottery_type': '予約販売',

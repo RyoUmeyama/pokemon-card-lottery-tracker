@@ -41,6 +41,7 @@ class RakutenBooksScraper(RequestsBaseScraper):
             if any(msg in page_text for msg in ['抽選受付は終了', '受付終了', '受付は終了']):
                 # 抽選終了の場合は空リストを返す
                 return {
+                'timestamp': datetime.now().isoformat(),
                     'source': 'books.rakuten.co.jp',
                     'scraped_at': datetime.now().isoformat(),
                     'lotteries': []
@@ -93,6 +94,7 @@ class RakutenBooksScraper(RequestsBaseScraper):
                     lotteries.append(lottery)
 
             return {
+                'timestamp': datetime.now().isoformat(),
                 'source': 'books.rakuten.co.jp',
                 'scraped_at': datetime.now().isoformat(),
                 'lotteries': lotteries

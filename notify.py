@@ -230,6 +230,16 @@ class GmailNotifier:
                 else:
                     return False
 
+        # フォールバック: メール送信失敗時にHTMLを保存
+        logger.warning("⚠️ メール送信失敗。フォールバック: logs/notification_fallback.html に内容を保存します")
+        try:
+            os.makedirs('logs', exist_ok=True)
+            with open('logs/notification_fallback.html', 'w', encoding='utf-8') as f:
+                f.write(email_body)
+            logger.info(f"✅ フォールバック保存完了: logs/notification_fallback.html")
+        except Exception as e:
+            logger.error(f"❌ フォールバック保存失敗: {e}")
+
         return False
 
     def _is_new(self, item_timestamp: Optional[str]) -> bool:
@@ -584,10 +594,17 @@ class GmailNotifier:
                     if end_date:
                         deadline_info = f'<div style="margin-top: 5px;"><span class="deadline-highlight">📅 締切: {end_date}</span></div>'
 
+                    # 価格情報を表示
+                    price_info = ''
+                    price = lottery.get('price', '')
+                    if price:
+                        price_info = f'<div class="price">💰 {price}</div>'
+
                     html += f"""
             <div class="lottery-item">
                 <div class="store-name">🏪 {store}</div>
                 <div class="product-name">📦 {product}{new_badge}</div>
+                {price_info}
                 {deadline_info}
                 <a href="{detail_url}" class="detail-link" target="_blank">🔗 詳細を見る</a>
             </div>

@@ -42,6 +42,7 @@ class SurugayaScraper(RequestsBaseScraper):
                 continue
 
         return {
+                'timestamp': datetime.now().isoformat(),
             "source": "suruga-ya.jp",
             "scraped_at": datetime.now().isoformat(),
             "lotteries": all_lotteries,

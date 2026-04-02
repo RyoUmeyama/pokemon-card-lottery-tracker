@@ -22,6 +22,7 @@ class BiccameraPlaywrightScraper(PlaywrightBaseScraper):
         """Playwrightで抽選情報をスクレイピング"""
         if not PLAYWRIGHT_AVAILABLE:
             return {
+                'timestamp': datetime.now().isoformat(),
                 'source': self.source_name,
                 'source_url': self.search_url,
                 'scraped_at': datetime.now().isoformat(),
@@ -44,6 +45,7 @@ class BiccameraPlaywrightScraper(PlaywrightBaseScraper):
                 if '403' in content or 'forbidden' in content.lower():
                     logger.warning("ビックカメラ: 403 Forbidden - アクセス制限中")
                     return {
+                'timestamp': datetime.now().isoformat(),
                         'source': self.source_name,
                         'source_url': self.search_url,
                         'scraped_at': datetime.now().isoformat(),
@@ -55,6 +57,7 @@ class BiccameraPlaywrightScraper(PlaywrightBaseScraper):
         except TimeoutError:
             logger.error("Error scraping biccamera: Timeout - site may be slow or blocking")
             return {
+                'timestamp': datetime.now().isoformat(),
                 'source': self.source_name,
                 'source_url': self.search_url,
                 'scraped_at': datetime.now().isoformat(),
@@ -67,6 +70,7 @@ class BiccameraPlaywrightScraper(PlaywrightBaseScraper):
         unique_lotteries = self.remove_duplicates(lotteries)
 
         return {
+                'timestamp': datetime.now().isoformat(),
             'source': self.source_name,
             'source_url': self.search_url,
             'scraped_at': datetime.now().isoformat(),
@@ -133,6 +137,7 @@ class BiccameraPlaywrightScraper(PlaywrightBaseScraper):
 
             if product_name and href:
                 return {
+                'timestamp': datetime.now().isoformat(),
                     'store': 'ビックカメラ',
                     'product': product_name,
                     'lottery_type': '抽選販売' if '抽選' in text else '予約販売',
@@ -164,6 +169,7 @@ class BiccameraPlaywrightScraper(PlaywrightBaseScraper):
 
             if len(text) > 10:
                 return {
+                'timestamp': datetime.now().isoformat(),
                     'store': 'ビックカメラ',
                     'product': text,
                     'lottery_type': '抽選販売' if '抽選' in parent_text else '予約販売',

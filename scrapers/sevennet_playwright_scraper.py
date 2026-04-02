@@ -29,6 +29,7 @@ class SevenNetPlaywrightScraper(PlaywrightBaseScraper):
         """Playwrightで抽選情報をスクレイピング"""
         if not PLAYWRIGHT_AVAILABLE:
             return {
+                'timestamp': datetime.now().isoformat(),
                 'source': self.source_name,
                 'source_url': self.lottery_url,
                 'scraped_at': datetime.now().isoformat(),
@@ -73,6 +74,7 @@ class SevenNetPlaywrightScraper(PlaywrightBaseScraper):
         unique_lotteries = self.remove_duplicates(lotteries)
 
         return {
+                'timestamp': datetime.now().isoformat(),
             'source': self.source_name,
             'source_url': self.lottery_url,
             'scraped_at': datetime.now().isoformat(),
@@ -165,6 +167,7 @@ class SevenNetPlaywrightScraper(PlaywrightBaseScraper):
 
             if product_name and href:
                 return {
+                'timestamp': datetime.now().isoformat(),
                     'store': 'セブンネットショッピング',
                     'product': product_name,
                     'lottery_type': '抽選販売' if '抽選' in text else '予約販売',
@@ -204,6 +207,7 @@ class SevenNetPlaywrightScraper(PlaywrightBaseScraper):
 
             if len(text) > 10:
                 return {
+                'timestamp': datetime.now().isoformat(),
                     'store': 'セブンネットショッピング',
                     'product': text,
                     'lottery_type': '抽選販売' if '抽選' in combined_text else '予約販売',

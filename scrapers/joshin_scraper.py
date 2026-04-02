@@ -162,6 +162,7 @@ class JoshinScraper(RequestsBaseScraper):
 
             if product_name and href:
                 return {
+                'timestamp': datetime.now().isoformat(),
                     'store': 'ジョーシン',
                     'product': product_name,
                     'lottery_type': '抽選販売',

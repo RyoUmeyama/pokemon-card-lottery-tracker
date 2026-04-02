@@ -107,6 +107,7 @@ class RakutenReservationScraper(RequestsBaseScraper):
             # 予約可能または在庫ありの場合のみ返す
             if availability['is_available'] or availability['is_reservation']:
                 return {
+                'timestamp': datetime.now().isoformat(),
                     'title': title,
                     'price': price,
                     'url': url,

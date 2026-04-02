@@ -42,6 +42,7 @@ class TsutayaScraper(RequestsBaseScraper):
                 continue
 
         return {
+                'timestamp': datetime.now().isoformat(),
             "source": "tsutaya.tsite.jp",
             "scraped_at": datetime.now().isoformat(),
             "lotteries": all_lotteries,

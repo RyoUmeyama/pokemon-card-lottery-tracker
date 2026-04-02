@@ -469,11 +469,11 @@ def main() -> None:
     # URL検証
     logger.info("\n🔗 detail_url検証を実行中...")
     import subprocess
-    result = subprocess.run(['python3', 'scripts/verify_urls.py', '--remove'], capture_output=True, text=True)
+    result = subprocess.run(['python3', 'scripts/verify_urls.py'], capture_output=True, text=True)
     if result.stdout:
         logger.info(result.stdout)
     if result.returncode != 0:
-        logger.warning("URLチェックで無効なURLが検出されました")
+        logger.warning("URLチェックで無効なURLが検出されました（自動削除は実行しません）")
 
     # Gmail通知
     if os.environ.get('ENABLE_EMAIL_NOTIFICATION') == 'true':

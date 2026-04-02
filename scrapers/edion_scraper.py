@@ -158,6 +158,7 @@ class EdionScraper(RequestsBaseScraper):
 
             if product_name and href:
                 return {
+                'timestamp': datetime.now().isoformat(),
                     'store': 'エディオン',
                     'product': product_name,
                     'lottery_type': '抽選販売',

@@ -22,6 +22,7 @@ class JoshinPlaywrightScraper(PlaywrightBaseScraper):
         """Playwrightで抽選情報をスクレイピング"""
         if not PLAYWRIGHT_AVAILABLE:
             return {
+                'timestamp': datetime.now().isoformat(),
                 'source': self.source_name,
                 'source_url': self.search_url,
                 'scraped_at': datetime.now().isoformat(),
@@ -44,6 +45,7 @@ class JoshinPlaywrightScraper(PlaywrightBaseScraper):
                 if any(code in content for code in ['404', 'Not Found', '403', 'Forbidden']):
                     logger.warning("ジョーシン: アクセスエラー（404/403）")
                     return {
+                'timestamp': datetime.now().isoformat(),
                         'source': self.source_name,
                         'source_url': self.search_url,
                         'scraped_at': datetime.now().isoformat(),
@@ -55,6 +57,7 @@ class JoshinPlaywrightScraper(PlaywrightBaseScraper):
         except TimeoutError:
             logger.error("Error scraping joshin: Timeout")
             return {
+                'timestamp': datetime.now().isoformat(),
                 'source': self.source_name,
                 'source_url': self.search_url,
                 'scraped_at': datetime.now().isoformat(),
@@ -67,6 +70,7 @@ class JoshinPlaywrightScraper(PlaywrightBaseScraper):
         unique_lotteries = self.remove_duplicates(lotteries)
 
         return {
+                'timestamp': datetime.now().isoformat(),
             'source': self.source_name,
             'source_url': self.search_url,
             'scraped_at': datetime.now().isoformat(),
@@ -131,6 +135,7 @@ class JoshinPlaywrightScraper(PlaywrightBaseScraper):
 
             if product_name and href:
                 return {
+                'timestamp': datetime.now().isoformat(),
                     'store': 'ジョーシン',
                     'product': product_name,
                     'lottery_type': '抽選販売' if '抽選' in text else '予約販売',
@@ -163,6 +168,7 @@ class JoshinPlaywrightScraper(PlaywrightBaseScraper):
 
             if len(text) > 10:
                 return {
+                'timestamp': datetime.now().isoformat(),
                     'store': 'ジョーシン',
                     'product': text,
                     'lottery_type': '抽選販売' if '抽選' in text else '予約販売',

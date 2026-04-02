@@ -22,6 +22,7 @@ class EdionPlaywrightScraper(PlaywrightBaseScraper):
         """Playwrightで抽選情報をスクレイピング"""
         if not PLAYWRIGHT_AVAILABLE:
             return {
+                'timestamp': datetime.now().isoformat(),
                 'source': self.source_name,
                 'source_url': self.search_url,
                 'scraped_at': datetime.now().isoformat(),
@@ -43,6 +44,7 @@ class EdionPlaywrightScraper(PlaywrightBaseScraper):
                 if any(code in content for code in ['403', '404', 'Not Found', 'Forbidden']):
                     logger.warning("エディオン: HTTPエラー（403/404）")
                     return {
+                'timestamp': datetime.now().isoformat(),
                         'source': self.source_name,
                         'source_url': self.search_url,
                         'scraped_at': datetime.now().isoformat(),
@@ -57,6 +59,7 @@ class EdionPlaywrightScraper(PlaywrightBaseScraper):
         unique_lotteries = self.remove_duplicates(lotteries)
 
         return {
+                'timestamp': datetime.now().isoformat(),
             'source': self.source_name,
             'source_url': self.search_url,
             'scraped_at': datetime.now().isoformat(),
@@ -123,6 +126,7 @@ class EdionPlaywrightScraper(PlaywrightBaseScraper):
 
             if product_name and href:
                 return {
+                'timestamp': datetime.now().isoformat(),
                     'store': 'エディオン',
                     'product': product_name,
                     'lottery_type': '抽選販売' if '抽選' in text else '予約販売',
@@ -154,6 +158,7 @@ class EdionPlaywrightScraper(PlaywrightBaseScraper):
 
             if len(text) > 10:
                 return {
+                'timestamp': datetime.now().isoformat(),
                     'store': 'エディオン',
                     'product': text,
                     'lottery_type': '抽選販売' if '抽選' in parent_text else '予約販売',

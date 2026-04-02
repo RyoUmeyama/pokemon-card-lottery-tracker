@@ -119,6 +119,7 @@ class YellowSubmarineScraper(RequestsBaseScraper):
 
             if len(link_text) > 5:
                 return {
+                'timestamp': datetime.now().isoformat(),
                     'store': 'イエローサブマリン',
                     'product': link_text,
                     'lottery_type': lottery_type,

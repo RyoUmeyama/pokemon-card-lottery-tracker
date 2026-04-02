@@ -1033,6 +1033,7 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
                     <tr role="row">
                         <th class="sortable" data-column="store" role="columnheader" tabindex="0" aria-sort="none">🏪 店舗名</th>
                         <th class="sortable" data-column="product" role="columnheader" tabindex="0" aria-sort="none">📦 商品名</th>
+                        <th class="sortable" data-column="price" role="columnheader" tabindex="0" aria-sort="none">💰 価格</th>
                         <th class="sortable" data-column="deadline" role="columnheader" tabindex="0" aria-sort="ascending">📅 締切日</th>
                         <th class="sortable" data-column="status" role="columnheader" tabindex="0" aria-sort="none">ステータス</th>
                         <th class="sortable" data-column="type" role="columnheader" tabindex="0" aria-sort="none">抽選形式</th>
@@ -1060,6 +1061,7 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
     for i, lottery in enumerate(all_lotteries_sorted, 1):
         store = lottery.get('store', '')
         product = lottery.get('product', '')
+        price = lottery.get('price', '')
         lottery_type = lottery.get('lottery_type', '')
         start_date = lottery.get('start_date', '')
         end_date = lottery.get('end_date', '')
@@ -1086,6 +1088,7 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
         # H5: XSS対策 - html.escape() で ユーザー由来データをエスケープ
         store_escaped = html.escape(store)
         product_escaped = html.escape(product)
+        price_escaped = html.escape(price)
         lottery_type_escaped = html.escape(lottery_type)
         source_escaped = html.escape(source)
         announcement_escaped = html.escape(announcement)
@@ -1096,6 +1099,7 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
                     <tr data-search="{html.escape(product.lower() + ' ' + store.lower() + ' ' + lottery_type.lower(), quote=True)}" data-timestamp="{html.escape(timestamp, quote=True)}" data-store="{html.escape(store, quote=True)}" data-deadline="{html.escape(end_date, quote=True)}">
                         <td class="store" data-sort-value="{html.escape(store, quote=True)}">{store_escaped}</td>
                         <td data-sort-value="{html.escape(product, quote=True)}">{product_escaped}</td>
+                        <td data-sort-value="{html.escape(price, quote=True)}">{price_escaped if price else '—'}</td>
                         <td class="deadline" data-sort-value="{html.escape(end_date, quote=True)}">{html.escape(end_date)}</td>
                         <td>{status_badge}</td>
                         <td data-sort-value="{html.escape(lottery_type, quote=True)}">{lottery_type_escaped if lottery_type else '—'}</td>

@@ -77,6 +77,7 @@ class YodobashiScraper(RequestsBaseScraper):
         except requests.exceptions.HTTPError as e:
             logger.error(f"Error scraping limited.yodobashi.com: HTTP {e.response.status_code}")
             return {
+                'timestamp': datetime.now().isoformat(),
                 'source': 'ヨドバシカメラ (limited.yodobashi.com)',
                 'source_url': self.url,
                 'scraped_at': datetime.now().isoformat(),
@@ -86,6 +87,7 @@ class YodobashiScraper(RequestsBaseScraper):
         except Exception as e:
             logger.error(f"Error scraping limited.yodobashi.com: {e}", exc_info=True)
             return {
+                'timestamp': datetime.now().isoformat(),
                 'source': 'ヨドバシカメラ (limited.yodobashi.com)',
                 'source_url': self.url,
                 'scraped_at': datetime.now().isoformat(),

@@ -42,6 +42,7 @@ class GeoScraper(RequestsBaseScraper):
                 continue
 
         return {
+                'timestamp': datetime.now().isoformat(),
             "source": "geo-online.co.jp",
             "scraped_at": datetime.now().isoformat(),
             "lotteries": all_lotteries,

@@ -223,14 +223,14 @@ class PlaywrightBaseScraper:
                     try:
                         await page.wait_for_load_state('networkidle', timeout=15000)
                     except TimeoutError:
-                        pass
+                        logger.warning(f"networkidle wait timeout for {url}")
 
                 # 特定のセレクタを待つ場合
                 if wait_selector:
                     try:
                         await page.wait_for_selector(wait_selector, timeout=15000)
                     except TimeoutError:
-                        pass  # セレクタが見つからなくても続行
+                        logger.warning(f"Selector '{wait_selector}' timeout for {url}")
 
                 # ページ全体をスクロールして遅延読み込みコンテンツを取得
                 if scroll:
@@ -254,18 +254,31 @@ class PlaywrightBaseScraper:
             if page:
                 try:
                     await page.close()
-                except (TimeoutError, RuntimeError):
-                    pass
+                except (TimeoutError, RuntimeError) as e:
+                    logger.warning(f"Error closing page: {e}")
             if context:
                 try:
                     await context.close()
-                except (TimeoutError, RuntimeError):
-                    pass
+                except (TimeoutError, RuntimeError) as e:
+                    logger.warning(f"Error closing context: {e}")
             if browser:
                 try:
                     await browser.close()
-                except (TimeoutError, RuntimeError):
-                    pass
+                except (TimeoutError, RuntimeError) as e:
+                    # タイムアウト時は強制終了を試行
+                    logger.warning(f"Browser close timeout, attempting force close: {e}")
+                    try:
+                        # Playwrightの内部的な強制終了
+                        if hasattr(browser, '_impl') and hasattr(browser._impl, '_remote'):
+                            # プロセス取得を試みる
+                            if hasattr(browser._impl, '_launch_process'):
+                                try:
+                                    browser._impl._launch_process.kill()
+                                    logger.info("Browser process force killed")
+                                except Exception as kill_err:
+                                    logger.warning(f"Force kill failed: {kill_err}")
+                    except Exception as inner_e:
+                        logger.warning(f"Force close attempt failed: {inner_e}")
 
     async def _smooth_scroll(self, page):
         """人間らしいスムーズスクロール"""
@@ -309,18 +322,29 @@ class PlaywrightBaseScraper:
 
     def run_async(self, coro):
         """非同期処理を同期的に実行"""
+        created_new_loop = False
+        loop = None
         try:
-            loop = asyncio.get_event_loop()
-            if loop.is_running():
-                # 既にイベントループが実行中の場合は新しいループを作成
-                import nest_asyncio
-                nest_asyncio.apply()
-                return loop.run_until_complete(coro)
-        except RuntimeError:
-            loop = asyncio.new_event_loop()
-            asyncio.set_event_loop(loop)
+            try:
+                loop = asyncio.get_event_loop()
+                if loop.is_running():
+                    # 既にイベントループが実行中の場合は新しいループを作成
+                    import nest_asyncio
+                    nest_asyncio.apply()
+                    return loop.run_until_complete(coro)
+            except RuntimeError:
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+                created_new_loop = True
 
-        return loop.run_until_complete(coro)
+            return loop.run_until_complete(coro)
+        finally:
+            # 新規作成したループのみcloseする（既存ループは閉じない）
+            if created_new_loop and loop:
+                try:
+                    loop.close()
+                except Exception as e:
+                    logger.warning(f"Error closing event loop: {e}")
 
     def remove_duplicates(self, lotteries):
         """重複を除去"""
