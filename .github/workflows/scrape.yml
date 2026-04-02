@@ -60,7 +60,6 @@ jobs:
 
       - name: Run tests
         timeout-minutes: 2
-        continue-on-error: true
         run: |
           pip install pytest pytest-cov
           python -m pytest tests/ -q --cov=scrapers --cov=. --cov-report=term-missing

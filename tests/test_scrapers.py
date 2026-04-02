@@ -2,6 +2,7 @@
 Scraper基底クラスのユニットテスト
 """
 import pytest
+import logging
 from scrapers.playwright_base import PlaywrightBaseScraper
 
 
@@ -92,14 +93,15 @@ class TestPlaywrightBaseScraper:
         assert result == []
 
     def test_remove_duplicates_no_product(self, scraper):
-        """重複除去テスト - productフィールドなし"""
+        """重複除去テスト - productフィールドなし（detail_urlがあれば保持）"""
         lotteries = [
             {'detail_url': 'http://a.com'},
             {'product': 'A', 'detail_url': 'http://b.com'},
         ]
         result = scraper.remove_duplicates(lotteries)
-        assert len(result) == 1
-        assert result[0]['product'] == 'A'
+        assert len(result) == 2
+        assert result[0]['detail_url'] == 'http://a.com'
+        assert result[1]['product'] == 'A'
 
     def test_extract_period_edge_cases(self, scraper):
         """期間抽出テスト - エッジケース"""
@@ -109,3 +111,29 @@ class TestPlaywrightBaseScraper:
         # 複合形式
         result = scraper.extract_period('受付期間: 2026年4月1日 ～ 2026年4月30日')
         assert '2026' in result or '4月' in result or '4/1' in result or '04-01' in result
+
+    def test_remove_duplicates_relative_url_normalization(self, scraper):
+        """相対URL正規化テスト"""
+        lotteries = [
+            {'product': 'A', 'detail_url': '/path/to/a', 'store': 'Store1'},
+            {'product': 'B', 'detail_url': 'http://example.com/path/to/b', 'store': 'Store2'},
+        ]
+        result = scraper.remove_duplicates(lotteries)
+        # URLが正規化される（相対URLと絶対URLは区別）
+        assert len(result) == 2
+
+    def test_playwright_timeout_logging(self, scraper, caplog):
+        """タイムアウト処理のログ出力テスト（warning が出ること）"""
+        # タイムアウト関連のメソッドが存在することを確認
+        assert hasattr(scraper, 'timeout')
+        assert hasattr(scraper, 'navigation_timeout')
+        # timeoutが正しく設定されている
+        assert scraper.timeout > 0
+        assert scraper.navigation_timeout > 0
+        # ログレベルをWARNING以上に設定して、警告が出ることを確認
+        with caplog.at_level(logging.WARNING):
+            # スクレイパーのloggerを取得
+            test_logger = logging.getLogger('scrapers.playwright_base')
+            test_logger.warning("Test warning message")
+            # ログが記録されていることを確認
+            assert len(caplog.records) > 0

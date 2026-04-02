@@ -99,7 +99,7 @@ def load_scrapers_from_config(config_path: str = 'config/scrapers.yaml') -> List
 
         # 動的にスクレイパークラスをロード
         for scraper_config in scrapers:
-            if not scraper_config.get('skip') and 'class' not in scraper_config:
+            if not scraper_config.get('skip') and isinstance(scraper_config.get('class'), str):
                 module_name = scraper_config.get('module')
                 class_name = scraper_config.get('class')
                 if module_name and class_name:

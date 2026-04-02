@@ -244,6 +244,26 @@ export RECIPIENT_EMAIL="recipient@gmail.com"
 python main.py
 ```
 
+## 🔧 開発環境セットアップ
+
+### Git Hooks
+
+Push前にテストを自動実行するhookを設定:
+
+```bash
+bash scripts/setup_hooks.sh
+```
+
+このコマンドで以下の設定が実施されます：
+- `.githooks/` ディレクトリを git hooks パスに設定
+- `pre-push` hook を実行可能に変更
+- Push時にテストが自動実行され、失敗時は push がブロックされます
+
+テストなしで push する場合：
+```bash
+git push --no-verify
+```
+
 ## 🔔 今後の拡張予定
 
 ### 実装済み

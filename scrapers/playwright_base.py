@@ -269,11 +269,12 @@ class PlaywrightBaseScraper:
                     logger.warning(f"Browser close timeout, attempting force close: {e}")
                     try:
                         # Playwrightの内部的な強制終了
-                        if hasattr(browser, '_impl') and hasattr(browser._impl, '_remote'):
-                            # プロセス取得を試みる
-                            if hasattr(browser._impl, '_launch_process'):
+                        if hasattr(browser, '_impl') and hasattr(browser._impl, '_launch_process'):
+                            process = browser._impl._launch_process
+                            # kill() が callable か確認（str型等の誤判定を防止）
+                            if hasattr(process, 'kill') and callable(process.kill):
                                 try:
-                                    browser._impl._launch_process.kill()
+                                    process.kill()
                                     logger.info("Browser process force killed")
                                 except Exception as kill_err:
                                     logger.warning(f"Force kill failed: {kill_err}")
