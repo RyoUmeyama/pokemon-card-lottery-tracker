@@ -1,6 +1,88 @@
 {
-  "timestamp": "2026-04-02T07:46:39.624791",
-  "sources": [],
+  "timestamp": "2026-04-02T08:12:41.088220",
+  "sources": [
+    {
+      "timestamp": "2026-04-02T08:12:52.264709",
+      "source": "books.rakuten.co.jp",
+      "scraped_at": "2026-04-02T08:12:52.264717",
+      "lotteries": []
+    },
+    {
+      "source": "amazon.co.jp",
+      "scraped_at": "2026-04-02T08:12:44.341844",
+      "reservations": []
+    },
+    {
+      "timestamp": "2026-04-02T08:12:41.241879",
+      "source": "X (Twitter) 公式アカウント",
+      "scraped_at": "2026-04-02T08:12:41.241884",
+      "lotteries": [],
+      "error": "X API credentials not configured or tweepy not installed"
+    },
+    {
+      "source": "ノジマオンライン (online.nojima.co.jp)",
+      "source_url": null,
+      "scraped_at": "2026-04-02T08:12:41.242562",
+      "lotteries": []
+    },
+    {
+      "source": "イエローサブマリン (yellowsubmarine.co.jp)",
+      "source_url": "https://www.yellowsubmarine.co.jp/",
+      "scraped_at": "2026-04-02T08:12:41.244575",
+      "lotteries": []
+    },
+    {
+      "source": "カードショップセラ (cardshopserra.jp)",
+      "source_url": "https://www.cardshopserra.jp/",
+      "scraped_at": "2026-04-02T08:12:41.243985",
+      "lotteries": [],
+      "note": "DNS解決エラーのため現在無効化"
+    },
+    {
+      "source": "セブンネットショッピング (7net.omni7.jp)",
+      "source_url": "https://7net.omni7.jp/search/?keyword=ポケモンカード&searchKeywordFlg=1",
+      "scraped_at": "2026-04-02T08:12:41.245404",
+      "lotteries": []
+    },
+    {
+      "source": "ローソン HMV (hmv.co.jp)",
+      "source_url": "https://www.hmv.co.jp/search/?category=ALL&keyword=ポケモンカード",
+      "scraped_at": "2026-04-02T08:12:44.041704",
+      "lotteries": []
+    },
+    {
+      "source": "ファミリーマート (family.co.jp)",
+      "source_url": "https://www.family.co.jp/campaign.html",
+      "scraped_at": "2026-04-02T08:12:42.936631",
+      "lotteries": []
+    },
+    {
+      "timestamp": "2026-04-02T08:12:43.713255",
+      "source": "suruga-ya.jp",
+      "scraped_at": "2026-04-02T08:12:43.713260",
+      "lotteries": [],
+      "reservations": []
+    },
+    {
+      "timestamp": "2026-04-02T08:12:45.955458",
+      "source": "geo-online.co.jp",
+      "scraped_at": "2026-04-02T08:12:45.955464",
+      "lotteries": [],
+      "reservations": []
+    }
+  ],
   "zero_alert": false,
-  "zero_alert_sources": []
+  "zero_alert_sources": [
+    "楽天ブックス",
+    "Amazon",
+    "X(Twitter)",
+    "ノジマ",
+    "イエローサブマリン",
+    "カードショップセラ",
+    "セブンネットショッピング",
+    "ローソンHMV",
+    "ファミリーマート",
+    "駿河屋",
+    "GEO"
+  ]
 }
