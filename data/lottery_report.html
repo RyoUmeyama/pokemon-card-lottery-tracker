@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ポケモンカード抽選・販売情報</title>
-    <style>
-        * {
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -100,18 +101,38 @@
         }
 
         .filter-controls input:focus {
-            outline: none;
+            outline: 3px solid #667eea;
+            outline-offset: 2px;
             border-color: #667eea;
+        }
+
+        .filter-controls select:focus {
+            outline: 3px solid #667eea;
+            outline-offset: 2px;
+            border-color: #667eea;
+        }
+
+        table th:focus {
+            outline: 3px solid #fff;
+            outline-offset: -2px;
         }
 
         .lotteries {
             padding: 30px;
         }
 
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-top: 20px;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            margin-top: 0;
+            min-width: 500px;
         }
 
         table thead {
@@ -415,27 +436,46 @@
             font-size: 0.9em;
         }
 
+        @media (max-width: 1024px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            table th, table td {
+                padding: 10px;
+            }
+        }
+
         @media (max-width: 768px) {
             body {
                 padding: 10px;
+                font-size: 14px;
+            }
+
+            header {
+                padding: 25px;
             }
 
             header h1 {
-                font-size: 1.8em;
-                margin-bottom: 10px;
+                font-size: 1.6em;
+                margin-bottom: 8px;
             }
 
             header .subtitle {
-                font-size: 0.95em;
+                font-size: 0.9em;
             }
 
             .container {
                 border-radius: 10px;
-                padding: 15px;
             }
 
             .stats {
                 grid-template-columns: 1fr;
+                gap: 10px;
             }
 
             .stat-card {
@@ -443,7 +483,19 @@
             }
 
             .stat-card .number {
-                font-size: 1.5em;
+                font-size: 1.4em;
+            }
+
+            .stat-card .label {
+                font-size: 0.85em;
+            }
+
+            .summary {
+                padding: 20px;
+            }
+
+            .summary h2 {
+                font-size: 1.3em;
             }
 
             .filter-controls {
@@ -452,24 +504,37 @@
 
             .filter-controls input {
                 font-size: 16px;
-                padding: 10px 15px;
+                padding: 12px 15px;
+            }
+
+            .table-wrapper {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                margin: 10px -15px;
+                padding: 0 15px;
             }
 
             table {
-                font-size: 0.85em;
-            }
-
-            table th, table td {
-                padding: 8px 5px;
+                font-size: 0.8em;
+                min-width: 100%;
             }
 
             table th {
+                padding: 8px 4px;
                 font-size: 0.75em;
+                white-space: nowrap;
+            }
+
+            table td {
+                padding: 8px 4px;
+                word-break: break-word;
             }
 
             table td a {
-                padding: 4px 8px;
-                font-size: 0.75em;
+                padding: 3px 6px;
+                font-size: 0.7em;
+                display: block;
+                margin-top: 3px;
             }
 
             .lotteries {
@@ -478,38 +543,183 @@
 
             .lottery-card {
                 padding: 15px;
-                margin-bottom: 15px;
+                margin-bottom: 12px;
+                border-radius: 10px;
             }
 
             .lottery-card .header {
                 flex-direction: column;
-                gap: 10px;
+                gap: 8px;
+            }
+
+            .lottery-card .store {
+                font-size: 1em;
             }
 
             .lottery-card .product {
-                font-size: 1.1em;
+                font-size: 1em;
+                margin-bottom: 10px;
+            }
+
+            .lottery-card .detail-row {
+                margin: 8px 0;
+                font-size: 0.9em;
+            }
+
+            .lottery-card .detail-row .icon {
+                width: 20px;
+            }
+
+            .lottery-card a {
+                padding: 10px 20px;
+                font-size: 0.9em;
+                margin-top: 10px;
+            }
+
+            .upcoming-section {
+                padding: 20px;
+            }
+
+            .upcoming-section h2 {
+                font-size: 1.3em;
             }
 
             .upcoming-card {
                 padding: 15px;
+                margin-bottom: 12px;
             }
 
             .upcoming-card .product-name {
-                font-size: 1em;
+                font-size: 0.95em;
+            }
+
+            .upcoming-card .date-badge {
+                font-size: 0.8em;
+            }
+
+            .upcoming-card .schedule-info {
+                font-size: 0.9em;
             }
 
             footer {
                 padding: 15px;
-                font-size: 0.85em;
+                font-size: 0.8em;
             }
         }
-    </style>
-</head>
-<body>
+
+        @media (max-width: 480px) {
+            body {
+                padding: 8px;
+                font-size: 13px;
+            }
+
+            header {
+                padding: 15px;
+            }
+
+            header h1 {
+                font-size: 1.3em;
+                margin-bottom: 5px;
+            }
+
+            header .subtitle {
+                font-size: 0.8em;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .stat-card {
+                padding: 12px;
+            }
+
+            .stat-card .number {
+                font-size: 1.2em;
+            }
+
+            .stat-card .label {
+                font-size: 0.75em;
+            }
+
+            .summary {
+                padding: 15px;
+            }
+
+            .summary h2 {
+                font-size: 1.1em;
+                margin-bottom: 15px;
+            }
+
+            .filter-controls {
+                padding: 12px;
+            }
+
+            .filter-controls input {
+                font-size: 16px;
+                padding: 10px;
+            }
+
+            .table-wrapper {
+                margin: 10px -8px;
+                padding: 0 8px;
+            }
+
+            table {
+                font-size: 0.75em;
+            }
+
+            table th {
+                padding: 6px 2px;
+                font-size: 0.7em;
+            }
+
+            table td {
+                padding: 6px 2px;
+            }
+
+            table td a {
+                padding: 2px 4px;
+                font-size: 0.65em;
+            }
+
+            .lotteries {
+                padding: 12px;
+            }
+
+            .lottery-card {
+                padding: 12px;
+                margin-bottom: 10px;
+            }
+
+            .lottery-card .store {
+                font-size: 0.9em;
+            }
+
+            .lottery-card .product {
+                font-size: 0.9em;
+                margin-bottom: 8px;
+            }
+
+            .lottery-card .detail-row {
+                font-size: 0.85em;
+            }
+
+            .lottery-card a {
+                padding: 8px 16px;
+                font-size: 0.85em;
+            }
+
+            footer {
+                padding: 12px;
+                font-size: 0.75em;
+            }
+        }
     <div class="container">
         <header>
             <h1>🎴 ポケモンカード抽選・販売情報</h1>
-            <div class="subtitle">最終更新: 2026年04月01日 08:42:20</div>
+            <div class="subtitle">最終更新: 2026年04月02日 00:35:29</div>
         </header>
 
         <div class="summary">
@@ -520,9 +730,11 @@
         </div>
 
         <div class="filter-controls">
-            <div style="display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap;">
-                <input type="text" id="searchBox" placeholder="🔍 商品名、店舗名、抽選形式で検索..." onkeyup="filterLotteries()" style="flex: 1; min-width: 200px;">
-                <select id="sortSelect" onchange="sortLotteries()" style="padding: 12px 15px; border: 2px solid #ddd; border-radius: 25px; font-size: 1em; cursor: pointer; background: white; color: #333; font-weight: 500;">
+            <div style="display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap; align-items: center;">
+                <label for="searchBox" style="color: #333; font-weight: 500; white-space: nowrap;">🔍 検索:</label>
+                <input type="text" id="searchBox" placeholder="商品名、店舗名、抽選形式で検索..." onkeyup="filterLotteries()" aria-label="抽選情報を商品名、店舗名、抽選形式で検索" style="flex: 1; min-width: 200px;">
+                <label for="sortSelect" style="color: #333; font-weight: 500; white-space: nowrap;">📊 並び順:</label>
+                <select id="sortSelect" onchange="sortLotteries()" aria-label="抽選情報の表示順序を変更" style="padding: 12px 15px; border: 2px solid #ddd; border-radius: 25px; font-size: 1em; cursor: pointer; background: white; color: #333; font-weight: 500;">
                     <option value="deadline">📅 期限順（近い順）</option>
                     <option value="store">🏪 店舗名順</option>
                     <option value="newest">🆕 新着順</option>
@@ -531,18 +743,18 @@
         </div>
 
         <div class="lotteries" id="lotteriesList">
-            <table id="lotteriesTable">
+            <table id="lotteriesTable" role="table">
                 <thead>
-                    <tr>
-                        <th class="sortable" data-column="store">🏪 店舗名</th>
-                        <th class="sortable" data-column="product">📦 商品名</th>
-                        <th class="sortable" data-column="deadline">📅 締切日</th>
-                        <th class="sortable" data-column="status">ステータス</th>
-                        <th class="sortable" data-column="type">抽選形式</th>
-                        <th>詳細</th>
+                    <tr role="row">
+                        <th class="sortable" data-column="store" role="columnheader" tabindex="0" aria-sort="none">🏪 店舗名</th>
+                        <th class="sortable" data-column="product" role="columnheader" tabindex="0" aria-sort="none">📦 商品名</th>
+                        <th class="sortable" data-column="deadline" role="columnheader" tabindex="0" aria-sort="ascending">📅 締切日</th>
+                        <th class="sortable" data-column="status" role="columnheader" tabindex="0" aria-sort="none">ステータス</th>
+                        <th class="sortable" data-column="type" role="columnheader" tabindex="0" aria-sort="none">抽選形式</th>
+                        <th role="columnheader">詳細</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody role="rowgroup">
 
                 </tbody>
             </table>
@@ -559,113 +771,6 @@
         </footer>
     </div>
 
-    <script>
-        let currentSort = { column: 'deadline', direction: 'asc' };
-
-        function filterLotteries() {
-            const searchText = document.getElementById('searchBox').value.toLowerCase();
-            const rows = document.querySelectorAll('#lotteriesTable tbody tr');
-            let visibleCount = 0;
-
-            rows.forEach(row => {
-                const searchData = row.getAttribute('data-search');
-                if (searchData.includes(searchText)) {
-                    row.style.display = '';
-                    visibleCount++;
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        }
-
-        function sortLotteries() {
-            const sortSelect = document.getElementById('sortSelect').value;
-            const tbody = document.querySelector('#lotteriesTable tbody');
-            const rows = Array.from(tbody.querySelectorAll('tr'));
-
-            rows.sort((a, b) => {
-                if (sortSelect === 'deadline') {
-                    // 期限順（近い順）
-                    const aDeadline = a.getAttribute('data-deadline') || '';
-                    const bDeadline = b.getAttribute('data-deadline') || '';
-                    return aDeadline.localeCompare(bDeadline);
-                } else if (sortSelect === 'store') {
-                    // 店舗名順
-                    const aStore = a.getAttribute('data-store') || '';
-                    const bStore = b.getAttribute('data-store') || '';
-                    return aStore.localeCompare(bStore, 'ja');
-                } else if (sortSelect === 'newest') {
-                    // 新着順（新しい順）
-                    const aTimestamp = a.getAttribute('data-timestamp') || '0000-00-00';
-                    const bTimestamp = b.getAttribute('data-timestamp') || '0000-00-00';
-                    return bTimestamp.localeCompare(aTimestamp);  // 逆順（新しい順）
-                }
-                return 0;
-            });
-
-            // ソート結果を反映
-            rows.forEach(row => tbody.appendChild(row));
-        }
-
-        function sortTable(column) {
-            const table = document.getElementById('lotteriesTable');
-            const tbody = table.querySelector('tbody');
-            const rows = Array.from(tbody.querySelectorAll('tr:not([style*="display: none"])'));
-
-            // ソート方向の切り替え
-            if (currentSort.column === column) {
-                currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
-            } else {
-                currentSort.column = column;
-                currentSort.direction = 'asc';
-            }
-
-            // ソート実行
-            const columnIndex = {'store': 0, 'product': 1, 'deadline': 2, 'status': 3, 'type': 4}[column];
-            rows.sort((a, b) => {
-                let aVal = a.children[columnIndex].getAttribute('data-sort-value') || a.children[columnIndex].textContent;
-                let bVal = b.children[columnIndex].getAttribute('data-sort-value') || b.children[columnIndex].textContent;
-
-                // 数値ソート試行
-                const aNum = parseFloat(aVal);
-                const bNum = parseFloat(bVal);
-                if (!isNaN(aNum) && !isNaN(bNum)) {
-                    return currentSort.direction === 'asc' ? aNum - bNum : bNum - aNum;
-                }
-
-                // 文字列ソート
-                if (currentSort.direction === 'asc') {
-                    return aVal.localeCompare(bVal);
-                } else {
-                    return bVal.localeCompare(aVal);
-                }
-            });
-
-            // ソート結果を反映
-            rows.forEach(row => tbody.appendChild(row));
-
-            // ヘッダのソート状態を更新
-            document.querySelectorAll('#lotteriesTable th.sortable').forEach(th => {
-                th.classList.remove('sorted-asc', 'sorted-desc');
-                if (th.getAttribute('data-column') === column) {
-                    th.classList.add(currentSort.direction === 'asc' ? 'sorted-asc' : 'sorted-desc');
-                }
-            });
-        }
-
-        // ヘッダクリック時にソート実行
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('#lotteriesTable th.sortable').forEach(th => {
-                th.addEventListener('click', () => {
-                    sortTable(th.getAttribute('data-column'));
-                });
-            });
-
-            // デフォルトで deadline でソート
-            sortTable('deadline');
-            // ドロップダウンのデフォルト値を設定
-            document.getElementById('sortSelect').value = 'deadline';
-        });
-    </script>
+    <script src="static/sort.js"></script>
 </body>
 </html>
