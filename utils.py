@@ -3,7 +3,23 @@
 """
 import re
 from datetime import date, datetime
-from typing import Optional
+from typing import Optional, Any
+
+
+def parse_date_flexible(date_str: str, today=None) -> Optional[date]:
+    """日付文字列を柔軟にパース（多様な形式対応、曜日対応）
+
+    Args:
+        date_str: パースする日付文字列
+        today: 基準日（年なし形式用）。Noneの場合は現在日付を使用
+
+    Returns:
+        date オブジェクト、またはパース失敗時は None
+    """
+    if today is None:
+        today = datetime.now().date()
+
+    return _parse_date_flexible(date_str, today)
 
 
 def _parse_date_flexible(date_str: str, today) -> Optional:

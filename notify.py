@@ -9,12 +9,15 @@ import time
 from datetime import datetime
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from typing import Optional, List, Dict, Any
+
+from utils import parse_date_flexible
 
 logger = logging.getLogger(__name__)
 
 
 class GmailNotifier:
-    def __init__(self):
+    def __init__(self) -> None:
         # 環境変数から認証情報を取得（SMTP設定）
         # 注意: SMTP_PORT 587 の場合は STARTTLS、465 の場合は SMTP_SSL を使用
         # SMTP_USE_SSL の設定を検討する場合は、send_notification メソッドを参照
@@ -24,10 +27,15 @@ class GmailNotifier:
         self.smtp_password = os.environ.get('SMTP_PASSWORD')
         self.recipient = os.environ.get('RECIPIENT_EMAIL')
 
-    def _parse_date(self, date_string):
-        """日付文字列をdatetime オブジェクトに変換"""
+    def _parse_date(self, date_string: Optional[str]) -> Optional[datetime]:
+        """日付文字列をdatetime オブジェクトに変換（utils.parse_date_flexible を使用）"""
         if not date_string or not isinstance(date_string, str):
             return None
+
+        parsed_date = parse_date_flexible(date_string)
+        if parsed_date:
+            return datetime.combine(parsed_date, datetime.min.time())
+        return None
 
         formats = ['%Y-%m-%d', '%Y/%m/%d', '%Y年%m月%d日']
         for fmt in formats:
@@ -37,7 +45,7 @@ class GmailNotifier:
                 continue
         return None
 
-    def _is_ended(self, end_date_str):
+    def _is_ended(self, end_date_str: Optional[str]) -> bool:
         """抽選が終了しているか判定（end_date < 今日）"""
         if not end_date_str:
             return False
@@ -46,7 +54,7 @@ class GmailNotifier:
             return False
         return end_date.date() < datetime.now().date()
 
-    def _days_until_deadline(self, end_date_str):
+    def _days_until_deadline(self, end_date_str: Optional[str]) -> Optional[int]:
         """期限までの日数を計算（負なら既に終了）"""
         if not end_date_str:
             return None
@@ -56,14 +64,14 @@ class GmailNotifier:
         delta = (end_date.date() - datetime.now().date()).days
         return delta
 
-    def _is_deadline_soon(self, end_date_str, days=3):
+    def _is_deadline_soon(self, end_date_str: Optional[str], days: int = 3) -> bool:
         """期限が間近か判定（3日以内）"""
         days_left = self._days_until_deadline(end_date_str)
         if days_left is None:
             return False
         return 0 <= days_left <= days
 
-    def send_notification(self, all_lotteries_data):
+    def send_notification(self, all_lotteries_data: Dict[str, Any]) -> bool:
         """抽選情報をメールで通知"""
         if not self.smtp_username or not self.smtp_password or not self.recipient:
             logger.warning("⚠️ SMTP認証情報が設定されていません")
@@ -224,7 +232,7 @@ class GmailNotifier:
 
         return False
 
-    def _is_new(self, item_timestamp):
+    def _is_new(self, item_timestamp: Optional[str]) -> bool:
         """アイテムが24時間以内に追加されたかチェック"""
         if not item_timestamp:
             return False
@@ -236,14 +244,14 @@ class GmailNotifier:
         except (ValueError, TypeError):
             return False
 
-    def _is_active(self, start_date_str, end_date_str):
+    def _is_active(self, start_date_str: Optional[str], end_date_str: Optional[str]) -> bool:
         """抽選が「受付中」かどうか判定"""
         if not end_date_str:
             return False
         # 受付終了していなければ受付中と判定
         return not self._is_ended(end_date_str)
 
-    def _sort_lotteries_by_status(self, lotteries):
+    def _sort_lotteries_by_status(self, lotteries: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """抽選を受付中優先でソート"""
         active = []
         inactive = []
@@ -254,7 +262,7 @@ class GmailNotifier:
                 inactive.append(lottery)
         return active + inactive
 
-    def _create_email_body(self, sources_summary, total_lottery_count, total_reservation_count, first_come_first_served_items=None, upcoming_products=None, deadline_soon_items=None, zero_alert=False, zero_alert_sources=None):
+    def _create_email_body(self, sources_summary: List[Dict[str, Any]], total_lottery_count: int, total_reservation_count: int, first_come_first_served_items: Optional[List[Dict[str, Any]]] = None, upcoming_products: Optional[List[Dict[str, Any]]] = None, deadline_soon_items: Optional[List[Dict[str, Any]]] = None, zero_alert: bool = False, zero_alert_sources: Optional[List[str]] = None) -> str:
         """メール本文（HTML）を作成"""
         if first_come_first_served_items is None:
             first_come_first_served_items = []

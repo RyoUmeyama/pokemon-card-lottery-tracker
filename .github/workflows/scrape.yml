@@ -60,8 +60,8 @@ jobs:
 
       - name: Run tests
         run: |
-          pip install pytest
-          python -m pytest tests/ -q
+          pip install pytest pytest-cov
+          python -m pytest tests/ -q --cov=scrapers --cov=. --cov-report=term-missing
 
       - name: Run scraper
         env:

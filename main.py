@@ -152,7 +152,6 @@ def filter_expired(items: list) -> list:
     from datetime import date
     today = date.today()
     filtered = []
-    WHITELIST_STORES = []  # ドラゴンスター削除
 
     for item in items:
         # ドラゴンスター固有フィルタ
@@ -163,11 +162,6 @@ def filter_expired(items: list) -> list:
             if status == 'closed' or (detail_url and detail_url.endswith('#')):
                 logger.info(f"ドラゴンスター除外: {item.get('product', '?')} (status: {status}, url: {detail_url})")
                 continue
-
-        # ホワイトリスト対象は常に通す
-        if any(store_name in store for store_name in WHITELIST_STORES):
-            filtered.append(item)
-            continue
 
         # 年号チェック
         if _check_year(item):
@@ -199,32 +193,10 @@ def filter_expired(items: list) -> list:
 
 
 def filter_pokemon_card_only(items: list) -> list:
-    """ポケモンカード関連のみ残す
-
-    ホワイトリスト: ポケカ専門ショップ（ドラゴンスター等）は自動通過
-    """
-    # ポケカ専門ショップのホワイトリスト（キーワード不要で通す）
-    WHITELIST_STORES = []  # ドラゴンスター削除
-
-    # 抽選情報集約サイトのホワイトリスト（複数商品を一覧にするため、全て通す）
-    WHITELIST_SOURCES = []
-
+    """ポケモンカード関連のみ残す"""
     filtered = []
     for item in items:
-        store = item.get('store', '')
-        source = item.get('source', '')
-
-        # ホワイトリスト対象は自動通過
-        if any(store_name in store for store_name in WHITELIST_STORES):
-            filtered.append(item)
-            continue
-
-        # ホワイトリストソースも自動通過
-        if any(src in source for src in WHITELIST_SOURCES):
-            filtered.append(item)
-            continue
-
-        # それ以外はキーワードチェック
+        # キーワードチェック
         text = ' '.join([
             str(item.get('product', '')),
             str(item.get('product_name', '')),
@@ -321,7 +293,7 @@ async def execute_scraper(config: Dict[str, Any], semaphore: asyncio.Semaphore, 
             return None
 
         try:
-            data = scraper.scrape()
+            data = await asyncio.to_thread(scraper.scrape)
         except (RuntimeError, ConnectionError, TimeoutError) as e:
             logger.warning(f"✗ {name}の取得に失敗: {e}")
             return None
@@ -457,7 +429,8 @@ def main() -> None:
     logger.info("\n🔗 detail_url検証を実行中...")
     import subprocess
     result = subprocess.run(['python3', 'scripts/verify_urls.py', '--remove'], capture_output=True, text=True)
-    print(result.stdout)
+    if result.stdout:
+        logger.info(result.stdout)
     if result.returncode != 0:
         logger.warning("URLチェックで無効なURLが検出されました")
 

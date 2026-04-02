@@ -189,3 +189,38 @@ scrapers:
     class: 'DragonstarScraper'
     skip: true
     reason: '不正確なデータ (cmd_244: 修復困難)'
+
+  - num: 27
+    name: 'イオン(Requests)'
+    module: 'scrapers.aeon_scraper'
+    class: 'AeonScraper'
+    skip: true
+    reason: 'WAF (cmd_253: 未登録スクレイパー対応)'
+
+  - num: 28
+    name: 'あみあみ(Playwright)'
+    module: 'scrapers.amiami_playwright_scraper'
+    class: 'AmiAmiPlaywrightScraper'
+    skip: true
+    reason: '代替手段として保持 (cmd_253: 未登録スクレイパー対応)'
+
+  - num: 29
+    name: 'ビックカメラ(Playwright)'
+    module: 'scrapers.biccamera_playwright_scraper'
+    class: 'BiccameraPlaywrightScraper'
+    skip: true
+    reason: '代替手段として保持 (cmd_253: 未登録スクレイパー対応)'
+
+  - num: 30
+    name: 'エディオン(Playwright)'
+    module: 'scrapers.edion_playwright_scraper'
+    class: 'EdionPlaywrightScraper'
+    skip: true
+    reason: '代替手段として保持 (cmd_253: 未登録スクレイパー対応)'
+
+  - num: 31
+    name: 'ジョーシン(Playwright)'
+    module: 'scrapers.joshin_playwright_scraper'
+    class: 'JoshinPlaywrightScraper'
+    skip: true
+    reason: '代替手段として保持 (cmd_253: 未登録スクレイパー対応)'

@@ -8,6 +8,8 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any, Dict, List
 
+from utils import parse_date_flexible
+
 logger = logging.getLogger(__name__)
 
 # 定数定義
@@ -69,24 +71,22 @@ def normalize_schema(data: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def parse_date(date_string: Any) -> Any:
-    """M7: 日付文字列をdatetime形式に正規化（パース失敗時は元文字列保持）"""
+    """M7: 日付文字列をdatetime形式に正規化（パース失敗時は元文字列保持）
+
+    ISO datetime形式とutils.parse_date_flexibleを使用して統一的に処理
+    """
     if not date_string or not isinstance(date_string, str):
         return date_string
 
-    # 複数フォーマットを試す
-    formats = [
-        '%Y-%m-%d',
-        '%Y/%m/%d',
-        '%Y年%m月%d日',
-        '%Y-%m-%dT%H:%M:%S',
-        '%Y-%m-%dT%H:%M:%S.%f',
-    ]
+    # ISO datetime形式を先に試す（fromisoformatはTを含む形式に対応）
+    try:
+        return datetime.fromisoformat(date_string)
+    except (ValueError, AttributeError):
+        pass
 
-    for fmt in formats:
-        try:
-            return datetime.strptime(date_string, fmt)
-        except ValueError:
-            continue
+    parsed_date = parse_date_flexible(date_string)
+    if parsed_date:
+        return datetime.combine(parsed_date, datetime.min.time())
 
     # パース失敗時は元文字列を返す
     return date_string

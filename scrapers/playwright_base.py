@@ -15,7 +15,7 @@ try:
 except ImportError:
     PLAYWRIGHT_AVAILABLE = False
 
-from constants import DEFAULT_HEADERS, DEFAULT_NAVIGATION_TIMEOUT, DEFAULT_TIMEOUT, USER_AGENTS
+from constants import DEFAULT_HEADERS, DEFAULT_MAX_RETRIES, DEFAULT_NAVIGATION_TIMEOUT, DEFAULT_TIMEOUT, USER_AGENTS
 
 logger = logging.getLogger(__name__)
 
@@ -77,7 +77,7 @@ class PlaywrightBaseScraper:
             return 'upcoming'
         return 'unknown'
 
-    async def fetch_page_content(self, url, wait_selector=None, wait_for_js=True, scroll=True, extra_wait=2, max_retries=1):
+    async def fetch_page_content(self, url, wait_selector=None, wait_for_js=True, scroll=True, extra_wait=2, max_retries=None):
         """
         Playwrightでページコンテンツを取得（1回retry対応）
 
@@ -92,6 +92,9 @@ class PlaywrightBaseScraper:
         if not PLAYWRIGHT_AVAILABLE:
             logger.warning("playwright is not installed")
             return None
+
+        if max_retries is None:
+            max_retries = DEFAULT_MAX_RETRIES
 
         for attempt in range(max_retries + 1):
             result = await self._fetch_page_content_internal(url, wait_selector, wait_for_js, scroll, extra_wait, attempt)

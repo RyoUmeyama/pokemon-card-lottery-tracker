@@ -37,7 +37,10 @@ class RequestsBaseScraper:
         """
         self.timeout = timeout or self.DEFAULT_TIMEOUT
         self.wait_time = wait_time or self.DEFAULT_WAIT_TIME
+        self.session = requests.Session()
         self.headers = self.get_headers()
+        # Sessionにヘッダを設定
+        self.session.headers.update(self.headers)
 
     def get_headers(self) -> Dict[str, str]:
         """
@@ -62,7 +65,7 @@ class RequestsBaseScraper:
         """
         try:
             time.sleep(self.wait_time)
-            response = requests.get(url, headers=self.headers, timeout=self.timeout)
+            response = self.session.get(url, timeout=self.timeout)
             response.raise_for_status()
             return response.content
         except requests.RequestException as e:
