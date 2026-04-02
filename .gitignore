@@ -45,19 +45,15 @@ logs/
 .DS_Store
 Thumbs.db
 
-# Test & temporary
-test_*.py
-*_test.py
+# Temporary files
 *.tmp
 temp/
 *.bak
 *.backup
 
-# Data files (backup & latest)
-data/
+# Data files (backup only - data/ must be tracked for GitHub Actions)
 data/*_backup*.db
 data/*_backup*.json
-data/*_latest.json
 
 # Notification configs (contains sensitive tokens)
 config/notification.json
