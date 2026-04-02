@@ -53,12 +53,49 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
+def _validate_scraper_config(scraper: Dict[str, Any]) -> bool:
+    """スクレイパー設定の必須フィールドをバリデーション
+
+    Args:
+        scraper: スクレイパー設定
+
+    Returns:
+        バリデーション結果（True: 有効, False: 無効）
+    """
+    required_fields = ['num', 'name', 'module', 'class', 'skip']
+    for field in required_fields:
+        if field not in scraper:
+            logger.warning(f"Missing required field '{field}' in scraper config: {scraper.get('name', 'unknown')}")
+            return False
+
+    # skip=falseの場合、filenameが必須
+    if not scraper.get('skip') and 'filename' not in scraper:
+        logger.warning(f"Missing 'filename' for active scraper: {scraper.get('name', 'unknown')}")
+        return False
+
+    # skip=trueの場合、reasonが推奨
+    if scraper.get('skip') and 'reason' not in scraper:
+        logger.warning(f"Missing 'reason' for skipped scraper: {scraper.get('name', 'unknown')}")
+
+    return True
+
+
 def load_scrapers_from_config(config_path: str = 'config/scrapers.yaml') -> List[Dict[str, Any]]:
     """config/scrapers.yaml からスクレイパー設定を読み込む"""
     try:
         with open(config_path, 'r', encoding='utf-8') as f:
             config_data = yaml.safe_load(f)
         scrapers = config_data.get('scrapers', [])
+
+        # バリデーション: 必須フィールドチェック
+        validated_scrapers = []
+        for scraper_config in scrapers:
+            if _validate_scraper_config(scraper_config):
+                validated_scrapers.append(scraper_config)
+            else:
+                logger.warning(f"Skipping invalid scraper config: {scraper_config.get('name', 'unknown')}")
+
+        scrapers = validated_scrapers
 
         # 動的にスクレイパークラスをロード
         for scraper_config in scrapers:
@@ -217,8 +254,12 @@ def filter_pokemon_card_only(items: list) -> list:
 def load_previous_data(filename: str) -> Optional[Dict[str, Any]]:
     """前回のデータを読み込み"""
     if os.path.exists(filename):
-        with open(filename, 'r', encoding='utf-8') as f:
-            return json.load(f)
+        try:
+            with open(filename, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except json.JSONDecodeError as e:
+            logger.warning(f"⚠️ JSONファイルが破損しています ({filename}): {e}. 空のデータから開始します。")
+            return None
     return None
 
 

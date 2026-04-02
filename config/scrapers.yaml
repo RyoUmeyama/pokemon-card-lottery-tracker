@@ -1,25 +1,19 @@
+# ポケモンカード抽選・販売情報スクレイパー設定
+# 各スクレイパーの定義、スキップ条件、メタデータを管理
+# last_success_date: 最後に成功した実行日時（ISO8601形式）
+# reason: skip:trueの理由、調査日時、次回予定日、関連cmd番号を含む
+
 scrapers:
+  # === アクティブなスクレイパー（skip: false） ===
+
   - num: 1
     name: '楽天ブックス'
     module: 'scrapers.rakuten_books_scraper'
     class: 'RakutenBooksScraper'
     filename: 'data/rakuten_books_latest.json'
     skip: false
+    last_success_date: null
     kwargs: {}
-
-  - num: 3
-    name: 'ポケモンセンター公式'
-    module: 'scrapers.pokemon_center_scraper'
-    class: 'PokemonCenterScraper'
-    skip: true
-    reason: 'ログイン認証+SPA (cmd_244: 修復困難)'
-
-  - num: 4
-    name: 'ポケモンセンター公式(Playwright)'
-    module: 'scrapers.pokemoncenter_playwright_scraper'
-    class: 'PokemonCenterPlaywrightScraper'
-    skip: true
-    reason: 'WAF/アクセス拒否 (cmd_219: 403)'
 
   - num: 5
     name: 'Amazon'
@@ -28,7 +22,25 @@ scrapers:
     filename: 'data/amazon_reservation_latest.json'
     data_type: 'reservation'
     skip: false
+    last_success_date: null
     kwargs: {}
+
+  # === スキップされているスクレイパー（skip: true） ===
+  # 理由フォーマット: 問題の説明 (調査: YYYY-MM-DD, 次回: YYYY-MM-DD, cmd_XXX: 詳細)
+
+  - num: 3
+    name: 'ポケモンセンター公式'
+    module: 'scrapers.pokemon_center_scraper'
+    class: 'PokemonCenterScraper'
+    skip: true
+    reason: 'ログイン認証+SPA (調査: 2026-04-02, 次回: 2026-05-02, cmd_244: 修復困難)'
+
+  - num: 4
+    name: 'ポケモンセンター公式(Playwright)'
+    module: 'scrapers.pokemoncenter_playwright_scraper'
+    class: 'PokemonCenterPlaywrightScraper'
+    skip: true
+    reason: 'WAF/アクセス拒否 (調査: 2026-04-02, 次回: 2026-05-02, cmd_219: 403)'
 
   - num: 6
     name: '楽天ブックス予約'
@@ -37,6 +49,7 @@ scrapers:
     filename: 'data/rakuten_reservation_latest.json'
     data_type: 'reservation'
     skip: false
+    last_success_date: null
     kwargs: {}
 
   - num: 7
@@ -44,14 +57,14 @@ scrapers:
     module: 'scrapers.yodobashi_scraper'
     class: 'YodobashiScraper'
     skip: true
-    reason: '受付終了 (cmd_244: 修復困難)'
+    reason: '受付終了 (調査: 2026-04-02, 次回: 2026-05-02, cmd_244: 修復困難)'
 
   - num: 8
     name: 'ビックカメラ'
     module: 'scrapers.biccamera_scraper'
     class: 'BiccameraScraper'
     skip: true
-    reason: 'Timeout (cmd_219: 000) - URL調査必要'
+    reason: 'Timeout (調査: 2026-04-02, 次回: 2026-05-02, cmd_219: 000) - URL調査必要'
 
   - num: 9
     name: 'X(Twitter)'
@@ -59,6 +72,7 @@ scrapers:
     class: 'XLotteryScraper'
     filename: 'data/x_lottery_latest.json'
     skip: false
+    last_success_date: null
     kwargs: {}
 
   - num: 10
@@ -66,21 +80,21 @@ scrapers:
     module: 'scrapers.joshin_scraper'
     class: 'JoshinScraper'
     skip: true
-    reason: 'Timeout (cmd_219: 000) - URL調査必要'
+    reason: 'Timeout (調査: 2026-04-02, 次回: 2026-05-02, cmd_219: 000) - URL調査必要'
 
   - num: 11
     name: 'エディオン'
     module: 'scrapers.edion_scraper'
     class: 'EdionScraper'
     skip: true
-    reason: 'JavaScript必須 (cmd_244: 修復困難)'
+    reason: 'JavaScript必須 (調査: 2026-04-02, 次回: 2026-05-02, cmd_244: 修復困難)'
 
   - num: 12
     name: 'ケーズデンキ'
     module: 'scrapers.ksdenki_scraper'
     class: 'KsDenkiScraper'
     skip: true
-    reason: 'URL無効 (cmd_244: 修復困難)'
+    reason: 'URL無効 (調査: 2026-04-02, 次回: 2026-05-02, cmd_244: 修復困難)'
 
   - num: 13
     name: 'ノジマ'
@@ -88,6 +102,7 @@ scrapers:
     class: 'NojimaScraper'
     filename: 'data/nojima_latest.json'
     skip: false
+    last_success_date: null
     kwargs: {}
 
   - num: 14
@@ -103,6 +118,7 @@ scrapers:
     class: 'YellowSubmarineScraper'
     filename: 'data/yellow_submarine_latest.json'
     skip: false
+    last_success_date: null
     kwargs: {}
 
   - num: 16
@@ -111,6 +127,7 @@ scrapers:
     class: 'CardShopSerraScraper'
     filename: 'data/cardshop_serra_latest.json'
     skip: false
+    last_success_date: null
     kwargs: {}
 
   - num: 17
@@ -119,6 +136,7 @@ scrapers:
     class: 'SevenElevenScraper'
     filename: 'data/seven_eleven_latest.json'
     skip: false
+    last_success_date: null
     kwargs:
       check_availability: true
 
@@ -127,7 +145,7 @@ scrapers:
     module: 'scrapers.sevennet_playwright_scraper'
     class: 'SevenNetPlaywrightScraper'
     skip: true
-    reason: 'WAF完全ブロック (cmd_245: 修復困難)'
+    reason: 'WAF完全ブロック (調査: 2026-04-02, 次回: 2026-05-02, cmd_245: 修復困難)'
 
   - num: 19
     name: 'ローソンHMV'
@@ -135,6 +153,7 @@ scrapers:
     class: 'LawsonScraper'
     filename: 'data/lawson_latest.json'
     skip: false
+    last_success_date: null
     kwargs: {}
 
   - num: 20
@@ -142,7 +161,7 @@ scrapers:
     module: 'scrapers.aeon_playwright_scraper'
     class: 'AeonPlaywrightScraper'
     skip: true
-    reason: 'コンテンツなし (cmd_245: 修復困難)'
+    reason: 'コンテンツなし (調査: 2026-04-02, 次回: 2026-05-02, cmd_245: 修復困難)'
 
   - num: 21
     name: 'ファミリーマート'
@@ -150,6 +169,7 @@ scrapers:
     class: 'FamilyMartScraper'
     filename: 'data/familymart_latest.json'
     skip: false
+    last_success_date: null
     kwargs: {}
 
   - num: 22
@@ -158,6 +178,7 @@ scrapers:
     class: 'SurugayaScraper'
     filename: 'data/surugaya_latest.json'
     skip: false
+    last_success_date: null
     kwargs: {}
 
   - num: 23
@@ -166,6 +187,7 @@ scrapers:
     class: 'GeoScraper'
     filename: 'data/geo_latest.json'
     skip: false
+    last_success_date: null
     kwargs: {}
 
   - num: 24
@@ -174,7 +196,7 @@ scrapers:
     class: 'TsutayaScraper'
     filename: 'data/tsutaya_latest.json'
     skip: true
-    reason: '404エラー対応'
+    reason: '404エラー対応 (調査: 2026-04-02, 次回: 2026-05-02)'
 
   - num: 25
     name: 'Google Forms抽選'
@@ -182,13 +204,14 @@ scrapers:
     class: 'GoogleFormsScraper'
     filename: 'data/google_forms_latest.json'
     skip: true
+    reason: 'フォーム認証必須 (調査: 2026-04-02, 次回: 2026-05-02)'
 
   - num: 26
     name: 'ドラゴンスター'
     module: 'scrapers.dragonstar_scraper'
     class: 'DragonstarScraper'
     skip: true
-    reason: '不正確なデータ (cmd_244: 修復困難)'
+    reason: '不正確なデータ (調査: 2026-04-02, 次回: 2026-05-02, cmd_244: 修復困難)'
 
   - num: 27
     name: 'イオン(Requests)'

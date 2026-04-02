@@ -8,8 +8,16 @@ import json
 import sys
 import argparse
 import requests
+import logging
 from pathlib import Path
 from urllib.parse import urlparse
+
+# Logging設定
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
 
 # Configuration
 DATA_FILE = Path(__file__).parent.parent / 'data' / 'all_lotteries.json'
@@ -75,14 +83,14 @@ def verify_url(url):
 def load_json():
     """Load all_lotteries.json"""
     if not DATA_FILE.exists():
-        print(f"Error: {DATA_FILE} not found", file=sys.stderr)
+        logger.error(f"Error: {DATA_FILE} not found")
         return None
 
     try:
         with open(DATA_FILE, 'r', encoding='utf-8') as f:
             return json.load(f)
     except Exception as e:
-        print(f"Error loading JSON: {e}", file=sys.stderr)
+        logger.error(f"Error loading JSON: {e}")
         return None
 
 
@@ -115,8 +123,8 @@ def verify_all_urls(data):
         status = "VALID" if is_valid else "INVALID"
         reason_str = f" ({reason})" if reason else ""
 
-        print(f"{status}: {url}{reason_str}")
-        print(f"  └─ {entry['source']} > {entry['store']}")
+        logger.info(f"{status}: {url}{reason_str}")
+        logger.info(f"  └─ {entry['source']} > {entry['store']}")
 
         results.append({
             'url': url,
@@ -144,7 +152,7 @@ def remove_invalid_urls(data, results):
         ]
         removed_count = original_count - len(source['lotteries'])
         if removed_count > 0:
-            print(f"Removed {removed_count} invalid entries from {source.get('source', 'unknown')}")
+            logger.info(f"Removed {removed_count} invalid entries from {source.get('source', 'unknown')}")
 
     return data
 
@@ -154,9 +162,9 @@ def save_json(data):
     try:
         with open(DATA_FILE, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
-        print(f"Updated {DATA_FILE}")
+        logger.info(f"Updated {DATA_FILE}")
     except Exception as e:
-        print(f"Error saving JSON: {e}", file=sys.stderr)
+        logger.error(f"Error saving JSON: {e}")
         sys.exit(1)
 
 
@@ -176,19 +184,19 @@ def main():
     if data is None:
         sys.exit(1)
 
-    print(f"Verifying URLs from {DATA_FILE}\n")
+    logger.info(f"Verifying URLs from {DATA_FILE}\n")
 
     # Verify all URLs
     results, invalid_count = verify_all_urls(data)
 
-    print(f"\n{'='*60}")
-    print(f"Total URLs: {len(results)}")
-    print(f"Valid: {len(results) - invalid_count}")
-    print(f"Invalid: {invalid_count}")
+    logger.info(f"\n{'='*60}")
+    logger.info(f"Total URLs: {len(results)}")
+    logger.info(f"Valid: {len(results) - invalid_count}")
+    logger.info(f"Invalid: {invalid_count}")
 
     # Remove invalid entries if requested
     if args.remove and invalid_count > 0:
-        print(f"\nRemoving {invalid_count} invalid entries...")
+        logger.info(f"\nRemoving {invalid_count} invalid entries...")
         data = remove_invalid_urls(data, results)
         save_json(data)
 

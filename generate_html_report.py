@@ -218,8 +218,9 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ポケモンカード抽選・販売情報</title>
-    <style>
-        * {{
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -314,8 +315,20 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
         }}
 
         .filter-controls input:focus {{
-            outline: none;
+            outline: 3px solid #667eea;
+            outline-offset: 2px;
             border-color: #667eea;
+        }}
+
+        .filter-controls select:focus {{
+            outline: 3px solid #667eea;
+            outline-offset: 2px;
+            border-color: #667eea;
+        }}
+
+        table th:focus {{
+            outline: 3px solid #fff;
+            outline-offset: -2px;
         }}
 
         .lotteries {{
@@ -917,9 +930,6 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
                 font-size: 0.75em;
             }}
         }}
-    </style>
-</head>
-<body>
     <div class="container">
         <header>
             <h1>🎴 ポケモンカード抽選・販売情報</h1>
@@ -938,10 +948,11 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
             status_text = "✅ 抽選実施中" if source.get('has_active_lottery') else "⚠️ 現在抽選なし"
 
         lottery_count = len(source.get('lotteries', []))
+        source_name_escaped = html.escape(source['source'])
         html_content += f"""
                 <div class="stat-card">
                     <div class="number">{lottery_count}</div>
-                    <div class="label">{source['source']}</div>
+                    <div class="label">{source_name_escaped}</div>
                     {f'<div style="margin-top: 10px; color: #667eea;">{status_text}</div>' if status_text else ''}
                 </div>
 """
@@ -951,9 +962,11 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
         </div>
 
         <div class="filter-controls">
-            <div style="display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap;">
-                <input type="text" id="searchBox" placeholder="🔍 商品名、店舗名、抽選形式で検索..." onkeyup="filterLotteries()" style="flex: 1; min-width: 200px;">
-                <select id="sortSelect" onchange="sortLotteries()" style="padding: 12px 15px; border: 2px solid #ddd; border-radius: 25px; font-size: 1em; cursor: pointer; background: white; color: #333; font-weight: 500;">
+            <div style="display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap; align-items: center;">
+                <label for="searchBox" style="color: #333; font-weight: 500; white-space: nowrap;">🔍 検索:</label>
+                <input type="text" id="searchBox" placeholder="商品名、店舗名、抽選形式で検索..." onkeyup="filterLotteries()" aria-label="抽選情報を商品名、店舗名、抽選形式で検索" style="flex: 1; min-width: 200px;">
+                <label for="sortSelect" style="color: #333; font-weight: 500; white-space: nowrap;">📊 並び順:</label>
+                <select id="sortSelect" onchange="sortLotteries()" aria-label="抽選情報の表示順序を変更" style="padding: 12px 15px; border: 2px solid #ddd; border-radius: 25px; font-size: 1em; cursor: pointer; background: white; color: #333; font-weight: 500;">
                     <option value="deadline">📅 期限順（近い順）</option>
                     <option value="store">🏪 店舗名順</option>
                     <option value="newest">🆕 新着順</option>
@@ -1015,18 +1028,18 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
 
     html_content += """
         <div class="lotteries" id="lotteriesList">
-            <table id="lotteriesTable">
+            <table id="lotteriesTable" role="table">
                 <thead>
-                    <tr>
-                        <th class="sortable" data-column="store">🏪 店舗名</th>
-                        <th class="sortable" data-column="product">📦 商品名</th>
-                        <th class="sortable" data-column="deadline">📅 締切日</th>
-                        <th class="sortable" data-column="status">ステータス</th>
-                        <th class="sortable" data-column="type">抽選形式</th>
-                        <th>詳細</th>
+                    <tr role="row">
+                        <th class="sortable" data-column="store" role="columnheader" tabindex="0" aria-sort="none">🏪 店舗名</th>
+                        <th class="sortable" data-column="product" role="columnheader" tabindex="0" aria-sort="none">📦 商品名</th>
+                        <th class="sortable" data-column="deadline" role="columnheader" tabindex="0" aria-sort="ascending">📅 締切日</th>
+                        <th class="sortable" data-column="status" role="columnheader" tabindex="0" aria-sort="none">ステータス</th>
+                        <th class="sortable" data-column="type" role="columnheader" tabindex="0" aria-sort="none">抽選形式</th>
+                        <th role="columnheader">詳細</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody role="rowgroup">
 """
 
     # 締切日でデフォルトソート（昇順）
@@ -1080,12 +1093,12 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
 
         # テーブル行として出力（timestamp は既に定義済み）
         html_content += f"""
-                    <tr data-search="{product.lower()} {store.lower()} {lottery_type.lower()}" data-timestamp="{html.escape(timestamp)}" data-store="{store_escaped}" data-deadline="{html.escape(end_date)}">
-                        <td class="store" data-sort-value="{store_escaped}">{store_escaped}</td>
-                        <td data-sort-value="{product_escaped}">{product_escaped}</td>
-                        <td class="deadline" data-sort-value="{html.escape(end_date)}">{html.escape(end_date)}</td>
+                    <tr data-search="{html.escape(product.lower() + ' ' + store.lower() + ' ' + lottery_type.lower(), quote=True)}" data-timestamp="{html.escape(timestamp, quote=True)}" data-store="{html.escape(store, quote=True)}" data-deadline="{html.escape(end_date, quote=True)}">
+                        <td class="store" data-sort-value="{html.escape(store, quote=True)}">{store_escaped}</td>
+                        <td data-sort-value="{html.escape(product, quote=True)}">{product_escaped}</td>
+                        <td class="deadline" data-sort-value="{html.escape(end_date, quote=True)}">{html.escape(end_date)}</td>
                         <td>{status_badge}</td>
-                        <td data-sort-value="{lottery_type_escaped}">{lottery_type_escaped if lottery_type else '—'}</td>
+                        <td data-sort-value="{html.escape(lottery_type, quote=True)}">{lottery_type_escaped if lottery_type else '—'}</td>
                         <td>
 """
         if url and url.startswith('http'):
@@ -1118,114 +1131,7 @@ def generate_html_report(data: Dict[str, Any], output_file: str = 'data/lottery_
         </footer>
     </div>
 
-    <script>
-        let currentSort = {{ column: 'deadline', direction: 'asc' }};
-
-        function filterLotteries() {{
-            const searchText = document.getElementById('searchBox').value.toLowerCase();
-            const rows = document.querySelectorAll('#lotteriesTable tbody tr');
-            let visibleCount = 0;
-
-            rows.forEach(row => {{
-                const searchData = row.getAttribute('data-search');
-                if (searchData.includes(searchText)) {{
-                    row.style.display = '';
-                    visibleCount++;
-                }} else {{
-                    row.style.display = 'none';
-                }}
-            }});
-        }}
-
-        function sortLotteries() {{
-            const sortSelect = document.getElementById('sortSelect').value;
-            const tbody = document.querySelector('#lotteriesTable tbody');
-            const rows = Array.from(tbody.querySelectorAll('tr'));
-
-            rows.sort((a, b) => {{
-                if (sortSelect === 'deadline') {{
-                    // 期限順（近い順）
-                    const aDeadline = a.getAttribute('data-deadline') || '';
-                    const bDeadline = b.getAttribute('data-deadline') || '';
-                    return aDeadline.localeCompare(bDeadline);
-                }} else if (sortSelect === 'store') {{
-                    // 店舗名順
-                    const aStore = a.getAttribute('data-store') || '';
-                    const bStore = b.getAttribute('data-store') || '';
-                    return aStore.localeCompare(bStore, 'ja');
-                }} else if (sortSelect === 'newest') {{
-                    // 新着順（新しい順）
-                    const aTimestamp = a.getAttribute('data-timestamp') || '0000-00-00';
-                    const bTimestamp = b.getAttribute('data-timestamp') || '0000-00-00';
-                    return bTimestamp.localeCompare(aTimestamp);  // 逆順（新しい順）
-                }}
-                return 0;
-            }});
-
-            // ソート結果を反映
-            rows.forEach(row => tbody.appendChild(row));
-        }}
-
-        function sortTable(column) {{
-            const table = document.getElementById('lotteriesTable');
-            const tbody = table.querySelector('tbody');
-            const rows = Array.from(tbody.querySelectorAll('tr:not([style*="display: none"])'));
-
-            // ソート方向の切り替え
-            if (currentSort.column === column) {{
-                currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
-            }} else {{
-                currentSort.column = column;
-                currentSort.direction = 'asc';
-            }}
-
-            // ソート実行
-            const columnIndex = {{'store': 0, 'product': 1, 'deadline': 2, 'status': 3, 'type': 4}}[column];
-            rows.sort((a, b) => {{
-                let aVal = a.children[columnIndex].getAttribute('data-sort-value') || a.children[columnIndex].textContent;
-                let bVal = b.children[columnIndex].getAttribute('data-sort-value') || b.children[columnIndex].textContent;
-
-                // 数値ソート試行
-                const aNum = parseFloat(aVal);
-                const bNum = parseFloat(bVal);
-                if (!isNaN(aNum) && !isNaN(bNum)) {{
-                    return currentSort.direction === 'asc' ? aNum - bNum : bNum - aNum;
-                }}
-
-                // 文字列ソート
-                if (currentSort.direction === 'asc') {{
-                    return aVal.localeCompare(bVal);
-                }} else {{
-                    return bVal.localeCompare(aVal);
-                }}
-            }});
-
-            // ソート結果を反映
-            rows.forEach(row => tbody.appendChild(row));
-
-            // ヘッダのソート状態を更新
-            document.querySelectorAll('#lotteriesTable th.sortable').forEach(th => {{
-                th.classList.remove('sorted-asc', 'sorted-desc');
-                if (th.getAttribute('data-column') === column) {{
-                    th.classList.add(currentSort.direction === 'asc' ? 'sorted-asc' : 'sorted-desc');
-                }}
-            }});
-        }}
-
-        // ヘッダクリック時にソート実行
-        document.addEventListener('DOMContentLoaded', () => {{
-            document.querySelectorAll('#lotteriesTable th.sortable').forEach(th => {{
-                th.addEventListener('click', () => {{
-                    sortTable(th.getAttribute('data-column'));
-                }});
-            }});
-
-            // デフォルトで deadline でソート
-            sortTable('deadline');
-            // ドロップダウンのデフォルト値を設定
-            document.getElementById('sortSelect').value = 'deadline';
-        }});
-    </script>
+    <script src="static/sort.js"></script>
 </body>
 </html>
 """

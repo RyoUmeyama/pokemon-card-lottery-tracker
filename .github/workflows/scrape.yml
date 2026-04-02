@@ -59,11 +59,13 @@ jobs:
           playwright install-deps chromium
 
       - name: Run tests
+        timeout-minutes: 2
         run: |
           pip install pytest pytest-cov
           python -m pytest tests/ -q --cov=scrapers --cov=. --cov-report=term-missing
 
       - name: Run scraper
+        timeout-minutes: 10
         env:
           ENABLE_EMAIL_NOTIFICATION: 'true'
           SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
@@ -81,6 +83,7 @@ jobs:
           python main.py
 
       - name: Generate HTML report
+        timeout-minutes: 2
         run: |
           python generate_html_report.py
 

@@ -1,0 +1,698 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 40px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+header .subtitle {
+    font-size: 1.1em;
+    opacity: 0.9;
+}
+
+.summary {
+    background: #f8f9fa;
+    padding: 30px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.summary h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.stat-card .number {
+    font-size: 2em;
+    font-weight: bold;
+    color: #667eea;
+    margin-bottom: 5px;
+}
+
+.stat-card .label {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.filter-controls {
+    background: #f8f9fa;
+    padding: 20px 30px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.filter-controls input {
+    width: 100%;
+    padding: 12px 20px;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+.filter-controls input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.lotteries {
+    padding: 30px;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0;
+    min-width: 500px;
+}
+
+table thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+}
+
+table th {
+    padding: 15px;
+    text-align: left;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+}
+
+table th:hover {
+    background: linear-gradient(135deg, #5568d3 0%, #6a3d91 100%);
+}
+
+table th.sortable::after {
+    content: ' ↕️';
+    opacity: 0.5;
+}
+
+table th.sorted-asc::after {
+    content: ' ↑';
+    opacity: 1;
+}
+
+table th.sorted-desc::after {
+    content: ' ↓';
+    opacity: 1;
+}
+
+table tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.2s;
+}
+
+table tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+table td {
+    padding: 12px 15px;
+}
+
+table td.store {
+    font-weight: bold;
+    color: #667eea;
+}
+
+table td.deadline {
+    color: #d32f2f;
+    font-weight: 500;
+}
+
+table td a {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.85em;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+table td a:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(102, 126, 234, 0.4);
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75em;
+    font-weight: 700;
+    margin: 3px 0;
+}
+
+.status-badge.active {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+}
+
+.status-badge.ended {
+    background: linear-gradient(135deg, #999999 0%, #777777 100%);
+    color: white;
+}
+
+.status-badge.upcoming {
+    background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+    color: white;
+}
+
+.status-badge.new {
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    color: white;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.lottery-card {
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.lottery-card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+    border-color: #667eea;
+}
+
+.lottery-card .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.lottery-card .store {
+    font-size: 1.1em;
+    color: #667eea;
+    font-weight: bold;
+}
+
+.lottery-card .source {
+    background: #e0e7ff;
+    color: #667eea;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 600;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.85em;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.status-badge.active {
+    background: #4CAF50;
+    color: white;
+}
+
+.status-badge.ended {
+    background: #999999;
+    color: white;
+}
+
+.status-badge.upcoming {
+    background: #FF9800;
+    color: white;
+}
+
+.lottery-card .product {
+    font-size: 1.3em;
+    color: #333;
+    margin-bottom: 15px;
+    line-height: 1.5;
+    font-weight: 600;
+}
+
+.lottery-card .detail-row {
+    display: flex;
+    align-items: start;
+    margin: 10px 0;
+    color: #555;
+}
+
+.lottery-card .detail-row .icon {
+    width: 25px;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.lottery-card .detail-row .content {
+    flex: 1;
+}
+
+.lottery-card .lottery-type {
+    display: inline-block;
+    background: #ffd700;
+    color: #333;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+.lottery-card a {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    margin-top: 15px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-weight: 600;
+}
+
+.lottery-card a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.no-results {
+    text-align: center;
+    padding: 60px 20px;
+    color: #999;
+}
+
+.no-results .emoji {
+    font-size: 4em;
+    margin-bottom: 20px;
+}
+
+.upcoming-section {
+    background: #fffbf0;
+    padding: 30px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.upcoming-section h2 {
+    color: #ff6b35;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.upcoming-card {
+    background: white;
+    border: 2px solid #ffb347;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.upcoming-card:hover {
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.15);
+    transform: translateY(-2px);
+    border-color: #ff6b35;
+}
+
+.upcoming-card .product-name {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.upcoming-card .date-badge {
+    display: inline-block;
+    background: #ff6b35;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.upcoming-card .schedule-info {
+    color: #555;
+    margin: 10px 0;
+    line-height: 1.5;
+}
+
+footer {
+    background: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+    color: #666;
+    font-size: 0.9em;
+}
+
+@media (max-width: 1024px) {
+    header h1 {
+        font-size: 2em;
+    }
+
+    table {
+        font-size: 0.9em;
+    }
+
+    table th, table td {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    header {
+        padding: 25px;
+    }
+
+    header h1 {
+        font-size: 1.6em;
+        margin-bottom: 8px;
+    }
+
+    header .subtitle {
+        font-size: 0.9em;
+    }
+
+    .container {
+        border-radius: 10px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .stat-card {
+        padding: 15px;
+    }
+
+    .stat-card .number {
+        font-size: 1.4em;
+    }
+
+    .stat-card .label {
+        font-size: 0.85em;
+    }
+
+    .summary {
+        padding: 20px;
+    }
+
+    .summary h2 {
+        font-size: 1.3em;
+    }
+
+    .filter-controls {
+        padding: 15px;
+    }
+
+    .filter-controls input {
+        font-size: 16px;
+        padding: 12px 15px;
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 10px -15px;
+        padding: 0 15px;
+    }
+
+    table {
+        font-size: 0.8em;
+        min-width: 100%;
+    }
+
+    table th {
+        padding: 8px 4px;
+        font-size: 0.75em;
+        white-space: nowrap;
+    }
+
+    table td {
+        padding: 8px 4px;
+        word-break: break-word;
+    }
+
+    table td a {
+        padding: 3px 6px;
+        font-size: 0.7em;
+        display: block;
+        margin-top: 3px;
+    }
+
+    .lotteries {
+        padding: 15px;
+    }
+
+    .lottery-card {
+        padding: 15px;
+        margin-bottom: 12px;
+        border-radius: 10px;
+    }
+
+    .lottery-card .header {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .lottery-card .store {
+        font-size: 1em;
+    }
+
+    .lottery-card .product {
+        font-size: 1em;
+        margin-bottom: 10px;
+    }
+
+    .lottery-card .detail-row {
+        margin: 8px 0;
+        font-size: 0.9em;
+    }
+
+    .lottery-card .detail-row .icon {
+        width: 20px;
+    }
+
+    .lottery-card a {
+        padding: 10px 20px;
+        font-size: 0.9em;
+        margin-top: 10px;
+    }
+
+    .upcoming-section {
+        padding: 20px;
+    }
+
+    .upcoming-section h2 {
+        font-size: 1.3em;
+    }
+
+    .upcoming-card {
+        padding: 15px;
+        margin-bottom: 12px;
+    }
+
+    .upcoming-card .product-name {
+        font-size: 0.95em;
+    }
+
+    .upcoming-card .date-badge {
+        font-size: 0.8em;
+    }
+
+    .upcoming-card .schedule-info {
+        font-size: 0.9em;
+    }
+
+    footer {
+        padding: 15px;
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 8px;
+        font-size: 13px;
+    }
+
+    header {
+        padding: 15px;
+    }
+
+    header h1 {
+        font-size: 1.3em;
+        margin-bottom: 5px;
+    }
+
+    header .subtitle {
+        font-size: 0.8em;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .stat-card {
+        padding: 12px;
+    }
+
+    .stat-card .number {
+        font-size: 1.2em;
+    }
+
+    .stat-card .label {
+        font-size: 0.75em;
+    }
+
+    .summary {
+        padding: 15px;
+    }
+
+    .summary h2 {
+        font-size: 1.1em;
+        margin-bottom: 15px;
+    }
+
+    .filter-controls {
+        padding: 12px;
+    }
+
+    .filter-controls input {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .table-wrapper {
+        margin: 10px -8px;
+        padding: 0 8px;
+    }
+
+    table {
+        font-size: 0.75em;
+    }
+
+    table th {
+        padding: 6px 2px;
+        font-size: 0.7em;
+    }
+
+    table td {
+        padding: 6px 2px;
+    }
+
+    table td a {
+        padding: 2px 4px;
+        font-size: 0.65em;
+    }
+
+    .lotteries {
+        padding: 12px;
+    }
+
+    .lottery-card {
+        padding: 12px;
+        margin-bottom: 10px;
+    }
+
+    .lottery-card .store {
+        font-size: 0.9em;
+    }
+
+    .lottery-card .product {
+        font-size: 0.9em;
+        margin-bottom: 8px;
+    }
+
+    .lottery-card .detail-row {
+        font-size: 0.85em;
+    }
+
+    .lottery-card a {
+        padding: 8px 16px;
+        font-size: 0.85em;
+    }
+
+    footer {
+        padding: 12px;
+        font-size: 0.75em;
+    }
+}
