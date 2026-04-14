@@ -1,72 +1,133 @@
 {
-  "timestamp": "2026-04-14T03:44:47.959952",
+  "timestamp": "2026-04-14T05:33:33.068101",
   "sources": [
     {
-      "timestamp": "2026-04-14T03:44:59.282312",
+      "timestamp": "2026-04-14T05:33:44.540671",
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-04-14T03:44:59.282319",
+      "scraped_at": "2026-04-14T05:33:44.540682",
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2026-04-14T03:44:51.887259",
-      "reservations": []
+      "scraped_at": "2026-04-14T05:33:38.547290",
+      "reservations": [
+        {
+          "timestamp": "2026-04-14T05:33:36.418045",
+          "title": "ポケモンカードゲーム MEGA ハイクラスパック MEGAドリームex BOX",
+          "price": "￥5,500",
+          "url": "https://www.amazon.co.jp/%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%AB%E3%83%BC%E3%83%89%E3%82%B2%E3%83%BC%E3%83%A0-MEGA-%E3%83%8F%E3%82%A4%E3%82%AF%E3%83%A9%E3%82%B9%E3%83%91%E3%83%83%E3%82%AF-MEGA%E3%83%89%E3%83%AA%E3%83%BC%E3%83%A0ex-BOX/dp/B0FLCWJ1VK/ref=sr_1_1?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&crid=2M096C61O4MLT&dib=eyJ2IjoiMSJ9.TsKXy-xiiqPeRW_W__zXb14FOLtKCSxWQKHpX89Pox7FJkHztTAiP1mQvH08EuNvQ5z7nE-OgrRPh3mNdqkhtUJIq3GXSXAoHRMxiWqFqUVE_c_nkcMo7cIMiMaovXV--uYo7cd1ldocMYlw4eyCEyy0XpWJsKyD1Sc66ZGq0jbu69pXq5TTrY8TPtMQzO8xZ7uJrx2JJ1GR_K2QSRYLKa7rIufc-HCUfg-UQgnXUV77Pz6uJ2dh1ZfbowkI7nQxS2nHjuWcKoXQ3C5nqLVf2ahdXVyDYSEim0L02CZEnPY.2TktlrW_t9abhE5o4JY6s0Wgm1sbw21bPBcvJVX4u_E&dib_tag=se&keywords=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%AB%E3%83%BC%E3%83%89%E3%82%B2%E3%83%BC%E3%83%A0+%E6%8B%A1%E5%BC%B5%E3%83%91%E3%83%83%E3%82%AF&qid=1776144815&s=toys&sprefix=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%AB%E3%83%BC%E3%83%89%E3%82%B2%E3%83%BC%E3%83%A0+%E6%8B%A1%E5%BC%B5%E3%83%91%E3%83%83%E3%82%AF&sr=1-1",
+          "asin": "B0FLCWJ1VK",
+          "availability": "購入可能",
+          "is_reservation": false,
+          "detected_at": "2026-04-14T05:33:36.418055"
+        },
+        {
+          "timestamp": "2026-04-14T05:33:36.418981",
+          "title": "ポケモンカードゲーム MEGA 拡張パック インフェルノX BOX",
+          "price": "￥5,412",
+          "url": "https://www.amazon.co.jp/%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%AB%E3%83%BC%E3%83%89%E3%82%B2%E3%83%BC%E3%83%A0-MEGA-%E6%8B%A1%E5%BC%B5%E3%83%91%E3%83%83%E3%82%AF-%E3%82%A4%E3%83%B3%E3%83%95%E3%82%A7%E3%83%AB%E3%83%8EX-BOX/dp/B0F9KJGGZ5/ref=sr_1_2?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&crid=2M096C61O4MLT&dib=eyJ2IjoiMSJ9.TsKXy-xiiqPeRW_W__zXb14FOLtKCSxWQKHpX89Pox7FJkHztTAiP1mQvH08EuNvQ5z7nE-OgrRPh3mNdqkhtUJIq3GXSXAoHRMxiWqFqUVE_c_nkcMo7cIMiMaovXV--uYo7cd1ldocMYlw4eyCEyy0XpWJsKyD1Sc66ZGq0jbu69pXq5TTrY8TPtMQzO8xZ7uJrx2JJ1GR_K2QSRYLKa7rIufc-HCUfg-UQgnXUV77Pz6uJ2dh1ZfbowkI7nQxS2nHjuWcKoXQ3C5nqLVf2ahdXVyDYSEim0L02CZEnPY.2TktlrW_t9abhE5o4JY6s0Wgm1sbw21bPBcvJVX4u_E&dib_tag=se&keywords=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%AB%E3%83%BC%E3%83%89%E3%82%B2%E3%83%BC%E3%83%A0+%E6%8B%A1%E5%BC%B5%E3%83%91%E3%83%83%E3%82%AF&qid=1776144815&s=toys&sprefix=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%AB%E3%83%BC%E3%83%89%E3%82%B2%E3%83%BC%E3%83%A0+%E6%8B%A1%E5%BC%B5%E3%83%91%E3%83%83%E3%82%AF&sr=1-2",
+          "asin": "B0F9KJGGZ5",
+          "availability": "購入可能",
+          "is_reservation": false,
+          "detected_at": "2026-04-14T05:33:36.418983"
+        },
+        {
+          "timestamp": "2026-04-14T05:33:36.422042",
+          "title": "ポケモンカードゲーム スカーレット&バイオレット 強化拡張パック 楽園ドラゴーナ BOX",
+          "price": "￥5,412",
+          "url": "https://www.amazon.co.jp/%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%AB%E3%83%BC%E3%83%89%E3%82%B2%E3%83%BC%E3%83%A0-%E3%82%B9%E3%82%AB%E3%83%BC%E3%83%AC%E3%83%83%E3%83%88-%E3%83%90%E3%82%A4%E3%82%AA%E3%83%AC%E3%83%83%E3%83%88-%E5%BC%B7%E5%8C%96%E6%8B%A1%E5%BC%B5%E3%83%91%E3%83%83%E3%82%AF-%E6%A5%BD%E5%9C%92%E3%83%89%E3%83%A9%E3%82%B4%E3%83%BC%E3%83%8A/dp/B0D2WX2M3W/ref=sr_1_5?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&crid=2M096C61O4MLT&dib=eyJ2IjoiMSJ9.TsKXy-xiiqPeRW_W__zXb14FOLtKCSxWQKHpX89Pox7FJkHztTAiP1mQvH08EuNvQ5z7nE-OgrRPh3mNdqkhtUJIq3GXSXAoHRMxiWqFqUVE_c_nkcMo7cIMiMaovXV--uYo7cd1ldocMYlw4eyCEyy0XpWJsKyD1Sc66ZGq0jbu69pXq5TTrY8TPtMQzO8xZ7uJrx2JJ1GR_K2QSRYLKa7rIufc-HCUfg-UQgnXUV77Pz6uJ2dh1ZfbowkI7nQxS2nHjuWcKoXQ3C5nqLVf2ahdXVyDYSEim0L02CZEnPY.2TktlrW_t9abhE5o4JY6s0Wgm1sbw21bPBcvJVX4u_E&dib_tag=se&keywords=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%AB%E3%83%BC%E3%83%89%E3%82%B2%E3%83%BC%E3%83%A0+%E6%8B%A1%E5%BC%B5%E3%83%91%E3%83%83%E3%82%AF&qid=1776144815&s=toys&sprefix=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%AB%E3%83%BC%E3%83%89%E3%82%B2%E3%83%BC%E3%83%A0+%E6%8B%A1%E5%BC%B5%E3%83%91%E3%83%83%E3%82%AF&sr=1-5",
+          "asin": "B0D2WX2M3W",
+          "availability": "購入可能",
+          "is_reservation": false,
+          "detected_at": "2026-04-14T05:33:36.422044"
+        },
+        {
+          "timestamp": "2026-04-14T05:33:36.422933",
+          "title": "ポケモンカードゲーム スカーレット＆バイオレット 拡張パック 超電ブレイカー BOX",
+          "price": "￥5,412",
+          "url": "https://www.amazon.co.jp/%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%AB%E3%83%BC%E3%83%89%E3%82%B2%E3%83%BC%E3%83%A0-%E3%82%B9%E3%82%AB%E3%83%BC%E3%83%AC%E3%83%83%E3%83%88%EF%BC%86%E3%83%90%E3%82%A4%E3%82%AA%E3%83%AC%E3%83%83%E3%83%88-%E6%8B%A1%E5%BC%B5%E3%83%91%E3%83%83%E3%82%AF-%E8%B6%85%E9%9B%BB%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AB%E3%83%BC-BOX/dp/B0D2WX4CYJ/ref=sr_1_6?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&crid=2M096C61O4MLT&dib=eyJ2IjoiMSJ9.TsKXy-xiiqPeRW_W__zXb14FOLtKCSxWQKHpX89Pox7FJkHztTAiP1mQvH08EuNvQ5z7nE-OgrRPh3mNdqkhtUJIq3GXSXAoHRMxiWqFqUVE_c_nkcMo7cIMiMaovXV--uYo7cd1ldocMYlw4eyCEyy0XpWJsKyD1Sc66ZGq0jbu69pXq5TTrY8TPtMQzO8xZ7uJrx2JJ1GR_K2QSRYLKa7rIufc-HCUfg-UQgnXUV77Pz6uJ2dh1ZfbowkI7nQxS2nHjuWcKoXQ3C5nqLVf2ahdXVyDYSEim0L02CZEnPY.2TktlrW_t9abhE5o4JY6s0Wgm1sbw21bPBcvJVX4u_E&dib_tag=se&keywords=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%AB%E3%83%BC%E3%83%89%E3%82%B2%E3%83%BC%E3%83%A0+%E6%8B%A1%E5%BC%B5%E3%83%91%E3%83%83%E3%82%AF&qid=1776144815&s=toys&sprefix=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%AB%E3%83%BC%E3%83%89%E3%82%B2%E3%83%BC%E3%83%A0+%E6%8B%A1%E5%BC%B5%E3%83%91%E3%83%83%E3%82%AF&sr=1-6",
+          "asin": "B0D2WX4CYJ",
+          "availability": "購入可能",
+          "is_reservation": false,
+          "detected_at": "2026-04-14T05:33:36.422935"
+        },
+        {
+          "timestamp": "2026-04-14T05:33:38.532119",
+          "title": "ポケモンカードゲーム スカーレット&バイオレット ハイクラスパック テラスタルフェスex BOX",
+          "price": "￥5,500",
+          "url": "https://www.amazon.co.jp/%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%AB%E3%83%BC%E3%83%89%E3%82%B2%E3%83%BC%E3%83%A0-%E3%82%B9%E3%82%AB%E3%83%BC%E3%83%AC%E3%83%83%E3%83%88-%E3%83%90%E3%82%A4%E3%82%AA%E3%83%AC%E3%83%83%E3%83%88-%E3%83%8F%E3%82%A4%E3%82%AF%E3%83%A9%E3%82%B9%E3%83%91%E3%83%83%E3%82%AF-%E3%83%86%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%AB%E3%83%95%E3%82%A7%E3%82%B9ex/dp/B0D86FVG5R/ref=sr_1_5?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&crid=2M096C61O4MLT&dib=eyJ2IjoiMSJ9.N9v8T-kyveTyA6O5bjs627L-qz4u2dspcC2wibOkND8avaGw570eOQpIPOwYZnZlb5jByhfNCa01WAH12H22pYhuKkGGjISwVnyjWGZ-xDwFUIVXXP81nibuRzhu78TzyWK4Pn28S4Tki2aCxfR5ctfkoL7kET5WS3ucTTknQPfgkycTSreKMNLLXUs-HIq6HcFikBfYly_w4K6cjy4jS3GLqhTcPBRoPcosPl3-KQbqQ6ayUSUVHAhZY1fjmp1IQSWT12MYtniS5fjoU1ijKaFw_ffnBmBa3zboFiEci7c.VI6iR0M_LgNeKKbw8Gg6la_RsqSATfgEO7SNmLYXIj8&dib_tag=se&keywords=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%AB%E3%83%BC%E3%83%89+BOX&qid=1776144817&s=toys&sprefix=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%AB%E3%83%BC%E3%83%89+BOX&sr=1-5",
+          "asin": "B0D86FVG5R",
+          "availability": "購入可能",
+          "is_reservation": false,
+          "detected_at": "2026-04-14T05:33:38.532121"
+        },
+        {
+          "timestamp": "2026-04-14T05:33:38.542092",
+          "title": "ポケモンカードゲーム スカーレット&バイオレット デッキビルドBOX バトルパートナーズ",
+          "price": "￥4,201",
+          "url": "https://www.amazon.co.jp/%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%AB%E3%83%BC%E3%83%89%E3%82%B2%E3%83%BC%E3%83%A0-%E3%82%B9%E3%82%AB%E3%83%BC%E3%83%AC%E3%83%83%E3%83%88-%E3%83%90%E3%82%A4%E3%82%AA%E3%83%AC%E3%83%83%E3%83%88-%E3%83%87%E3%83%83%E3%82%AD%E3%83%93%E3%83%AB%E3%83%89BOX-%E3%83%90%E3%83%88%E3%83%AB%E3%83%91%E3%83%BC%E3%83%88%E3%83%8A%E3%83%BC%E3%82%BA/dp/B0DB7XZDL7/ref=sr_1_15?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&crid=2M096C61O4MLT&dib=eyJ2IjoiMSJ9.N9v8T-kyveTyA6O5bjs627L-qz4u2dspcC2wibOkND8avaGw570eOQpIPOwYZnZlb5jByhfNCa01WAH12H22pYhuKkGGjISwVnyjWGZ-xDwFUIVXXP81nibuRzhu78TzyWK4Pn28S4Tki2aCxfR5ctfkoL7kET5WS3ucTTknQPfgkycTSreKMNLLXUs-HIq6HcFikBfYly_w4K6cjy4jS3GLqhTcPBRoPcosPl3-KQbqQ6ayUSUVHAhZY1fjmp1IQSWT12MYtniS5fjoU1ijKaFw_ffnBmBa3zboFiEci7c.VI6iR0M_LgNeKKbw8Gg6la_RsqSATfgEO7SNmLYXIj8&dib_tag=se&keywords=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%AB%E3%83%BC%E3%83%89+BOX&qid=1776144817&s=toys&sprefix=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%AB%E3%83%BC%E3%83%89+BOX&sr=1-15",
+          "asin": "B0DB7XZDL7",
+          "availability": "購入可能",
+          "is_reservation": false,
+          "detected_at": "2026-04-14T05:33:38.542094"
+        }
+      ]
     },
     {
-      "timestamp": "2026-04-14T03:44:48.133671",
+      "timestamp": "2026-04-14T05:33:33.232018",
       "source": "X (Twitter) 公式アカウント",
-      "scraped_at": "2026-04-14T03:44:48.133676",
+      "scraped_at": "2026-04-14T05:33:33.232025",
       "lotteries": [],
       "error": "X API credentials not configured or tweepy not installed"
     },
     {
       "source": "ノジマオンライン (online.nojima.co.jp)",
       "source_url": null,
-      "scraped_at": "2026-04-14T03:44:48.134456",
+      "scraped_at": "2026-04-14T05:33:33.232558",
       "lotteries": []
     },
     {
       "source": "イエローサブマリン (yellowsubmarine.co.jp)",
       "source_url": "https://www.yellowsubmarine.co.jp/",
-      "scraped_at": "2026-04-14T03:44:48.136414",
+      "scraped_at": "2026-04-14T05:33:33.234524",
       "lotteries": []
     },
     {
       "source": "カードショップセラ (cardshopserra.jp)",
       "source_url": "https://www.cardshopserra.jp/",
-      "scraped_at": "2026-04-14T03:44:48.135714",
+      "scraped_at": "2026-04-14T05:33:33.233902",
       "lotteries": [],
       "note": "DNS解決エラーのため現在無効化"
     },
     {
       "source": "セブンネットショッピング (7net.omni7.jp)",
       "source_url": "https://7net.omni7.jp/search/?keyword=ポケモンカード&searchKeywordFlg=1",
-      "scraped_at": "2026-04-14T03:44:48.137386",
+      "scraped_at": "2026-04-14T05:33:33.235391",
       "lotteries": []
     },
     {
       "source": "ローソン HMV (hmv.co.jp)",
       "source_url": "https://www.hmv.co.jp/search/?category=ALL&keyword=ポケモンカード",
-      "scraped_at": "2026-04-14T03:44:54.247221",
+      "scraped_at": "2026-04-14T05:33:36.706639",
       "lotteries": []
     },
     {
       "source": "ファミリーマート (family.co.jp)",
       "source_url": "https://www.family.co.jp/campaign.html",
-      "scraped_at": "2026-04-14T03:44:49.580075",
+      "scraped_at": "2026-04-14T05:33:35.367853",
       "lotteries": []
     },
     {
-      "timestamp": "2026-04-14T03:44:50.865982",
+      "timestamp": "2026-04-14T05:33:36.742189",
       "source": "suruga-ya.jp",
-      "scraped_at": "2026-04-14T03:44:50.865987",
+      "scraped_at": "2026-04-14T05:33:36.742196",
       "lotteries": [],
       "reservations": []
     },
     {
-      "timestamp": "2026-04-14T03:44:53.111646",
+      "timestamp": "2026-04-14T05:33:38.562286",
       "source": "geo-online.co.jp",
-      "scraped_at": "2026-04-14T03:44:53.111650",
+      "scraped_at": "2026-04-14T05:33:38.562292",
       "lotteries": [],
       "reservations": []
     }
@@ -74,7 +135,6 @@
   "zero_alert": false,
   "zero_alert_sources": [
     "楽天ブックス",
-    "Amazon",
     "X(Twitter)",
     "ノジマ",
     "イエローサブマリン",
