@@ -200,6 +200,7 @@ class TestCleanupOldData:
     def test_cleanup_removes_2025_and_earlier(self):
         """2025年以前のデータ削除"""
         base_time = datetime.now()
+        recent_start = (base_time - timedelta(days=10)).isoformat()
         data = {
             'timestamp': base_time.isoformat(),
             'sources': [
@@ -213,10 +214,10 @@ class TestCleanupOldData:
                             'end_date': '2025-12-10',
                         },
                         {
-                            'product': '2026年商品',
+                            'product': '最近の商品',
                             'store': 'テスト店舗',
-                            'start_date': '2026-04-01',
-                            'end_date': '2026-04-10',
+                            'start_date': recent_start,
+                            'end_date': (base_time + timedelta(days=5)).isoformat(),
                         }
                     ],
                     'upcoming_products': []
@@ -226,7 +227,7 @@ class TestCleanupOldData:
 
         cleaned = cleanup_old_data(data, days=30)
         assert len(cleaned['sources'][0]['lotteries']) == 1
-        assert cleaned['sources'][0]['lotteries'][0]['product'] == '2026年商品'
+        assert cleaned['sources'][0]['lotteries'][0]['product'] == '最近の商品'
 
 
 class TestGenerateHtmlReport:
