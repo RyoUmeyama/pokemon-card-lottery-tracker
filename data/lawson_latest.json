@@ -1,10 +1,10 @@
 {
   "source": "ローソン HMV (hmv.co.jp)",
   "source_url": "https://www.hmv.co.jp/search/?category=ALL&keyword=ポケモンカード",
-  "scraped_at": "2026-05-17T10:40:04.471698",
+  "scraped_at": "2026-05-17T13:57:32.385801",
   "lotteries": [
     {
-      "timestamp": "2026-05-17T10:40:04.460651",
+      "timestamp": "2026-05-17T13:57:32.373496",
       "store": "ローソン HMV",
       "product": "ポケモンカードゲーム MEGA 拡張パック「アビスアイ」HMV店頭 抽選販売受付",
       "lottery_type": "抽選販売",
