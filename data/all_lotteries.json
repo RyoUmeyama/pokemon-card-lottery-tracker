@@ -1,72 +1,72 @@
 {
-  "timestamp": "2026-06-09T04:38:07.378351",
+  "timestamp": "2026-06-09T06:58:04.997120",
   "sources": [
     {
-      "timestamp": "2026-06-09T04:38:18.823261",
+      "timestamp": "2026-06-09T06:58:16.844130",
       "source": "books.rakuten.co.jp",
-      "scraped_at": "2026-06-09T04:38:18.823272",
+      "scraped_at": "2026-06-09T06:58:16.844138",
       "lotteries": []
     },
     {
       "source": "amazon.co.jp",
-      "scraped_at": "2026-06-09T04:38:09.983181",
+      "scraped_at": "2026-06-09T06:58:08.517525",
       "reservations": []
     },
     {
-      "timestamp": "2026-06-09T04:38:07.494571",
+      "timestamp": "2026-06-09T06:58:05.175149",
       "source": "X (Twitter) 公式アカウント",
-      "scraped_at": "2026-06-09T04:38:07.494576",
+      "scraped_at": "2026-06-09T06:58:05.175154",
       "lotteries": [],
       "error": "X API credentials not configured or tweepy not installed"
     },
     {
       "source": "ノジマオンライン (online.nojima.co.jp)",
       "source_url": null,
-      "scraped_at": "2026-06-09T04:38:07.495036",
+      "scraped_at": "2026-06-09T06:58:05.175910",
       "lotteries": []
     },
     {
       "source": "イエローサブマリン (yellowsubmarine.co.jp)",
       "source_url": "https://www.yellowsubmarine.co.jp/",
-      "scraped_at": "2026-06-09T04:38:07.496636",
+      "scraped_at": "2026-06-09T06:58:05.177910",
       "lotteries": []
     },
     {
       "source": "カードショップセラ (cardshopserra.jp)",
       "source_url": "https://www.cardshopserra.jp/",
-      "scraped_at": "2026-06-09T04:38:07.496130",
+      "scraped_at": "2026-06-09T06:58:05.177336",
       "lotteries": [],
       "note": "DNS解決エラーのため現在無効化"
     },
     {
       "source": "セブンネットショッピング (7net.omni7.jp)",
       "source_url": "https://7net.omni7.jp/search/?keyword=ポケモンカード&searchKeywordFlg=1",
-      "scraped_at": "2026-06-09T04:38:07.497288",
+      "scraped_at": "2026-06-09T06:58:05.179840",
       "lotteries": []
     },
     {
       "source": "ローソン HMV (hmv.co.jp)",
       "source_url": "https://www.hmv.co.jp/search/?category=ALL&keyword=ポケモンカード",
-      "scraped_at": "2026-06-09T04:38:10.177566",
+      "scraped_at": "2026-06-09T06:58:08.933044",
       "lotteries": []
     },
     {
       "source": "ファミリーマート (family.co.jp)",
       "source_url": "https://www.family.co.jp/campaign.html",
-      "scraped_at": "2026-06-09T04:38:09.560849",
+      "scraped_at": "2026-06-09T06:58:07.060929",
       "lotteries": []
     },
     {
-      "timestamp": "2026-06-09T04:38:10.375514",
+      "timestamp": "2026-06-09T06:58:08.440568",
       "source": "suruga-ya.jp",
-      "scraped_at": "2026-06-09T04:38:10.375520",
+      "scraped_at": "2026-06-09T06:58:08.440573",
       "lotteries": [],
       "reservations": []
     },
     {
-      "timestamp": "2026-06-09T04:38:12.216583",
+      "timestamp": "2026-06-09T06:58:10.627763",
       "source": "geo-online.co.jp",
-      "scraped_at": "2026-06-09T04:38:12.216592",
+      "scraped_at": "2026-06-09T06:58:10.627769",
       "lotteries": [],
       "reservations": []
     }
