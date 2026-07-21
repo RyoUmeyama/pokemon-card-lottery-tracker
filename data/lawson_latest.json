@@ -1,10 +1,10 @@
 {
   "source": "ローソン HMV (hmv.co.jp)",
   "source_url": "https://www.hmv.co.jp/search/?category=ALL&keyword=ポケモンカード",
-  "scraped_at": "2026-07-21T06:06:44.569693",
+  "scraped_at": "2026-07-21T11:19:04.075080",
   "lotteries": [
     {
-      "timestamp": "2026-07-21T06:06:44.561641",
+      "timestamp": "2026-07-21T11:19:04.063557",
       "store": "ローソン HMV",
       "product": "ポケモンカードゲーム MEGA 拡張パック「ストームエメラルダ」HMV店頭 抽選販売受付",
       "lottery_type": "抽選販売",
